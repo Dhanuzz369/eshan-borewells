@@ -55,12 +55,15 @@ export function EnquiryPopup({ whatsapp, email }: EnquiryPopupProps) {
     const name = String(data.get("name") || "").trim();
     const phone = String(data.get("phone") || "").trim();
     const area = String(data.get("area") || "").trim();
-    const property = String(data.get("property") || "").trim();
-    if (!name || !phone || !area || !property) {
-      setError("Please complete all four fields so we can understand your enquiry.");
+    if (!name || !phone || !area) {
+      setError("Please enter your name, phone number and site location.");
       return;
     }
-    const message = `Hello Eshan Borewells, I would like to discuss a borewell site visit.\nName: ${name}\nPhone: ${phone}\nArea: ${area}\nProperty: ${property}`;
+    if (!/^\d{10,15}$/.test(phone.replace(/\D/g, ""))) {
+      setError("Please enter a valid phone number with 10 to 15 digits.");
+      return;
+    }
+    const message = `Hello Eshan Borewells, I would like to discuss a borewell site visit.\nName: ${name}\nPhone: ${phone}\nSite location: ${area}`;
     if (whatsapp) {
       const destination = `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
       const chat = window.open(destination, "_blank", "noopener,noreferrer");
@@ -73,6 +76,6 @@ export function EnquiryPopup({ whatsapp, email }: EnquiryPopupProps) {
 
   return <>
     {whatsapp && <a className="floating-whatsapp" href={`https://wa.me/${whatsapp}?text=${encodeURIComponent("Hello Eshan Borewells, I would like to discuss a borewell site visit.")}`} target="_blank" rel="noopener noreferrer" aria-label="Chat with Eshan Borewells on WhatsApp"><MessageCircle size={24} /></a>}
-    {open && <div className="enquiry-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}><section className="enquiry-dialog" role="dialog" aria-modal="true" aria-labelledby="enquiry-title"><button ref={closeRef} className="enquiry-close" type="button" aria-label="Close enquiry form" onClick={() => setOpen(false)}><X size={21} /></button><div className="enquiry-copy"><span>PLANNING A BOREWELL?</span><h2 id="enquiry-title">Let&apos;s talk about your site.</h2><p>Four quick details are enough to start a useful conversation.</p></div><form onSubmit={submit} noValidate><label>Name<input name="name" autoComplete="name" required placeholder="Your name" /></label><label>Phone number<input name="phone" autoComplete="tel" inputMode="tel" required placeholder="Your number" /></label><label>Area or locality<input name="area" autoComplete="address-level2" required placeholder="e.g. Kanakapura Road" /></label><label>Property type<select name="property" required defaultValue=""><option value="" disabled>Select one</option><option>Home</option><option>Apartment or layout</option><option>Farm</option><option>Commercial site</option><option>Industrial site</option></select></label>{error && <p className="enquiry-error" role="alert">{error}</p>}<button className="enquiry-submit" type="submit">{whatsapp ? "Continue on WhatsApp" : "Continue by email"}<ArrowRight size={18} /></button><p className="enquiry-privacy">Submitting opens {whatsapp ? "WhatsApp" : "your email app"} with your details. Nothing is stored on this site.</p></form></section></div>}
+    {open && <div className="enquiry-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}><section className="enquiry-dialog" role="dialog" aria-modal="true" aria-labelledby="enquiry-title"><button ref={closeRef} className="enquiry-close" type="button" aria-label="Close enquiry form" onClick={() => setOpen(false)}><X size={21} /></button><div className="enquiry-copy"><span>PLANNING A BOREWELL?</span><h2 id="enquiry-title">Let&apos;s talk about your site.</h2><p>Share three details to start a useful conversation.</p></div><form onSubmit={submit} noValidate><label>Name<input name="name" autoComplete="name" required placeholder="Your name" /></label><label>Phone number<input name="phone" autoComplete="tel" inputMode="tel" required placeholder="Your number" /></label><label>Site location<input name="area" autoComplete="address-level2" required placeholder="e.g. Rajajinagar" /></label>{error && <p className="enquiry-error" role="alert">{error}</p>}<button className="enquiry-submit" type="submit">{whatsapp ? "Continue on WhatsApp" : "Continue by email"}<ArrowRight size={18} /></button><p className="enquiry-privacy">Your details open as a draft in {whatsapp ? "WhatsApp" : "your email app"}. Tap Send there to share them with us. Nothing is stored on this site.</p></form></section></div>}
   </>;
 }
