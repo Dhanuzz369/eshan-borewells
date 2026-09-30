@@ -1,5 +1,13 @@
 # vinext-starter
 
+## Token-free codebase updates
+
+This repository includes a committed Graphify code graph in `graphify-out/`.
+It is generated from local AST analysis, not an LLM. After changing code, run
+`npm run graph:update`. This refreshes only changed code files and regenerates
+the graph report without AI labeling or token usage. Use
+`graphify query "<question>"` to navigate the existing graph without rebuilding it.
+
 A clean full-stack starter running on [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and Drizzle support.
 
 ## Prerequisites

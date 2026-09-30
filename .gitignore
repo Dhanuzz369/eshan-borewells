@@ -44,3 +44,8 @@ next-env.d.ts
 /.codex/
 /outputs/
 /work/
+
+# Graphify's graph is committed for token-free codebase navigation. This local
+# pointer is machine-specific and is rebuilt whenever the graph is refreshed.
+/graphify-out/.graphify_root
+/graphify-out/*.sig
