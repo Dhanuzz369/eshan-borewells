@@ -1,8 +1,8 @@
 {
   "app/business-config.ts": {
-    "mtime": 1790770919.9956975,
-    "seen": 1790771011.372679,
-    "ast_hash": "8a0de7b72b1fee44e33436e80ae18339",
+    "mtime": 1790771964.8628929,
+    "seen": 1790772684.629538,
+    "ast_hash": "660efe7cfdaf9c2fc29d550a910bf558",
     "semantic_hash": ""
   },
   "app/chatgpt-auth.ts": {
@@ -18,9 +18,9 @@
     "semantic_hash": "acbac29352d0a85a0459839d00deaec8"
   },
   "app/page.tsx": {
-    "mtime": 1790770898.61246,
-    "seen": 1790771011.3726861,
-    "ast_hash": "d85d9b1655040a09efb867db215e0965",
+    "mtime": 1790772065.5689778,
+    "seen": 1790772684.629545,
+    "ast_hash": "24bc935ff27b70f5c73a5a73e3ffdd1c",
     "semantic_hash": ""
   },
   "cloudflare-env.d.ts": {
@@ -669,6 +669,12 @@
     "mtime": 1790770396.286482,
     "seen": 1790771011.372746,
     "ast_hash": "eb1161e93eb99c7c1a4958f71a523817",
+    "semantic_hash": ""
+  },
+  "app/scroll-nav.tsx": {
+    "mtime": 1790771948.1721802,
+    "seen": 1790772684.629545,
+    "ast_hash": "d8f07b3a6edb8fafe39163aaae5b0e42",
     "semantic_hash": ""
   }
 }
