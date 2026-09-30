@@ -594,9 +594,9 @@
     "semantic_hash": "107f3fd79057c6e38df3c43273491889"
   },
   "README.md": {
-    "mtime": 1790788015.9385397,
-    "seen": 1790788164.983268,
-    "ast_hash": "a87c2de8c0ee59774143811825ee2f80",
+    "mtime": 1790788379.8815982,
+    "seen": 1790788425.640231,
+    "ast_hash": "7523267279d50d8ca74ddd75d986289a",
     "semantic_hash": ""
   },
   "vendor/shadcn-tailwind-4.13.0.LICENSE.md": {
@@ -798,15 +798,15 @@
     "semantic_hash": ""
   },
   "app/customer-reviews-data.ts": {
-    "mtime": 1790787839.1944635,
-    "seen": 1790788164.9832041,
-    "ast_hash": "fab0b0543c16616fc8c9717ef760b2b2",
+    "mtime": 1790788351.5190797,
+    "seen": 1790788425.640167,
+    "ast_hash": "9316356843f7e80b7a18f530096de9fe",
     "semantic_hash": ""
   },
   "app/customer-reviews.tsx": {
-    "mtime": 1790787985.9392283,
-    "seen": 1790788164.983205,
-    "ast_hash": "96ec4ac7a054fa90f734d7843a05a82e",
+    "mtime": 1790788276.431375,
+    "seen": 1790788425.640168,
+    "ast_hash": "ddd940d5ad1e1034a59ac1ca56ba95f3",
     "semantic_hash": ""
   },
   "components/ui/marquee.tsx": {
