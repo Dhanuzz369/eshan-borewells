@@ -28,7 +28,7 @@ export function CustomerReviews({ reviews, aggregateRating, ratingSource, feedba
       <div><span className="section-label">CUSTOMER FEEDBACK</span><h2 id="reviews-heading">Words from our customers.</h2></div>
       {displayRating && <p className="reviews-rating"><strong>{aggregateRating.toFixed(1)} <span aria-hidden="true">★</span></strong><span>Verified rating on {ratingSource}</span></p>}
     </div>
-    <Marquee className="reviews-track" pauseOnHover repeat={4} aria-label="Customer reviews">
+    <Marquee className="reviews-track" repeat={2} aria-label="Customer reviews">
       {reviews.map((review, index) => <blockquote className="review-card" key={`${review.reviewer}-${index}`}>
         {review.rating != null && <div className="review-stars" aria-label={`${review.rating} out of 5 stars`}><span aria-hidden="true">{"★".repeat(review.rating)}{"☆".repeat(5 - review.rating)}</span></div>}
         <p>“{review.quote}”</p>

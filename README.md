@@ -24,8 +24,10 @@ does not use the keywords meta tag for ranking.
 
 ## Customer reviews
 
-The review marquee follows the supplied repeated 40-second linear animation,
-pauses on hover, and stops for reduced-motion preferences. It has no photos.
+The review marquee follows the supplied repeated linear animation, with a
+170-second loop for the 40 reviews so each stays readable. It runs continuously
+on desktop (including while the pointer is over it) and stops for reduced-motion
+preferences. It has no photos.
 The owner-provided testimonials live in `app/customer-reviews-data.ts`. Individual
 stars are omitted because ratings were not supplied. Add a rating only when it
 belongs to that review; set an aggregate and its public source only if that

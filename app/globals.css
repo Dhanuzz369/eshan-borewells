@@ -227,7 +227,7 @@
 .reviews-rating{display:grid;gap:3px;margin:0;color:#385367;font-size:12px}
 .reviews-rating strong{color:#092348;font-size:27px}
 .reviews-rating strong span{color:#c07a1a}
-.reviews-track{mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.reviews-track{--duration:170s;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
 .review-card{width:330px;min-height:215px;display:flex;flex-direction:column;margin:0;padding:24px;border:1px solid #c9d9e2;border-radius:12px;background:#fff}
 .review-stars{color:#ad6d12;font-size:17px;letter-spacing:2px}
 .review-card p{margin:16px 0 20px;color:#17374e;font-size:16px;line-height:1.5}
