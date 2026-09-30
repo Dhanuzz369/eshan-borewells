@@ -18,9 +18,9 @@
     "semantic_hash": "acbac29352d0a85a0459839d00deaec8"
   },
   "app/page.tsx": {
-    "mtime": 1790772065.5689778,
-    "seen": 1790772684.629545,
-    "ast_hash": "24bc935ff27b70f5c73a5a73e3ffdd1c",
+    "mtime": 1790774760.213668,
+    "seen": 1790775321.6242418,
+    "ast_hash": "f55d10394c5ed9352cd0d089c8aec605",
     "semantic_hash": ""
   },
   "cloudflare-env.d.ts": {
@@ -642,15 +642,15 @@
     "semantic_hash": ""
   },
   "app/mobile-menu.tsx": {
-    "mtime": 1790769367.085488,
-    "seen": 1790770167.6005812,
-    "ast_hash": "e2f3c514cb12abdf02001a624e9a4189",
+    "mtime": 1790774787.5686224,
+    "seen": 1790775321.6242409,
+    "ast_hash": "28af23f343422365b61f2d778f84262e",
     "semantic_hash": ""
   },
   "app/enquiry-popup.tsx": {
-    "mtime": 1790770712.669456,
-    "seen": 1790771011.372683,
-    "ast_hash": "46dd4eeeb0ac1a23c00fe45afa9ad3fa",
+    "mtime": 1790775184.69849,
+    "seen": 1790775321.6242392,
+    "ast_hash": "385b8df09865bd7088c3c9f4d4859cd0",
     "semantic_hash": ""
   },
   "app/verified-projects.ts": {
@@ -672,9 +672,51 @@
     "semantic_hash": ""
   },
   "app/scroll-nav.tsx": {
-    "mtime": 1790771948.1721802,
-    "seen": 1790772684.629545,
-    "ast_hash": "d8f07b3a6edb8fafe39163aaae5b0e42",
+    "mtime": 1790774787.647643,
+    "seen": 1790775321.624243,
+    "ast_hash": "ac23001ff9e4fed82c408577c72a8d43",
+    "semantic_hash": ""
+  },
+  "public/borewell-water-flow.jpg": {
+    "mtime": 1790774453.8505194,
+    "seen": 1790775321.624305,
+    "ast_hash": "5b0ff34da35817acbe8fd6745f7d02f4",
+    "semantic_hash": ""
+  },
+  "public/casing-installation.jpg": {
+    "mtime": 1790774574.3516214,
+    "seen": 1790775321.624306,
+    "ast_hash": "94e6c1edf7694a36f1868e82543fa705",
+    "semantic_hash": ""
+  },
+  "public/compact-drilling-rig.jpg": {
+    "mtime": 1790774453.6721559,
+    "seen": 1790775321.624306,
+    "ast_hash": "560ad6c775e4e4031bd12151172ad517",
+    "semantic_hash": ""
+  },
+  "public/drilling-team.jpg": {
+    "mtime": 1790774454.0306907,
+    "seen": 1790775321.6243079,
+    "ast_hash": "c82cce9983a8bfc7f4886c7a8fb9ff5c",
+    "semantic_hash": ""
+  },
+  "public/large-drilling-rig.jpg": {
+    "mtime": 1790774453.5161936,
+    "seen": 1790775321.624311,
+    "ast_hash": "672f2549a75b892ab62c30af453e14bd",
+    "semantic_hash": ""
+  },
+  "public/survey-technician.jpg": {
+    "mtime": 1790774453.3541296,
+    "seen": 1790775321.6243122,
+    "ast_hash": "cff4d146c3169ec51b37a53e90f1cbda",
+    "semantic_hash": ""
+  },
+  "public/why-us-banner.jpg": {
+    "mtime": 1790774454.2056026,
+    "seen": 1790775321.6243122,
+    "ast_hash": "fb6603a8cd08f3b4e785cabe6f9232cd",
     "semantic_hash": ""
   }
 }
