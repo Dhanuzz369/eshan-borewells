@@ -147,6 +147,19 @@
       "source_location": "L35"
     },
     {
+      "id": "app_enquiry_popup_enquirypopupprops",
+      "label": "EnquiryPopupProps",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "lucide-react",
+      "file_type": "code",
+      "norm_label": "enquirypopupprops",
+      "source_file": "app/enquiry-popup.tsx",
+      "source_location": "L6"
+    },
+    {
       "id": "scripts_npm_install_npmcacheprogress",
       "label": "NpmCacheProgress",
       "_callable": true,
@@ -171,6 +184,32 @@
       "norm_label": "installprogress",
       "source_file": "scripts/pnpm-install.mjs",
       "source_location": "L41"
+    },
+    {
+      "id": "components_ui_form_formfieldcontextvalue",
+      "label": "FormFieldContextValue",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "form.tsx",
+      "file_type": "code",
+      "norm_label": "formfieldcontextvalue",
+      "source_file": "components/ui/form.tsx",
+      "source_location": "L21"
+    },
+    {
+      "id": "components_ui_form_formitemcontextvalue",
+      "label": "FormItemContextValue",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "form.tsx",
+      "file_type": "code",
+      "norm_label": "formitemcontextvalue",
+      "source_file": "components/ui/form.tsx",
+      "source_location": "L68"
     },
     {
       "id": "cloudflare_env_d_env",
@@ -275,32 +314,6 @@
       "norm_label": "connectorresult",
       "source_file": "lib/connector-contract.mts",
       "source_location": "L29"
-    },
-    {
-      "id": "components_ui_form_formfieldcontextvalue",
-      "label": "FormFieldContextValue",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "field.tsx",
-      "file_type": "code",
-      "norm_label": "formfieldcontextvalue",
-      "source_file": "components/ui/form.tsx",
-      "source_location": "L21"
-    },
-    {
-      "id": "components_ui_form_formitemcontextvalue",
-      "label": "FormItemContextValue",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "field.tsx",
-      "file_type": "code",
-      "norm_label": "formitemcontextvalue",
-      "source_file": "components/ui/form.tsx",
-      "source_location": "L68"
     },
     {
       "id": "lib_connector_contract_json",
@@ -664,30 +677,6 @@
       "source_location": "L5"
     },
     {
-      "id": "components_ui_button_group_buttongroupseparator",
-      "label": "ButtonGroupSeparator()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "item.tsx",
-      "file_type": "code",
-      "norm_label": "buttongroupseparator()",
-      "source_file": "components/ui/button-group.tsx",
-      "source_location": "L60"
-    },
-    {
-      "id": "components_ui_field_fieldseparator",
-      "label": "FieldSeparator()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "item.tsx",
-      "file_type": "code",
-      "norm_label": "fieldseparator()",
-      "source_file": "components/ui/field.tsx",
-      "source_location": "L156"
-    },
-    {
       "id": "components_ui_item_item",
       "label": "Item()",
       "_callable": true,
@@ -784,18 +773,6 @@
       "source_location": "L91"
     },
     {
-      "id": "components_ui_item_itemseparator",
-      "label": "ItemSeparator()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "item.tsx",
-      "file_type": "code",
-      "norm_label": "itemseparator()",
-      "source_file": "components/ui/item.tsx",
-      "source_location": "L19"
-    },
-    {
       "id": "components_ui_item_itemtitle",
       "label": "ItemTitle()",
       "_callable": true,
@@ -806,18 +783,6 @@
       "norm_label": "itemtitle()",
       "source_file": "components/ui/item.tsx",
       "source_location": "L119"
-    },
-    {
-      "id": "components_ui_separator_separator",
-      "label": "Separator()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "item.tsx",
-      "file_type": "code",
-      "norm_label": "separator()",
-      "source_file": "components/ui/separator.tsx",
-      "source_location": "L8"
     },
     {
       "id": "components_ui_menubar_menubar",
@@ -1288,12 +1253,24 @@
       "source_location": "L4"
     },
     {
+      "id": "components_ui_aspect_ratio_aspectratio",
+      "label": "AspectRatio()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "radix-ui",
+      "file_type": "code",
+      "norm_label": "aspectratio()",
+      "source_file": "components/ui/aspect-ratio.tsx",
+      "source_location": "L5"
+    },
+    {
       "id": "components_ui_collapsible_collapsible",
       "label": "Collapsible()",
       "_callable": true,
       "_origin": "ast",
       "community": 18,
-      "community_name": "collapsible.tsx",
+      "community_name": "radix-ui",
       "file_type": "code",
       "norm_label": "collapsible()",
       "source_file": "components/ui/collapsible.tsx",
@@ -1305,7 +1282,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 18,
-      "community_name": "collapsible.tsx",
+      "community_name": "radix-ui",
       "file_type": "code",
       "norm_label": "collapsiblecontent()",
       "source_file": "components/ui/collapsible.tsx",
@@ -1317,11 +1294,59 @@
       "_callable": true,
       "_origin": "ast",
       "community": 18,
-      "community_name": "collapsible.tsx",
+      "community_name": "radix-ui",
       "file_type": "code",
       "norm_label": "collapsibletrigger()",
       "source_file": "components/ui/collapsible.tsx",
       "source_location": "L11"
+    },
+    {
+      "id": "components_ui_hover_card_hovercard",
+      "label": "HoverCard()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "radix-ui",
+      "file_type": "code",
+      "norm_label": "hovercard()",
+      "source_file": "components/ui/hover-card.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "components_ui_hover_card_hovercardcontent",
+      "label": "HoverCardContent()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "radix-ui",
+      "file_type": "code",
+      "norm_label": "hovercardcontent()",
+      "source_file": "components/ui/hover-card.tsx",
+      "source_location": "L22"
+    },
+    {
+      "id": "components_ui_hover_card_hovercardtrigger",
+      "label": "HoverCardTrigger()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "radix-ui",
+      "file_type": "code",
+      "norm_label": "hovercardtrigger()",
+      "source_file": "components/ui/hover-card.tsx",
+      "source_location": "L14"
+    },
+    {
+      "id": "components_ui_switch_switch",
+      "label": "Switch()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "radix-ui",
+      "file_type": "code",
+      "norm_label": "switch()",
+      "source_file": "components/ui/switch.tsx",
+      "source_location": "L8"
     },
     {
       "id": "components_ui_chart_chartcontainer",
@@ -1624,6 +1649,42 @@
       "source_location": "L100"
     },
     {
+      "id": "components_ui_input_group_inputgrouptext",
+      "label": "InputGroupText()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "combobox.tsx",
+      "file_type": "code",
+      "norm_label": "inputgrouptext()",
+      "source_file": "components/ui/input-group.tsx",
+      "source_location": "L119"
+    },
+    {
+      "id": "components_ui_input_group_inputgrouptextarea",
+      "label": "InputGroupTextarea()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "combobox.tsx",
+      "file_type": "code",
+      "norm_label": "inputgrouptextarea()",
+      "source_file": "components/ui/input-group.tsx",
+      "source_location": "L147"
+    },
+    {
+      "id": "components_ui_textarea_textarea",
+      "label": "Textarea()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "combobox.tsx",
+      "file_type": "code",
+      "norm_label": "textarea()",
+      "source_file": "components/ui/textarea.tsx",
+      "source_location": "L5"
+    },
+    {
       "id": "components_ui_accordion_accordion",
       "label": "Accordion()",
       "_callable": true,
@@ -1672,6 +1733,42 @@
       "source_location": "L28"
     },
     {
+      "id": "components_ui_alert_alert",
+      "label": "Alert()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "utils.ts",
+      "file_type": "code",
+      "norm_label": "alert()",
+      "source_file": "components/ui/alert.tsx",
+      "source_location": "L22"
+    },
+    {
+      "id": "components_ui_alert_alertdescription",
+      "label": "AlertDescription()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "utils.ts",
+      "file_type": "code",
+      "norm_label": "alertdescription()",
+      "source_file": "components/ui/alert.tsx",
+      "source_location": "L50"
+    },
+    {
+      "id": "components_ui_alert_alerttitle",
+      "label": "AlertTitle()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "utils.ts",
+      "file_type": "code",
+      "norm_label": "alerttitle()",
+      "source_file": "components/ui/alert.tsx",
+      "source_location": "L37"
+    },
+    {
       "id": "components_ui_checkbox_checkbox",
       "label": "Checkbox()",
       "_callable": true,
@@ -1684,6 +1781,54 @@
       "source_location": "L9"
     },
     {
+      "id": "components_ui_direction_directionprovider",
+      "label": "DirectionProvider()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "utils.ts",
+      "file_type": "code",
+      "norm_label": "directionprovider()",
+      "source_file": "components/ui/direction.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "components_ui_progress_progress",
+      "label": "Progress()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "utils.ts",
+      "file_type": "code",
+      "norm_label": "progress()",
+      "source_file": "components/ui/progress.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "components_ui_radio_group_radiogroup",
+      "label": "RadioGroup()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "utils.ts",
+      "file_type": "code",
+      "norm_label": "radiogroup()",
+      "source_file": "components/ui/radio-group.tsx",
+      "source_location": "L9"
+    },
+    {
+      "id": "components_ui_radio_group_radiogroupitem",
+      "label": "RadioGroupItem()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "utils.ts",
+      "file_type": "code",
+      "norm_label": "radiogroupitem()",
+      "source_file": "components/ui/radio-group.tsx",
+      "source_location": "L22"
+    },
+    {
       "id": "components_ui_slider_slider",
       "label": "Slider()",
       "_callable": true,
@@ -1693,18 +1838,6 @@
       "file_type": "code",
       "norm_label": "slider()",
       "source_file": "components/ui/slider.tsx",
-      "source_location": "L8"
-    },
-    {
-      "id": "components_ui_switch_switch",
-      "label": "Switch()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "utils.ts",
-      "file_type": "code",
-      "norm_label": "switch()",
-      "source_file": "components/ui/switch.tsx",
       "source_location": "L8"
     },
     {
@@ -2133,7 +2266,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 26,
-      "community_name": "toggle-group.tsx",
+      "community_name": "class-variance-authority",
       "file_type": "code",
       "norm_label": "togglegroup()",
       "source_file": "components/ui/toggle-group.tsx",
@@ -2145,7 +2278,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 26,
-      "community_name": "toggle-group.tsx",
+      "community_name": "class-variance-authority",
       "file_type": "code",
       "norm_label": "togglegroupitem()",
       "source_file": "components/ui/toggle-group.tsx",
@@ -2157,7 +2290,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 26,
-      "community_name": "toggle-group.tsx",
+      "community_name": "class-variance-authority",
       "file_type": "code",
       "norm_label": "toggle()",
       "source_file": "components/ui/toggle.tsx",
@@ -3172,6 +3305,30 @@
       "source_location": "L105"
     },
     {
+      "id": "app_enquiry_popup_enquirypopup",
+      "label": "EnquiryPopup()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "lucide-react",
+      "file_type": "code",
+      "norm_label": "enquirypopup()",
+      "source_file": "app/enquiry-popup.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "app_enquiry_popup_enquirypopup_submit",
+      "label": "submit()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "lucide-react",
+      "file_type": "code",
+      "norm_label": "submit()",
+      "source_file": "app/enquiry-popup.tsx",
+      "source_location": "L51"
+    },
+    {
       "id": "app_mobile_menu_mobilemenu",
       "label": "MobileMenu()",
       "_callable": true,
@@ -3193,7 +3350,7 @@
       "file_type": "code",
       "norm_label": "brand()",
       "source_file": "app/page.tsx",
-      "source_location": "L26"
+      "source_location": "L28"
     },
     {
       "id": "app_page_contactlink",
@@ -3205,7 +3362,7 @@
       "file_type": "code",
       "norm_label": "contactlink()",
       "source_file": "app/page.tsx",
-      "source_location": "L30"
+      "source_location": "L32"
     },
     {
       "id": "app_page_homepage",
@@ -3217,7 +3374,7 @@
       "file_type": "code",
       "norm_label": "homepage()",
       "source_file": "app/page.tsx",
-      "source_location": "L34"
+      "source_location": "L36"
     },
     {
       "id": "components_ui_input_otp_inputotp",
@@ -3772,28 +3929,28 @@
       "source_location": "L15"
     },
     {
-      "id": "components_ui_aspect_ratio_aspectratio",
-      "label": "AspectRatio()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "radix-ui",
-      "file_type": "code",
-      "norm_label": "aspectratio()",
-      "source_file": "components/ui/aspect-ratio.tsx",
-      "source_location": "L5"
-    },
-    {
       "id": "components_ui_button_group_buttongroup",
       "label": "ButtonGroup()",
       "_callable": true,
       "_origin": "ast",
       "community": 42,
-      "community_name": "radix-ui",
+      "community_name": "button-group.tsx",
       "file_type": "code",
       "norm_label": "buttongroup()",
       "source_file": "components/ui/button-group.tsx",
       "source_location": "L24"
+    },
+    {
+      "id": "components_ui_button_group_buttongroupseparator",
+      "label": "ButtonGroupSeparator()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "button-group.tsx",
+      "file_type": "code",
+      "norm_label": "buttongroupseparator()",
+      "source_file": "components/ui/button-group.tsx",
+      "source_location": "L60"
     },
     {
       "id": "components_ui_button_group_buttongrouptext",
@@ -3801,95 +3958,131 @@
       "_callable": true,
       "_origin": "ast",
       "community": 42,
-      "community_name": "radix-ui",
+      "community_name": "button-group.tsx",
       "file_type": "code",
       "norm_label": "buttongrouptext()",
       "source_file": "components/ui/button-group.tsx",
       "source_location": "L40"
     },
     {
-      "id": "components_ui_radio_group_radiogroup",
-      "label": "RadioGroup()",
+      "id": "components_ui_field_fieldseparator",
+      "label": "FieldSeparator()",
       "_callable": true,
       "_origin": "ast",
       "community": 42,
-      "community_name": "radix-ui",
+      "community_name": "button-group.tsx",
       "file_type": "code",
-      "norm_label": "radiogroup()",
-      "source_file": "components/ui/radio-group.tsx",
-      "source_location": "L9"
+      "norm_label": "fieldseparator()",
+      "source_file": "components/ui/field.tsx",
+      "source_location": "L156"
     },
     {
-      "id": "components_ui_radio_group_radiogroupitem",
-      "label": "RadioGroupItem()",
+      "id": "components_ui_item_itemseparator",
+      "label": "ItemSeparator()",
       "_callable": true,
       "_origin": "ast",
       "community": 42,
-      "community_name": "radix-ui",
+      "community_name": "button-group.tsx",
       "file_type": "code",
-      "norm_label": "radiogroupitem()",
-      "source_file": "components/ui/radio-group.tsx",
-      "source_location": "L22"
+      "norm_label": "itemseparator()",
+      "source_file": "components/ui/item.tsx",
+      "source_location": "L19"
     },
     {
-      "id": "components_ui_direction_directionprovider",
-      "label": "DirectionProvider()",
+      "id": "components_ui_separator_separator",
+      "label": "Separator()",
       "_callable": true,
       "_origin": "ast",
-      "community": 43,
-      "community_name": "react",
+      "community": 42,
+      "community_name": "button-group.tsx",
       "file_type": "code",
-      "norm_label": "directionprovider()",
-      "source_file": "components/ui/direction.tsx",
-      "source_location": "L6"
-    },
-    {
-      "id": "components_ui_input_group_inputgrouptext",
-      "label": "InputGroupText()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 43,
-      "community_name": "react",
-      "file_type": "code",
-      "norm_label": "inputgrouptext()",
-      "source_file": "components/ui/input-group.tsx",
-      "source_location": "L119"
-    },
-    {
-      "id": "components_ui_input_group_inputgrouptextarea",
-      "label": "InputGroupTextarea()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 43,
-      "community_name": "react",
-      "file_type": "code",
-      "norm_label": "inputgrouptextarea()",
-      "source_file": "components/ui/input-group.tsx",
-      "source_location": "L147"
-    },
-    {
-      "id": "components_ui_progress_progress",
-      "label": "Progress()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 43,
-      "community_name": "react",
-      "file_type": "code",
-      "norm_label": "progress()",
-      "source_file": "components/ui/progress.tsx",
+      "norm_label": "separator()",
+      "source_file": "components/ui/separator.tsx",
       "source_location": "L8"
     },
     {
-      "id": "components_ui_textarea_textarea",
-      "label": "Textarea()",
+      "id": "components_ui_form_formcontrol",
+      "label": "FormControl()",
       "_callable": true,
       "_origin": "ast",
       "community": 43,
-      "community_name": "react",
+      "community_name": "form.tsx",
       "file_type": "code",
-      "norm_label": "textarea()",
-      "source_file": "components/ui/textarea.tsx",
-      "source_location": "L5"
+      "norm_label": "formcontrol()",
+      "source_file": "components/ui/form.tsx",
+      "source_location": "L107"
+    },
+    {
+      "id": "components_ui_form_formdescription",
+      "label": "FormDescription()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "form.tsx",
+      "file_type": "code",
+      "norm_label": "formdescription()",
+      "source_file": "components/ui/form.tsx",
+      "source_location": "L125"
+    },
+    {
+      "id": "components_ui_form_formfield",
+      "label": "FormField()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "form.tsx",
+      "file_type": "code",
+      "norm_label": "formfield()",
+      "source_file": "components/ui/form.tsx",
+      "source_location": "L32"
+    },
+    {
+      "id": "components_ui_form_formitem",
+      "label": "FormItem()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "form.tsx",
+      "file_type": "code",
+      "norm_label": "formitem()",
+      "source_file": "components/ui/form.tsx",
+      "source_location": "L76"
+    },
+    {
+      "id": "components_ui_form_formlabel",
+      "label": "FormLabel()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "form.tsx",
+      "file_type": "code",
+      "norm_label": "formlabel()",
+      "source_file": "components/ui/form.tsx",
+      "source_location": "L90"
+    },
+    {
+      "id": "components_ui_form_formmessage",
+      "label": "FormMessage()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "form.tsx",
+      "file_type": "code",
+      "norm_label": "formmessage()",
+      "source_file": "components/ui/form.tsx",
+      "source_location": "L138"
+    },
+    {
+      "id": "components_ui_form_useformfield",
+      "label": "useFormField()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "form.tsx",
+      "file_type": "code",
+      "norm_label": "useformfield()",
+      "source_file": "components/ui/form.tsx",
+      "source_location": "L45"
     },
     {
       "id": "components_ui_scroll_area_scrollarea",
@@ -3916,48 +4109,12 @@
       "source_location": "L31"
     },
     {
-      "id": "components_ui_alert_alert",
-      "label": "Alert()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "class-variance-authority",
-      "file_type": "code",
-      "norm_label": "alert()",
-      "source_file": "components/ui/alert.tsx",
-      "source_location": "L22"
-    },
-    {
-      "id": "components_ui_alert_alertdescription",
-      "label": "AlertDescription()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "class-variance-authority",
-      "file_type": "code",
-      "norm_label": "alertdescription()",
-      "source_file": "components/ui/alert.tsx",
-      "source_location": "L50"
-    },
-    {
-      "id": "components_ui_alert_alerttitle",
-      "label": "AlertTitle()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "class-variance-authority",
-      "file_type": "code",
-      "norm_label": "alerttitle()",
-      "source_file": "components/ui/alert.tsx",
-      "source_location": "L37"
-    },
-    {
       "id": "components_ui_badge_badge",
       "label": "Badge()",
       "_callable": true,
       "_origin": "ast",
       "community": 46,
-      "community_name": "class-variance-authority",
+      "community_name": "badge.tsx",
       "file_type": "code",
       "norm_label": "badge()",
       "source_file": "components/ui/badge.tsx",
@@ -4432,42 +4589,6 @@
       "source_location": "L4"
     },
     {
-      "id": "components_ui_hover_card_hovercard",
-      "label": "HoverCard()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "hover-card.tsx",
-      "file_type": "code",
-      "norm_label": "hovercard()",
-      "source_file": "components/ui/hover-card.tsx",
-      "source_location": "L8"
-    },
-    {
-      "id": "components_ui_hover_card_hovercardcontent",
-      "label": "HoverCardContent()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "hover-card.tsx",
-      "file_type": "code",
-      "norm_label": "hovercardcontent()",
-      "source_file": "components/ui/hover-card.tsx",
-      "source_location": "L22"
-    },
-    {
-      "id": "components_ui_hover_card_hovercardtrigger",
-      "label": "HoverCardTrigger()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "hover-card.tsx",
-      "file_type": "code",
-      "norm_label": "hovercardtrigger()",
-      "source_file": "components/ui/hover-card.tsx",
-      "source_location": "L14"
-    },
-    {
       "id": "lib_connector_contract_createconnectors",
       "label": "createConnectors()",
       "_callable": true,
@@ -4586,90 +4707,6 @@
       "norm_label": "fieldtitle()",
       "source_file": "components/ui/field.tsx",
       "source_location": "L128"
-    },
-    {
-      "id": "components_ui_form_formcontrol",
-      "label": "FormControl()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "field.tsx",
-      "file_type": "code",
-      "norm_label": "formcontrol()",
-      "source_file": "components/ui/form.tsx",
-      "source_location": "L107"
-    },
-    {
-      "id": "components_ui_form_formdescription",
-      "label": "FormDescription()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "field.tsx",
-      "file_type": "code",
-      "norm_label": "formdescription()",
-      "source_file": "components/ui/form.tsx",
-      "source_location": "L125"
-    },
-    {
-      "id": "components_ui_form_formfield",
-      "label": "FormField()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "field.tsx",
-      "file_type": "code",
-      "norm_label": "formfield()",
-      "source_file": "components/ui/form.tsx",
-      "source_location": "L32"
-    },
-    {
-      "id": "components_ui_form_formitem",
-      "label": "FormItem()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "field.tsx",
-      "file_type": "code",
-      "norm_label": "formitem()",
-      "source_file": "components/ui/form.tsx",
-      "source_location": "L76"
-    },
-    {
-      "id": "components_ui_form_formlabel",
-      "label": "FormLabel()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "field.tsx",
-      "file_type": "code",
-      "norm_label": "formlabel()",
-      "source_file": "components/ui/form.tsx",
-      "source_location": "L90"
-    },
-    {
-      "id": "components_ui_form_formmessage",
-      "label": "FormMessage()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "field.tsx",
-      "file_type": "code",
-      "norm_label": "formmessage()",
-      "source_file": "components/ui/form.tsx",
-      "source_location": "L138"
-    },
-    {
-      "id": "components_ui_form_useformfield",
-      "label": "useFormField()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "field.tsx",
-      "file_type": "code",
-      "norm_label": "useformfield()",
-      "source_file": "components/ui/form.tsx",
-      "source_location": "L45"
     },
     {
       "id": "components_ui_label_label",
@@ -6200,15 +6237,59 @@
       "source_location": "L59"
     },
     {
+      "id": "components_ui_aspect_ratio",
+      "label": "aspect-ratio.tsx",
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "radix-ui",
+      "file_type": "code",
+      "norm_label": "aspect-ratio.tsx",
+      "source_file": "components/ui/aspect-ratio.tsx",
+      "source_location": "L1"
+    },
+    {
       "id": "components_ui_collapsible",
       "label": "collapsible.tsx",
       "_origin": "ast",
       "community": 18,
-      "community_name": "collapsible.tsx",
+      "community_name": "radix-ui",
       "file_type": "code",
       "norm_label": "collapsible.tsx",
       "source_file": "components/ui/collapsible.tsx",
       "source_location": "L1"
+    },
+    {
+      "id": "components_ui_hover_card",
+      "label": "hover-card.tsx",
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "radix-ui",
+      "file_type": "code",
+      "norm_label": "hover-card.tsx",
+      "source_file": "components/ui/hover-card.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_ui_switch",
+      "label": "switch.tsx",
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "radix-ui",
+      "file_type": "code",
+      "norm_label": "switch.tsx",
+      "source_file": "components/ui/switch.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "ref_radix_ui",
+      "label": "radix-ui",
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "radix-ui",
+      "file_type": "concept",
+      "norm_label": "radix-ui",
+      "source_file": "package.json",
+      "source_location": "L29"
     },
     {
       "id": "components_ui_chart",
@@ -6277,6 +6358,17 @@
       "source_location": "L1"
     },
     {
+      "id": "components_ui_input_group",
+      "label": "input-group.tsx",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "combobox.tsx",
+      "file_type": "code",
+      "norm_label": "input-group.tsx",
+      "source_file": "components/ui/input-group.tsx",
+      "source_location": "L1"
+    },
+    {
       "id": "components_ui_input_group_inputgroupaddonvariants",
       "label": "inputGroupAddonVariants",
       "_origin": "ast",
@@ -6297,6 +6389,17 @@
       "norm_label": "inputgroupbuttonvariants",
       "source_file": "components/ui/input-group.tsx",
       "source_location": "L82"
+    },
+    {
+      "id": "components_ui_textarea",
+      "label": "textarea.tsx",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "combobox.tsx",
+      "file_type": "code",
+      "norm_label": "textarea.tsx",
+      "source_file": "components/ui/textarea.tsx",
+      "source_location": "L1"
     },
     {
       "id": "ref_base_ui_react",
@@ -6321,6 +6424,28 @@
       "source_location": "L1"
     },
     {
+      "id": "components_ui_alert",
+      "label": "alert.tsx",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "utils.ts",
+      "file_type": "code",
+      "norm_label": "alert.tsx",
+      "source_file": "components/ui/alert.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_ui_alert_alertvariants",
+      "label": "alertVariants",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "utils.ts",
+      "file_type": "code",
+      "norm_label": "alertvariants",
+      "source_file": "components/ui/alert.tsx",
+      "source_location": "L6"
+    },
+    {
       "id": "components_ui_checkbox",
       "label": "checkbox.tsx",
       "_origin": "ast",
@@ -6329,6 +6454,39 @@
       "file_type": "code",
       "norm_label": "checkbox.tsx",
       "source_file": "components/ui/checkbox.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_ui_direction",
+      "label": "direction.tsx",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "utils.ts",
+      "file_type": "code",
+      "norm_label": "direction.tsx",
+      "source_file": "components/ui/direction.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_ui_progress",
+      "label": "progress.tsx",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "utils.ts",
+      "file_type": "code",
+      "norm_label": "progress.tsx",
+      "source_file": "components/ui/progress.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_ui_radio_group",
+      "label": "radio-group.tsx",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "utils.ts",
+      "file_type": "code",
+      "norm_label": "radio-group.tsx",
+      "source_file": "components/ui/radio-group.tsx",
       "source_location": "L1"
     },
     {
@@ -6343,17 +6501,6 @@
       "source_location": "L1"
     },
     {
-      "id": "components_ui_switch",
-      "label": "switch.tsx",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "utils.ts",
-      "file_type": "code",
-      "norm_label": "switch.tsx",
-      "source_file": "components/ui/switch.tsx",
-      "source_location": "L1"
-    },
-    {
       "id": "lib_utils",
       "label": "utils.ts",
       "_origin": "ast",
@@ -6363,6 +6510,17 @@
       "norm_label": "utils.ts",
       "source_file": "lib/utils.ts",
       "source_location": "L1"
+    },
+    {
+      "id": "ref_react",
+      "label": "react",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "utils.ts",
+      "file_type": "concept",
+      "norm_label": "react",
+      "source_file": "package.json",
+      "source_location": "L30"
     },
     {
       "id": "scripts_sites_env_home",
@@ -6678,7 +6836,7 @@
       "label": "toggle.tsx",
       "_origin": "ast",
       "community": 26,
-      "community_name": "toggle-group.tsx",
+      "community_name": "class-variance-authority",
       "file_type": "code",
       "norm_label": "toggle.tsx",
       "source_file": "components/ui/toggle.tsx",
@@ -6689,7 +6847,7 @@
       "label": "toggle-group.tsx",
       "_origin": "ast",
       "community": 26,
-      "community_name": "toggle-group.tsx",
+      "community_name": "class-variance-authority",
       "file_type": "code",
       "norm_label": "toggle-group.tsx",
       "source_file": "components/ui/toggle-group.tsx",
@@ -6700,7 +6858,7 @@
       "label": "ToggleGroupContext",
       "_origin": "ast",
       "community": 26,
-      "community_name": "toggle-group.tsx",
+      "community_name": "class-variance-authority",
       "file_type": "code",
       "norm_label": "togglegroupcontext",
       "source_file": "components/ui/toggle-group.tsx",
@@ -6711,11 +6869,22 @@
       "label": "toggleVariants",
       "_origin": "ast",
       "community": 26,
-      "community_name": "toggle-group.tsx",
+      "community_name": "class-variance-authority",
       "file_type": "code",
       "norm_label": "togglevariants",
       "source_file": "components/ui/toggle.tsx",
       "source_location": "L9"
+    },
+    {
+      "id": "ref_class_variance_authority",
+      "label": "class-variance-authority",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "class-variance-authority",
+      "file_type": "concept",
+      "norm_label": "class-variance-authority",
+      "source_file": "package.json",
+      "source_location": "L19"
     },
     {
       "id": "components_ui_select",
@@ -7157,6 +7326,17 @@
       "source_location": "L3"
     },
     {
+      "id": "app_enquiry_popup",
+      "label": "enquiry-popup.tsx",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "lucide-react",
+      "file_type": "code",
+      "norm_label": "enquiry-popup.tsx",
+      "source_file": "app/enquiry-popup.tsx",
+      "source_location": "L1"
+    },
+    {
       "id": "app_mobile_menu",
       "label": "mobile-menu.tsx",
       "_origin": "ast",
@@ -7198,7 +7378,7 @@
       "file_type": "code",
       "norm_label": "questions",
       "source_file": "app/page.tsx",
-      "source_location": "L19"
+      "source_location": "L21"
     },
     {
       "id": "app_page_services",
@@ -7209,7 +7389,29 @@
       "file_type": "code",
       "norm_label": "services",
       "source_file": "app/page.tsx",
-      "source_location": "L12"
+      "source_location": "L14"
+    },
+    {
+      "id": "app_verified_projects",
+      "label": "verified-projects.ts",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "lucide-react",
+      "file_type": "code",
+      "norm_label": "verified-projects.ts",
+      "source_file": "app/verified-projects.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_verified_projects_verifieddevelopers",
+      "label": "verifiedDevelopers",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "lucide-react",
+      "file_type": "code",
+      "norm_label": "verifieddevelopers",
+      "source_file": "app/verified-projects.ts",
+      "source_location": "L2"
     },
     {
       "id": "components_ui_input_otp",
@@ -7595,22 +7797,11 @@
       "source_location": "L1"
     },
     {
-      "id": "components_ui_aspect_ratio",
-      "label": "aspect-ratio.tsx",
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "radix-ui",
-      "file_type": "code",
-      "norm_label": "aspect-ratio.tsx",
-      "source_file": "components/ui/aspect-ratio.tsx",
-      "source_location": "L1"
-    },
-    {
       "id": "components_ui_button_group",
       "label": "button-group.tsx",
       "_origin": "ast",
       "community": 42,
-      "community_name": "radix-ui",
+      "community_name": "button-group.tsx",
       "file_type": "code",
       "norm_label": "button-group.tsx",
       "source_file": "components/ui/button-group.tsx",
@@ -7621,99 +7812,66 @@
       "label": "buttonGroupVariants",
       "_origin": "ast",
       "community": 42,
-      "community_name": "radix-ui",
+      "community_name": "button-group.tsx",
       "file_type": "code",
       "norm_label": "buttongroupvariants",
       "source_file": "components/ui/button-group.tsx",
       "source_location": "L7"
     },
     {
-      "id": "components_ui_radio_group",
-      "label": "radio-group.tsx",
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "radix-ui",
-      "file_type": "code",
-      "norm_label": "radio-group.tsx",
-      "source_file": "components/ui/radio-group.tsx",
-      "source_location": "L1"
-    },
-    {
       "id": "components_ui_separator",
       "label": "separator.tsx",
       "_origin": "ast",
       "community": 42,
-      "community_name": "radix-ui",
+      "community_name": "button-group.tsx",
       "file_type": "code",
       "norm_label": "separator.tsx",
       "source_file": "components/ui/separator.tsx",
       "source_location": "L1"
     },
     {
-      "id": "ref_radix_ui",
-      "label": "radix-ui",
+      "id": "components_ui_form",
+      "label": "form.tsx",
       "_origin": "ast",
-      "community": 42,
-      "community_name": "radix-ui",
+      "community": 43,
+      "community_name": "form.tsx",
+      "file_type": "code",
+      "norm_label": "form.tsx",
+      "source_file": "components/ui/form.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_ui_form_formfieldcontext",
+      "label": "FormFieldContext",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "form.tsx",
+      "file_type": "code",
+      "norm_label": "formfieldcontext",
+      "source_file": "components/ui/form.tsx",
+      "source_location": "L28"
+    },
+    {
+      "id": "components_ui_form_formitemcontext",
+      "label": "FormItemContext",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "form.tsx",
+      "file_type": "code",
+      "norm_label": "formitemcontext",
+      "source_file": "components/ui/form.tsx",
+      "source_location": "L72"
+    },
+    {
+      "id": "ref_react_hook_form",
+      "label": "react-hook-form",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "form.tsx",
       "file_type": "concept",
-      "norm_label": "radix-ui",
+      "norm_label": "react-hook-form",
       "source_file": "package.json",
-      "source_location": "L29"
-    },
-    {
-      "id": "components_ui_direction",
-      "label": "direction.tsx",
-      "_origin": "ast",
-      "community": 43,
-      "community_name": "react",
-      "file_type": "code",
-      "norm_label": "direction.tsx",
-      "source_file": "components/ui/direction.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_ui_input_group",
-      "label": "input-group.tsx",
-      "_origin": "ast",
-      "community": 43,
-      "community_name": "react",
-      "file_type": "code",
-      "norm_label": "input-group.tsx",
-      "source_file": "components/ui/input-group.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_ui_progress",
-      "label": "progress.tsx",
-      "_origin": "ast",
-      "community": 43,
-      "community_name": "react",
-      "file_type": "code",
-      "norm_label": "progress.tsx",
-      "source_file": "components/ui/progress.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_ui_textarea",
-      "label": "textarea.tsx",
-      "_origin": "ast",
-      "community": 43,
-      "community_name": "react",
-      "file_type": "code",
-      "norm_label": "textarea.tsx",
-      "source_file": "components/ui/textarea.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "ref_react",
-      "label": "react",
-      "_origin": "ast",
-      "community": 43,
-      "community_name": "react",
-      "file_type": "concept",
-      "norm_label": "react",
-      "source_file": "package.json",
-      "source_location": "L30"
+      "source_location": "L33"
     },
     {
       "id": "cloudflare_env_d",
@@ -7749,33 +7907,11 @@
       "source_location": "L1"
     },
     {
-      "id": "components_ui_alert",
-      "label": "alert.tsx",
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "class-variance-authority",
-      "file_type": "code",
-      "norm_label": "alert.tsx",
-      "source_file": "components/ui/alert.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_ui_alert_alertvariants",
-      "label": "alertVariants",
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "class-variance-authority",
-      "file_type": "code",
-      "norm_label": "alertvariants",
-      "source_file": "components/ui/alert.tsx",
-      "source_location": "L6"
-    },
-    {
       "id": "components_ui_badge",
       "label": "badge.tsx",
       "_origin": "ast",
       "community": 46,
-      "community_name": "class-variance-authority",
+      "community_name": "badge.tsx",
       "file_type": "code",
       "norm_label": "badge.tsx",
       "source_file": "components/ui/badge.tsx",
@@ -7786,22 +7922,11 @@
       "label": "badgeVariants",
       "_origin": "ast",
       "community": 46,
-      "community_name": "class-variance-authority",
+      "community_name": "badge.tsx",
       "file_type": "code",
       "norm_label": "badgevariants",
       "source_file": "components/ui/badge.tsx",
       "source_location": "L7"
-    },
-    {
-      "id": "ref_class_variance_authority",
-      "label": "class-variance-authority",
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "class-variance-authority",
-      "file_type": "concept",
-      "norm_label": "class-variance-authority",
-      "source_file": "package.json",
-      "source_location": "L19"
     },
     {
       "id": "components_ui_pagination",
@@ -7956,17 +8081,6 @@
       "source_location": "L1"
     },
     {
-      "id": "components_ui_hover_card",
-      "label": "hover-card.tsx",
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "hover-card.tsx",
-      "file_type": "code",
-      "norm_label": "hover-card.tsx",
-      "source_file": "components/ui/hover-card.tsx",
-      "source_location": "L1"
-    },
-    {
       "id": "lib_connector_preview_d",
       "label": "connector-preview.d.ts",
       "_origin": "ast",
@@ -8022,39 +8136,6 @@
       "source_location": "L57"
     },
     {
-      "id": "components_ui_form",
-      "label": "form.tsx",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "field.tsx",
-      "file_type": "code",
-      "norm_label": "form.tsx",
-      "source_file": "components/ui/form.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_ui_form_formfieldcontext",
-      "label": "FormFieldContext",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "field.tsx",
-      "file_type": "code",
-      "norm_label": "formfieldcontext",
-      "source_file": "components/ui/form.tsx",
-      "source_location": "L28"
-    },
-    {
-      "id": "components_ui_form_formitemcontext",
-      "label": "FormItemContext",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "field.tsx",
-      "file_type": "code",
-      "norm_label": "formitemcontext",
-      "source_file": "components/ui/form.tsx",
-      "source_location": "L72"
-    },
-    {
       "id": "components_ui_label",
       "label": "label.tsx",
       "_origin": "ast",
@@ -8064,17 +8145,6 @@
       "norm_label": "label.tsx",
       "source_file": "components/ui/label.tsx",
       "source_location": "L1"
-    },
-    {
-      "id": "ref_react_hook_form",
-      "label": "react-hook-form",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "field.tsx",
-      "file_type": "concept",
-      "norm_label": "react-hook-form",
-      "source_file": "package.json",
-      "source_location": "L33"
     },
     {
       "id": "package_dependencies",
@@ -9142,7 +9212,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/page.tsx",
-      "source_location": "L39",
+      "source_location": "L41",
       "weight": 1.0
     },
     {
@@ -9154,7 +9224,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/page.tsx",
-      "source_location": "L39",
+      "source_location": "L41",
       "weight": 1.0
     },
     {
@@ -9166,7 +9236,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/page.tsx",
-      "source_location": "L40",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page_homepage",
+      "target": "app_enquiry_popup_enquirypopup",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app/page.tsx",
+      "source_location": "L53",
       "weight": 1.0
     },
     {
@@ -13982,6 +14064,30 @@
       "weight": 1.0
     },
     {
+      "source": "app_page",
+      "target": "app_enquiry_popup_enquirypopup",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page",
+      "target": "app_verified_projects_verifieddevelopers",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
       "source": "components_connector_error",
       "target": "components_ui_button_button",
       "relation": "imports",
@@ -15890,6 +15996,30 @@
       "weight": 1.0
     },
     {
+      "source": "app_enquiry_popup",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/enquiry-popup.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_enquiry_popup",
+      "target": "ref_lucide_react",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/enquiry-popup.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
       "source": "app_layout",
       "target": "ref_next",
       "relation": "imports_from",
@@ -15984,6 +16114,30 @@
       "context": "import",
       "source_file": "app/page.tsx",
       "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page",
+      "target": "app_enquiry_popup",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page",
+      "target": "app_verified_projects",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/page.tsx",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -19542,6 +19696,39 @@
       "weight": 1.0
     },
     {
+      "source": "app_enquiry_popup",
+      "target": "app_enquiry_popup_enquirypopupprops",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/enquiry-popup.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_enquiry_popup",
+      "target": "app_enquiry_popup_enquirypopup",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/enquiry-popup.tsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "app_enquiry_popup_enquirypopup",
+      "target": "app_enquiry_popup_enquirypopup_submit",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/enquiry-popup.tsx",
+      "source_location": "L51",
+      "weight": 1.0
+    },
+    {
       "source": "app_layout",
       "target": "app_layout_metadata",
       "relation": "contains",
@@ -19593,7 +19780,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/page.tsx",
-      "source_location": "L12",
+      "source_location": "L14",
       "weight": 1.0
     },
     {
@@ -19604,7 +19791,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/page.tsx",
-      "source_location": "L19",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -19615,7 +19802,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/page.tsx",
-      "source_location": "L26",
+      "source_location": "L28",
       "weight": 1.0
     },
     {
@@ -19626,7 +19813,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/page.tsx",
-      "source_location": "L30",
+      "source_location": "L32",
       "weight": 1.0
     },
     {
@@ -19637,7 +19824,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/page.tsx",
-      "source_location": "L34",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "app_verified_projects",
+      "target": "app_verified_projects_verifieddevelopers",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/verified-projects.ts",
+      "source_location": "L2",
       "weight": 1.0
     },
     {
@@ -26068,5 +26266,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "17437554b8f9e53c17f129b8b6be79b80bed0405"
+  "built_at_commit": "c4f9c2de138c4768bd09a37023a33182dd4a44bb"
 }

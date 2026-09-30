@@ -1,17 +1,17 @@
 # Graph Report - eshan-borewells  (2026-09-30)
 
 ## Corpus Check
-- 102 files · ~115,807 words
+- 104 files · ~213,743 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 5 file(s) not represented in the graph (top: (none) 2, .css 2, .xml 1)
 
 ## Summary
-- 771 nodes · 1467 edges · 61 communities (47 shown, 14 thin omitted)
+- 777 nodes · 1478 edges · 60 communities (47 shown, 13 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 2 edges (avg confidence: 0.9)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `17437554`
+- Built from commit: `c4f9c2de`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -34,6 +34,7 @@
 - menubar.tsx
 - dropdown-menu.tsx
 - vinext-starter
+- radix-ui
 - chart.tsx
 - utils.ts
 - sites-env.sh
@@ -41,7 +42,7 @@
 - attachment.tsx
 - drawer.tsx
 - sheet.tsx
-- toggle-group.tsx
+- class-variance-authority
 - select.tsx
 - navigation-menu.tsx
 - breadcrumb.tsx
@@ -57,16 +58,15 @@
 - marker.tsx
 - alert-dialog.tsx
 - install-ci.sh
-- radix-ui
-- react
+- button-group.tsx
+- form.tsx
 - cloudflare-env.d.ts
 - scroll-area.tsx
-- class-variance-authority
+- badge.tsx
 - pagination.tsx
 - message-scroller.tsx
 - postcss.config.mjs
 - build-verified.sh
-- hover-card.tsx
 - connector-preview.d.ts
 - ConnectorBinding
 - ConnectorContent
@@ -77,9 +77,9 @@
 
 ## God Nodes (most connected - your core abstractions)
 1. `cn()` - 327 edges
-2. `react` - 55 edges
+2. `react` - 56 edges
 3. `radix-ui` - 38 edges
-4. `lucide-react` - 27 edges
+4. `lucide-react` - 28 edges
 5. `Button()` - 26 edges
 6. `compilerOptions` - 17 edges
 7. `class-variance-authority` - 17 edges
@@ -90,19 +90,19 @@
 ## Surprising Connections (you probably didn't know these)
 - `Optional Dispatch-Owned ChatGPT Sign-In` --references--> `getChatGPTUser()`  [INFERRED]
   README.md → app/chatgpt-auth.ts
-- `AccordionContent()` --calls--> `cn()`  [EXTRACTED]
-  components/ui/accordion.tsx → lib/utils.ts
-- `AccordionItem()` --calls--> `cn()`  [EXTRACTED]
-  components/ui/accordion.tsx → lib/utils.ts
-- `AccordionTrigger()` --calls--> `cn()`  [EXTRACTED]
-  components/ui/accordion.tsx → lib/utils.ts
 - `ContextMenuCheckboxItem()` --calls--> `cn()`  [EXTRACTED]
+  components/ui/context-menu.tsx → lib/utils.ts
+- `ContextMenuContent()` --calls--> `cn()`  [EXTRACTED]
+  components/ui/context-menu.tsx → lib/utils.ts
+- `ContextMenuItem()` --calls--> `cn()`  [EXTRACTED]
+  components/ui/context-menu.tsx → lib/utils.ts
+- `ContextMenuLabel()` --calls--> `cn()`  [EXTRACTED]
   components/ui/context-menu.tsx → lib/utils.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (61 total, 14 thin omitted)
+## Communities (60 total, 13 thin omitted)
 
 ### Community 0 - "connector-preview-session.mjs"
 Cohesion: 0.06
@@ -114,7 +114,7 @@ Nodes (9): ContextMenuCheckboxItem(), ContextMenuContent(), ContextMenuItem(), C
 
 ### Community 2 - "combobox.tsx"
 Cohesion: 0.11
-Nodes (19): ComboboxChip(), ComboboxChips(), ComboboxChipsInput(), ComboboxClear(), ComboboxContent(), ComboboxEmpty(), ComboboxGroup(), ComboboxInput() (+11 more)
+Nodes (22): ComboboxChip(), ComboboxChips(), ComboboxChipsInput(), ComboboxClear(), ComboboxContent(), ComboboxEmpty(), ComboboxGroup(), ComboboxInput() (+14 more)
 
 ### Community 3 - "sidebar.tsx"
 Cohesion: 0.08
@@ -129,8 +129,8 @@ Cohesion: 0.12
 Nodes (26): Avatar(), AvatarBadge(), AvatarFallback(), AvatarGroup(), AvatarGroupCount(), AvatarImage(), Kbd(), KbdGroup() (+18 more)
 
 ### Community 6 - "field.tsx"
-Cohesion: 0.10
-Nodes (22): Field(), FieldContent(), FieldDescription(), FieldError(), FieldGroup(), FieldLabel(), FieldLegend(), FieldSet() (+14 more)
+Cohesion: 0.19
+Nodes (11): Field(), FieldContent(), FieldDescription(), FieldError(), FieldGroup(), FieldLabel(), FieldLegend(), FieldSet() (+3 more)
 
 ### Community 7 - "dependencies"
 Cohesion: 0.08
@@ -153,8 +153,8 @@ Cohesion: 0.36
 Nodes (3): bindings, getConnectorBinding(), connectorsForRequest()
 
 ### Community 12 - "item.tsx"
-Cohesion: 0.15
-Nodes (15): ButtonGroupSeparator(), FieldSeparator(), Item(), ItemActions(), ItemContent(), ItemDescription(), ItemFooter(), ItemGroup() (+7 more)
+Cohesion: 0.20
+Nodes (11): Item(), ItemActions(), ItemContent(), ItemDescription(), ItemFooter(), ItemGroup(), ItemHeader(), ItemMedia() (+3 more)
 
 ### Community 13 - "compilerOptions"
 Cohesion: 0.10
@@ -176,13 +176,17 @@ Nodes (9): DropdownMenuCheckboxItem(), DropdownMenuContent(), DropdownMenuItem()
 Cohesion: 0.09
 Nodes (21): chatGPTSignInPath(), chatGPTSignOutPath(), ChatGPTUser, getChatGPTUser(), isReservedAuthPath(), requireChatGPTUser(), safeDecodeURIComponent(), safeRelativeReturnPath() (+13 more)
 
+### Community 18 - "radix-ui"
+Cohesion: 0.15
+Nodes (3): HoverCardContent(), Switch(), radix-ui
+
 ### Community 19 - "chart.tsx"
 Cohesion: 0.20
 Nodes (13): ChartConfig, ChartContainer(), ChartContext, ChartContextProps, ChartLegendContent(), ChartStyle(), ChartTooltipContent(), getPayloadConfigFromPayload() (+5 more)
 
 ### Community 20 - "utils.ts"
-Cohesion: 0.17
-Nodes (6): AccordionContent(), AccordionItem(), AccordionTrigger(), Checkbox(), Slider(), Switch()
+Cohesion: 0.11
+Nodes (13): AccordionContent(), AccordionItem(), AccordionTrigger(), Alert(), AlertDescription(), AlertTitle(), alertVariants, Checkbox() (+5 more)
 
 ### Community 21 - "sites-env.sh"
 Cohesion: 0.14
@@ -204,9 +208,9 @@ Nodes (8): DrawerContent(), DrawerDescription(), DrawerFooter(), DrawerHeader(),
 Cohesion: 0.26
 Nodes (9): Sheet(), SheetContent(), SheetDescription(), SheetFooter(), SheetHeader(), SheetOverlay(), SheetPortal(), SheetTitle() (+1 more)
 
-### Community 26 - "toggle-group.tsx"
-Cohesion: 0.43
-Nodes (5): ToggleGroup(), ToggleGroupContext, ToggleGroupItem(), Toggle(), toggleVariants
+### Community 26 - "class-variance-authority"
+Cohesion: 0.39
+Nodes (6): ToggleGroup(), ToggleGroupContext, ToggleGroupItem(), Toggle(), toggleVariants, class-variance-authority
 
 ### Community 27 - "select.tsx"
 Cohesion: 0.22
@@ -245,8 +249,8 @@ Cohesion: 0.38
 Nodes (6): Bubble(), BubbleContent(), BubbleGroup(), BubbleReactions(), bubbleReactionsVariants, bubbleVariants
 
 ### Community 36 - "lucide-react"
-Cohesion: 0.09
-Nodes (20): BUSINESS_ADDRESS, BUSINESS_EMAIL, BUSINESS_PHONE, WHATSAPP_NUMBER, links, MobileMenu(), Brand(), ContactLink() (+12 more)
+Cohesion: 0.08
+Nodes (23): BUSINESS_ADDRESS, BUSINESS_EMAIL, BUSINESS_PHONE, WHATSAPP_NUMBER, EnquiryPopup(), EnquiryPopupProps, links, MobileMenu() (+15 more)
 
 ### Community 37 - "tabs.tsx"
 Cohesion: 0.40
@@ -268,17 +272,13 @@ Nodes (9): AlertDialogAction(), AlertDialogContent(), AlertDialogDescription(), 
 Cohesion: 0.40
 Nodes (4): NPM_CONFIG_FETCH_RETRIES, NPM_CONFIG_FETCH_TIMEOUT, NPM_CONFIG_MAXSOCKETS, install-ci.sh script
 
-### Community 42 - "radix-ui"
-Cohesion: 0.22
-Nodes (6): ButtonGroup(), ButtonGroupText(), buttonGroupVariants, RadioGroup(), RadioGroupItem(), radix-ui
+### Community 42 - "button-group.tsx"
+Cohesion: 0.31
+Nodes (7): ButtonGroup(), ButtonGroupSeparator(), ButtonGroupText(), buttonGroupVariants, FieldSeparator(), ItemSeparator(), Separator()
 
-### Community 43 - "react"
-Cohesion: 0.27
-Nodes (5): InputGroupText(), InputGroupTextarea(), Progress(), Textarea(), react
-
-### Community 46 - "class-variance-authority"
-Cohesion: 0.28
-Nodes (7): Alert(), AlertDescription(), AlertTitle(), alertVariants, Badge(), badgeVariants, class-variance-authority
+### Community 43 - "form.tsx"
+Cohesion: 0.21
+Nodes (11): FormControl(), FormDescription(), FormFieldContext, FormFieldContextValue, FormItem(), FormItemContext, FormItemContextValue, FormLabel() (+3 more)
 
 ### Community 47 - "pagination.tsx"
 Cohesion: 0.28
@@ -293,24 +293,24 @@ Cohesion: 0.50
 Nodes (3): Cloudflare, Env, virtual:sites-connector-preview
 
 ## Knowledge Gaps
-- **198 isolated node(s):** `links`, `services`, `questions`, `ConnectorBinding`, `ConnectorContent` (+193 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 270 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **14 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **199 isolated node(s):** `EnquiryPopupProps`, `links`, `services`, `questions`, `ChatGPTUser` (+194 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 272 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **13 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `cn()` connect `cn` to `context-menu.tsx`, `combobox.tsx`, `sidebar.tsx`, `field.tsx`, `command.tsx`, `item.tsx`, `menubar.tsx`, `dropdown-menu.tsx`, `chart.tsx`, `utils.ts`, `carousel.tsx`, `attachment.tsx`, `drawer.tsx`, `sheet.tsx`, `toggle-group.tsx`, `select.tsx`, `navigation-menu.tsx`, `breadcrumb.tsx`, `card.tsx`, `empty.tsx`, `popover.tsx`, `bubble.tsx`, `lucide-react`, `tabs.tsx`, `Button`, `marker.tsx`, `alert-dialog.tsx`, `radix-ui`, `react`, `scroll-area.tsx`, `class-variance-authority`, `pagination.tsx`, `message-scroller.tsx`, `hover-card.tsx`?**
-  _High betweenness centrality (0.297) - this node is a cross-community bridge._
-- **Why does `react` connect `react` to `context-menu.tsx`, `combobox.tsx`, `sidebar.tsx`, `cn`, `field.tsx`, `package.json`, `command.tsx`, `item.tsx`, `menubar.tsx`, `dropdown-menu.tsx`, `chart.tsx`, `utils.ts`, `carousel.tsx`, `attachment.tsx`, `drawer.tsx`, `sheet.tsx`, `toggle-group.tsx`, `select.tsx`, `navigation-menu.tsx`, `breadcrumb.tsx`, `card.tsx`, `popover.tsx`, `bubble.tsx`, `lucide-react`, `tabs.tsx`, `Button`, `marker.tsx`, `alert-dialog.tsx`, `radix-ui`, `scroll-area.tsx`, `class-variance-authority`, `pagination.tsx`, `message-scroller.tsx`, `hover-card.tsx`?**
-  _High betweenness centrality (0.137) - this node is a cross-community bridge._
+- **Why does `cn()` connect `cn` to `context-menu.tsx`, `combobox.tsx`, `sidebar.tsx`, `field.tsx`, `command.tsx`, `item.tsx`, `menubar.tsx`, `dropdown-menu.tsx`, `radix-ui`, `chart.tsx`, `utils.ts`, `carousel.tsx`, `attachment.tsx`, `drawer.tsx`, `sheet.tsx`, `class-variance-authority`, `select.tsx`, `navigation-menu.tsx`, `breadcrumb.tsx`, `card.tsx`, `empty.tsx`, `popover.tsx`, `bubble.tsx`, `lucide-react`, `tabs.tsx`, `Button`, `marker.tsx`, `alert-dialog.tsx`, `button-group.tsx`, `form.tsx`, `scroll-area.tsx`, `badge.tsx`, `pagination.tsx`, `message-scroller.tsx`?**
+  _High betweenness centrality (0.294) - this node is a cross-community bridge._
+- **Why does `react` connect `utils.ts` to `context-menu.tsx`, `combobox.tsx`, `sidebar.tsx`, `cn`, `field.tsx`, `package.json`, `command.tsx`, `item.tsx`, `menubar.tsx`, `dropdown-menu.tsx`, `radix-ui`, `chart.tsx`, `carousel.tsx`, `attachment.tsx`, `drawer.tsx`, `sheet.tsx`, `class-variance-authority`, `select.tsx`, `navigation-menu.tsx`, `breadcrumb.tsx`, `card.tsx`, `popover.tsx`, `bubble.tsx`, `lucide-react`, `tabs.tsx`, `Button`, `marker.tsx`, `alert-dialog.tsx`, `button-group.tsx`, `form.tsx`, `scroll-area.tsx`, `badge.tsx`, `pagination.tsx`, `message-scroller.tsx`?**
+  _High betweenness centrality (0.140) - this node is a cross-community bridge._
 - **Why does `json-rpc-2.0` connect `connector-preview-session.mjs` to `package.json`?**
-  _High betweenness centrality (0.109) - this node is a cross-community bridge._
-- **What connects `links`, `services`, `questions` to the rest of the system?**
-  _198 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.108) - this node is a cross-community bridge._
+- **What connects `EnquiryPopupProps`, `links`, `services` to the rest of the system?**
+  _199 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `connector-preview-session.mjs` be split into smaller, more focused modules?**
   _Cohesion score 0.0613107822410148 - nodes in this community are weakly interconnected._
 - **Should `context-menu.tsx` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._
 - **Should `combobox.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.11067193675889328 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.10582010582010581 - nodes in this community are weakly interconnected._
