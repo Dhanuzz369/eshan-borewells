@@ -22,6 +22,16 @@ guaranteed and depend on factors beyond site code, including a complete
 Google Business Profile. The keywords metadata is only descriptive: Google
 does not use the keywords meta tag for ranking.
 
+## Customer reviews
+
+The review marquee follows the supplied repeated 40-second linear animation,
+pauses on hover, and stops for reduced-motion preferences. It has no photos.
+Until customer-approved quotes are available, the page shows an honest feedback
+invitation instead of invented testimonials or an unsupported rating. Add real
+quotes, reviewer names or initials, and individual star ratings in
+`app/customer-reviews-data.ts`; set an aggregate and its public source there only
+if the rating can be verified.
+
 ## Token-free codebase updates
 
 This repository includes a committed Graphify code graph in `graphify-out/`.

@@ -209,3 +209,32 @@
 .hero-cinematic .button-primary:hover{background:#0b548b}
 .area-note{color:#385367}
 .contact-card-note{color:#405768}
+
+/* Magic UI marquee motion: each repeated strip travels its own width plus the gap. */
+.review-marquee{--duration:40s;--gap:1rem;display:flex;flex-direction:row;gap:var(--gap);overflow:hidden;padding:8px}
+.review-marquee-group{display:flex;flex:none;flex-direction:row;justify-content:space-around;gap:var(--gap);animation:review-marquee var(--duration) linear infinite}
+.review-marquee-pause:hover .review-marquee-group{animation-play-state:paused}
+.review-marquee-reverse .review-marquee-group{animation-direction:reverse}
+.review-marquee-vertical{flex-direction:column}
+.review-marquee-vertical .review-marquee-group{flex-direction:column;animation-name:review-marquee-vertical}
+@keyframes review-marquee{from{transform:translateX(0)}to{transform:translateX(calc(-100% - var(--gap)))}}
+@keyframes review-marquee-vertical{from{transform:translateY(0)}to{transform:translateY(calc(-100% - var(--gap)))}}
+@media(prefers-reduced-motion:reduce){.review-marquee-group{animation:none!important}}
+
+.reviews-section{padding-block:78px 85px;background:#f4f7f8}
+.reviews-heading{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:25px}
+.reviews-heading h2,.reviews-empty h2{margin:14px 0 0;font-size:clamp(36px,3.8vw,58px);line-height:1.06;letter-spacing:-.05em}
+.reviews-rating{display:grid;gap:3px;margin:0;color:#385367;font-size:12px}
+.reviews-rating strong{color:#092348;font-size:27px}
+.reviews-rating strong span{color:#c07a1a}
+.reviews-track{mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.review-card{width:330px;min-height:215px;display:flex;flex-direction:column;margin:0;padding:24px;border:1px solid #c9d9e2;border-radius:12px;background:#fff}
+.review-stars{color:#ad6d12;font-size:17px;letter-spacing:2px}
+.review-card p{margin:16px 0 20px;color:#17374e;font-size:16px;line-height:1.5}
+.review-card footer{margin-top:auto;color:#526779;font-size:12px;font-weight:700}
+.reviews-empty-inner{display:grid;grid-template-columns:1fr 1fr;gap:10%;align-items:end}
+.reviews-empty-inner>div:last-child{max-width:430px}
+.reviews-empty-inner p{margin:0 0 19px;color:#40586a;font-size:16px;line-height:1.6}
+.reviews-empty-inner a{display:inline-flex;align-items:center;gap:13px;min-height:45px;padding:0 18px;border-radius:999px;background:#145c92;color:#fff;font-size:13px;font-weight:800}
+.reviews-empty-inner a:hover{background:#0c4572}
+@media(max-width:800px){.reviews-empty-inner{grid-template-columns:1fr;gap:20px}.reviews-section{padding-block:58px}.review-card{width:285px;min-height:210px}}
