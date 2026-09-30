@@ -49,3 +49,5 @@ next-env.d.ts
 # pointer is machine-specific and is rebuilt whenever the graph is refreshed.
 /graphify-out/.graphify_root
 /graphify-out/*.sig
+/graphify-out/cache/
+/graphify-out/20*/
