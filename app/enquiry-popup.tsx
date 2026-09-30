@@ -9,17 +9,42 @@ type EnquiryPopupProps = { whatsapp: string | null; phone: string | null; collec
 export function EnquiryPopup({ whatsapp, phone, collectionEnabled }: EnquiryPopupProps) {
   const [open, setOpen] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const dismissedRef = useRef(false);
+  const completedRef = useRef(false);
+  const bottomReadyRef = useRef(true);
+
+  function dismiss() {
+    dismissedRef.current = true;
+    setOpen(false);
+  }
 
   useEffect(() => {
     if (!whatsapp && !collectionEnabled) return;
     if (sessionStorage.getItem("eshan-enquiry-seen")) return;
+    if (window.location.hash && window.location.hash !== "#top") return;
     const target = document.getElementById("services");
     if (!target) return;
     const observer = new IntersectionObserver((entries) => {
-      if (entries[0]?.isIntersecting && !window.location.hash) {
+      if (entries[0]?.isIntersecting) {
         setOpen(true);
         sessionStorage.setItem("eshan-enquiry-seen", "1");
         observer.disconnect();
+      }
+    }, { threshold: 0.2 });
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, [whatsapp, collectionEnabled]);
+
+  useEffect(() => {
+    if (!whatsapp && !collectionEnabled) return;
+    const target = document.getElementById("contact");
+    if (!target) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) {
+        bottomReadyRef.current = true;
+      } else if (bottomReadyRef.current && dismissedRef.current && !completedRef.current) {
+        bottomReadyRef.current = false;
+        setOpen(true);
       }
     }, { threshold: 0.2 });
     observer.observe(target);
@@ -32,7 +57,7 @@ export function EnquiryPopup({ whatsapp, phone, collectionEnabled }: EnquiryPopu
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") dismiss();
       if (event.key !== "Tab") return;
       const dialog = closeRef.current?.closest(".enquiry-dialog");
       const focusable = dialog?.querySelectorAll<HTMLElement>("button, input, select, a[href]");
@@ -50,6 +75,6 @@ export function EnquiryPopup({ whatsapp, phone, collectionEnabled }: EnquiryPopu
 
   return <>
     {whatsapp && <a className="floating-whatsapp" href={`https://wa.me/${whatsapp}?text=${encodeURIComponent("Hello Eshan Borewells, I would like to discuss a borewell site visit.")}`} target="_blank" rel="noopener noreferrer" aria-label="Chat with Eshan Borewells on WhatsApp"><MessageCircle size={24} /></a>}
-    {open && <div className="enquiry-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}><section className="enquiry-dialog" role="dialog" aria-modal="true" aria-labelledby="enquiry-title"><button ref={closeRef} className="enquiry-close" type="button" aria-label="Close enquiry form" onClick={() => setOpen(false)}><X size={21} /></button><div className="enquiry-copy"><span>PLANNING A BOREWELL?</span><h2 id="enquiry-title">Let&apos;s talk about your site.</h2><p>Share three details to start a useful conversation.</p></div><LeadForm source="popup" whatsapp={whatsapp} phone={phone} collectionEnabled={collectionEnabled} onDraftOpened={() => setOpen(false)} /></section></div>}
+    {open && <div className="enquiry-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) dismiss(); }}><section className="enquiry-dialog" role="dialog" aria-modal="true" aria-labelledby="enquiry-title"><button ref={closeRef} className="enquiry-close" type="button" aria-label="Close enquiry form" onClick={dismiss}><X size={21} /></button><div className="enquiry-copy"><span>PLANNING A BOREWELL?</span><h2 id="enquiry-title">Let&apos;s talk about your site.</h2><p>Share three details to start a useful conversation.</p></div><LeadForm source="popup" whatsapp={whatsapp} phone={phone} collectionEnabled={collectionEnabled} onDraftOpened={() => { completedRef.current = true; setOpen(false); }} onSubmitted={() => { completedRef.current = true; setOpen(false); }} /></section></div>}
   </>;
 }

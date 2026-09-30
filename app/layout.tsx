@@ -6,14 +6,16 @@ const siteUrl = getProductionUrl();
 
 export const metadata: Metadata = {
   ...(siteUrl ? { metadataBase: new URL(siteUrl), alternates: { canonical: "/" } } : {}),
-  title: "Borewell Drilling in Bengaluru | Eshan Borewells",
-  description: "Borewell drilling, groundwater survey, casing and flushing for homes, apartments, farms and commercial sites in Bengaluru and nearby areas within about 100 km.",
+  title: "Borewell Drilling & Water Survey in Bengaluru | Eshan Borewells",
+  description: "Borewell drilling, groundwater survey, casing, flushing and water solutions for homes, apartments, farms and commercial sites across Bengaluru and nearby areas.",
+  keywords: ["borewell drilling Bengaluru", "borewell drilling Bangalore", "groundwater survey Bengaluru", "water detection Bangalore", "borewell casing", "borewell flushing", "residential borewell", "apartment borewell", "farm borewell", "borewell services near me"],
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
   openGraph: {
     title: "Eshan Borewells | Borewell Drilling in Bengaluru",
     description: "Site-aware borewell drilling and water solutions across Bengaluru and nearby areas.",
     type: "website",
     ...(siteUrl ? { url: siteUrl } : {}),
-    ...(siteUrl ? { images: [{ url: "/hero-drilling.png", width: 1536, height: 1024, alt: "Borewell drilling rig at a Bengaluru property" }] } : {}),
+    ...(siteUrl ? { images: [{ url: "/hero-drilling.webp", width: 1672, height: 941, alt: "Borewell drilling rig at a Bengaluru property" }] } : {}),
   },
   twitter: { card: "summary_large_image" },
   icons: { icon: "/favicon.svg" },

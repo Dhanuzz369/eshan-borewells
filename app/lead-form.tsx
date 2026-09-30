@@ -9,11 +9,12 @@ type LeadFormProps = {
   phone: string | null;
   collectionEnabled: boolean;
   onDraftOpened?: () => void;
+  onSubmitted?: () => void;
 };
 
 type LeadDetails = { name: string; phone: string; siteLocation: string };
 
-export function LeadForm({ source, whatsapp, phone, collectionEnabled, onDraftOpened }: LeadFormProps) {
+export function LeadForm({ source, whatsapp, phone, collectionEnabled, onDraftOpened, onSubmitted }: LeadFormProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -67,6 +68,7 @@ export function LeadForm({ source, whatsapp, phone, collectionEnabled, onDraftOp
       setStatus("sent");
       setMessage("Thank you. We received your site details and will get in touch.");
       formRef.current?.reset();
+      onSubmitted?.();
     } catch {
       setStatus("error");
       setMessage("We could not save your enquiry. Please use WhatsApp or call us instead.");
