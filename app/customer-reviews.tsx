@@ -3,7 +3,7 @@ import { Marquee } from "@/components/ui/marquee";
 export type CustomerReview = {
   quote: string;
   reviewer: string;
-  rating: 1 | 2 | 3 | 4 | 5;
+  rating?: 1 | 2 | 3 | 4 | 5;
 };
 
 type CustomerReviewsProps = {
@@ -30,7 +30,7 @@ export function CustomerReviews({ reviews, aggregateRating, ratingSource, feedba
     </div>
     <Marquee className="reviews-track" pauseOnHover repeat={4} aria-label="Customer reviews">
       {reviews.map((review, index) => <blockquote className="review-card" key={`${review.reviewer}-${index}`}>
-        <div className="review-stars" aria-label={`${review.rating} out of 5 stars`}><span aria-hidden="true">{"★".repeat(review.rating)}{"☆".repeat(5 - review.rating)}</span></div>
+        {review.rating != null && <div className="review-stars" aria-label={`${review.rating} out of 5 stars`}><span aria-hidden="true">{"★".repeat(review.rating)}{"☆".repeat(5 - review.rating)}</span></div>}
         <p>“{review.quote}”</p>
         <footer>{review.reviewer}</footer>
       </blockquote>)}
