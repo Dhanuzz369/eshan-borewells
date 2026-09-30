@@ -16,7 +16,7 @@ export function EnquiryPopup({ whatsapp, email }: EnquiryPopupProps) {
     const target = document.getElementById("services");
     if (!target) return;
     const observer = new IntersectionObserver((entries) => {
-      if (entries[0]?.isIntersecting) {
+      if (entries[0]?.isIntersecting && !window.location.hash) {
         setOpen(true);
         sessionStorage.setItem("eshan-enquiry-seen", "1");
         observer.disconnect();

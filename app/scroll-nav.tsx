@@ -6,7 +6,7 @@ import { Droplets, Menu, X } from "lucide-react";
 const links = [
   ["Services", "#services"],
   ["Our approach", "#approach"],
-  ["Projects", "#projects"],
+  ["Why us", "#why-us"],
   ["Where we work", "#areas"],
   ["FAQs", "#questions"],
   ["Contact", "#contact"],
