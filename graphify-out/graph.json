@@ -14017,6 +14017,18 @@
     },
     {
       "source": "app_page",
+      "target": "app_business_config_business_address",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page",
       "target": "app_business_config_business_email",
       "relation": "imports",
       "_origin": "ast",
@@ -26266,5 +26278,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "c4f9c2de138c4768bd09a37023a33182dd4a44bb"
+  "built_at_commit": "de652a67fb41e2809b90b939ca25c12842d62f5f"
 }

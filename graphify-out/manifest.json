@@ -1,9 +1,9 @@
 {
   "app/business-config.ts": {
-    "mtime": 1790760763.6451275,
-    "seen": 1790763071.9435961,
-    "ast_hash": "5878f44a33edc4aade71b6acea00ac59",
-    "semantic_hash": "5878f44a33edc4aade71b6acea00ac59"
+    "mtime": 1790770919.9956975,
+    "seen": 1790771011.372679,
+    "ast_hash": "8a0de7b72b1fee44e33436e80ae18339",
+    "semantic_hash": ""
   },
   "app/chatgpt-auth.ts": {
     "mtime": 1790759423.1672764,
@@ -18,9 +18,9 @@
     "semantic_hash": "acbac29352d0a85a0459839d00deaec8"
   },
   "app/page.tsx": {
-    "mtime": 1790769868.008098,
-    "seen": 1790770167.600582,
-    "ast_hash": "e02d5fbe8e5c3bb02ed50e08fbd6be3e",
+    "mtime": 1790770898.61246,
+    "seen": 1790771011.3726861,
+    "ast_hash": "d85d9b1655040a09efb867db215e0965",
     "semantic_hash": ""
   },
   "cloudflare-env.d.ts": {
@@ -648,21 +648,27 @@
     "semantic_hash": ""
   },
   "app/enquiry-popup.tsx": {
-    "mtime": 1790769909.4860039,
-    "seen": 1790770167.600579,
-    "ast_hash": "de02aae7f943829c72202ee1d4a217bd",
+    "mtime": 1790770712.669456,
+    "seen": 1790771011.372683,
+    "ast_hash": "46dd4eeeb0ac1a23c00fe45afa9ad3fa",
     "semantic_hash": ""
   },
   "app/verified-projects.ts": {
-    "mtime": 1790769342.9468875,
-    "seen": 1790770167.6005828,
-    "ast_hash": "a02948953a02caf981800cbb074b64ac",
+    "mtime": 1790770488.832696,
+    "seen": 1790771011.3726861,
+    "ast_hash": "f75a12c2b9280769c90bda047b4b3b8b",
     "semantic_hash": ""
   },
   "public/apartment-drilling-illustration.png": {
     "mtime": 1790769811.465508,
     "seen": 1790770167.60064,
     "ast_hash": "60af5493bd00b6b2809b5813a94a2a8c",
+    "semantic_hash": ""
+  },
+  "public/developer-logos-source.png": {
+    "mtime": 1790770396.286482,
+    "seen": 1790771011.372746,
+    "ast_hash": "eb1161e93eb99c7c1a4958f71a523817",
     "semantic_hash": ""
   }
 }
