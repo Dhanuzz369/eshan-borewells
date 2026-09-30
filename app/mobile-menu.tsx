@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
-const links = [["Services", "#services"], ["Our approach", "#approach"], ["Where we work", "#areas"], ["FAQs", "#questions"], ["Contact", "#contact"]];
+const links = [["Services", "#services"], ["Our approach", "#approach"], ["Projects", "#projects"], ["Where we work", "#areas"], ["FAQs", "#questions"], ["Contact", "#contact"]];
 
 export function MobileMenu() {
   const [open, setOpen] = useState(false);
