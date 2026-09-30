@@ -1,17 +1,17 @@
 "use client";
 
-import { FormEvent, useEffect, useRef, useState } from "react";
-import { ArrowRight, MessageCircle, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { MessageCircle, X } from "lucide-react";
+import { LeadForm } from "./lead-form";
 
-type EnquiryPopupProps = { whatsapp: string | null; email: string | null };
+type EnquiryPopupProps = { whatsapp: string | null; phone: string | null; collectionEnabled: boolean };
 
-export function EnquiryPopup({ whatsapp, email }: EnquiryPopupProps) {
+export function EnquiryPopup({ whatsapp, phone, collectionEnabled }: EnquiryPopupProps) {
   const [open, setOpen] = useState(false);
-  const [error, setError] = useState("");
   const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (!whatsapp && !email) return;
+    if (!whatsapp && !collectionEnabled) return;
     if (sessionStorage.getItem("eshan-enquiry-seen")) return;
     const target = document.getElementById("services");
     if (!target) return;
@@ -24,7 +24,7 @@ export function EnquiryPopup({ whatsapp, email }: EnquiryPopupProps) {
     }, { threshold: 0.2 });
     observer.observe(target);
     return () => observer.disconnect();
-  }, [whatsapp, email]);
+  }, [whatsapp, collectionEnabled]);
 
   useEffect(() => {
     if (!open) return;
@@ -46,36 +46,10 @@ export function EnquiryPopup({ whatsapp, email }: EnquiryPopupProps) {
     return () => { document.removeEventListener("keydown", onKeyDown); document.body.style.overflow = previousOverflow; };
   }, [open]);
 
-  if (!whatsapp && !email) return null;
-
-  function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setError("");
-    const data = new FormData(event.currentTarget);
-    const name = String(data.get("name") || "").trim();
-    const phone = String(data.get("phone") || "").trim();
-    const area = String(data.get("area") || "").trim();
-    if (!name || !phone || !area) {
-      setError("Please enter your name, phone number and site location.");
-      return;
-    }
-    if (!/^\d{10,15}$/.test(phone.replace(/\D/g, ""))) {
-      setError("Please enter a valid phone number with 10 to 15 digits.");
-      return;
-    }
-    const message = `Hello Eshan Borewells, I would like to discuss a borewell site visit.\nName: ${name}\nPhone: ${phone}\nSite location: ${area}`;
-    if (whatsapp) {
-      const destination = `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
-      const chat = window.open(destination, "_blank", "noopener,noreferrer");
-      if (!chat) window.location.href = destination;
-    } else if (email) {
-      window.location.href = `mailto:${email}?subject=${encodeURIComponent("Borewell site enquiry")}&body=${encodeURIComponent(message)}`;
-    }
-    setOpen(false);
-  }
+  if (!whatsapp && !collectionEnabled) return null;
 
   return <>
     {whatsapp && <a className="floating-whatsapp" href={`https://wa.me/${whatsapp}?text=${encodeURIComponent("Hello Eshan Borewells, I would like to discuss a borewell site visit.")}`} target="_blank" rel="noopener noreferrer" aria-label="Chat with Eshan Borewells on WhatsApp"><MessageCircle size={24} /></a>}
-    {open && <div className="enquiry-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}><section className="enquiry-dialog" role="dialog" aria-modal="true" aria-labelledby="enquiry-title"><button ref={closeRef} className="enquiry-close" type="button" aria-label="Close enquiry form" onClick={() => setOpen(false)}><X size={21} /></button><div className="enquiry-copy"><span>PLANNING A BOREWELL?</span><h2 id="enquiry-title">Let&apos;s talk about your site.</h2><p>Share three details to start a useful conversation.</p></div><form onSubmit={submit} noValidate><label>Name<input name="name" autoComplete="name" required placeholder="Your name" /></label><label>Phone number<input name="phone" autoComplete="tel" inputMode="tel" required placeholder="Your number" /></label><label>Site location<input name="area" autoComplete="address-level2" required placeholder="e.g. Rajajinagar" /></label>{error && <p className="enquiry-error" role="alert">{error}</p>}<button className="enquiry-submit" type="submit">{whatsapp ? "Continue on WhatsApp" : "Continue by email"}<ArrowRight size={18} /></button><p className="enquiry-privacy">Your details open as a draft in {whatsapp ? "WhatsApp" : "your email app"}. Tap Send there to share them with us. Nothing is stored on this site.</p></form></section></div>}
+    {open && <div className="enquiry-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}><section className="enquiry-dialog" role="dialog" aria-modal="true" aria-labelledby="enquiry-title"><button ref={closeRef} className="enquiry-close" type="button" aria-label="Close enquiry form" onClick={() => setOpen(false)}><X size={21} /></button><div className="enquiry-copy"><span>PLANNING A BOREWELL?</span><h2 id="enquiry-title">Let&apos;s talk about your site.</h2><p>Share three details to start a useful conversation.</p></div><LeadForm source="popup" whatsapp={whatsapp} phone={phone} collectionEnabled={collectionEnabled} onDraftOpened={() => setOpen(false)} /></section></div>}
   </>;
 }

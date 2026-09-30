@@ -148,3 +148,51 @@
 @media(max-width:1100px){.service-row{grid-template-columns:45px minmax(170px,1fr) minmax(170px,290px) 135px 21px;gap:14px}.service-image{width:135px;height:88px}.why-cards{grid-template-columns:repeat(3,minmax(0,1fr))}.why-card-photo{height:175px}.why-bottom-inner{grid-template-columns:1fr}.why-benefits{grid-template-columns:repeat(5,minmax(0,1fr))}}
 @media(max-width:800px){.service-row{grid-template-columns:38px 1fr 120px 22px;gap:11px;padding-block:14px}.service-row p{grid-column:2;grid-row:2}.service-image{grid-column:3;grid-row:1/3;width:120px;height:92px}.service-row>svg{grid-column:4;grid-row:1/3}.why-banner{min-height:535px}.why-banner>img{object-position:63% center}.why-banner-shade{background:linear-gradient(90deg,#f8f9f8 0%,rgba(248,249,248,.94) 47%,rgba(248,249,248,.42) 78%,rgba(248,249,248,.2))}.why-banner-content h2{font-size:51px}.why-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.why-benefits{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}}
 @media(max-width:540px){.service-row{grid-template-columns:27px 1fr 92px 18px;gap:8px}.service-row h3{font-size:18px}.service-row p{font-size:12px}.service-image{width:92px;height:90px}.why-banner{min-height:670px}.why-banner>img{object-position:65% center}.why-banner-shade{background:linear-gradient(180deg,rgba(248,249,248,.99) 0%,rgba(248,249,248,.96) 45%,rgba(248,249,248,.4) 72%,rgba(248,249,248,.08) 100%)}.why-banner-content{padding-block:36px}.why-banner-content h2{font-size:43px}.why-banner-content>p{font-size:14px;max-width:360px}.why-metrics{grid-template-columns:repeat(2,1fr);max-width:360px;gap:15px;margin-top:20px}.why-metrics>div{grid-template-columns:45px 1fr;column-gap:6px;align-items:center}.why-metrics svg{grid-row:1/3;width:18px;height:18px;padding:9px}.why-metrics strong{font-size:23px}.why-metrics span{font-size:10px}.why-cards{grid-template-columns:1fr;gap:12px;padding-block:15px}.why-card-photo{height:190px}.why-card-body{padding:17px}.why-card h3{font-size:20px}.why-card p{font-size:14px}.why-benefits{grid-template-columns:1fr 1fr}.why-bottom-cta{max-width:360px}.developer-section{padding-block:37px 41px}}
+
+.scroll-nav-links a{display:grid;grid-template-columns:32px 1fr 17px;align-items:center;justify-content:initial;gap:9px;min-height:45px}
+.scroll-nav-links .scroll-nav-link-icon{display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:#eaf4f9;color:#115e92}
+.scroll-nav-links .scroll-nav-link-label{color:inherit}
+.scroll-nav-links .scroll-nav-link-arrow{color:#6390ad;transition:transform .2s}
+.scroll-nav-links a:hover .scroll-nav-link-arrow{transform:translate(2px,-2px)}
+.mobile-navigation a{display:grid;grid-template-columns:24px 1fr 17px;align-items:center;gap:12px}
+.mobile-navigation a>svg:first-child{color:#17659b}
+.mobile-navigation a>svg:last-child{color:#6c97b2}
+.mobile-navigation a:hover{background:#e9f3f8;color:#0b5e94}
+@media(max-width:540px){.scroll-nav-links{min-width:min(272px,calc(100vw - 26px))}.mobile-navigation{border-radius:14px}.mobile-navigation a{min-height:49px;border-radius:8px}}
+
+.service-footnote>a{margin-left:14px}
+.area-pills{margin-top:21px}
+.area-call{display:inline-flex;align-items:center;gap:8px;margin-top:24px;color:#135b92;font-size:13px;font-weight:800}
+.area-call:hover{color:#0b3e68}
+.floating-call{display:none}
+@media(max-width:540px){.service-footnote>a{margin-left:0;margin-right:14px}.area-pills{gap:8px}.area-pills span{font-size:11px;padding:8px 10px}.floating-call{position:fixed;z-index:20;left:15px;bottom:15px;display:flex;align-items:center;gap:7px;min-height:52px;padding:0 17px;border-radius:999px;background:#0c4779;color:white;box-shadow:0 10px 28px rgba(5,47,74,.23);font-size:13px;font-weight:800}.floating-call:hover{background:#0d679e}}
+
+.footer-lead{display:grid;grid-template-columns:minmax(260px,.8fr) minmax(500px,1.2fr);gap:7%;align-items:start;padding-block:42px 58px;border-top:1px solid #31536d}
+.footer-lead h2{max-width:400px;margin:17px 0 14px;color:#fff;font-size:clamp(29px,3vw,43px);line-height:1.08;letter-spacing:-.045em}
+.footer-lead>div>p{max-width:360px;margin:0;color:#a9c5d8;font-size:14px;line-height:1.6}
+.lead-form{position:relative;display:grid;gap:16px;padding:28px;border:1px solid #d1e0e9;border-radius:15px;background:#f9fcfd;color:#0a2b4d}
+.lead-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.lead-form label{display:grid;gap:7px;color:#153a59;font-size:12px;font-weight:800}
+.lead-form input{width:100%;min-width:0;height:46px;padding:0 12px;border:1px solid #9db9ca;border-radius:8px;background:white;color:#0b2a47;font-size:14px;font-weight:400}
+.lead-form input::placeholder{color:#60788b}
+.lead-form input:focus{outline:2px solid #287ab5;outline-offset:1px}
+.lead-honeypot{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.lead-actions{display:flex;align-items:center;flex-wrap:wrap;gap:9px}
+.lead-submit,.lead-whatsapp,.lead-call{min-height:45px;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:0 15px;border-radius:999px;font-size:12px;font-weight:800;white-space:nowrap;cursor:pointer}
+.lead-submit{justify-content:space-between;flex:1;border:0;background:#155f9f;color:white}
+.lead-submit:hover{background:#0a477c}
+.lead-submit:disabled{opacity:.7;cursor:wait}
+.lead-whatsapp{border:1px solid #92bca6;background:#e9f7ef;color:#126b43}
+.lead-whatsapp:hover{background:#d7f0e2}
+.lead-call{border:1px solid #a6c2d2;background:white;color:#0e507e}
+.lead-call:hover{background:#e8f3fa}
+.lead-privacy{margin:0;color:#4e6678;font-size:11px;line-height:1.5}
+.lead-message{margin:0;color:#9d2f24;font-size:12px;line-height:1.4}
+.lead-message-success{color:#0d7146}
+.lead-form-popup{border:0;border-radius:0;background:#f9faf8}
+.lead-form-popup .lead-fields{grid-template-columns:1fr}
+.lead-form-popup .lead-actions{align-items:stretch}
+.lead-form-popup .lead-submit{flex-basis:100%}
+.lead-form-popup .lead-whatsapp,.lead-form-popup .lead-call{flex:1}
+@media(max-width:1050px){.footer-lead{grid-template-columns:1fr;gap:25px}.footer-lead h2{max-width:620px}.footer-lead>div>p{max-width:620px}}
+@media(max-width:540px){.footer-lead{padding-block:38px 45px}.lead-form{padding:21px;gap:14px}.lead-fields{grid-template-columns:1fr}.lead-actions{display:grid;grid-template-columns:1fr 1fr}.lead-submit{grid-column:1/-1}.lead-form-popup .lead-whatsapp,.lead-form-popup .lead-call{min-width:0;font-size:11px;padding-inline:8px}.enquiry-dialog .lead-form{padding:22px 25px 26px}}

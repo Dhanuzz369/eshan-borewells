@@ -1,4 +1,24 @@
-# vinext-starter
+# Eshan Borewells website
+
+## Deployment and enquiries
+
+The production site builds with `npm run build` on Vercel. Pushes to the connected
+GitHub branch trigger Vercel's normal deployment workflow; no Vercel CLI deployment
+is required.
+
+The footer and scroll-popup forms ask for a name, phone number, and site location.
+By default, they open a prefilled WhatsApp chat to **+91 98447 75905**; details are
+not stored by this site unless the visitor sends the message. To save enquiries,
+configure `LEADS_WEBHOOK_URL` in the hosting environment with an HTTPS endpoint
+that accepts JSON (`name`, `phone`, `siteLocation`, `source`, `submittedAt`). An
+optional `LEADS_WEBHOOK_TOKEN` is sent as a bearer token. When configured, the
+forms submit to `/api/leads` and offer WhatsApp as a separate alternative. Do not
+commit real credentials. See [.env.example](.env.example) for the variable names.
+
+For SEO, set `NEXT_PUBLIC_SITE_URL` to the public canonical origin if the Vercel
+production project URL is not the desired address. The app uses it for canonical
+metadata, the sitemap, and robots.txt. Search rankings are not guaranteed and
+depend on factors beyond site code, including a complete Google Business Profile.
 
 ## Token-free codebase updates
 

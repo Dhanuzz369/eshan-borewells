@@ -1,15 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Droplets, Menu, X } from "lucide-react";
+import { ArrowUpRight, BadgeCheck, Droplets, HelpCircle, MapPin, Menu, Phone, Route, Wrench, X } from "lucide-react";
 
 const links = [
-  ["Services", "#services"],
-  ["Our approach", "#approach"],
-  ["Why us", "#why-us"],
-  ["Where we work", "#areas"],
-  ["FAQs", "#questions"],
-  ["Contact", "#contact"],
+  { label: "Services", href: "#services", Icon: Wrench },
+  { label: "Our approach", href: "#approach", Icon: Route },
+  { label: "Why us", href: "#why-us", Icon: BadgeCheck },
+  { label: "Where we work", href: "#areas", Icon: MapPin },
+  { label: "FAQs", href: "#questions", Icon: HelpCircle },
+  { label: "Contact", href: "#contact", Icon: Phone },
 ];
 
 export function ScrollNav() {
@@ -51,7 +51,7 @@ export function ScrollNav() {
       <span className="scroll-nav-icon">{open ? <X size={18} /> : <Menu size={18} />}</span>
     </button>
     {open && visible && <nav id="scroll-nav-links" className="scroll-nav-links" aria-label="Quick navigation">
-      {links.map(([label, href]) => <a key={href} href={href} onClick={() => setOpen(false)}>{label}<span aria-hidden="true">↗</span></a>)}
+      {links.map(({ label, href, Icon }) => <a key={href} href={href} onClick={() => setOpen(false)}><span className="scroll-nav-link-icon"><Icon size={17} strokeWidth={1.8} /></span><span className="scroll-nav-link-label">{label}</span><ArrowUpRight className="scroll-nav-link-arrow" size={16} strokeWidth={1.8} aria-hidden="true" /></a>)}
     </nav>}
   </div>;
 }
