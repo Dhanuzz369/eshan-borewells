@@ -44,3 +44,59 @@
 .developer-logo-image{display:block;height:90px;background-image:url('/developer-logos-source.png');background-repeat:no-repeat;background-size:1536px 1024px}
 .business-address{display:flex;align-items:center;gap:9px;margin-top:26px!important;color:#d9ebf5!important;font-size:14px!important}
 .business-address svg{flex:none;color:#9ed4f3}
+
+/* A compact, editorial header that hands off to one floating navigation control. */
+.site-header{height:72px;margin-block:10px;padding-inline:22px;gap:22px;border:1px solid #d6e3e9;border-radius:18px;background:rgba(255,255,255,.9);box-shadow:0 8px 30px rgba(9,43,78,.07)}
+.desktop-nav{gap:3px}
+.desktop-nav a{padding:11px 13px;border-radius:999px;transition:background .2s,color .2s}
+.desktop-nav a:hover{background:#e7f2f8;color:#0d5d96}
+.header-contact{margin-left:8px;padding:11px 15px;border:0;border-radius:999px;background:#0c4779;color:white;white-space:nowrap;gap:13px;transition:background .2s,transform .2s}
+.header-contact:hover{background:#116ca6;color:white;transform:translateY(-2px)}
+.scroll-nav{position:fixed;z-index:25;top:16px;right:24px;opacity:0;transform:translateY(-12px) scale(.94);transform-origin:top right;pointer-events:none;transition:opacity .3s,transform .4s cubic-bezier(.18,.82,.2,1)}
+.scroll-nav-visible{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.scroll-nav-trigger{display:flex;align-items:center;gap:11px;min-height:53px;padding:5px 8px 5px 6px;border:1px solid rgba(180,213,232,.45);border-radius:999px;background:#062f55;color:white;box-shadow:0 14px 35px rgba(3,28,53,.26);font-size:13px;font-weight:800;letter-spacing:.01em;cursor:pointer}
+.scroll-nav-brand,.scroll-nav-icon{display:grid;place-items:center;flex:none;width:39px;height:39px;border-radius:50%}
+.scroll-nav-brand{background:#d6edfa;color:#0b5f9b}
+.scroll-nav-icon{margin-left:9px;background:rgba(255,255,255,.13);transition:transform .3s,background .3s}
+.scroll-nav-trigger:hover .scroll-nav-icon,.scroll-nav-open .scroll-nav-icon{transform:rotate(90deg);background:rgba(255,255,255,.25)}
+.scroll-nav-links{display:grid;gap:2px;min-width:230px;margin-top:9px;padding:9px;border:1px solid #d5e4eb;border-radius:17px;background:#fff;box-shadow:0 18px 45px rgba(3,28,53,.21);animation:quick-nav-in .25s ease-out both}
+.scroll-nav-links a{display:flex;justify-content:space-between;gap:30px;padding:11px 12px;border-radius:10px;color:#0b3153;font-size:13px;font-weight:700}
+.scroll-nav-links a:hover{background:#eaf4f9;color:#0b66a1}
+.scroll-nav-links a span{color:#5a9ac1}
+@keyframes quick-nav-in{from{opacity:0;transform:translateY(-7px)}to{opacity:1;transform:translateY(0)}}
+
+.hero-cinematic .hero-actions{gap:11px}
+.hero-cinematic .hero-actions .button{min-height:55px;gap:20px;padding:0 18px 0 22px;border-radius:999px}
+.hero-cinematic .hero-actions .button svg{flex:none;transition:transform .25s}
+.hero-cinematic .hero-actions .button:hover svg{transform:translate(2px,-2px)}
+.hero-cinematic .button-primary{background:#3e9bd8;box-shadow:0 8px 28px rgba(4,28,52,.2)}
+.hero-cinematic .button-primary:hover{background:#65b7e8}
+.button-hero-secondary{border:1px solid rgba(231,246,255,.6);background:rgba(6,40,70,.25);color:#fff;backdrop-filter:blur(12px)}
+.button-hero-secondary:hover{background:rgba(255,255,255,.16)}
+.hero-proof{display:flex;align-items:center;width:max-content;max-width:100%;gap:27px;margin-top:35px;padding-top:16px;border-top:1px solid rgba(232,246,255,.35)}
+.hero-proof>div{display:flex;align-items:baseline;gap:9px}
+.hero-proof>div+div{padding-left:27px;border-left:1px solid rgba(232,246,255,.3)}
+.hero-proof strong{font-size:28px;line-height:1;letter-spacing:-.05em;color:#b7e6ff}
+.hero-proof span{max-width:105px;color:#e5f3fb;font-size:11px;line-height:1.25;font-weight:700;text-transform:uppercase;letter-spacing:.07em}
+
+/* Full-width, quiet client roll: one uninterrupted row, no logo cards. */
+.developer-section{position:relative;left:50%;width:100vw;margin-top:95px;padding:50px 0 55px;transform:translateX(-50%);overflow:hidden;border-top:1px solid #d9e6ea;border-bottom:1px solid #d9e6ea;background:#fff}
+.developer-section h3{margin:0 20px 31px;text-align:center;font-size:18px;line-height:1.35;font-weight:700;letter-spacing:-.015em}
+.developer-marquee{mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.developer-track{gap:0;animation-duration:42s}
+.developer-logo{height:88px;margin-right:35px}
+.developer-logo-image{filter:grayscale(1) contrast(1.12) brightness(1.2);opacity:.8;transition:filter .3s,opacity .3s}
+.developer-logo:hover .developer-logo-image{filter:none;opacity:1}
+
+.footer-top{grid-template-columns:minmax(250px,1.25fr) minmax(210px,1fr) minmax(210px,1fr);gap:65px;padding-block:64px}
+.footer-brand p{max-width:290px;margin:24px 0 0;color:#a9c0d0;font-size:13px;line-height:1.6}
+.footer-details{display:grid;align-content:start;gap:15px}
+.footer-details h3{margin:2px 0 9px;color:#91bbd5;font-size:11px;font-weight:800;letter-spacing:.17em;text-transform:uppercase}
+.footer-details address,.footer-details a{display:flex;align-items:flex-start;gap:11px;max-width:260px;color:#edf6fb;font-size:14px;font-style:normal;line-height:1.55}
+.footer-details svg{flex:none;margin-top:2px;color:#88c5e7}
+.footer-details a:hover,.footer-bottom a:hover{color:#8ed0f6}
+.footer-bottom a{color:#e0f0fa}
+@media(max-width:1050px){.site-header{gap:12px;padding-inline:15px}.desktop-nav a{padding-inline:8px}.footer-top{gap:30px}}
+@media(max-width:800px){.site-header{height:68px}.mobile-menu{margin-left:auto}.menu-toggle{border-radius:50%;background:#eaf4f8}.footer-top{grid-template-columns:1fr 1fr}.footer-brand{grid-column:1/-1}.developer-section{margin-top:78px}}
+@media(max-width:540px){.site-header{margin-block:8px;padding-inline:12px;border-radius:14px}.scroll-nav{right:13px;top:11px}.scroll-nav-trigger{min-height:48px;font-size:12px}.scroll-nav-brand,.scroll-nav-icon{width:35px;height:35px}.hero-cinematic{min-height:650px}.hero-cinematic .hero-copy{padding:43px 0}.hero-cinematic .hero-actions{gap:9px;flex-wrap:wrap}.hero-cinematic .hero-actions .button{min-height:49px;gap:8px;padding-inline:14px;font-size:12px}.hero-proof{gap:14px;margin-top:25px;padding-top:14px}.hero-proof>div{display:block}.hero-proof>div+div{padding-left:15px}.hero-proof strong{font-size:25px}.hero-proof span{display:block;max-width:none;margin-top:4px;font-size:9px}.developer-section{padding-block:40px 44px}.developer-section h3{font-size:16px}.developer-logo{margin-right:25px}.footer-top{grid-template-columns:1fr;gap:35px;padding-block:48px}.footer-brand{grid-column:auto}}
+@media(prefers-reduced-motion:reduce){.scroll-nav,.scroll-nav-icon,.developer-logo-image{transition:none!important}.scroll-nav-links{animation:none!important}}
