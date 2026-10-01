@@ -238,3 +238,24 @@
 .reviews-empty-inner a{display:inline-flex;align-items:center;gap:13px;min-height:45px;padding:0 18px;border-radius:999px;background:#145c92;color:#fff;font-size:13px;font-weight:800}
 .reviews-empty-inner a:hover{background:#0c4572}
 @media(max-width:800px){.reviews-empty-inner{grid-template-columns:1fr;gap:20px}.reviews-section{padding-block:58px}.review-card{width:285px;min-height:210px}}
+
+/* Static service and area pages stay deliberately light: no hero media, no client scripts. */
+.seo-page{min-height:100vh;background:#f8f7f3}
+.seo-header{display:flex;align-items:center;justify-content:space-between;min-height:82px}
+.seo-header .brand-mark{font-size:16px;font-weight:900}
+.seo-header-call{display:inline-flex;align-items:center;gap:8px;border-bottom:1px solid currentColor;padding-bottom:6px;color:#0d4f81;font-size:13px;font-weight:800}
+.seo-hero{padding:94px 0 103px;background:#092d53;color:#fff}
+.seo-hero .section-label{color:#9dc5df}
+.seo-hero h1{max-width:840px;margin:18px 0 0;font-size:clamp(44px,6vw,78px);line-height:1.01;letter-spacing:-.06em}
+.seo-hero p{max-width:690px;margin:27px 0 34px;color:#c7d9e5;font-size:18px;line-height:1.65}
+.seo-hero .button-primary{background:#fff;color:#093461}
+.seo-hero .button-primary:hover{background:#dcecf4}
+.seo-content{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.8fr);gap:12%;padding-block:100px}
+.seo-content h2{max-width:520px;margin:18px 0 0;font-size:clamp(34px,4vw,56px);line-height:1.07;letter-spacing:-.05em}
+.seo-copy{display:grid;gap:20px;align-content:start}
+.seo-copy p{margin:0;color:#3f586b;font-size:16px;line-height:1.7}
+.seo-location{display:flex;gap:12px;margin-top:12px;padding-top:23px;border-top:1px solid #c3d0d6;color:#3f586b;font-size:14px;line-height:1.55}
+.seo-location svg{flex:none;margin-top:3px;color:#1769a3}
+.seo-location strong{display:block;margin-bottom:3px;color:#092348}
+.seo-text-link{display:inline-flex;align-items:center;gap:8px;width:max-content;margin-top:5px;color:#145ca5;font-size:13px;font-weight:800}
+@media(max-width:700px){.seo-header{min-height:70px}.seo-hero{padding-block:67px 74px}.seo-hero p{font-size:16px}.seo-content{grid-template-columns:1fr;gap:34px;padding-block:66px}.seo-header-call{font-size:12px}}

@@ -1,9 +1,9 @@
 import { getProductionUrl } from "../site-url";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 86400;
 
-export function GET(request: Request) {
-  const origin = getProductionUrl() || new URL(request.url).origin;
+export function GET() {
+  const origin = getProductionUrl() || "https://eshan-borewells.vercel.app";
   const text = `User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`;
-  return new Response(text, { headers: { "content-type": "text/plain; charset=utf-8" } });
+  return new Response(text, { headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "public, s-maxage=86400, stale-while-revalidate=604800" } });
 }
