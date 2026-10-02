@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowRight, MapPin, Phone } from "lucide-react";
 import { BUSINESS_ADDRESS, BUSINESS_PHONE } from "../business-config";
 import { getSeoPage, seoPages } from "../seo-pages";
+import { getProductionUrl } from "../site-url";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -20,6 +21,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description: page.description,
     keywords: page.keywords,
     alternates: { canonical: `/${page.slug}` },
+    openGraph: {
+      title: `${page.title} | Eshan Borewells`,
+      description: page.description,
+      url: `/${page.slug}`,
+      type: "website",
+    },
   };
 }
 
@@ -33,8 +40,10 @@ export default async function SeoLandingPage({ params }: PageProps) {
     "@type": "Service",
     name: page.title,
     description: page.description,
+    url: `${getProductionUrl() || "https://www.eshanborewells.com"}/${page.slug}`,
+    serviceType: page.keywords[0],
     provider: { "@type": "LocalBusiness", name: "Eshan Borewells", telephone: BUSINESS_PHONE, address: BUSINESS_ADDRESS },
-    areaServed: { "@type": "City", name: "Bengaluru" },
+    areaServed: { "@type": "Place", name: "Bengaluru and nearby areas within about 100 km" },
   };
 
   return <main className="seo-page">

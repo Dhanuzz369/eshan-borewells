@@ -15,9 +15,9 @@ optional `LEADS_WEBHOOK_TOKEN` is sent as a bearer token. When configured, the
 forms submit to `/api/leads` and offer WhatsApp as a separate alternative. Do not
 commit real credentials. See [.env.example](.env.example) for the variable names.
 
-The canonical URL defaults to `https://eshan-borewells.vercel.app`. Set
-`NEXT_PUBLIC_SITE_URL` when moving to a custom domain; the app uses it for
-canonical metadata, the sitemap, and robots.txt. Search rankings are not
+The canonical URL defaults to `https://www.eshanborewells.com`. Set
+`NEXT_PUBLIC_SITE_URL` only when a different canonical host is intentionally
+needed; the app uses it for canonical metadata, the sitemap, and robots.txt. Search rankings are not
 guaranteed and depend on factors beyond site code, including a complete
 Google Business Profile. The keywords metadata is only descriptive: Google
 does not use the keywords meta tag for ranking.

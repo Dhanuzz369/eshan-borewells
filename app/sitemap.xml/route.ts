@@ -4,7 +4,7 @@ import { seoPages } from "../seo-pages";
 export const revalidate = 86400;
 
 export function GET() {
-  const origin = getProductionUrl() || "https://eshan-borewells.vercel.app";
+  const origin = getProductionUrl() || "https://www.eshanborewells.com";
   const lastmod = new Date().toISOString();
   const urls = [
     { path: "/", priority: "1.0", changefreq: "weekly" },

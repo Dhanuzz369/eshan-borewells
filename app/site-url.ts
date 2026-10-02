@@ -1,5 +1,7 @@
 export function getProductionUrl(): string | null {
-  const raw = process.env.NEXT_PUBLIC_SITE_URL || process.env.VERCEL_PROJECT_PRODUCTION_URL || "https://eshan-borewells.vercel.app";
+  // Keep production canonical URLs on the business domain. A preview can opt into
+  // its own canonical explicitly with NEXT_PUBLIC_SITE_URL when required.
+  const raw = process.env.NEXT_PUBLIC_SITE_URL || "https://www.eshanborewells.com";
 
   try {
     const url = new URL(/^https?:\/\//i.test(raw) ? raw : `https://${raw}`);
