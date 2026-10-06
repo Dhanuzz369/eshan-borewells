@@ -365,7 +365,7 @@
       "file_type": "code",
       "norm_label": "submission",
       "source_file": "lib/quote/schema.ts",
-      "source_location": "L42"
+      "source_location": "L43"
     },
     {
       "id": "lib_connector_preview_d_env",
@@ -407,19 +407,6 @@
       "source_location": "L13"
     },
     {
-      "id": "app_get_quote_quote_result_props",
-      "label": "Props",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 59,
-      "community_name": "calculate.ts",
-      "file_type": "code",
-      "norm_label": "props",
-      "source_file": "app/get-quote/quote-result.tsx",
-      "source_location": "L14"
-    },
-    {
       "id": "lib_quote_calculate_costline",
       "label": "CostLine",
       "_callable": true,
@@ -459,19 +446,6 @@
       "source_location": "L6"
     },
     {
-      "id": "lib_quote_document_quotationdata",
-      "label": "QuotationData",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 59,
-      "community_name": "calculate.ts",
-      "file_type": "code",
-      "norm_label": "quotationdata",
-      "source_file": "lib/quote/document.ts",
-      "source_location": "L7"
-    },
-    {
       "id": "lib_quote_schema_quoteinput",
       "label": "QuoteInput",
       "_callable": true,
@@ -482,7 +456,7 @@
       "file_type": "code",
       "norm_label": "quoteinput",
       "source_file": "lib/quote/schema.ts",
-      "source_location": "L29"
+      "source_location": "L30"
     },
     {
       "id": "lib_connector_contract_connectorbinding",
@@ -587,6 +561,32 @@
       "norm_label": "pdfinput",
       "source_file": "app/get-quote/quote-pdf.ts",
       "source_location": "L5"
+    },
+    {
+      "id": "app_get_quote_quote_result_props",
+      "label": "Props",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 74,
+      "community_name": "quote-pdf.ts",
+      "file_type": "code",
+      "norm_label": "props",
+      "source_file": "app/get-quote/quote-result.tsx",
+      "source_location": "L14"
+    },
+    {
+      "id": "lib_quote_document_quotationdata",
+      "label": "QuotationData",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 74,
+      "community_name": "quote-pdf.ts",
+      "file_type": "code",
+      "norm_label": "quotationdata",
+      "source_file": "lib/quote/document.ts",
+      "source_location": "L7"
     },
     {
       "id": "app_chatgpt_auth_chatgptuser",
@@ -1872,54 +1872,6 @@
       "norm_label": "post()",
       "source_file": "app/api/quotes/route.ts",
       "source_location": "L9"
-    },
-    {
-      "id": "lib_quote_calculate_calculatequote",
-      "label": "calculateQuote()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 22,
-      "community_name": "delivery.ts",
-      "file_type": "code",
-      "norm_label": "calculatequote()",
-      "source_file": "lib/quote/calculate.ts",
-      "source_location": "L45"
-    },
-    {
-      "id": "lib_quote_calculate_drillingslabs",
-      "label": "drillingSlabs()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 22,
-      "community_name": "delivery.ts",
-      "file_type": "code",
-      "norm_label": "drillingslabs()",
-      "source_file": "lib/quote/calculate.ts",
-      "source_location": "L23"
-    },
-    {
-      "id": "lib_quote_calculate_slabcost",
-      "label": "slabCost()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 22,
-      "community_name": "delivery.ts",
-      "file_type": "code",
-      "norm_label": "slabcost()",
-      "source_file": "lib/quote/calculate.ts",
-      "source_location": "L32"
-    },
-    {
-      "id": "lib_quote_calculate_test_drilling",
-      "label": "drilling()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 22,
-      "community_name": "delivery.ts",
-      "file_type": "code",
-      "norm_label": "drilling()",
-      "source_file": "lib/quote/calculate.test.ts",
-      "source_location": "L8"
     },
     {
       "id": "lib_quote_delivery_allowsubmission",
@@ -4727,7 +4679,19 @@
       "file_type": "code",
       "norm_label": "edit()",
       "source_file": "app/get-quote/quote-wizard.tsx",
-      "source_location": "L67"
+      "source_location": "L69"
+    },
+    {
+      "id": "app_get_quote_quote_wizard_quotewizard_selectmachine",
+      "label": "selectMachine()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "quote-wizard.tsx",
+      "file_type": "code",
+      "norm_label": "selectmachine()",
+      "source_file": "app/get-quote/quote-wizard.tsx",
+      "source_location": "L38"
     },
     {
       "id": "app_get_quote_quote_wizard_quotewizard_selectservice",
@@ -4739,7 +4703,7 @@
       "file_type": "code",
       "norm_label": "selectservice()",
       "source_file": "app/get-quote/quote-wizard.tsx",
-      "source_location": "L42"
+      "source_location": "L44"
     },
     {
       "id": "app_get_quote_quote_wizard_quotewizard_submit",
@@ -4751,7 +4715,7 @@
       "file_type": "code",
       "norm_label": "submit()",
       "source_file": "app/get-quote/quote-wizard.tsx",
-      "source_location": "L44"
+      "source_location": "L46"
     },
     {
       "id": "app_get_quote_quote_wizard_quotewizard_update",
@@ -4763,7 +4727,7 @@
       "file_type": "code",
       "norm_label": "update()",
       "source_file": "app/get-quote/quote-wizard.tsx",
-      "source_location": "L36"
+      "source_location": "L37"
     },
     {
       "id": "app_get_quote_quote_wizard_sectiontitle",
@@ -4778,39 +4742,27 @@
       "source_location": "L20"
     },
     {
-      "id": "app_get_quote_quote_result_quoteresult",
-      "label": "QuoteResult()",
+      "id": "lib_quote_calculate_calculatequote",
+      "label": "calculateQuote()",
       "_callable": true,
       "_origin": "ast",
       "community": 59,
       "community_name": "calculate.ts",
       "file_type": "code",
-      "norm_label": "quoteresult()",
-      "source_file": "app/get-quote/quote-result.tsx",
-      "source_location": "L27"
+      "norm_label": "calculatequote()",
+      "source_file": "lib/quote/calculate.ts",
+      "source_location": "L45"
     },
     {
-      "id": "app_get_quote_quote_result_quoteresult_download",
-      "label": "download()",
+      "id": "lib_quote_calculate_drillingslabs",
+      "label": "drillingSlabs()",
       "_callable": true,
       "_origin": "ast",
       "community": 59,
       "community_name": "calculate.ts",
       "file_type": "code",
-      "norm_label": "download()",
-      "source_file": "app/get-quote/quote-result.tsx",
-      "source_location": "L33"
-    },
-    {
-      "id": "app_get_quote_quote_result_sectionheading",
-      "label": "SectionHeading()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 59,
-      "community_name": "calculate.ts",
-      "file_type": "code",
-      "norm_label": "sectionheading()",
-      "source_file": "app/get-quote/quote-result.tsx",
+      "norm_label": "drillingslabs()",
+      "source_file": "lib/quote/calculate.ts",
       "source_location": "L23"
     },
     {
@@ -4836,6 +4788,30 @@
       "norm_label": "quoteprice()",
       "source_file": "lib/quote/calculate.ts",
       "source_location": "L7"
+    },
+    {
+      "id": "lib_quote_calculate_slabcost",
+      "label": "slabCost()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "calculate.ts",
+      "file_type": "code",
+      "norm_label": "slabcost()",
+      "source_file": "lib/quote/calculate.ts",
+      "source_location": "L32"
+    },
+    {
+      "id": "lib_quote_calculate_test_drilling",
+      "label": "drilling()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "calculate.ts",
+      "file_type": "code",
+      "norm_label": "drilling()",
+      "source_file": "lib/quote/calculate.test.ts",
+      "source_location": "L8"
     },
     {
       "id": "lib_quote_document_buildquotationdata",
@@ -5435,7 +5411,7 @@
       "file_type": "code",
       "norm_label": "downloadquote()",
       "source_file": "app/get-quote/quote-pdf.ts",
-      "source_location": "L25"
+      "source_location": "L24"
     },
     {
       "id": "app_get_quote_quote_pdf_imagedata",
@@ -5447,7 +5423,7 @@
       "file_type": "code",
       "norm_label": "imagedata()",
       "source_file": "app/get-quote/quote-pdf.ts",
-      "source_location": "L13"
+      "source_location": "L12"
     },
     {
       "id": "app_get_quote_quote_pdf_renderquotepdf",
@@ -5459,7 +5435,43 @@
       "file_type": "code",
       "norm_label": "renderquotepdf()",
       "source_file": "app/get-quote/quote-pdf.ts",
-      "source_location": "L37"
+      "source_location": "L35"
+    },
+    {
+      "id": "app_get_quote_quote_result_quoteresult",
+      "label": "QuoteResult()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 74,
+      "community_name": "quote-pdf.ts",
+      "file_type": "code",
+      "norm_label": "quoteresult()",
+      "source_file": "app/get-quote/quote-result.tsx",
+      "source_location": "L27"
+    },
+    {
+      "id": "app_get_quote_quote_result_quoteresult_download",
+      "label": "download()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 74,
+      "community_name": "quote-pdf.ts",
+      "file_type": "code",
+      "norm_label": "download()",
+      "source_file": "app/get-quote/quote-result.tsx",
+      "source_location": "L33"
+    },
+    {
+      "id": "app_get_quote_quote_result_sectionheading",
+      "label": "SectionHeading()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 74,
+      "community_name": "quote-pdf.ts",
+      "file_type": "code",
+      "norm_label": "sectionheading()",
+      "source_file": "app/get-quote/quote-result.tsx",
+      "source_location": "L23"
     },
     {
       "id": "lib_quote_api_test_request",
@@ -5467,7 +5479,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 75,
-      "community_name": "document.test.ts",
+      "community_name": "api.test.ts",
       "file_type": "code",
       "norm_label": "request()",
       "source_file": "lib/quote/api.test.ts",
@@ -9352,17 +9364,6 @@
       "source_location": "L18"
     },
     {
-      "id": "lib_quote_config_variablematerials",
-      "label": "variableMaterials",
-      "_origin": "ast",
-      "community": 51,
-      "community_name": "config.ts",
-      "file_type": "code",
-      "norm_label": "variablematerials",
-      "source_file": "lib/quote/config.ts",
-      "source_location": "L53"
-    },
-    {
       "id": "lib_quote_schema",
       "label": "quote/schema.ts",
       "_origin": "ast",
@@ -9382,7 +9383,7 @@
       "file_type": "code",
       "norm_label": "customerschema",
       "source_file": "lib/quote/schema.ts",
-      "source_location": "L30"
+      "source_location": "L31"
     },
     {
       "id": "lib_quote_schema_decision",
@@ -9394,17 +9395,6 @@
       "norm_label": "decision",
       "source_file": "lib/quote/schema.ts",
       "source_location": "L11"
-    },
-    {
-      "id": "lib_quote_schema_quoteinputschema",
-      "label": "quoteInputSchema",
-      "_origin": "ast",
-      "community": 51,
-      "community_name": "config.ts",
-      "file_type": "code",
-      "norm_label": "quoteinputschema",
-      "source_file": "lib/quote/schema.ts",
-      "source_location": "L13"
     },
     {
       "id": "lib_quote_schema_text",
@@ -9690,51 +9680,7 @@
       "file_type": "code",
       "norm_label": "submissionschema",
       "source_file": "lib/quote/schema.ts",
-      "source_location": "L36"
-    },
-    {
-      "id": "next_config",
-      "label": "next.config.ts",
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "quote-wizard.tsx",
-      "file_type": "code",
-      "norm_label": "next.config.ts",
-      "source_file": "next.config.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "next_config_nextconfig",
-      "label": "nextConfig",
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "quote-wizard.tsx",
-      "file_type": "code",
-      "norm_label": "nextconfig",
-      "source_file": "next.config.ts",
-      "source_location": "L3"
-    },
-    {
-      "id": "ref_next",
-      "label": "next",
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "quote-wizard.tsx",
-      "file_type": "concept",
-      "norm_label": "next",
-      "source_file": "package.json",
-      "source_location": "L30"
-    },
-    {
-      "id": "app_get_quote_quote_result",
-      "label": "quote-result.tsx",
-      "_origin": "ast",
-      "community": 59,
-      "community_name": "calculate.ts",
-      "file_type": "code",
-      "norm_label": "quote-result.tsx",
-      "source_file": "app/get-quote/quote-result.tsx",
-      "source_location": "L1"
+      "source_location": "L37"
     },
     {
       "id": "lib_quote_calculate",
@@ -9759,15 +9705,15 @@
       "source_location": "L10"
     },
     {
-      "id": "lib_quote_config_disclaimer",
-      "label": "disclaimer",
+      "id": "lib_quote_config_variablematerials",
+      "label": "variableMaterials",
       "_origin": "ast",
       "community": 59,
       "community_name": "calculate.ts",
       "file_type": "code",
-      "norm_label": "disclaimer",
+      "norm_label": "variablematerials",
       "source_file": "lib/quote/config.ts",
-      "source_location": "L48"
+      "source_location": "L53"
     },
     {
       "id": "lib_quote_document",
@@ -9790,6 +9736,39 @@
       "norm_label": "dateformatter",
       "source_file": "lib/quote/document.ts",
       "source_location": "L34"
+    },
+    {
+      "id": "lib_quote_document_quote_validity_days",
+      "label": "QUOTE_VALIDITY_DAYS",
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "calculate.ts",
+      "file_type": "code",
+      "norm_label": "quote_validity_days",
+      "source_file": "lib/quote/document.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "lib_quote_document_test",
+      "label": "document.test.ts",
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "calculate.ts",
+      "file_type": "code",
+      "norm_label": "document.test.ts",
+      "source_file": "lib/quote/document.test.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_quote_schema_quoteinputschema",
+      "label": "quoteInputSchema",
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "calculate.ts",
+      "file_type": "code",
+      "norm_label": "quoteinputschema",
+      "source_file": "lib/quote/schema.ts",
+      "source_location": "L13"
     },
     {
       "id": "package_dependencies",
@@ -10416,7 +10395,7 @@
       "file_type": "code",
       "norm_label": "ink",
       "source_file": "app/get-quote/quote-pdf.ts",
-      "source_location": "L9"
+      "source_location": "L8"
     },
     {
       "id": "app_get_quote_quote_pdf_line",
@@ -10427,7 +10406,7 @@
       "file_type": "code",
       "norm_label": "line",
       "source_file": "app/get-quote/quote-pdf.ts",
-      "source_location": "L11"
+      "source_location": "L10"
     },
     {
       "id": "app_get_quote_quote_pdf_muted",
@@ -10438,7 +10417,7 @@
       "file_type": "code",
       "norm_label": "muted",
       "source_file": "app/get-quote/quote-pdf.ts",
-      "source_location": "L10"
+      "source_location": "L9"
     },
     {
       "id": "app_get_quote_quote_pdf_navy",
@@ -10452,17 +10431,6 @@
       "source_location": "L6"
     },
     {
-      "id": "app_get_quote_quote_pdf_orange",
-      "label": "orange",
-      "_origin": "ast",
-      "community": 74,
-      "community_name": "quote-pdf.ts",
-      "file_type": "code",
-      "norm_label": "orange",
-      "source_file": "app/get-quote/quote-pdf.ts",
-      "source_location": "L8"
-    },
-    {
       "id": "app_get_quote_quote_pdf_teal",
       "label": "teal",
       "_origin": "ast",
@@ -10472,6 +10440,50 @@
       "norm_label": "teal",
       "source_file": "app/get-quote/quote-pdf.ts",
       "source_location": "L7"
+    },
+    {
+      "id": "app_get_quote_quote_result",
+      "label": "quote-result.tsx",
+      "_origin": "ast",
+      "community": 74,
+      "community_name": "quote-pdf.ts",
+      "file_type": "code",
+      "norm_label": "quote-result.tsx",
+      "source_file": "app/get-quote/quote-result.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_quote_config_disclaimer",
+      "label": "disclaimer",
+      "_origin": "ast",
+      "community": 74,
+      "community_name": "quote-pdf.ts",
+      "file_type": "code",
+      "norm_label": "disclaimer",
+      "source_file": "lib/quote/config.ts",
+      "source_location": "L48"
+    },
+    {
+      "id": "next_config",
+      "label": "next.config.ts",
+      "_origin": "ast",
+      "community": 74,
+      "community_name": "quote-pdf.ts",
+      "file_type": "code",
+      "norm_label": "next.config.ts",
+      "source_file": "next.config.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "next_config_nextconfig",
+      "label": "nextConfig",
+      "_origin": "ast",
+      "community": 74,
+      "community_name": "quote-pdf.ts",
+      "file_type": "code",
+      "norm_label": "nextconfig",
+      "source_file": "next.config.ts",
+      "source_location": "L3"
     },
     {
       "id": "ref_jspdf",
@@ -10485,11 +10497,22 @@
       "source_location": "L27"
     },
     {
+      "id": "ref_next",
+      "label": "next",
+      "_origin": "ast",
+      "community": 74,
+      "community_name": "quote-pdf.ts",
+      "file_type": "concept",
+      "norm_label": "next",
+      "source_file": "package.json",
+      "source_location": "L30"
+    },
+    {
       "id": "lib_quote_api_test",
       "label": "api.test.ts",
       "_origin": "ast",
       "community": 75,
-      "community_name": "document.test.ts",
+      "community_name": "api.test.ts",
       "file_type": "code",
       "norm_label": "api.test.ts",
       "source_file": "lib/quote/api.test.ts",
@@ -10500,7 +10523,7 @@
       "label": "payload",
       "_origin": "ast",
       "community": 75,
-      "community_name": "document.test.ts",
+      "community_name": "api.test.ts",
       "file_type": "code",
       "norm_label": "payload",
       "source_file": "lib/quote/api.test.ts",
@@ -10511,32 +10534,10 @@
       "label": "delivery.test.ts",
       "_origin": "ast",
       "community": 75,
-      "community_name": "document.test.ts",
+      "community_name": "api.test.ts",
       "file_type": "code",
       "norm_label": "delivery.test.ts",
       "source_file": "lib/quote/delivery.test.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "lib_quote_document_quote_validity_days",
-      "label": "QUOTE_VALIDITY_DAYS",
-      "_origin": "ast",
-      "community": 75,
-      "community_name": "document.test.ts",
-      "file_type": "code",
-      "norm_label": "quote_validity_days",
-      "source_file": "lib/quote/document.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "lib_quote_document_test",
-      "label": "document.test.ts",
-      "_origin": "ast",
-      "community": 75,
-      "community_name": "document.test.ts",
-      "file_type": "code",
-      "norm_label": "document.test.ts",
-      "source_file": "lib/quote/document.test.ts",
       "source_location": "L1"
     },
     {
@@ -10544,18 +10545,18 @@
       "label": "initialInput",
       "_origin": "ast",
       "community": 75,
-      "community_name": "document.test.ts",
+      "community_name": "api.test.ts",
       "file_type": "code",
       "norm_label": "initialinput",
       "source_file": "lib/quote/schema.ts",
-      "source_location": "L43"
+      "source_location": "L44"
     },
     {
       "id": "lib_quote_sheets_test",
       "label": "sheets.test.ts",
       "_origin": "ast",
       "community": 75,
-      "community_name": "document.test.ts",
+      "community_name": "api.test.ts",
       "file_type": "code",
       "norm_label": "sheets.test.ts",
       "source_file": "lib/quote/sheets.test.ts",
@@ -11167,7 +11168,7 @@
       "label": "ref_node_assert",
       "_origin": "semantic",
       "community": 75,
-      "community_name": "document.test.ts",
+      "community_name": "api.test.ts",
       "external": true,
       "file_type": "concept",
       "norm_label": "ref_node_assert",
@@ -11179,7 +11180,7 @@
       "label": "ref_node_test",
       "_origin": "semantic",
       "community": 75,
-      "community_name": "document.test.ts",
+      "community_name": "api.test.ts",
       "external": true,
       "file_type": "concept",
       "norm_label": "ref_node_test",
@@ -11191,7 +11192,7 @@
       "label": "ref_node_vm",
       "_origin": "semantic",
       "community": 75,
-      "community_name": "document.test.ts",
+      "community_name": "api.test.ts",
       "external": true,
       "file_type": "concept",
       "norm_label": "ref_node_vm",
@@ -11413,7 +11414,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/get-quote/quote-pdf.ts",
-      "source_location": "L31",
+      "source_location": "L30",
       "weight": 1.0
     },
     {
@@ -11425,7 +11426,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/get-quote/quote-pdf.ts",
-      "source_location": "L32",
+      "source_location": "L31",
       "weight": 1.0
     },
     {
@@ -11437,7 +11438,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/get-quote/quote-pdf.ts",
-      "source_location": "L43",
+      "source_location": "L41",
       "weight": 1.0
     },
     {
@@ -11449,7 +11450,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/get-quote/quote-pdf.ts",
-      "source_location": "L65",
+      "source_location": "L63",
       "weight": 1.0
     },
     {
@@ -11497,7 +11498,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/get-quote/quote-wizard.tsx",
-      "source_location": "L35",
+      "source_location": "L36",
       "weight": 1.0
     },
     {
@@ -11509,7 +11510,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/get-quote/quote-wizard.tsx",
-      "source_location": "L69",
+      "source_location": "L71",
       "weight": 1.0
     },
     {
@@ -11521,7 +11522,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/get-quote/quote-wizard.tsx",
-      "source_location": "L73",
+      "source_location": "L75",
       "weight": 1.0
     },
     {
@@ -11533,7 +11534,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/get-quote/quote-wizard.tsx",
-      "source_location": "L73",
+      "source_location": "L75",
       "weight": 1.0
     },
     {
@@ -11545,7 +11546,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/get-quote/quote-wizard.tsx",
-      "source_location": "L42",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -16681,7 +16682,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/get-quote/quote-wizard.tsx",
-      "source_location": "L36",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "app_get_quote_quote_wizard_quotewizard",
+      "target": "app_get_quote_quote_wizard_quotewizard_selectmachine",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app/get-quote/quote-wizard.tsx",
+      "source_location": "L38",
       "weight": 1.0
     },
     {
@@ -19287,6 +19300,18 @@
       "context": "import",
       "source_file": "lib/quote/document.test.ts",
       "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_quote_document_test",
+      "target": "lib_quote_schema_quoteinputschema",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/quote/document.test.ts",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
@@ -24133,7 +24158,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "lib/quote/document.test.ts",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
@@ -25091,7 +25116,7 @@
     },
     {
       "source": "app_get_quote_quote_pdf",
-      "target": "app_get_quote_quote_pdf_muted",
+      "target": "app_get_quote_quote_pdf_line",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -25102,24 +25127,13 @@
     },
     {
       "source": "app_get_quote_quote_pdf",
-      "target": "app_get_quote_quote_pdf_line",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "app/get-quote/quote-pdf.ts",
-      "source_location": "L11",
-      "weight": 1.0
-    },
-    {
-      "source": "app_get_quote_quote_pdf",
       "target": "app_get_quote_quote_pdf_imagedata",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/get-quote/quote-pdf.ts",
-      "source_location": "L13",
+      "source_location": "L12",
       "weight": 1.0
     },
     {
@@ -25130,7 +25144,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/get-quote/quote-pdf.ts",
-      "source_location": "L25",
+      "source_location": "L24",
       "weight": 1.0
     },
     {
@@ -25141,7 +25155,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/get-quote/quote-pdf.ts",
-      "source_location": "L37",
+      "source_location": "L35",
       "weight": 1.0
     },
     {
@@ -25179,7 +25193,7 @@
     },
     {
       "source": "app_get_quote_quote_pdf",
-      "target": "app_get_quote_quote_pdf_orange",
+      "target": "app_get_quote_quote_pdf_ink",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -25190,7 +25204,7 @@
     },
     {
       "source": "app_get_quote_quote_pdf",
-      "target": "app_get_quote_quote_pdf_ink",
+      "target": "app_get_quote_quote_pdf_muted",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -25306,7 +25320,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/get-quote/quote-wizard.tsx",
-      "source_location": "L42",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -25317,7 +25331,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/get-quote/quote-wizard.tsx",
-      "source_location": "L44",
+      "source_location": "L46",
       "weight": 1.0
     },
     {
@@ -25328,7 +25342,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/get-quote/quote-wizard.tsx",
-      "source_location": "L67",
+      "source_location": "L69",
       "weight": 1.0
     },
     {
@@ -30883,7 +30897,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/quote/schema.ts",
-      "source_location": "L29",
+      "source_location": "L30",
       "weight": 1.0
     },
     {
@@ -30894,7 +30908,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/quote/schema.ts",
-      "source_location": "L30",
+      "source_location": "L31",
       "weight": 1.0
     },
     {
@@ -30905,7 +30919,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/quote/schema.ts",
-      "source_location": "L36",
+      "source_location": "L37",
       "weight": 1.0
     },
     {
@@ -30916,7 +30930,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/quote/schema.ts",
-      "source_location": "L42",
+      "source_location": "L43",
       "weight": 1.0
     },
     {
@@ -30927,7 +30941,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/quote/schema.ts",
-      "source_location": "L43",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -32906,7 +32920,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "lib/quote/schema.ts",
-      "source_location": "L32",
+      "source_location": "L33",
       "weight": 1.0
     },
     {
@@ -32935,5 +32949,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "9c647933e74ad10e6793a4de0a880e20d43c5312"
+  "built_at_commit": "087cdf8d10e41442078df36e2e18446b0395ffab"
 }
