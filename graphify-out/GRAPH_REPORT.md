@@ -1,7 +1,7 @@
 # Graph Report - eshan-borewells  (2026-10-06)
 
 ## Corpus Check
-- 133 files · ~487,478 words
+- 133 files · ~487,484 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 8 file(s) not represented in the graph (top: .css 3, (none) 2, .example 1)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `087cdf8d`
+- Built from commit: `c9e3d40f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -104,7 +104,7 @@
 7. `class-variance-authority` - 17 edges
 8. `QuoteWizard()` - 13 edges
 9. `Eshan Borewells website` - 13 edges
-10. `calculateQuote()` - 12 edges
+10. `getProductionUrl()` - 12 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Optional Dispatch-Owned ChatGPT Sign-In` --references--> `getChatGPTUser()`  [INFERRED]
