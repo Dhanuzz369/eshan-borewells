@@ -58,7 +58,7 @@ export const variableMaterials = [
   { label: '7" M.S. Welding', rate: 300, unit: "each" },
   { label: '7" M.S. Collar', rate: 300, unit: "each" },
   { label: '7" M.S. Cap', rate: 300, unit: "each" },
-  { label: '6" PVC Slotted Casing', rate: 130, unit: "ft" },
+  { label: '4½" or 5" 6 kg PVC Slotted Casing', rate: 130, unit: "ft", certification: null },
   { label: "Water Injection", rate: 8, unit: "ft" },
 ] as const;
 

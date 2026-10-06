@@ -1,74 +1,139 @@
 import { jsPDF } from "jspdf";
-import type { QuoteInput } from "@/lib/quote/schema";
-import { formatRange, quotePrice, type Quote } from "@/lib/quote/calculate";
-import { disclaimer, serviceOptions, variableMaterials } from "@/lib/quote/config";
+import { formatRange } from "@/lib/quote/calculate";
+import type { QuotationData } from "@/lib/quote/document";
 
-type PdfInput = { result: { quote: Quote | null; quoteNumber: string; capturedAt: string; delivery: string }; input: QuoteInput; customer: { name: string; mobile: string; email: string }; phone: string; address: string };
-export async function downloadQuote({ result, input, customer, phone, address }: PdfInput) {
-  const pdf = new jsPDF({ unit: "mm", format: "a4" });
-  // Loaded only when downloading a PDF, never in the first-page bundle.
+type PdfInput = { quotation: QuotationData; phone: string; address: string };
+const navy: [number, number, number] = [8, 47, 73];
+const teal: [number, number, number] = [7, 93, 107];
+const orange: [number, number, number] = [245, 158, 11];
+const ink: [number, number, number] = [16, 42, 67];
+const muted: [number, number, number] = [91, 111, 132];
+const line: [number, number, number] = [217, 228, 236];
+
+async function imageData(path: string) {
+  const response = await fetch(path);
+  if (!response.ok) throw new Error(`Unable to load ${path}`);
+  const blob = await response.blob();
+  return await new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result));
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
+export async function downloadQuote({ quotation, phone, address }: PdfInput) {
   const font = await fetch("/fonts/NotoSans-Regular.ttf");
   if (!font.ok) throw new Error("PDF font unavailable");
   const bytes = new Uint8Array(await font.arrayBuffer());
   let binary = "";
-  for (const b of bytes) binary += String.fromCharCode(b);
-  pdf.addFileToVFS("NotoSans-Regular.ttf", btoa(binary));
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  const hero = await imageData("/hero-drilling.webp");
+  const pdf = renderQuotePdf({ quotation, phone, address, fontBase64: btoa(binary), hero });
+  const filenameQuote = quotation.quoteNumber.replace(/[^A-Za-z0-9-]/g, "");
+  pdf.save(`Eshan-Borewells-Quotation-${filenameQuote}.pdf`);
+}
+
+export function renderQuotePdf({ quotation, phone, address, fontBase64, hero }: PdfInput & { fontBase64: string; hero: string }) {
+  const pdf = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
+  pdf.addFileToVFS("NotoSans-Regular.ttf", fontBase64);
   pdf.addFont("NotoSans-Regular.ttf", "NotoSans", "normal");
   pdf.setFont("NotoSans");
-  pdf.setFillColor(9, 45, 83); pdf.rect(0, 0, 210, 46, "F");
-  // Reuse the existing site favicon for the brand mark, not a page screenshot.
-  const logo = new Image();
-  logo.src = "/favicon.svg";
-  await logo.decode();
-  const canvas = document.createElement("canvas"); canvas.width = 120; canvas.height = 120;
-  canvas.getContext("2d")!.drawImage(logo, 0, 0, 120, 120);
-  pdf.addImage(canvas.toDataURL("image/png"), "PNG", 16, 11, 19, 19);
-  pdf.setTextColor(255, 255, 255); pdf.setFontSize(21); pdf.text("ESHAN BOREWELLS", 41, 22);
-  pdf.setFontSize(10); pdf.text("PROJECT ESTIMATE  /  SUBJECT TO SITE ASSESSMENT", 41, 32);
-  let y = 58;
-  function text(value: string, size = 10, color = [39, 65, 85]) {
-    pdf.setFontSize(size); pdf.setTextColor(color[0], color[1], color[2]);
-    const lines: string[] = pdf.splitTextToSize(value, 176);
-    for (const line of lines) { if (y > 264) { pdf.addPage(); y = 20; } pdf.text(line, 17, y); y += size * 0.48 + 1; }
+
+  const money = (value: number | null) => formatRange(value, value);
+  const setText = (size: number, color: [number, number, number] = ink) => { pdf.setFontSize(size); pdf.setTextColor(...color); };
+  const wrapped = (value: string, x: number, y: number, width: number, size = 8, color: [number, number, number] = muted, lineHeight = 4) => {
+    setText(size, color);
+    const rows = pdf.splitTextToSize(value, width) as string[];
+    pdf.text(rows, x, y);
+    return y + rows.length * lineHeight;
+  };
+  const rect = (x: number, y: number, width: number, height: number, fill: [number, number, number], stroke: [number, number, number] = fill, radius = 2) => {
+    pdf.setFillColor(...fill); pdf.setDrawColor(...stroke); pdf.roundedRect(x, y, width, height, radius, radius, "FD");
+  };
+  const brandHeader = (compact = false) => {
+    const height = compact ? 28 : 46;
+    pdf.setFillColor(...teal); pdf.rect(0, 0, 210, height, "F");
+    if (!compact) { pdf.addImage(hero, "WEBP", 112, 0, 98, 46, undefined, "FAST"); pdf.setFillColor(...teal); pdf.rect(0, 0, 122, 46, "F"); }
+    setText(compact ? 17 : 21, [255, 255, 255]); pdf.text("ESHAN", 14, compact ? 13 : 18);
+    pdf.setCharSpace(2); setText(compact ? 7 : 8, [255, 255, 255]); pdf.text("BOREWELLS", 14, compact ? 20 : 27); pdf.setCharSpace(0);
+    if (!compact) { pdf.setFillColor(...orange); pdf.rect(14, 31, 16, 1.5, "F"); setText(7, [232, 247, 248]); pdf.text("25+ years  |  10,000+ borewell sites  |  Bengaluru", 14, 39); }
+    setText(7, [232, 247, 248]); pdf.text(`${phone}  |  ${address}`, 196, compact ? 17 : 39, { align: "right", maxWidth: compact ? 105 : 76 });
+    return height;
+  };
+  const pageFooter = () => {
+    pdf.setDrawColor(...line); pdf.line(14, 283, 196, 283);
+    setText(6.5, muted); pdf.text(`Eshan Borewells  |  ${quotation.quoteNumber}  |  Valid until ${quotation.validUntil}`, 14, 288);
+    pdf.text(`${pdf.getCurrentPageInfo().pageNumber}`, 196, 288, { align: "right" });
+  };
+  const sectionTitle = (title: string, subtitle: string, y: number) => {
+    pdf.setFillColor(...orange); pdf.roundedRect(14, y, 6, 6, 1.5, 1.5, "F");
+    setText(10, navy); pdf.text(title, 24, y + 4.5);
+    setText(6.5, muted); pdf.text(subtitle, 24, y + 9);
+    return y + 13;
+  };
+
+  let y = brandHeader() + 8;
+  setText(18, navy); pdf.text("Borewell Quotation", 14, y);
+  rect(77, y - 7, 41, 10, [237, 244, 247], [237, 244, 247], 3); setText(8, [49, 80, 105]); pdf.text(quotation.quoteNumber, 97.5, y - .5, { align: "center" });
+  setText(7, muted); pdf.text("Quotation date", 140, y - 4); pdf.text(`Valid for ${quotation.validityDays} days`, 172, y - 4);
+  setText(8, ink); pdf.text(quotation.quoteDate, 140, y + 1); pdf.text(quotation.validUntil, 172, y + 1);
+  y += 8; wrapped("Estimated project cost based on the customer and site details provided.", 14, y, 120, 7.5); y += 5;
+
+  const summaryY = y;
+  const summary = [["CUSTOMER", quotation.customerName, quotation.mobile], ["LOCATION", quotation.location, quotation.propertyType], ["DEPTH", quotation.depth, quotation.accessType], ["SERVICE", quotation.service, quotation.machineType]];
+  summary.forEach(([label, value, detail], index) => {
+    const x = 14 + index * 45.5;
+    rect(x, summaryY, 44, 27, [245, 249, 251], line, 2);
+    setText(6, muted); pdf.text(label, x + 4, summaryY + 6);
+    wrapped(value, x + 4, summaryY + 13, 36, 9, ink, 3.7);
+    wrapped(detail, x + 4, summaryY + 22, 36, 6.2, muted, 3);
+  });
+  y += 32;
+  rect(14, y, 182, 20, [232, 247, 238], [184, 224, 199], 2);
+  setText(8, [7, 91, 52]); pdf.text("ESTIMATED TOTAL", 20, y + 7);
+  setText(17, [7, 91, 52]); pdf.text(quotation.estimatedTotalFormatted, 191, y + 12, { align: "right" });
+  setText(6.5, [61, 112, 83]); pdf.text("Drilling and configured project costs", 20, y + 14);
+  y += 27;
+
+  y = sectionTitle("Drilling Cost Structure", "Rates are based on depth range and selected machine type.", y);
+  pdf.setFillColor(234, 242, 246); pdf.rect(14, y, 182, 8, "F");
+  setText(6.5, [56, 83, 109]); pdf.text("DEPTH RANGE", 19, y + 5); pdf.text("RATE (₹/FT)", 112, y + 5, { align: "center" }); pdf.text("AMOUNT (₹)", 191, y + 5, { align: "right" });
+  y += 8;
+  for (const slab of quotation.drillingBreakdown) {
+    pdf.setDrawColor(...line); pdf.line(14, y + 7, 196, y + 7);
+    setText(7.3, ink); pdf.text(`${slab.from} - ${slab.to} ft`, 19, y + 4.8); pdf.text(slab.rate === null ? "To confirm" : `₹${slab.rate}`, 112, y + 4.8, { align: "center" }); pdf.text(money(slab.amount), 191, y + 4.8, { align: "right" }); y += 7;
   }
-  function section(title: string) {
-    // Keep headings with the first lines of content instead of orphaning them.
-    if (y > 235) { pdf.addPage(); y = 20; }
-    text(title, 12);
-  }
-  text(result.quoteNumber, 13);
-  text(`${new Intl.DateTimeFormat("en-IN", { dateStyle: "long", timeStyle: "short", timeZone: "Asia/Kolkata" }).format(new Date(result.capturedAt))} IST`, 9);
-  y += 5;
-  text(`Prepared for: ${customer.name}`); text(`Mobile: ${customer.mobile}`);
-  if (customer.email) text(`Email: ${customer.email}`);
-  text(`Site: ${input.locality}, ${input.city}${input.pin ? ` - ${input.pin}` : ""}`);
-  text(`Service: ${serviceOptions.find((s) => s.value === input.service)!.label}`);
-  text(`Property: ${input.property}`);
-  text(`Depth: ${input.service === "pump" || input.service === "existing" ? "Not applicable to new drilling" : input.depth ? `${input.depth} ft (estimated)` : "Site assessment required"}`);
-  text(`Suggested equipment: ${result.quote?.machine || "Site assessment required"}`);
-  text(`Casing: ${input.casing.required === "yes" ? `${input.casing.material}, ${input.casing.diameter}, ${input.casing.depth} ft` : input.casing.required}`);
-  text(`Pump: ${input.pump.required === "yes" ? `${input.pump.type}, ${input.pump.hp}` : input.pump.required === "no" ? "Supply not requested" : "Recommendation required"}`);
-  y += 5;
-  section("ESTIMATED COST BREAKDOWN");
-  for (const line of result.quote?.breakdown || []) { text(`${line.label}: ${formatRange(line.min, line.max)}`, 10); if (line.detail) text(line.detail, 8, [90, 105, 118]); }
-  if (result.quote?.drillingSlabs.length) {
-    y += 4; section("PROGRESSIVE DRILLING SLABS");
-    for (const slab of result.quote.drillingSlabs) text(`${slab.from}–${slab.to} ft: ${slab.feet} ft × ${slab.rate === null ? "rate pending" : `₹${slab.rate}/ft`} = ${formatRange(slab.amount, slab.amount)}`, 9);
-  }
-  text(`Tax: ${result.quote?.taxPercent == null ? "To be confirmed" : `${result.quote.taxPercent}%`}`, 10);
-  y += 4;
-  const price = result.quote ? quotePrice(result.quote) : null;
-  text(`${price?.label || "Estimated total"}: ${formatRange(price?.min ?? null, price?.max ?? null)}`, 15, [19, 94, 150]);
-  if (price && !price.full) text(`Not an all-inclusive total. Unpriced items excluded: ${price.pending.join(", ")}. These charges require separate confirmation.`, 9);
-  y += 5; section("VARIABLE MATERIAL RATES");
-  text("Charged according to actual site usage and not included in the displayed amount.", 9);
-  for (const material of variableMaterials) text(`${material.label}: ₹${material.rate}/${material.unit}`, 9);
-  text("No payment is requested by this estimate.", 9);
-  if (result.delivery === "not_saved") text("Enquiry not yet sent. Please call or share this quote on WhatsApp.", 9);
-  y += 6; section("TERMS & NEXT STEPS"); text(disclaimer, 9);
-  for (const note of result.quote?.assumptions || []) text(note, 9);
-  y += 5; text(`Call / WhatsApp: ${phone}`, 10); text(address, 9); text("www.eshanborewells.com", 9);
-  const pages = pdf.getNumberOfPages();
-  for (let page = 1; page <= pages; page++) { pdf.setPage(page); pdf.setFontSize(8); pdf.setTextColor(90, 105, 118); pdf.text(`Eshan Borewells  |  Estimate only  |  ${page} / ${pages}`, 17, 286); }
-  pdf.save(`${result.quoteNumber}.pdf`);
+  pdf.setFillColor(255, 241, 217); pdf.rect(14, y, 182, 10, "F");
+  setText(8, [107, 43, 22]); pdf.text("Drilling Subtotal", 19, y + 6.5); setText(10, [107, 43, 22]); pdf.text(money(quotation.drillingSubtotal), 191, y + 6.5, { align: "right" });
+  pageFooter();
+
+  pdf.addPage(); y = brandHeader(true) + 9;
+  y = sectionTitle("Fixed Operational Costs", "One-time operational costs configured for this machine.", y);
+  rect(14, y, 88, 10 + quotation.fixedOperationalCosts.length * 9, [250, 252, 253], line, 2);
+  quotation.fixedOperationalCosts.forEach((cost, index) => { const rowY = y + 7 + index * 9; setText(7.5, ink); pdf.text(cost.label, 19, rowY); pdf.text(formatRange(cost.min, cost.max), 97, rowY, { align: "right" }); });
+  const fixedBottom = y + 10 + quotation.fixedOperationalCosts.length * 9;
+  rect(14, fixedBottom + 2, 88, 13, [232, 247, 238], [184, 224, 199], 2); setText(8, [7, 91, 52]); pdf.text("Subtotal (Fixed)", 19, fixedBottom + 10); pdf.text(money(quotation.fixedSubtotal), 97, fixedBottom + 10, { align: "right" });
+  rect(108, y, 88, 25, [255, 246, 231], [255, 195, 107], 2); setText(8, [122, 35, 18]); pdf.text("ESTIMATED TOTAL", 114, y + 8); setText(18, [104, 23, 13]); pdf.text(quotation.estimatedTotalFormatted, 190, y + 19, { align: "right" });
+  y = Math.max(fixedBottom + 22, y + 32);
+
+  if (quotation.materialsServices.length) { y = sectionTitle("Selected Materials and Services", "Included or pending confirmation in this quotation.", y); for (const item of quotation.materialsServices) { setText(7, ink); pdf.text(item.label, 19, y); pdf.text(formatRange(item.min, item.max), 191, y, { align: "right" }); y += 7; } y += 3; }
+
+  y = sectionTitle("Variable Materials", "Not included unless selected or used. Final cost depends on actual site usage.", y);
+  quotation.variableMaterials.forEach((material, index) => {
+    const column = index % 2, row = Math.floor(index / 2), x = 14 + column * 92, rowY = y + row * 10;
+    pdf.setDrawColor(...line); pdf.line(x, rowY + 8, x + 88, rowY + 8);
+    wrapped(material.label, x + 4, rowY + 5, 60, 6.8, ink, 3.2);
+    rect(x + 68, rowY + 1, 18, 6, [230, 246, 235], [230, 246, 235], 1); setText(6.4, [23, 104, 59]); pdf.text(`₹${material.rate}/${material.unit}`, x + 77, rowY + 5.2, { align: "center" });
+  });
+  y += Math.ceil(quotation.variableMaterials.length / 2) * 10 + 8;
+
+  y = sectionTitle("Important Note", `Quotation validity: ${quotation.validityDays} days. Valid until ${quotation.validUntil}.`, y);
+  y = wrapped("This is an estimated quotation based on the information provided by the customer. Final pricing may vary depending on actual drilling conditions, ground formation, machine access, actual depth, casing requirements, materials used and site assessment. Water, depth and final price are not guaranteed.", 18, y, 174, 7, muted, 3.8) + 5;
+  rect(14, y, 182, 22, [240, 247, 248], line, 2);
+  setText(8, teal); pdf.text("25+ YEARS EXPERIENCE", 20, y + 8); pdf.text("10,000+ BOREWELL SITES", 78, y + 8); pdf.text("BENGALURU & SURROUNDING AREAS", 142, y + 8);
+  setText(6.5, muted); pdf.text("Call or WhatsApp to confirm site conditions and the final scope.", 20, y + 16); pdf.text(phone, 191, y + 16, { align: "right" });
+  pageFooter();
+
+  return pdf;
 }
