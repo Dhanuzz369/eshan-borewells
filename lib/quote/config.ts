@@ -51,14 +51,14 @@ export const fixedOperationalCosts = [
   { key: "food", label: "Food Charge", amount: 2000 },
 ] as const;
 export const variableMaterials = [
-  { label: '10" PVC Pipe', rate: 460, unit: "ft" },
-  { label: '12" PVC Pipe', rate: 760, unit: "ft" },
-  { label: '7" M.S. Pipe', rate: 460, unit: "ft" },
-  { label: '7" M.S. Heavy Pipe', rate: 560, unit: "ft" },
+  { label: '10" PVC Casing Pipe', rate: 460, unit: "ft" },
+  { label: '12" PVC Casing Pipe', rate: 760, unit: "ft" },
+  { label: '7" M.S. Medium Casing Pipe', rate: 460, unit: "ft" },
+  { label: '7" M.S. Heavy Casing Pipe', rate: 560, unit: "ft" },
   { label: '7" M.S. Welding', rate: 300, unit: "each" },
   { label: '7" M.S. Collar', rate: 300, unit: "each" },
   { label: '7" M.S. Cap', rate: 300, unit: "each" },
-  { label: '4½" or 5" 6 kg PVC Slotted Casing', rate: 130, unit: "ft", certification: null },
+  { label: '4½" or 5" 6 kg ISI Mark PVC Slotted Casing Pipe', rate: 130, unit: "ft", certification: "ISI Mark" },
   { label: "Water Injection", rate: 8, unit: "ft" },
 ] as const;
 

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState, type ReactNode } from "react";
 import {
-  AlertCircle, ArrowLeft, Building2, CalendarDays, Calculator, CheckCircle2,
+  AlertCircle, ArrowLeft, Building2, CalendarDays, CheckCircle2,
   Clock3, Download, Droplets, Gauge, MapPin, MessageCircle, Phone, ShieldCheck,
   UsersRound, Wrench,
 } from "lucide-react";
@@ -70,7 +70,6 @@ export function QuoteResult({ quotation, phone, whatsapp, address, delivery, onE
           <div className="quotation-summary-item"><Droplets size={24} /><span><small>Estimated depth</small><strong>{quotation.depth}</strong><p>{quotation.propertyType}</p></span></div>
           <div className="quotation-summary-item"><Gauge size={24} /><span><small>Service</small><strong>{quotation.service}</strong><p>{quotation.machineType}</p></span></div>
           <div className="quotation-summary-item"><Building2 size={24} /><span><small>Site access</small><strong>{quotation.accessType}</strong>{quotation.pumpDetails && <p>{quotation.pumpDetails}</p>}</span></div>
-          <div className="quotation-summary-total"><Calculator size={25} /><span><small>Estimated total</small><strong>{quotation.estimatedTotalFormatted}</strong><p>Drilling and configured project costs</p></span></div>
         </div>
       </section>
 
@@ -88,6 +87,7 @@ export function QuoteResult({ quotation, phone, whatsapp, address, delivery, onE
           <section className="quotation-panel quotation-fixed">
             <SectionHeading icon={<Wrench size={22} />} title="Fixed Operational Costs" subtitle="These are one-time operational costs." />
             <div className="quotation-table compact">{quotation.fixedOperationalCosts.map((line) => <div className="quotation-table-row" key={line.key}><span>{line.label}</span><b>{formatRange(line.min, line.max)}</b></div>)}<div className="quotation-table-total"><span>Subtotal (Fixed)</span><strong>{formatRange(quotation.fixedSubtotal, quotation.fixedSubtotal)}</strong></div></div>
+            <div className="quotation-total-inline"><span><small>Estimated total</small><em>Drilling plus fixed operational costs</em></span><strong>{quotation.estimatedTotalFormatted}</strong></div>
           </section>
           <div className="quotation-actions"><a href={whatsappHref} target="_blank" rel="noopener noreferrer"><MessageCircle size={19} />Confirm / Discuss on WhatsApp</a><a href={phoneHref}><Phone size={18} />Call Eshan Borewells</a></div>
         </aside>

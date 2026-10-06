@@ -86,12 +86,7 @@ export function renderQuotePdf({ quotation, phone, address, fontBase64, hero }: 
     wrapped(value, x + 4, summaryY + 13, 36, 9, ink, 3.7);
     wrapped(detail, x + 4, summaryY + 22, 36, 6.2, muted, 3);
   });
-  y += 32;
-  rect(14, y, 182, 20, [232, 247, 238], [184, 224, 199], 2);
-  setText(8, [7, 91, 52]); pdf.text("ESTIMATED TOTAL", 20, y + 7);
-  setText(17, [7, 91, 52]); pdf.text(quotation.estimatedTotalFormatted, 191, y + 12, { align: "right" });
-  setText(6.5, [61, 112, 83]); pdf.text("Drilling and configured project costs", 20, y + 14);
-  y += 27;
+  y += 34;
 
   y = sectionTitle("Drilling Cost Structure", "Rates are based on depth range and selected machine type.", y);
   pdf.setFillColor(234, 242, 246); pdf.rect(14, y, 182, 8, "F");
@@ -111,7 +106,12 @@ export function renderQuotePdf({ quotation, phone, address, fontBase64, hero }: 
   quotation.fixedOperationalCosts.forEach((cost, index) => { const rowY = y + 7 + index * 9; setText(7.5, ink); pdf.text(cost.label, 19, rowY); pdf.text(formatRange(cost.min, cost.max), 191, rowY, { align: "right" }); });
   const fixedBottom = y + 10 + quotation.fixedOperationalCosts.length * 9;
   rect(14, fixedBottom + 2, 182, 13, [232, 247, 238], [184, 224, 199], 2); setText(8, [7, 91, 52]); pdf.text("Subtotal (Fixed)", 19, fixedBottom + 10); pdf.text(money(quotation.fixedSubtotal), 191, fixedBottom + 10, { align: "right" });
-  y = fixedBottom + 22;
+  y = fixedBottom + 23;
+  pdf.setDrawColor(...line); pdf.line(14, y, 196, y);
+  setText(8.5, navy); pdf.text("Estimated Total", 14, y + 8);
+  setText(6.5, muted); pdf.text("Drilling plus fixed operational costs", 14, y + 13);
+  setText(15, navy); pdf.text(quotation.estimatedTotalFormatted, 196, y + 10, { align: "right" });
+  y += 21;
 
   if (quotation.materialsServices.length) { y = sectionTitle("Selected Materials and Services", "Included or pending confirmation in this quotation.", y); for (const item of quotation.materialsServices) { setText(7, ink); pdf.text(item.label, 19, y); pdf.text(formatRange(item.min, item.max), 191, y, { align: "right" }); y += 7; } y += 3; }
 

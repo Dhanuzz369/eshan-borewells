@@ -18,7 +18,8 @@ test("quotation data uses one quote object, seven-day validity and migrated casi
   assert.equal(data.machineType, "Sensor Rig");
   assert.equal(data.fixedOperationalCosts.find((line) => line.key === "fixed-setting")?.min, 2000);
   assert.equal(data.estimatedTotal, 264500);
-  assert.equal(data.variableMaterials.find((material) => material.label.includes("Slotted Casing"))?.label, '4½" or 5" 6 kg PVC Slotted Casing');
+  assert.equal(data.variableMaterials.find((material) => material.label.includes("Slotted Casing"))?.label, '4½" or 5" 6 kg ISI Mark PVC Slotted Casing Pipe');
+  assert.equal(data.variableMaterials.find((material) => material.label.includes("M.S. Medium"))?.label, '7" M.S. Medium Casing Pipe');
   const retiredName = '6" PVC ' + "Slotted Casing";
   assert.equal(variableMaterials.some((material) => String(material.label) === retiredName), false);
 });
