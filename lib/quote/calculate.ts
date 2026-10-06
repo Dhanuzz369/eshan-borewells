@@ -4,6 +4,17 @@ import type { QuoteInput } from "./schema";
 export type CostLine = { key: string; label: string; min: Rate; max: Rate; detail: string };
 export type DrillingSlab = { from: number; to: number; feet: number; rate: Rate; amount: Rate };
 export type Quote = { breakdown: CostLine[]; drillingSlabs: DrillingSlab[]; estimatedMin: Rate; estimatedMax: Rate; subtotalMin: Rate; subtotalMax: Rate; taxPercent: Rate; machine: string; assumptions: string[]; pricingVersion: string };
+export function quotePrice(quote: Quote) {
+  const priced = quote.breakdown.filter((line) => line.min !== null && line.max !== null);
+  const full = quote.estimatedMin !== null && quote.estimatedMax !== null;
+  return {
+    label: full ? "Estimated project total" : priced.length === 1 && priced[0].key === "drilling" ? "Drilling quotation" : "Priced items subtotal",
+    min: full ? quote.estimatedMin : priced.length ? priced.reduce((sum, line) => sum + line.min!, 0) : null,
+    max: full ? quote.estimatedMax : priced.length ? priced.reduce((sum, line) => sum + line.max!, 0) : null,
+    full,
+    pending: [...quote.breakdown.filter((line) => line.min === null || line.max === null).map((line) => line.label), ...(quote.taxPercent === null ? ["Tax"] : [])],
+  };
+}
 export function formatRange(min: Rate, max: Rate): string {
   if (min === null || max === null) return "To be confirmed";
   const f = (n: number) => new Intl.NumberFormat("en-IN", { maximumFractionDigits: 0 }).format(n);

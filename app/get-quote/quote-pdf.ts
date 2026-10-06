@@ -1,6 +1,6 @@
 import { jsPDF } from "jspdf";
 import type { QuoteInput } from "@/lib/quote/schema";
-import { formatRange, type Quote } from "@/lib/quote/calculate";
+import { formatRange, quotePrice, type Quote } from "@/lib/quote/calculate";
 import { disclaimer, serviceOptions } from "@/lib/quote/config";
 
 type PdfInput = { result: { quote: Quote | null; quoteNumber: string; capturedAt: string; delivery: string }; input: QuoteInput; customer: { name: string; mobile: string; email: string }; phone: string; address: string };
@@ -57,7 +57,9 @@ export async function downloadQuote({ result, input, customer, phone, address }:
   }
   text(`Tax: ${result.quote?.taxPercent == null ? "To be confirmed" : `${result.quote.taxPercent}%`}`, 10);
   y += 4;
-  text(`Estimated total: ${formatRange(result.quote?.estimatedMin ?? null, result.quote?.estimatedMax ?? null)}`, 15, [19, 94, 150]);
+  const price = result.quote ? quotePrice(result.quote) : null;
+  text(`${price?.label || "Estimated total"}: ${formatRange(price?.min ?? null, price?.max ?? null)}`, 15, [19, 94, 150]);
+  if (price && !price.full) text(`Not an all-inclusive total. Unpriced items excluded: ${price.pending.join(", ")}. These charges require separate confirmation.`, 9);
   text("No payment is requested by this estimate.", 9);
   if (result.delivery === "not_saved") text("Enquiry not yet sent. Please call or share this quote on WhatsApp.", 9);
   y += 6; section("TERMS & NEXT STEPS"); text(disclaimer, 9);
