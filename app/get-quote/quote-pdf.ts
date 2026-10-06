@@ -124,6 +124,14 @@ export function renderQuotePdf({ quotation, phone, address, fontBase64, hero }: 
   });
   y += Math.ceil(quotation.variableMaterials.length / 2) * 10 + 8;
 
+  const callableNumber = phone.replace(/[^+\d]/g, "");
+  pdf.setFillColor(5, 128, 76);
+  pdf.roundedRect(68, y, 74, 12, 3, 3, "F");
+  setText(8.5, [255, 255, 255]);
+  pdf.text(`CALL NOW  |  ${phone}`, 105, y + 7.7, { align: "center" });
+  pdf.link(68, y, 74, 12, { url: `tel:${callableNumber}` });
+  y += 20;
+
   y = sectionTitle("Important Note", `Quotation validity: ${quotation.validityDays} days. Valid until ${quotation.validUntil}.`, y);
   y = wrapped("This is an estimated quotation based on the information provided by the customer. Final pricing may vary depending on actual drilling conditions, ground formation, machine access, actual depth, casing requirements, materials used and site assessment. Water, depth and final price are not guaranteed.", 18, y, 174, 7, muted, 3.8) + 5;
   rect(14, y, 182, 22, [240, 247, 248], line, 2);
