@@ -8,6 +8,7 @@ export function GET() {
   const lastmod = new Date().toISOString();
   const urls = [
     { path: "/", priority: "1.0", changefreq: "weekly" },
+    { path: "/get-quote", priority: "0.9", changefreq: "monthly" },
     ...seoPages.map((page) => ({ path: `/${page.slug}`, priority: "0.8", changefreq: "monthly" })),
   ];
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(({ path, priority, changefreq }) => `  <url>\n    <loc>${origin}${path}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`).join("\n")}\n</urlset>`;

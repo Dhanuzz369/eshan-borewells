@@ -1,0 +1,26 @@
+name: Retry pending quote deliveries
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: quote-delivery
+  cancel-in-progress: false
+jobs:
+  deliver:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Deliver saved quotes to Google Sheets
+        env:
+          QUOTE_RETRY_SECRET: ${{ secrets.QUOTE_RETRY_SECRET }}
+          QUOTE_SITE_URL: ${{ vars.QUOTE_SITE_URL || 'https://www.eshanborewells.com' }}
+        run: |
+          if [ -z "$QUOTE_RETRY_SECRET" ]; then
+            echo "Quote delivery is awaiting secure integration setup."
+            exit 0
+          fi
+          curl --fail --silent --show-error --max-time 65 \
+            -H "Authorization: Bearer $QUOTE_RETRY_SECRET" \
+            "$QUOTE_SITE_URL/api/quotes/retry"

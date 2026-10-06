@@ -44,6 +44,8 @@ next-env.d.ts
 /.agents/
 /.codex/
 /outputs/
+/output/
+/.playwright-cli/
 /work/
 
 # Graphify's graph is committed for token-free codebase navigation. This local

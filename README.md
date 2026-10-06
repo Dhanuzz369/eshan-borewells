@@ -1,5 +1,16 @@
 # Eshan Borewells website
 
+## V2 instant quote
+
+`/get-quote` adds a progressive Sensor Rig drilling calculator, casing and pump
+scope, secure lead capture, WhatsApp and downloadable PDF estimates. Owner-supplied
+Sensor Rig rates are configured through 2,000 ft; unprovided charges stay pending.
+Run `npm run test:quote` for the calculation and delivery checks.
+See [quote setup](docs/QUOTE-SETUP.md) for Google Sheets, the durable retry queue,
+environment variables, privacy, testing and XLSX export. Live automatic capture
+requires the server credentials described there; without them the result clearly
+states that the enquiry has not been sent and offers WhatsApp and calling.
+
 ## Deployment and enquiries
 
 The production site builds with `npm run build` on Vercel. Pushes to the connected
