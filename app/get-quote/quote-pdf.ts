@@ -5,7 +5,6 @@ import type { QuotationData } from "@/lib/quote/document";
 type PdfInput = { quotation: QuotationData; phone: string; address: string };
 const navy: [number, number, number] = [8, 47, 73];
 const teal: [number, number, number] = [7, 93, 107];
-const orange: [number, number, number] = [245, 158, 11];
 const ink: [number, number, number] = [16, 42, 67];
 const muted: [number, number, number] = [91, 111, 132];
 const line: [number, number, number] = [217, 228, 236];
@@ -30,8 +29,7 @@ export async function downloadQuote({ quotation, phone, address }: PdfInput) {
   for (const byte of bytes) binary += String.fromCharCode(byte);
   const hero = await imageData("/hero-drilling.webp");
   const pdf = renderQuotePdf({ quotation, phone, address, fontBase64: btoa(binary), hero });
-  const filenameQuote = quotation.quoteNumber.replace(/[^A-Za-z0-9-]/g, "");
-  pdf.save(`Eshan-Borewells-Quotation-${filenameQuote}.pdf`);
+  pdf.save("Eshan-Borewells-Quotation.pdf");
 }
 
 export function renderQuotePdf({ quotation, phone, address, fontBase64, hero }: PdfInput & { fontBase64: string; hero: string }) {
@@ -57,27 +55,26 @@ export function renderQuotePdf({ quotation, phone, address, fontBase64, hero }: 
     if (!compact) { pdf.addImage(hero, "WEBP", 112, 0, 98, 46, undefined, "FAST"); pdf.setFillColor(...teal); pdf.rect(0, 0, 122, 46, "F"); }
     setText(compact ? 17 : 21, [255, 255, 255]); pdf.text("ESHAN", 14, compact ? 13 : 18);
     pdf.setCharSpace(2); setText(compact ? 7 : 8, [255, 255, 255]); pdf.text("BOREWELLS", 14, compact ? 20 : 27); pdf.setCharSpace(0);
-    if (!compact) { pdf.setFillColor(...orange); pdf.rect(14, 31, 16, 1.5, "F"); setText(7, [232, 247, 248]); pdf.text("25+ years  |  10,000+ borewell sites  |  Bengaluru", 14, 39); }
-    setText(7, [232, 247, 248]); pdf.text(`${phone}  |  ${address}`, 196, compact ? 17 : 39, { align: "right", maxWidth: compact ? 105 : 76 });
+    if (!compact) { setText(7, [232, 247, 248]); pdf.text("25+ years  |  10,000+ borewell sites  |  Bengaluru", 14, 35); setText(6.5, [255, 255, 255]); pdf.text(`${phone}  |  ${address}`, 14, 42); }
+    else { setText(7, [255, 255, 255]); pdf.text(`${phone}  |  ${address}`, 196, 17, { align: "right", maxWidth: 105 }); }
     return height;
   };
   const pageFooter = () => {
     pdf.setDrawColor(...line); pdf.line(14, 283, 196, 283);
-    setText(6.5, muted); pdf.text(`Eshan Borewells  |  ${quotation.quoteNumber}  |  Valid until ${quotation.validUntil}`, 14, 288);
+    setText(6.5, muted); pdf.text(`Eshan Borewells  |  Valid until ${quotation.validUntil}`, 14, 288);
     pdf.text(`${pdf.getCurrentPageInfo().pageNumber}`, 196, 288, { align: "right" });
   };
   const sectionTitle = (title: string, subtitle: string, y: number) => {
-    pdf.setFillColor(...orange); pdf.roundedRect(14, y, 6, 6, 1.5, 1.5, "F");
-    setText(10, navy); pdf.text(title, 24, y + 4.5);
-    setText(6.5, muted); pdf.text(subtitle, 24, y + 9);
-    return y + 13;
+    setText(10, navy); pdf.text(title, 14, y + 4);
+    pdf.setDrawColor(121, 154, 170); pdf.line(14, y + 7, 196, y + 7);
+    setText(6.5, muted); pdf.text(subtitle, 14, y + 12);
+    return y + 16;
   };
 
   let y = brandHeader() + 8;
   setText(18, navy); pdf.text("Borewell Quotation", 14, y);
-  rect(77, y - 7, 41, 10, [237, 244, 247], [237, 244, 247], 3); setText(8, [49, 80, 105]); pdf.text(quotation.quoteNumber, 97.5, y - .5, { align: "center" });
-  setText(7, muted); pdf.text("Quotation date", 140, y - 4); pdf.text(`Valid for ${quotation.validityDays} days`, 172, y - 4);
-  setText(8, ink); pdf.text(quotation.quoteDate, 140, y + 1); pdf.text(quotation.validUntil, 172, y + 1);
+  setText(7, muted); pdf.text("Quotation date", 142, y - 4); pdf.text(`Valid for ${quotation.validityDays} days`, 174, y - 4);
+  setText(8, ink); pdf.text(quotation.quoteDate, 142, y + 1); pdf.text(quotation.validUntil, 174, y + 1);
   y += 8; wrapped("Estimated project cost based on the customer and site details provided.", 14, y, 120, 7.5); y += 5;
 
   const summaryY = y;
@@ -104,18 +101,17 @@ export function renderQuotePdf({ quotation, phone, address, fontBase64, hero }: 
     pdf.setDrawColor(...line); pdf.line(14, y + 7, 196, y + 7);
     setText(7.3, ink); pdf.text(`${slab.from} - ${slab.to} ft`, 19, y + 4.8); pdf.text(slab.rate === null ? "To confirm" : `₹${slab.rate}`, 112, y + 4.8, { align: "center" }); pdf.text(money(slab.amount), 191, y + 4.8, { align: "right" }); y += 7;
   }
-  pdf.setFillColor(255, 241, 217); pdf.rect(14, y, 182, 10, "F");
-  setText(8, [107, 43, 22]); pdf.text("Drilling Subtotal", 19, y + 6.5); setText(10, [107, 43, 22]); pdf.text(money(quotation.drillingSubtotal), 191, y + 6.5, { align: "right" });
+  pdf.setFillColor(232, 242, 246); pdf.rect(14, y, 182, 10, "F");
+  setText(8, navy); pdf.text("Drilling Subtotal", 19, y + 6.5); setText(10, navy); pdf.text(money(quotation.drillingSubtotal), 191, y + 6.5, { align: "right" });
   pageFooter();
 
   pdf.addPage(); y = brandHeader(true) + 9;
   y = sectionTitle("Fixed Operational Costs", "One-time operational costs configured for this machine.", y);
-  rect(14, y, 88, 10 + quotation.fixedOperationalCosts.length * 9, [250, 252, 253], line, 2);
-  quotation.fixedOperationalCosts.forEach((cost, index) => { const rowY = y + 7 + index * 9; setText(7.5, ink); pdf.text(cost.label, 19, rowY); pdf.text(formatRange(cost.min, cost.max), 97, rowY, { align: "right" }); });
+  rect(14, y, 182, 10 + quotation.fixedOperationalCosts.length * 9, [250, 252, 253], line, 2);
+  quotation.fixedOperationalCosts.forEach((cost, index) => { const rowY = y + 7 + index * 9; setText(7.5, ink); pdf.text(cost.label, 19, rowY); pdf.text(formatRange(cost.min, cost.max), 191, rowY, { align: "right" }); });
   const fixedBottom = y + 10 + quotation.fixedOperationalCosts.length * 9;
-  rect(14, fixedBottom + 2, 88, 13, [232, 247, 238], [184, 224, 199], 2); setText(8, [7, 91, 52]); pdf.text("Subtotal (Fixed)", 19, fixedBottom + 10); pdf.text(money(quotation.fixedSubtotal), 97, fixedBottom + 10, { align: "right" });
-  rect(108, y, 88, 25, [255, 246, 231], [255, 195, 107], 2); setText(8, [122, 35, 18]); pdf.text("ESTIMATED TOTAL", 114, y + 8); setText(18, [104, 23, 13]); pdf.text(quotation.estimatedTotalFormatted, 190, y + 19, { align: "right" });
-  y = Math.max(fixedBottom + 22, y + 32);
+  rect(14, fixedBottom + 2, 182, 13, [232, 247, 238], [184, 224, 199], 2); setText(8, [7, 91, 52]); pdf.text("Subtotal (Fixed)", 19, fixedBottom + 10); pdf.text(money(quotation.fixedSubtotal), 191, fixedBottom + 10, { align: "right" });
+  y = fixedBottom + 22;
 
   if (quotation.materialsServices.length) { y = sectionTitle("Selected Materials and Services", "Included or pending confirmation in this quotation.", y); for (const item of quotation.materialsServices) { setText(7, ink); pdf.text(item.label, 19, y); pdf.text(formatRange(item.min, item.max), 191, y, { align: "right" }); y += 7; } y += 3; }
 

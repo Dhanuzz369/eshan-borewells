@@ -4,6 +4,7 @@ import { calculateQuote } from "./calculate";
 import { variableMaterials } from "./config";
 import { buildQuotationData, QUOTE_VALIDITY_DAYS } from "./document";
 import { initialInput } from "./schema";
+import { quoteInputSchema } from "./schema";
 
 test("quotation data uses one quote object, seven-day validity and migrated casing name", () => {
   const input = { ...structuredClone(initialInput), locality: "Bannerghatta", depth: 1200, machine: "Sensor Rig" as const };
@@ -29,4 +30,10 @@ test("Robo Rig document keeps zero setting charge and progressive total", () => 
   assert.equal(data.fixedOperationalCosts.find((line) => line.key === "fixed-setting")?.min, 0);
   assert.equal(data.drillingSubtotal, 540000);
   assert.equal(data.estimatedTotal, 544000);
+});
+
+test("Robo Rig input is capped at 1200 ft by validation", () => {
+  const valid = { ...structuredClone(initialInput), locality: "Rajajinagar", depth: 1200, machine: "Robo Rig" as const };
+  assert.equal(quoteInputSchema.safeParse(valid).success, true);
+  assert.equal(quoteInputSchema.safeParse({ ...valid, depth: 1210 }).success, false);
 });

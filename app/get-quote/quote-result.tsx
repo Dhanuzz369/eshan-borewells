@@ -60,7 +60,7 @@ export function QuoteResult({ quotation, phone, whatsapp, address, delivery, onE
     <main className="quotation-document shell">
       <section className="quotation-overview">
         <div className="quotation-title-row">
-          <div><span className="quotation-title-icon"><Wrench size={21} /></span><div><h1>Borewell Quotation</h1><p>Estimated project cost based on the details provided.</p></div><b className="quotation-number">{quotation.quoteNumber}</b></div>
+          <div><span className="quotation-title-icon"><Wrench size={21} /></span><div><h1>Borewell Quotation</h1><p>Estimated project cost based on the details provided.</p></div></div>
           <div className="quotation-meta"><CalendarDays size={17} /><span><small>Quotation date</small><b>{quotation.quoteDate}</b></span><span><small>Valid for {quotation.validityDays} days</small><b>{quotation.validUntil}</b></span></div>
           <div className="quotation-tools"><button type="button" onClick={onEdit}><ArrowLeft size={16} />Edit</button><button type="button" onClick={download} disabled={pdfBusy}><Download size={16} />{pdfBusy ? "Preparing" : "Download PDF"}</button></div>
         </div>
@@ -89,7 +89,6 @@ export function QuoteResult({ quotation, phone, whatsapp, address, delivery, onE
             <SectionHeading icon={<Wrench size={22} />} title="Fixed Operational Costs" subtitle="These are one-time operational costs." />
             <div className="quotation-table compact">{quotation.fixedOperationalCosts.map((line) => <div className="quotation-table-row" key={line.key}><span>{line.label}</span><b>{formatRange(line.min, line.max)}</b></div>)}<div className="quotation-table-total"><span>Subtotal (Fixed)</span><strong>{formatRange(quotation.fixedSubtotal, quotation.fixedSubtotal)}</strong></div></div>
           </section>
-          <section className="quotation-total-card"><Calculator size={26} /><div><span>Estimated Total</span><p>Drilling + configured project costs</p><strong>{quotation.estimatedTotalFormatted}</strong></div></section>
           <div className="quotation-actions"><a href={whatsappHref} target="_blank" rel="noopener noreferrer"><MessageCircle size={19} />Confirm / Discuss on WhatsApp</a><a href={phoneHref}><Phone size={18} />Call Eshan Borewells</a></div>
         </aside>
       </div>
@@ -109,7 +108,7 @@ export function QuoteResult({ quotation, phone, whatsapp, address, delivery, onE
 
       {pdfError && <p className="quote-error" role="alert">{pdfError}</p>}
       <p className={`quote-delivery ${delivery === "not_saved" ? "unsaved" : ""}`} role="status">{delivery === "delivered" ? "Your enquiry has been received by our team." : delivery === "pending" ? "Your enquiry is safely queued for delivery to our team." : "Your enquiry has not been sent. Please call or share this quotation on WhatsApp."}</p>
-      <footer className="quotation-footer"><div><strong>ESHAN</strong><span>BOREWELLS</span></div><p><MapPin size={15} />{address}</p><p><Phone size={15} />{phone}</p><small>{quotation.quoteNumber} · Valid until {quotation.validUntil}</small></footer>
+      <footer className="quotation-footer"><div><strong>ESHAN</strong><span>BOREWELLS</span></div><p><MapPin size={15} />{address}</p><p><Phone size={15} />{phone}</p><small>Valid until {quotation.validUntil}</small></footer>
     </main>
   </div>;
 }

@@ -24,6 +24,7 @@ export const quoteInputSchema = z.object({
   pump: z.object({ required: decision, type: z.enum(pumpTypes), hp: z.enum(pumpCapacities), installationDepth: z.number().int().min(1).max(2000).nullable(), panel: z.boolean(), electrical: z.boolean() }),
   additionalServices: z.array(z.enum(["cleaning", "deepening", "testing", "pump-installation", "pump-replacement", "electrical", "casing", "flushing", "inspection", "turnkey"])).max(10).transform((items) => [...new Set(items)]),
 }).superRefine((input, ctx) => {
+  if (input.machine === "Robo Rig" && input.depth && input.depth > 1200) ctx.addIssue({ code: "custom", path: ["depth"], message: "Robo Rig supports depths up to 1200 ft." });
   if ((input.service === "new" || input.service === "complete") && input.depth && input.casing.required === "yes" && input.casing.depth > input.depth) ctx.addIssue({ code: "custom", path: ["casing", "depth"], message: "Casing depth cannot exceed borewell depth." });
 });
 export type QuoteInput = z.infer<typeof quoteInputSchema>;
