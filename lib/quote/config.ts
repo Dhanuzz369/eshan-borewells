@@ -23,6 +23,16 @@ export const sensorSlabs = [
   { to: 1500, perFoot: 805 }, { to: 1600, perFoot: 905 }, { to: 1700, perFoot: 1005 },
   { to: 1800, perFoot: 1155 }, { to: 1900, perFoot: 1305 }, { to: 2000, perFoot: 1455 },
 ];
+export const roboSlabs = [
+  { to: 100, perFoot: 120 }, { to: 200, perFoot: 130 }, { to: 300, perFoot: 150 },
+  { to: 400, perFoot: 180 }, { to: 500, perFoot: 230 }, { to: 600, perFoot: 310 },
+  { to: 700, perFoot: 410 }, { to: 800, perFoot: 510 }, { to: 900, perFoot: 610 },
+  { to: 1000, perFoot: 750 }, { to: 1100, perFoot: 900 }, { to: 1200, perFoot: 1100 },
+];
+export const machinePricing = {
+  "Sensor Rig": { drillingSlabs: sensorSlabs, settingCharge: 2000 },
+  "Robo Rig": { drillingSlabs: roboSlabs, settingCharge: 0 },
+} as const;
 export const casingMaterials = ["Steel", "PVC"] as const;
 export const casingDiameters = ["6 inch", "7 inch"] as const;
 export const pumpTypes = ["Submersible Pump", "Open Well Pump", "Other"] as const;
@@ -37,7 +47,6 @@ export const extras = [
 export const localities = ["Kanakapura Road", "Thalaghatpura", "Vajrahalli", "JP Nagar", "Bannerghatta", "NICE Road", "Electronic City", "Sarjapur", "Uttarahalli", "Kengeri", "Ramanagara", "Rajajinagar"];
 export const disclaimer = "This is an estimated quotation based on the information provided online. Final pricing may vary based on actual site conditions, drilling depth, machine access, casing requirements, water level, materials and installation requirements. Water, depth, yield and final price are not guaranteed.";
 export const fixedOperationalCosts = [
-  { key: "setting", label: "Setting Charges (₹0/ft)", amount: 0 },
   { key: "transport-labour", label: "Transport & Labour", amount: 2000 },
   { key: "food", label: "Food Charge", amount: 2000 },
 ] as const;
@@ -68,19 +77,24 @@ export type Pricing = {
   pumps: Record<string, Record<string, Rate>>;
   installation: { labour: Rate; cablePerFoot: Rate; pipePerFoot: Rate; panel: Rate; electrical: Rate; transportation: Rate; accessories: Rate };
   extras: Record<string, Rate>;
+  settingCharge: Record<string, Rate>;
   fixedOperational: readonly { key: string; label: string; amount: number }[];
   variableMaterials: readonly { label: string; rate: number; unit: string }[];
 };
 const drillingConfiguration = () => Object.fromEntries(diameterOptions.map((d) => [d, { slabs: [{ to: 2000, perFoot: null }], minimum: null }]));
 export const quotePricing: Pricing = {
-  version: "sensor-approved-2026-10-04",
+  version: "machine-rates-approved-2026-10-06",
   defaultDepth: { min: 300, max: 800 },
   allowance: { low: 0.9, high: 1.1 }, // Estimate band, not a business rate.
   taxPercent: null,
   rounding: 1000,
   // Sensor rates were supplied without diameter-specific adjustments. A '*' entry
   // means the supplied base rate; do not invent a diameter surcharge.
-  drilling: { "Sensor Rig": { "*": { slabs: sensorSlabs, minimum: null } }, "Compact Rig": drillingConfiguration(), "Robo Rig": drillingConfiguration() },
+  drilling: {
+    "Sensor Rig": { "*": { slabs: machinePricing["Sensor Rig"].drillingSlabs, minimum: null } },
+    "Compact Rig": drillingConfiguration(),
+    "Robo Rig": { "*": { slabs: machinePricing["Robo Rig"].drillingSlabs, minimum: null } },
+  },
   access: { open: null, narrow: null, restricted: null },
   mobilization: { bangalore: null, outside: null, localitySurcharges: {} },
   setup: null,
@@ -88,6 +102,12 @@ export const quotePricing: Pricing = {
   pumps: Object.fromEntries(pumpTypes.map((t) => [t, Object.fromEntries(pumpCapacities.filter((hp) => hp !== "Not Sure").map((hp) => [hp, null]))])),
   installation: { labour: null, cablePerFoot: null, pipePerFoot: null, panel: null, electrical: null, transportation: null, accessories: null },
   extras: Object.fromEntries(extras.map((e) => [e.value, null])),
+  settingCharge: {
+    "Sensor Rig": machinePricing["Sensor Rig"].settingCharge,
+    "Robo Rig": machinePricing["Robo Rig"].settingCharge,
+    "Compact Rig": null,
+    "Not Sure": null,
+  },
   fixedOperational: fixedOperationalCosts,
   variableMaterials,
 };

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { AlertCircle, ArrowLeft, Check, Download, FileText, MapPin, MessageCircle, Phone, Settings2, ShieldCheck } from "lucide-react";
-import { disclaimer, fixedOperationalCosts, localities, propertyOptions, serviceOptions, variableMaterials } from "@/lib/quote/config";
+import { disclaimer, localities, propertyOptions, serviceOptions, variableMaterials } from "@/lib/quote/config";
 import { calculateQuote, formatRange, quotePrice, type Quote } from "@/lib/quote/calculate";
 import { customerSchema, initialInput, quoteInputSchema, submissionSchema, type QuoteInput } from "@/lib/quote/schema";
 
@@ -32,6 +32,7 @@ export function QuoteWizard({ phone, whatsapp, address }: Props) {
   const drilling = input.service === "new" || input.service === "complete";
   const displayedQuote = result?.quote || quote;
   const price = quotePrice(displayedQuote);
+  const fixedOperationalLines = displayedQuote.breakdown.filter((line) => line.key.startsWith("fixed-"));
   const total = formatRange(price.min, price.max);
   const service = serviceOptions.find((item) => item.value === input.service)!;
   const phoneHref = `tel:${phone.replace(/[^+\d]/g, "")}`;
@@ -76,7 +77,7 @@ export function QuoteWizard({ phone, whatsapp, address }: Props) {
     <section className="estimate-hero"><div className="shell"><div><span className="estimate-brand">ESHAN</span><small>BOREWELLS QUOTATION</small><p>{result.quoteNumber}</p></div><div className="estimate-total"><small>{price.label}</small><strong>{total}</strong></div><dl><div><dt>Location</dt><dd>{input.locality}</dd></div><div><dt>Service</dt><dd>{service.label} ({displayedQuote.machine})</dd></div><div><dt>Depth</dt><dd>{input.depth ? `${input.depth} ft` : "Assessment required"}</dd></div><div><dt>Prepared for</dt><dd>{customer.name}</dd></div></dl></div></section>
     <div className="estimate-body shell">
       <section><h2>Drilling cost structure</h2><div className="estimate-table"><div className="estimate-table-head"><span>Depth range</span><span>Rate</span><span>Amount</span></div>{displayedQuote.drillingSlabs.map((slab) => <div className="estimate-table-row" key={slab.to}><span>{slab.from} - {slab.to} ft</span><span>{slab.rate === null ? "To confirm" : `₹${slab.rate}/ft`}</span><strong>{formatRange(slab.amount, slab.amount)}</strong></div>)}<div className="estimate-table-total"><strong>Drilling subtotal</strong><strong>{formatRange(displayedQuote.breakdown.find((line) => line.key === "drilling")?.min ?? null, displayedQuote.breakdown.find((line) => line.key === "drilling")?.max ?? null)}</strong></div></div></section>
-      <section><h2><ShieldCheck size={17} /> Fixed operational costs</h2><div className="estimate-table estimate-costs">{fixedOperationalCosts.map((cost) => <div className="estimate-table-row" key={cost.key}><span>{cost.label}</span><strong>{formatRange(cost.amount, cost.amount)}</strong></div>)}<div className="estimate-table-total"><strong>Subtotal (Fixed)</strong><strong>{formatRange(fixedOperationalCosts.reduce((sum, cost) => sum + cost.amount, 0), fixedOperationalCosts.reduce((sum, cost) => sum + cost.amount, 0))}</strong></div></div></section>
+      <section><h2><ShieldCheck size={17} /> Fixed operational costs</h2><div className="estimate-table estimate-costs">{fixedOperationalLines.map((cost) => <div className="estimate-table-row" key={cost.key}><span>{cost.label}</span><strong>{formatRange(cost.min, cost.max)}</strong></div>)}<div className="estimate-table-total"><strong>Subtotal (Fixed)</strong><strong>{formatRange(fixedOperationalLines.every((cost) => cost.min !== null) ? fixedOperationalLines.reduce((sum, cost) => sum + cost.min!, 0) : null, fixedOperationalLines.every((cost) => cost.max !== null) ? fixedOperationalLines.reduce((sum, cost) => sum + cost.max!, 0) : null)}</strong></div></div></section>
       <section className="estimate-variable"><AlertCircle size={21} /><div><h2>Variable materials</h2><p>Charged according to actual site usage. These rates are not included in the displayed quotation amount.</p><div>{variableMaterials.map((material) => <span key={material.label}>{material.label}<b>₹{material.rate}/{material.unit}</b></span>)}</div></div></section>
       <p className={`quote-delivery ${result.delivery === "not_saved" ? "unsaved" : ""}`} role="status">{result.delivery === "delivered" ? "Your enquiry has been received by our team." : result.delivery === "pending" ? "Your enquiry is safely queued for delivery to our team." : "Your enquiry has not been sent. Please call or share this quotation on WhatsApp."}</p>
       <div className="estimate-actions"><a href={whatsappHref} target="_blank" rel="noopener noreferrer"><MessageCircle size={18} />Confirm booking on WhatsApp</a><a href={phoneHref}><Phone size={18} />Call Eshan Borewells</a></div><p className="estimate-validity">Estimate valid for 30 days. Final pricing is subject to site assessment.</p><p className="quote-disclaimer">{disclaimer}</p>

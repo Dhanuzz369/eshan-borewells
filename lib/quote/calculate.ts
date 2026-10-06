@@ -55,10 +55,11 @@ export function calculateQuote(input: QuoteInput, pricing: Pricing = quotePricin
     const config = pricing.drilling[input.machine]?.[input.diameter] || pricing.drilling[input.machine]?.["*"];
     if (config && input.depth !== null) appliedSlabs = drillingSlabs(input.depth, config);
     add("drilling", "Borewell drilling", config ? slabCost(depths.min, config) : null, input.depth ? `${input.depth} ft · ${input.diameter} · depth slab rates` : `${depths.min}–${depths.max} ft planning range`, config ? slabCost(depths.max, config) : null);
+    add("fixed-setting", "Setting Charge", pricing.settingCharge[input.machine] ?? null);
     for (const cost of pricing.fixedOperational) add(`fixed-${cost.key}`, cost.label, cost.amount);
     if (input.depth === null) assumptions.push("Depth is unknown. The planning range is not a groundwater prediction.");
     if (input.access === "unsure" || input.diameter === "Not Sure") assumptions.push("Machine access and borewell diameter require site assessment.");
-    if (input.machine === "Sensor Rig") assumptions.push("The supplied Sensor Rig drilling rates are applied progressively. Suitability, diameter, additional work and taxes must be confirmed separately.");
+    if (input.machine === "Sensor Rig" || input.machine === "Robo Rig") assumptions.push(`The supplied ${input.machine} drilling rates are applied progressively. Suitability, diameter, additional work and taxes must be confirmed separately.`);
   }
   const local = /^(bangalore|bengaluru)$/i.test(input.city.trim());
   if (!drilling) {
