@@ -36,6 +36,22 @@ export const extras = [
 ] as const;
 export const localities = ["Kanakapura Road", "Thalaghatpura", "Vajrahalli", "JP Nagar", "Bannerghatta", "NICE Road", "Electronic City", "Sarjapur", "Uttarahalli", "Kengeri", "Ramanagara", "Rajajinagar"];
 export const disclaimer = "This is an estimated quotation based on the information provided online. Final pricing may vary based on actual site conditions, drilling depth, machine access, casing requirements, water level, materials and installation requirements. Water, depth, yield and final price are not guaranteed.";
+export const fixedOperationalCosts = [
+  { key: "setting", label: "Setting Charges (₹0/ft)", amount: 0 },
+  { key: "transport-labour", label: "Transport & Labour", amount: 2000 },
+  { key: "food", label: "Food Charge", amount: 2000 },
+] as const;
+export const variableMaterials = [
+  { label: '10" PVC Pipe', rate: 460, unit: "ft" },
+  { label: '12" PVC Pipe', rate: 760, unit: "ft" },
+  { label: '7" M.S. Pipe', rate: 460, unit: "ft" },
+  { label: '7" M.S. Heavy Pipe', rate: 560, unit: "ft" },
+  { label: '7" M.S. Welding', rate: 300, unit: "each" },
+  { label: '7" M.S. Collar', rate: 300, unit: "each" },
+  { label: '7" M.S. Cap', rate: 300, unit: "each" },
+  { label: '6" PVC Slotted Casing', rate: 130, unit: "ft" },
+  { label: "Water Injection", rate: 8, unit: "ft" },
+] as const;
 
 export type Rate = number | null;
 export type Pricing = {
@@ -52,6 +68,8 @@ export type Pricing = {
   pumps: Record<string, Record<string, Rate>>;
   installation: { labour: Rate; cablePerFoot: Rate; pipePerFoot: Rate; panel: Rate; electrical: Rate; transportation: Rate; accessories: Rate };
   extras: Record<string, Rate>;
+  fixedOperational: readonly { key: string; label: string; amount: number }[];
+  variableMaterials: readonly { label: string; rate: number; unit: string }[];
 };
 const drillingConfiguration = () => Object.fromEntries(diameterOptions.map((d) => [d, { slabs: [{ to: 2000, perFoot: null }], minimum: null }]));
 export const quotePricing: Pricing = {
@@ -70,4 +88,6 @@ export const quotePricing: Pricing = {
   pumps: Object.fromEntries(pumpTypes.map((t) => [t, Object.fromEntries(pumpCapacities.filter((hp) => hp !== "Not Sure").map((hp) => [hp, null]))])),
   installation: { labour: null, cablePerFoot: null, pipePerFoot: null, panel: null, electrical: null, transportation: null, accessories: null },
   extras: Object.fromEntries(extras.map((e) => [e.value, null])),
+  fixedOperational: fixedOperationalCosts,
+  variableMaterials,
 };

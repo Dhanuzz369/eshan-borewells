@@ -1,7 +1,7 @@
 import { jsPDF } from "jspdf";
 import type { QuoteInput } from "@/lib/quote/schema";
 import { formatRange, quotePrice, type Quote } from "@/lib/quote/calculate";
-import { disclaimer, serviceOptions } from "@/lib/quote/config";
+import { disclaimer, serviceOptions, variableMaterials } from "@/lib/quote/config";
 
 type PdfInput = { result: { quote: Quote | null; quoteNumber: string; capturedAt: string; delivery: string }; input: QuoteInput; customer: { name: string; mobile: string; email: string }; phone: string; address: string };
 export async function downloadQuote({ result, input, customer, phone, address }: PdfInput) {
@@ -60,6 +60,9 @@ export async function downloadQuote({ result, input, customer, phone, address }:
   const price = result.quote ? quotePrice(result.quote) : null;
   text(`${price?.label || "Estimated total"}: ${formatRange(price?.min ?? null, price?.max ?? null)}`, 15, [19, 94, 150]);
   if (price && !price.full) text(`Not an all-inclusive total. Unpriced items excluded: ${price.pending.join(", ")}. These charges require separate confirmation.`, 9);
+  y += 5; section("VARIABLE MATERIAL RATES");
+  text("Charged according to actual site usage and not included in the displayed amount.", 9);
+  for (const material of variableMaterials) text(`${material.label}: ₹${material.rate}/${material.unit}`, 9);
   text("No payment is requested by this estimate.", 9);
   if (result.delivery === "not_saved") text("Enquiry not yet sent. Please call or share this quote on WhatsApp.", 9);
   y += 6; section("TERMS & NEXT STEPS"); text(disclaimer, 9);

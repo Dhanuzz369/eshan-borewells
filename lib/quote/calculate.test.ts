@@ -7,15 +7,14 @@ import { initialInput, normalizeMobile, quoteInputSchema, customerSchema, type Q
 const make = (overrides: Partial<QuoteInput> = {}): QuoteInput => ({ ...structuredClone(initialInput), locality: "Rajajinagar", access: "open", machine: "Sensor Rig", diameter: "Standard", ...overrides });
 const drilling = (input: QuoteInput) => calculateQuote(input).breakdown.find((x) => x.key === "drilling")?.min;
 
-test("on-page price shows approved drilling subtotal without treating unknown charges as free", () => {
+test("on-page price includes approved drilling and fixed operating costs", () => {
   const price = quotePrice(calculateQuote(make({ depth: 850 })));
-  assert.equal(price.min, 124250);
-  assert.equal(price.max, 124250);
-  assert.equal(price.label, "Drilling quotation");
+  assert.equal(price.min, 128250);
+  assert.equal(price.max, 128250);
+  assert.equal(price.label, "Priced items subtotal");
   assert.equal(price.full, false);
   assert.ok(price.pending.includes("Tax"));
-  assert.ok(price.pending.includes("Casing installation"));
-  assert.equal(quotePrice(calculateQuote(make({ machine: "Compact Rig" }))).min, null);
+  assert.equal(quotePrice(calculateQuote(make({ machine: "Compact Rig" }))).min, 4000);
 });
 
 test("approved progressive Sensor Rig rates, all boundaries and partial slabs", () => {

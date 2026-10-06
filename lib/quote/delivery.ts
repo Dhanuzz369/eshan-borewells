@@ -1,6 +1,6 @@
 import { randomUUID, createHash } from "node:crypto";
 import type { Submission } from "./schema";
-import { calculateQuote, formatRange, type Quote } from "./calculate";
+import { calculateQuote, formatRange, quotePrice, type Quote } from "./calculate";
 import { serviceOptions } from "./config";
 
 export type LeadRecord = Submission & { quoteNumber: string; capturedAt: string; quote?: Quote; state: "pending" | "delivered"; deliveredAt?: string };
@@ -64,7 +64,8 @@ export async function deliverLead(lead: LeadRecord): Promise<boolean> {
   const url = new URL(process.env.QUOTE_SHEETS_URL!);
   if (url.protocol !== "https:" || url.hostname !== "script.google.com" || !url.pathname.endsWith("/exec")) return false;
   try {
-    const response = await fetch(url, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ secret: process.env.QUOTE_SHEETS_SECRET, lead: record, serviceLabel: serviceOptions.find((s) => s.value === lead.input.service)!.label, estimatedQuote: quote ? formatRange(quote.estimatedMin, quote.estimatedMax) : "Assessment required" }), redirect: "follow", cache: "no-store", signal: AbortSignal.timeout(8000) });
+    const displayedPrice = quote ? quotePrice(quote) : null;
+    const response = await fetch(url, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ secret: process.env.QUOTE_SHEETS_SECRET, lead: record, serviceLabel: serviceOptions.find((s) => s.value === lead.input.service)!.label, estimatedQuote: displayedPrice ? formatRange(displayedPrice.min, displayedPrice.max) : "Assessment required" }), redirect: "follow", cache: "no-store", signal: AbortSignal.timeout(8000) });
     const data = await response.json() as { ok?: boolean; quoteNumber?: string };
     if (!response.ok || data.ok !== true || data.quoteNumber !== lead.quoteNumber) throw new Error("Delivery not acknowledged");
     await redis(["SET", key, JSON.stringify({ ...record, state: "delivered", deliveredAt: new Date().toISOString() }), "KEEPTTL"]);

@@ -41,8 +41,8 @@ export const submissionSchema = z.object({
 });
 export type Submission = z.infer<typeof submissionSchema>;
 export const initialInput: QuoteInput = {
-  service: "new", locality: "", city: "Bengaluru", pin: "", property: "Home / Villa", access: "unsure", machine: "Sensor Rig", depth: 500, diameter: "Not Sure",
-  casing: { required: "unsure", material: "Steel", diameter: "6 inch", depth: 40 },
+  service: "new", locality: "", city: "Bengaluru", pin: "", property: "Home / Villa", access: "open", machine: "Sensor Rig", depth: 500, diameter: "Standard",
+  casing: { required: "no", material: "Steel", diameter: "6 inch", depth: 40 },
   pump: { required: "no", type: "Submersible Pump", hp: "Not Sure", installationDepth: null, panel: false, electrical: false },
   additionalServices: [],
 };
