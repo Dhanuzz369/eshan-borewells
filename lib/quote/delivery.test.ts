@@ -15,7 +15,6 @@ test("lead saved before calculation, Sheets outage retained, successful retry ac
   process.env.QUOTE_REDIS_REST_URL = "https://test-redis.invalid";
   process.env.QUOTE_REDIS_REST_TOKEN = "fixture";
   process.env.QUOTE_SHEETS_URL = "https://script.google.com/macros/s/test/exec";
-  process.env.QUOTE_SHEETS_SECRET = "fixture";
   globalThis.fetch = async (url, options) => {
     if (String(url).includes("test-redis.invalid")) {
       const cmd = JSON.parse(String(options!.body));
@@ -25,14 +24,19 @@ test("lead saved before calculation, Sheets outage retained, successful retry ac
         return Response.json({ result: records.get(key) });
       }
       if (cmd[0] === "SET") { records.set(cmd[1], cmd[2]); writes.push("persist"); }
+      if (cmd[0] === "GET") return Response.json({ result: records.get(cmd[1]) || null });
       if (cmd[0] === "SREM") writes.push("remove-pending");
       return Response.json({ result: "OK" });
     }
     writes.push("sheets");
     if (!sheetsAvailable) return Response.json({ ok: false }, { status: 503 });
     const payload = JSON.parse(String(options!.body));
-    if (!rows.has(payload.lead.quoteNumber)) { rows.add(payload.lead.quoteNumber); sheetsWrites++; }
-    return Response.json({ ok: true, quoteNumber: payload.lead.quoteNumber });
+    assert.deepEqual(Object.keys(payload).sort(), ["estimatedDepth", "location", "machineType", "mobile", "name", "quote"]);
+    assert.equal(payload.name, "Test Customer"); assert.equal(payload.mobile, "+919844775905");
+    assert.equal(payload.location, "Rajajinagar, Bengaluru"); assert.equal(payload.machineType, "Sensor Rig");
+    assert.equal(payload.estimatedDepth, "500 ft"); assert.equal(payload.quote, "₹60,000");
+    rows.add(JSON.stringify(payload)); sheetsWrites++;
+    return Response.json({ ok: true });
   };
   try {
     const submission: Submission = { requestId: "36b85011-40cd-4d65-8d17-dd585c201001", input: { ...initialInput, locality: "Rajajinagar" }, customer: { name: "Test Customer", mobile: "+919844775905", email: "", consent: true } };

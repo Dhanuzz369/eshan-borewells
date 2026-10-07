@@ -6,31 +6,17 @@ The `/get-quote` feature is additive. The existing `/api/leads` footer/popup int
 
 The customer flow has two steps: (1) all site/service requirements together, with conditional drilling, casing and pump fields; (2) contact details and consent. The generated result includes a Download Quote PDF action. Going back retains the requirements. No ten-step navigation is used.
 
-Browser → POST `/api/quotes` → validate/normalize → atomically save to durable Redis and allocate ID → calculate server-side → Google Apps Script → append Google Sheet row.
+Browser → POST `/api/quotes` → validate/normalize → calculate server-side → Google Apps Script → append Google Sheet row. When Redis is configured, the lead is additionally retained first for retry-safe delivery and quote ID allocation.
 
 The pure calculator is `lib/quote/calculate.ts`. The browser shows a preview but cannot submit a price: the server recalculates from the trusted configuration. Pumps do not trigger new drilling charges. Partial depth slabs are charged progressively. Machine recommendations are provisional. No guessed pump HP is assigned.
 
 ## 1. Google Sheet
 
-Create a private Google Sheet in the business account. Use an empty tab named `Leads`. Its ID is the part between `/d/` and `/edit` in its URL. Do not publish the Sheet or make it accessible by link.
-
-The script creates the header on the first successful delivery:
-
-`Lead Date | Full Name | Mobile Number | Location | Service | Property Type | Access Type | Estimated Depth | Pump Required | Pump Type | Pump HP | Estimated Quote | Quote Number | Lead Source | Status | Email | Quote Details | Captured At ISO | Returning Lead`
-
-The first column is a real date value formatted `dd-MMM-yyyy HH:mm`, in Asia/Kolkata. It remains sortable. The ISO timestamp comes from the server. Full quote inputs and calculated components are retained in Quote Details.
+Use the configured Apps Script web app with these columns: `Date | Name | Mobile Number | Location | Machine Type | Estimated Depth | Quote | Status`. The website sends only `name`, `mobile`, `location`, `machineType`, `estimatedDepth`, and `quote`; the script owns the date and `New` status values.
 
 ## 2. Apps Script
 
-Open Extensions → Apps Script. Paste `integrations/google-sheets/Code.gs`. In Project Settings → Script Properties, set:
-
-- `SPREADSHEET_ID`: business Sheet ID.
-- `SHEET_NAME`: `Leads`.
-- `QUOTE_SECRET`: a newly generated, random 32-byte secret.
-
-Deploy → New deployment → Web app. Execute as the Sheet owner; allow Anyone to invoke the endpoint. The shared secret is required before any Sheet access. Copy the deployed HTTPS URL ending in `/exec`, not the editor or `/dev` URL. Grant only the permissions needed to access the Sheet. A Workspace policy may prevent public web-app deployment; have the account administrator enable it or use a private Sheets API integration instead.
-
-Google Apps Script JSON responses redirect to `script.googleusercontent.com`; the server fetch follows this redirect. The secret travels in the HTTPS POST body from the server, never in browser JavaScript or a URL. The script neutralizes spreadsheet formulas in customer input and uses a lock for duplicate/retry safety.
+The approved `/exec` URL is built into the quote delivery server route. Google Apps Script responses may redirect to `script.googleusercontent.com`; the server follows that redirect. The endpoint is called only from the website server, never from browser JavaScript.
 
 ## 3. Durable capture and IDs
 
@@ -41,8 +27,6 @@ Server-only environment variables:
 ```
 QUOTE_REDIS_REST_URL=https://YOUR-DATABASE.upstash.io
 QUOTE_REDIS_REST_TOKEN=PRIVATE_TOKEN
-QUOTE_SHEETS_URL=https://script.google.com/macros/s/DEPLOYMENT_ID/exec
-QUOTE_SHEETS_SECRET=PRIVATE_SHARED_SECRET
 QUOTE_RETRY_SECRET=PRIVATE_SCHEDULER_SECRET
 ```
 
@@ -79,7 +63,7 @@ With Redis unconfigured, customers can prepare a draft scope and PDF, but see �
 
 In Google Sheets choose File → Download → Microsoft Excel (.xlsx). The live Google Sheet continues to receive leads; the downloaded workbook is only an export.
 
-Rotate the shared secret in Apps Script and the matching server variable together; redeploy server configuration as necessary. Rotate the Redis token at the provider and update the hosting secret. Rotate the retry secret both on the server and in the scheduler. Do not put tokens in logs, URLs, issue reports or screenshots. To delete a lead on request, remove its Sheet row and corresponding `quote:lead:<requestId>` record and pending-set entry. Never reset the sequence counter.
+Keep the Apps Script web-app deployment restricted to the intended business Sheet and review its access policy regularly. Rotate the Redis token at the provider and update the hosting secret. Rotate the retry secret both on the server and in the scheduler. Do not put tokens in logs, URLs, issue reports or screenshots. To delete a lead on request, remove its Sheet row and corresponding `quote:lead:<requestId>` record and pending-set entry. Never reset the sequence counter.
 
 ## Rate changes
 

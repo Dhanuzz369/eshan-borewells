@@ -1,6 +1,6 @@
 import { calculateQuote } from "@/lib/quote/calculate";
 import { submissionSchema } from "@/lib/quote/schema";
-import { allowSubmission, captureLead, deliverLead, draftNumber, storageConfigured } from "@/lib/quote/delivery";
+import { allowSubmission, captureLead, deliverLead, deliverQuoteLead, draftNumber, storageConfigured } from "@/lib/quote/delivery";
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
@@ -42,5 +42,6 @@ export async function POST(request: Request) {
   try { quote = calculateQuote(parsed.data.input); } catch { console.warn("Quote calculation needs assessment", { quoteNumber: record?.quoteNumber }); }
   let delivered = false;
   if (record) { try { delivered = await deliverLead({ ...record, ...(quote ? { quote } : {}) }); } catch { console.warn("Quote retained for retry", { quoteNumber: record.quoteNumber }); } }
-  return Response.json({ quote, quoteNumber: record?.quoteNumber || draftNumber(), capturedAt: record?.capturedAt || new Date().toISOString(), delivery: record ? delivered ? "delivered" : "pending" : "not_saved" }, { headers });
+  else if (quote) delivered = await deliverQuoteLead(parsed.data, quote);
+  return Response.json({ quote, quoteNumber: record?.quoteNumber || draftNumber(), capturedAt: record?.capturedAt || new Date().toISOString(), delivery: record ? delivered ? "delivered" : "pending" : delivered ? "delivered" : "not_saved" }, { headers });
 }

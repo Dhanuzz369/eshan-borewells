@@ -1,11 +1,14 @@
 import { randomUUID, createHash } from "node:crypto";
 import type { Submission } from "./schema";
 import { calculateQuote, formatRange, quotePrice, type Quote } from "./calculate";
-import { serviceOptions } from "./config";
 
 export type LeadRecord = Submission & { quoteNumber: string; capturedAt: string; quote?: Quote; state: "pending" | "delivered"; deliveredAt?: string };
 export const storageConfigured = () => Boolean(process.env.QUOTE_REDIS_REST_URL && process.env.QUOTE_REDIS_REST_TOKEN);
-export const sheetsConfigured = () => Boolean(process.env.QUOTE_SHEETS_URL && process.env.QUOTE_SHEETS_SECRET);
+const configuredAppsScriptUrl = "https://script.google.com/macros/s/AKfycbwFNYu0g1P3LJN4XX9_whzY-B_74n5ORCESXPMF7a0i7aN9zlx8lEhA1AQWdf2nLt1L/exec";
+const appsScriptUrl = () => configuredAppsScriptUrl;
+export const sheetsConfigured = () => {
+  try { const url = new URL(appsScriptUrl()); return url.protocol === "https:" && url.hostname === "script.google.com" && url.pathname.endsWith("/exec"); } catch { return false; }
+};
 export async function redis(command: (string | number)[]): Promise<unknown> {
   const url = process.env.QUOTE_REDIS_REST_URL;
   if (!url || !url.startsWith("https://") || !process.env.QUOTE_REDIS_REST_TOKEN) throw new Error("Storage unavailable");
@@ -52,22 +55,41 @@ export async function allowSubmission(ip: string): Promise<boolean> {
   const count = await redis(["EVAL", "local n=redis.call('INCR',KEYS[1]); if n==1 then redis.call('EXPIRE',KEYS[1],600) end; return n", 1, `quote:rate:${hash}`]);
   return Number(count) <= 15;
 }
+type AppsScriptLead = Pick<Submission, "customer" | "input">;
+
+export async function deliverQuoteLead(lead: AppsScriptLead, quote: Quote | null): Promise<boolean> {
+  if (!sheetsConfigured()) return false;
+  const displayedPrice = quote ? quotePrice(quote) : null;
+  const payload = {
+    name: lead.customer.name,
+    mobile: lead.customer.mobile,
+    location: [lead.input.locality, lead.input.city, lead.input.pin].filter(Boolean).join(", "),
+    machineType: lead.input.machine,
+    estimatedDepth: lead.input.depth === null ? "Assessment required" : `${lead.input.depth} ft`,
+    quote: displayedPrice ? formatRange(displayedPrice.min, displayedPrice.max) : "Assessment required",
+  };
+  try {
+    const response = await fetch(appsScriptUrl(), { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload), redirect: "follow", cache: "no-store", signal: AbortSignal.timeout(8000) });
+    return response.ok;
+  } catch { return false; }
+}
+
 export async function deliverLead(lead: LeadRecord): Promise<boolean> {
   if (lead.state === "delivered") return true;
-  if (!sheetsConfigured()) return false;
   const key = `quote:lead:${lead.requestId}`;
+  // A stale in-memory retry must not append a second Sheet row after another
+  // request already completed delivery.
+  const saved = await redis(["GET", key]);
+  if (saved) {
+    try { if ((JSON.parse(String(saved)) as LeadRecord).state === "delivered") return true; } catch { /* Continue with the captured record. */ }
+  }
   let quote = lead.quote;
   try { quote ??= calculateQuote(lead.input); } catch { /* Preserve the captured lead even if calculation fails. */ }
   const record = { ...lead, quote };
   // Save the calculated estimate to durable storage before sending it downstream.
   await redis(["SET", key, JSON.stringify(record), "KEEPTTL"]);
-  const url = new URL(process.env.QUOTE_SHEETS_URL!);
-  if (url.protocol !== "https:" || url.hostname !== "script.google.com" || !url.pathname.endsWith("/exec")) return false;
   try {
-    const displayedPrice = quote ? quotePrice(quote) : null;
-    const response = await fetch(url, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ secret: process.env.QUOTE_SHEETS_SECRET, lead: record, serviceLabel: serviceOptions.find((s) => s.value === lead.input.service)!.label, estimatedQuote: displayedPrice ? formatRange(displayedPrice.min, displayedPrice.max) : "Assessment required" }), redirect: "follow", cache: "no-store", signal: AbortSignal.timeout(8000) });
-    const data = await response.json() as { ok?: boolean; quoteNumber?: string };
-    if (!response.ok || data.ok !== true || data.quoteNumber !== lead.quoteNumber) throw new Error("Delivery not acknowledged");
+    if (!await deliverQuoteLead(record, quote ?? null)) throw new Error("Delivery not acknowledged");
     await redis(["SET", key, JSON.stringify({ ...record, state: "delivered", deliveredAt: new Date().toISOString() }), "KEEPTTL"]);
     await redis(["SREM", "quote:pending", key]);
     return true;
