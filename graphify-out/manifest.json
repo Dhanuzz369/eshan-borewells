@@ -1,8 +1,8 @@
 {
   "app/business-config.ts": {
-    "mtime": 1790771964.8628929,
-    "seen": 1790772684.629538,
-    "ast_hash": "660efe7cfdaf9c2fc29d550a910bf558",
+    "mtime": 1791623860.6742468,
+    "seen": 1791623959.6411898,
+    "ast_hash": "c0cd4da2677a6d6eb3841675881ef803",
     "semantic_hash": ""
   },
   "app/chatgpt-auth.ts": {
@@ -18,9 +18,9 @@
     "semantic_hash": ""
   },
   "app/page.tsx": {
-    "mtime": 1791618841.9886868,
-    "seen": 1791619586.452089,
-    "ast_hash": "17494f9ad524d2425da80d440f2bb32d",
+    "mtime": 1791624444.710869,
+    "seen": 1791624499.355238,
+    "ast_hash": "469f6f5a333d8b8f43cf941178493cb4",
     "semantic_hash": ""
   },
   "cloudflare-env.d.ts": {
@@ -492,15 +492,15 @@
     "semantic_hash": "a201fb9f1c5fefe41b771aa8d7f99957"
   },
   "next.config.ts": {
-    "mtime": 1790835087.2342079,
-    "seen": 1790835365.343488,
-    "ast_hash": "0fa3a72ff9d5f03bd14bc9cdb6f54576",
+    "mtime": 1791624536.5933657,
+    "seen": 1791624567.586603,
+    "ast_hash": "4c5818b75980caf2eba68142c16ab3c9",
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1791619501.9069376,
-    "seen": 1791619586.452149,
-    "ast_hash": "465e34193075d638f1915a5f97068ed0",
+    "mtime": 1791624774.1681085,
+    "seen": 1791624812.7618828,
+    "ast_hash": "e8e9cba1e922305af7d43ff489e90c99",
     "semantic_hash": ""
   },
   "postcss.config.mjs": {
@@ -594,9 +594,9 @@
     "semantic_hash": "107f3fd79057c6e38df3c43273491889"
   },
   "README.md": {
-    "mtime": 1791096604.8995674,
-    "seen": 1791275937.420249,
-    "ast_hash": "492ff89e167983fa934ebcccfc7d8814",
+    "mtime": 1791624641.5321603,
+    "seen": 1791624726.19898,
+    "ast_hash": "3ec6d90b3309248e32929a5028f99ce9",
     "semantic_hash": ""
   },
   "vendor/shadcn-tailwind-4.13.0.LICENSE.md": {
@@ -738,9 +738,9 @@
     "semantic_hash": ""
   },
   "app/sitemap.xml/route.ts": {
-    "mtime": 1791616869.0407832,
-    "seen": 1791616943.297355,
-    "ast_hash": "7318ecfea977375a4799fed2dd01fde4",
+    "mtime": 1791624686.099257,
+    "seen": 1791624726.1989162,
+    "ast_hash": "f8ae564d219c81d0080d3b221ea0ff5f",
     "semantic_hash": ""
   },
   "public/borewell-water-flow.webp": {
@@ -816,9 +816,9 @@
     "semantic_hash": ""
   },
   "app/[slug]/page.tsx": {
-    "mtime": 1791618760.7139387,
-    "seen": 1791619586.4520729,
-    "ast_hash": "b41e2fb8c0a56e867f7ce7e43f7cf518",
+    "mtime": 1791624139.396648,
+    "seen": 1791624499.355221,
+    "ast_hash": "4ccd24772b8dd9c04f1d103e8b5a6ba3",
     "semantic_hash": ""
   },
   "app/seo-pages.ts": {
@@ -954,15 +954,15 @@
     "semantic_hash": ""
   },
   "lib/seo/page-schema.test.ts": {
-    "mtime": 1791619284.4189632,
-    "seen": 1791619586.452147,
-    "ast_hash": "51f51a6f5f2b25d9dac6e31204540ddb",
+    "mtime": 1791625019.9983344,
+    "seen": 1791625103.401144,
+    "ast_hash": "3e377ec06f73bb1a65def5a2c51dbfca",
     "semantic_hash": ""
   },
   "lib/seo/page-schema.ts": {
-    "mtime": 1791619501.856832,
-    "seen": 1791619586.452147,
-    "ast_hash": "d205433836eea27e80074c582b75604f",
+    "mtime": 1791623860.7064226,
+    "seen": 1791623959.641257,
+    "ast_hash": "54eb5e24c2d707b93d5ad3f52f463596",
     "semantic_hash": ""
   },
   "SEO_IMPLEMENTATION_REPORT.md": {
@@ -981,6 +981,54 @@
     "mtime": 1791623594.5678012,
     "seen": 1791623631.848196,
     "ast_hash": "ba59ca7ec8e08426148af8ded8f02689",
+    "semantic_hash": ""
+  },
+  "app/public-business-facts.ts": {
+    "mtime": 1791625068.7209945,
+    "seen": 1791625103.401087,
+    "ast_hash": "5a2a4187acac148eb9370fb660255b7b",
+    "semantic_hash": ""
+  },
+  "app/seo-content.test.ts": {
+    "mtime": 1791624686.0107026,
+    "seen": 1791624726.198912,
+    "ast_hash": "b916599c91da6c6437e260a08ec21dc1",
+    "semantic_hash": ""
+  },
+  "app/seo-content.ts": {
+    "mtime": 1791624090.8874476,
+    "seen": 1791624499.355241,
+    "ast_hash": "1e07514e827c4c8deb423c358152ff15",
+    "semantic_hash": ""
+  },
+  "app/sitemap.xml/route.test.ts": {
+    "mtime": 1791624686.1430988,
+    "seen": 1791624726.198915,
+    "ast_hash": "8683fab51d5544d037112cf004d2d24f",
+    "semantic_hash": ""
+  },
+  "next.config.test.ts": {
+    "mtime": 1791624516.5833604,
+    "seen": 1791624567.586602,
+    "ast_hash": "ed788cc7ef0d70f80bff606534de605d",
+    "semantic_hash": ""
+  },
+  "lib/seo/sitemap-builder.ts": {
+    "mtime": 1791624686.1886992,
+    "seen": 1791624726.198967,
+    "ast_hash": "16c9aa1db9a3728ced7fe122a74d356d",
+    "semantic_hash": ""
+  },
+  "GEO_AEO_IMPLEMENTATION_REPORT.md": {
+    "mtime": 1791625068.7471986,
+    "seen": 1791625103.4011571,
+    "ast_hash": "9ed02d1f360fedac01624141fac2a213",
+    "semantic_hash": ""
+  },
+  "docs/AI_VISIBILITY_MEASUREMENT.md": {
+    "mtime": 1791624627.2616951,
+    "seen": 1791624726.198981,
+    "ast_hash": "a8b463ecaa3ecb5d6709dbb12c1bc1e3",
     "semantic_hash": ""
   }
 }
