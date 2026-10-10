@@ -970,5 +970,11 @@
     "seen": 1791619586.45216,
     "ast_hash": "5fb2032533ff44f3bc1ba9053dcc9b59",
     "semantic_hash": ""
+  },
+  "docs/superpowers/specs/2026-10-10-geo-aeo-design.md": {
+    "mtime": 1791622727.1521828,
+    "seen": 1791622760.516856,
+    "ast_hash": "07e8005f9726edb209eceda32f990c8c",
+    "semantic_hash": ""
   }
 }
