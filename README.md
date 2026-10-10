@@ -33,6 +33,25 @@ guaranteed and depend on factors beyond site code, including a complete
 Google Business Profile. The keywords metadata is only descriptive: Google
 does not use the keywords meta tag for ranking.
 
+## Evidence-first SEO / GEO / AEO
+
+The homepage and the existing 15 public service/locality routes are the approved
+indexable pages. Their content model is in `app/seo-pages.ts` and
+`app/seo-content.ts`; business facts and schema are in
+`app/public-business-facts.ts` and `lib/seo/page-schema.ts`. Keep the sitemap and
+`llms.txt` limited to those public pages. `/get-quote` is an internal tool and
+must remain `noindex` and excluded from discovery files.
+
+Do not add unsupported groundwater, success-rate, coverage, project, rating,
+credential, operating-hours, or contact claims. The 25+ years and 10,000+ site
+figures are company-reported and not independently verified. Locality pages
+must remain site-specific planning guidance, not claims of a local office,
+completed project, local groundwater data, or guaranteed result. See
+[`GEO_AEO_IMPLEMENTATION_REPORT.md`](GEO_AEO_IMPLEMENTATION_REPORT.md) for the
+evidence checklist and [`docs/AI_VISIBILITY_MEASUREMENT.md`](docs/AI_VISIBILITY_MEASUREMENT.md)
+for a repeatable manual visibility log. Neither readiness audits nor a single
+search/AI observation proves ranking or recommendation.
+
 ## Customer reviews
 
 The review marquee follows the supplied repeated linear animation, with a
