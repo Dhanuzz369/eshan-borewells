@@ -1,6 +1,6 @@
 import { getProductionUrl } from "../site-url";
 import { seoPages } from "../seo-pages";
-import { buildSitemapXml } from "./sitemap";
+import { buildSitemapXml } from "../../lib/seo/sitemap-builder";
 
 export const revalidate = 86400;
 

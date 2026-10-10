@@ -1,4 +1,4 @@
-import type { SeoPage } from "../seo-pages";
+import type { SeoPage } from "../../app/seo-pages";
 
 function escapeXml(value: string) {
   return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&apos;");

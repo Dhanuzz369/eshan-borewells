@@ -8,6 +8,7 @@ test("gives every approved page an answer-first block and approved related links
     const content = getSeoContent(page.slug);
     const related = getRelatedSeoPages(page.slug);
 
+    assert.ok(content, `${page.slug} needs answer-first content`);
     assert.ok(content.directAnswer.length > 80, `${page.slug} needs a self-contained direct answer`);
     assert.ok(related.every((relatedPage) => relatedPage.slug !== page.slug), `${page.slug} links to itself`);
     assert.ok(related.every((relatedPage) => seoPages.some((approved) => approved.slug === relatedPage.slug)));

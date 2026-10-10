@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { buildSitemapXml } from "./sitemap";
+import { buildSitemapXml } from "../../lib/seo/sitemap-builder";
 import { seoPages } from "../seo-pages";
 
 test("lists only the canonical homepage and approved indexable pages", () => {
