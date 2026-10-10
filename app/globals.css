@@ -260,4 +260,11 @@
 .seo-location svg{flex:none;margin-top:3px;color:#1769a3}
 .seo-location strong{display:block;margin-bottom:3px;color:#092348}
 .seo-text-link{display:inline-flex;align-items:center;gap:8px;width:max-content;margin-top:5px;color:#145ca5;font-size:13px;font-weight:800}
+.seo-direct-answer{margin:24px 0 0;color:#344d61;font-size:18px;line-height:1.75}
+.seo-copy h3{margin:8px 0 0;font-size:17px;line-height:1.35}
+.seo-considerations,.seo-related-pages{display:grid;gap:10px;margin:0;padding-left:21px;color:#3f586b;font-size:14px;line-height:1.65}
+.seo-related-pages a{display:inline-flex;align-items:center;gap:8px;color:#145ca5;font-weight:700}
+.seo-related-pages a:hover,.seo-text-link:hover{text-decoration:underline;text-underline-offset:3px}
+.company-claim-note{display:block;margin-top:12px;color:#526477;font-size:11px;line-height:1.5}
+.hero .company-claim-note{color:#e0e9ee}
 @media(max-width:700px){.seo-header{min-height:70px}.seo-hero{padding-block:67px 74px}.seo-hero p{font-size:16px}.seo-content{grid-template-columns:1fr;gap:34px;padding-block:66px}.seo-header-call{font-size:12px}.seo-breadcrumb{font-size:12px;margin-bottom:17px}}
