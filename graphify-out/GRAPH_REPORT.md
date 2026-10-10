@@ -1,7 +1,7 @@
-# Graph Report - eshan-borewells  (2026-10-07)
+# Graph Report - eshan-borewells  (2026-10-10)
 
 ## Corpus Check
-- 133 files · ~487,538 words
+- 133 files · ~487,434 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 8 file(s) not represented in the graph (top: .css 3, (none) 2, .example 1)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a9daadc6`
+- Built from commit: `b7f14bbb`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -105,13 +105,13 @@
 ## Surprising Connections (you probably didn't know these)
 - `Optional Dispatch-Owned ChatGPT Sign-In` --references--> `getChatGPTUser()`  [INFERRED]
   README.md → app/chatgpt-auth.ts
+- `SheetFooter()` --calls--> `cn()`  [EXTRACTED]
+  components/ui/sheet.tsx → lib/utils.ts
 - `ContextMenuCheckboxItem()` --calls--> `cn()`  [EXTRACTED]
   components/ui/context-menu.tsx → lib/utils.ts
 - `ContextMenuContent()` --calls--> `cn()`  [EXTRACTED]
   components/ui/context-menu.tsx → lib/utils.ts
 - `ContextMenuItem()` --calls--> `cn()`  [EXTRACTED]
-  components/ui/context-menu.tsx → lib/utils.ts
-- `ContextMenuLabel()` --calls--> `cn()`  [EXTRACTED]
   components/ui/context-menu.tsx → lib/utils.ts
 
 ## Import Cycles
@@ -344,7 +344,7 @@ Cohesion: 0.15
 Nodes (18): downloadQuote(), imageData(), ink, line, muted, navy, PdfInput, renderQuotePdf() (+10 more)
 
 ## Knowledge Gaps
-- **252 isolated node(s):** `Result`, `Props`, `CarouselApi`, `CarouselContextProps`, `CarouselOptions` (+247 more)
+- **252 isolated node(s):** `metadata`, `revalidate`, `links`, `services`, `areaGroups` (+247 more)
   These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 335 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **20 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -357,7 +357,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.203) - this node is a cross-community bridge._
 - **Why does `lucide-react` connect `lucide-react` to `package.json`, `sidebar.tsx`, `cn`, `combobox.tsx`, `command.tsx`, `sheet.tsx`, `context-menu.tsx`, `accordion.tsx`, `app/page.tsx`, `Button`, `get-quote/page.tsx`, `breadcrumb.tsx`, `select.tsx`, `navigation-menu.tsx`, `[slug]/page.tsx`, `dropdown-menu.tsx`, `input-otp.tsx`, `resizable.tsx`, `sonner.tsx`, `quote-wizard.tsx`, `utils.ts`, `quote-pdf.ts`?**
   _High betweenness centrality (0.145) - this node is a cross-community bridge._
-- **What connects `Result`, `Props`, `CarouselApi` to the rest of the system?**
+- **What connects `metadata`, `revalidate`, `links` to the rest of the system?**
   _252 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `connector-preview-session.mjs` be split into smaller, more focused modules?**
   _Cohesion score 0.0613107822410148 - nodes in this community are weakly interconnected._
