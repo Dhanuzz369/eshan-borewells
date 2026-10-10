@@ -202,12 +202,20 @@
 .area-group{padding-top:11px;border-top:1px solid rgba(30,91,128,.27)}
 .area-group h3{margin:0 0 7px;color:#0d4e7b;font-size:13px;font-weight:800}
 .area-group p{margin:0;color:#365469;font-size:12px;line-height:1.65}
-.area-resource-links{margin-top:30px;padding-top:20px;border-top:1px solid rgba(30,91,128,.27)}.area-resource-links h3{margin:0 0 12px;color:#0d4e7b;font-size:13px;font-weight:800}.area-resource-links ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 16px;margin:0;padding:0;list-style:none}.area-resource-links a{color:#1c527a;font-size:12px;font-weight:700;line-height:1.45;text-decoration:underline;text-decoration-color:#92b2c7;text-underline-offset:3px}
-@media(max-width:540px){.area-groups{grid-template-columns:1fr;gap:13px}.area-group p{font-size:12px}.area-resource-links ul{grid-template-columns:1fr}}
+@media(max-width:540px){.area-groups{grid-template-columns:1fr;gap:13px}.area-group p{font-size:12px}}
 
 /* Restore text contrast reported by the mobile accessibility audit. */
 .hero-cinematic .button-primary{background:#1767a5}
 .hero-cinematic .button-primary:hover{background:#0b548b}
+
+.footer-top{grid-template-columns:1fr;padding-block:42px 30px}
+.footer-info{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(200px,.8fr) minmax(200px,.8fr);gap:45px;padding-block:10px 48px}
+.footer-service-links ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px;margin:0;padding:0;list-style:none}
+.footer-service-links a{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#d6e8f3;font-size:12px;line-height:1.5}
+.footer-service-links a:hover{color:#8ed0f6}
+.footer-service-links svg{flex:none}
+@media(max-width:800px){.footer-info{grid-template-columns:1fr 1fr;gap:30px}.footer-service-links{grid-column:1/-1}}
+@media(max-width:540px){.footer-top{padding-block:38px 26px}.footer-info{grid-template-columns:1fr;gap:30px;padding-bottom:38px}.footer-service-links{grid-column:auto}.footer-service-links ul{grid-template-columns:1fr}}
 .area-note{color:#385367}
 .contact-card-note{color:#405768}
 
