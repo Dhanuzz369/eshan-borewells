@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildWebsiteSchema } from "../lib/seo/page-schema";
 import { getProductionUrl } from "./site-url";
 import "./globals.css";
 
@@ -21,14 +22,7 @@ export const metadata: Metadata = {
   icons: { icon: "/favicon.svg" },
 };
 
-const websiteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "Eshan Borewells",
-  url: siteUrl || "https://www.eshanborewells.com",
-  inLanguage: "en-IN",
-  description: "Borewell drilling, groundwater survey and water solutions in Bengaluru and nearby areas.",
-};
+const websiteSchema = buildWebsiteSchema(siteUrl || "https://www.eshanborewells.com");
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return <html lang="en-IN"><body><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />{children}</body></html>;

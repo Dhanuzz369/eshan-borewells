@@ -149,3 +149,7 @@ export const seoPages: SeoPage[] = [
 export function getSeoPage(slug: string) {
   return seoPages.find((page) => page.slug === slug);
 }
+
+export function getIndexableSeoPages() {
+  return [...seoPages];
+}

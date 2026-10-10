@@ -202,7 +202,8 @@
 .area-group{padding-top:11px;border-top:1px solid rgba(30,91,128,.27)}
 .area-group h3{margin:0 0 7px;color:#0d4e7b;font-size:13px;font-weight:800}
 .area-group p{margin:0;color:#365469;font-size:12px;line-height:1.65}
-@media(max-width:540px){.area-groups{grid-template-columns:1fr;gap:13px}.area-group p{font-size:12px}}
+.area-resource-links{margin-top:30px;padding-top:20px;border-top:1px solid rgba(30,91,128,.27)}.area-resource-links h3{margin:0 0 12px;color:#0d4e7b;font-size:13px;font-weight:800}.area-resource-links ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 16px;margin:0;padding:0;list-style:none}.area-resource-links a{color:#1c527a;font-size:12px;font-weight:700;line-height:1.45;text-decoration:underline;text-decoration-color:#92b2c7;text-underline-offset:3px}
+@media(max-width:540px){.area-groups{grid-template-columns:1fr;gap:13px}.area-group p{font-size:12px}.area-resource-links ul{grid-template-columns:1fr}}
 
 /* Restore text contrast reported by the mobile accessibility audit. */
 .hero-cinematic .button-primary{background:#1767a5}
@@ -244,6 +245,7 @@
 .seo-header{display:flex;align-items:center;justify-content:space-between;min-height:82px}
 .seo-header .brand-mark{font-size:16px;font-weight:900}
 .seo-header-call{display:inline-flex;align-items:center;gap:8px;border-bottom:1px solid currentColor;padding-bottom:6px;color:#0d4f81;font-size:13px;font-weight:800}
+.seo-breadcrumb{display:flex;align-items:center;gap:8px;margin:0 0 21px;color:#4c6473;font-size:13px}.seo-breadcrumb a{color:inherit;text-decoration:underline;text-underline-offset:3px}.seo-breadcrumb span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .seo-hero{padding:94px 0 103px;background:#092d53;color:#fff}
 .seo-hero .section-label{color:#9dc5df}
 .seo-hero h1{max-width:840px;margin:18px 0 0;font-size:clamp(44px,6vw,78px);line-height:1.01;letter-spacing:-.06em}
@@ -258,4 +260,4 @@
 .seo-location svg{flex:none;margin-top:3px;color:#1769a3}
 .seo-location strong{display:block;margin-bottom:3px;color:#092348}
 .seo-text-link{display:inline-flex;align-items:center;gap:8px;width:max-content;margin-top:5px;color:#145ca5;font-size:13px;font-weight:800}
-@media(max-width:700px){.seo-header{min-height:70px}.seo-hero{padding-block:67px 74px}.seo-hero p{font-size:16px}.seo-content{grid-template-columns:1fr;gap:34px;padding-block:66px}.seo-header-call{font-size:12px}}
+@media(max-width:700px){.seo-header{min-height:70px}.seo-hero{padding-block:67px 74px}.seo-hero p{font-size:16px}.seo-content{grid-template-columns:1fr;gap:34px;padding-block:66px}.seo-header-call{font-size:12px}.seo-breadcrumb{font-size:12px;margin-bottom:17px}}

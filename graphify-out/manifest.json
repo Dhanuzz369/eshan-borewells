@@ -12,15 +12,15 @@
     "semantic_hash": "eef8181aed58aed8260fbe4a78383a83"
   },
   "app/layout.tsx": {
-    "mtime": 1790933490.4792128,
-    "seen": 1790934348.155574,
-    "ast_hash": "a8bfd0e5e323f37d81fa0df2f2a171fc",
+    "mtime": 1791619501.8850956,
+    "seen": 1791619586.452086,
+    "ast_hash": "1ea4b11b6e52df132d354680182c1a9d",
     "semantic_hash": ""
   },
   "app/page.tsx": {
-    "mtime": 1791616868.9775803,
-    "seen": 1791616943.297351,
-    "ast_hash": "5fa4b762515a75ceb3fa1a87188f3abc",
+    "mtime": 1791618841.9886868,
+    "seen": 1791619586.452089,
+    "ast_hash": "17494f9ad524d2425da80d440f2bb32d",
     "semantic_hash": ""
   },
   "cloudflare-env.d.ts": {
@@ -498,9 +498,9 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1791096604.832131,
-    "seen": 1791275937.4202392,
-    "ast_hash": "897df8412842cea8696605c84169b2b0",
+    "mtime": 1791619501.9069376,
+    "seen": 1791619586.452149,
+    "ast_hash": "465e34193075d638f1915a5f97068ed0",
     "semantic_hash": ""
   },
   "postcss.config.mjs": {
@@ -816,15 +816,15 @@
     "semantic_hash": ""
   },
   "app/[slug]/page.tsx": {
-    "mtime": 1790933897.1624959,
-    "seen": 1790934348.155563,
-    "ast_hash": "0ad1e1ae3289d5b7132b4cca8bf20901",
+    "mtime": 1791618760.7139387,
+    "seen": 1791619586.4520729,
+    "ast_hash": "b41e2fb8c0a56e867f7ce7e43f7cf518",
     "semantic_hash": ""
   },
   "app/seo-pages.ts": {
-    "mtime": 1790835018.5944116,
-    "seen": 1790835365.343441,
-    "ast_hash": "096ff53bd5fd561c198af4a3ec5b1b61",
+    "mtime": 1791618841.957656,
+    "seen": 1791619586.452092,
+    "ast_hash": "6c6801967a1e952c6fe48ef43e3f7c0a",
     "semantic_hash": ""
   },
   "app/llms.txt/route.ts": {
@@ -945,6 +945,30 @@
     "mtime": 1791302636.4395347,
     "seen": 1791303981.628057,
     "ast_hash": "d34eeff24885e79ebf24c82734c9d291",
+    "semantic_hash": ""
+  },
+  "app/seo-pages.test.ts": {
+    "mtime": 1791618795.456862,
+    "seen": 1791619586.452091,
+    "ast_hash": "553ff7b67e75040232e9d7787e393a86",
+    "semantic_hash": ""
+  },
+  "lib/seo/page-schema.test.ts": {
+    "mtime": 1791619284.4189632,
+    "seen": 1791619586.452147,
+    "ast_hash": "51f51a6f5f2b25d9dac6e31204540ddb",
+    "semantic_hash": ""
+  },
+  "lib/seo/page-schema.ts": {
+    "mtime": 1791619501.856832,
+    "seen": 1791619586.452147,
+    "ast_hash": "d205433836eea27e80074c582b75604f",
+    "semantic_hash": ""
+  },
+  "SEO_IMPLEMENTATION_REPORT.md": {
+    "mtime": 1791618916.5514736,
+    "seen": 1791619586.45216,
+    "ast_hash": "5fb2032533ff44f3bc1ba9053dcc9b59",
     "semantic_hash": ""
   }
 }

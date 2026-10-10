@@ -7,8 +7,10 @@
   },
   "scripts": {
     "test:quote": "node --import tsx --test lib/quote/*.test.ts",
+    "test:seo": "node --import tsx --test lib/seo/*.test.ts app/*.test.ts",
+    "test": "npm run test:quote && npm run test:seo",
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run test && next build",
     "start": "next start",
     "lint": "eslint . --ignore-pattern .next",
     "graph:update": "graphify update . --no-cluster && graphify cluster-only . --no-viz --no-label"
