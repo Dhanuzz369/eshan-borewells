@@ -6,10 +6,9 @@ import { QuoteWizard } from "./quote-wizard";
 import "./quote.css";
 
 export const metadata: Metadata = {
-  title: "Instant Borewell Quote Bangalore | Eshan Borewells",
-  description: "Plan your borewell drilling, casing or pump installation in Bangalore. Share a few site details, review your estimate and discuss a site visit with Eshan Borewells.",
-  alternates: { canonical: "/get-quote" },
-  openGraph: { title: "Get a Borewell Quote | Eshan Borewells", description: "A few site details. A clear scope of work. Plan your borewell or pump installation in Bengaluru.", url: "/get-quote", type: "website" },
+  title: "Internal Quotation Tool | Eshan Borewells",
+  description: "Internal quotation workspace for Eshan Borewells.",
+  robots: { index: false, follow: false },
 };
 export default function GetQuotePage() {
   return <main className="quote-page">

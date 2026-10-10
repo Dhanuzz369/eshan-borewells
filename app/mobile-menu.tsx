@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowUpRight, BadgeCheck, Calculator, HelpCircle, MapPin, Menu, Phone, Route, Wrench, X } from "lucide-react";
+import { ArrowUpRight, BadgeCheck, HelpCircle, MapPin, Menu, Phone, Route, Wrench, X } from "lucide-react";
 
 const links = [
-  { label: "Get Quote", href: "/get-quote", Icon: Calculator },
   { label: "Services", href: "#services", Icon: Wrench },
   { label: "Our approach", href: "#approach", Icon: Route },
   { label: "Why us", href: "#why-us", Icon: BadgeCheck },

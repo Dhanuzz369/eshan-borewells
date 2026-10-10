@@ -15,8 +15,6 @@ export function GET() {
 - [Sitemap](${origin}/sitemap.xml): Index of the official service and locality pages.
 - [Customer questions](${origin}/#questions): Practical answers about access, surveys, drilling, casing and existing borewells.
 
-- [Get a borewell quote](${origin}/get-quote): Configure drilling, casing and pump installation, review the scope and request an estimate.
-
 ## Services and local pages
 ${pageLinks}
 
