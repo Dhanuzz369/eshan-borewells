@@ -1,6 +1,21 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { buildIndexablePageSchemas, buildWebsiteSchema } from "./page-schema";
+import { buildIndexablePageSchemas, buildLocalBusinessSchema, buildHomePageSchema, buildWebsiteSchema } from "./page-schema";
+import { publicBusinessFacts } from "../../app/business-config";
+
+test("uses one stable LocalBusiness identifier", () => {
+  const localBusiness = buildLocalBusinessSchema("https://www.eshanborewells.com", publicBusinessFacts);
+  const page = buildHomePageSchema("https://www.eshanborewells.com", "Title", "Description");
+
+  assert.equal(localBusiness["@id"], "https://www.eshanborewells.com/#localbusiness");
+  assert.equal(page.about["@id"], localBusiness["@id"]);
+});
+
+test("omits optional unverified schema fields", () => {
+  const schema = buildLocalBusinessSchema("https://www.eshanborewells.com", { ...publicBusinessFacts, email: null });
+
+  assert.equal("email" in schema, false);
+});
 
 test("gives the site-wide WebSite entity a stable identifier", () => {
   const schema = buildWebsiteSchema("https://www.eshanborewells.com/");

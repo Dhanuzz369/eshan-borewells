@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowDownRight, ArrowRight, BadgeCheck, Building2, Clock3, Cog, Droplets, Headphones, Leaf, MapPin, MessageCircle, Phone, ShieldCheck, Target, ThumbsUp, Trophy, UsersRound, Wrench } from "lucide-react";
-import { BUSINESS_ADDRESS, BUSINESS_EMAIL, BUSINESS_PHONE, WHATSAPP_NUMBER } from "./business-config";
+import { BUSINESS_ADDRESS, publicBusinessFacts, WHATSAPP_NUMBER } from "./business-config";
 import { MobileMenu } from "./mobile-menu";
 import { EnquiryPopup } from "./enquiry-popup";
 import { verifiedDevelopers } from "./verified-projects";
@@ -11,10 +11,11 @@ import { getProductionUrl } from "./site-url";
 import { CustomerReviews } from "./customer-reviews";
 import { customerRating, customerRatingSource, customerReviews } from "./customer-reviews-data";
 import { getIndexableSeoPages } from "./seo-pages";
+import { buildHomePageSchema, buildLocalBusinessSchema } from "../lib/seo/page-schema";
 
-const phone = /^\+?[\d\s()-]{8,}$/.test(BUSINESS_PHONE) ? BUSINESS_PHONE : null;
+const phone = publicBusinessFacts.phone;
 const whatsapp = /^\d{10,15}$/.test(WHATSAPP_NUMBER.replace(/\D/g, "")) ? WHATSAPP_NUMBER.replace(/\D/g, "") : null;
-const email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(BUSINESS_EMAIL) ? BUSINESS_EMAIL : null;
+const email = publicBusinessFacts.email;
 const contactHref = phone ? `tel:${phone.replace(/[^+\d]/g, "")}` : "#contact";
 const whatsappHref = whatsapp ? `https://wa.me/${whatsapp}?text=${encodeURIComponent("Hello Eshan Borewells, I would like to discuss a borewell site visit. My location is: ")}` : null;
 
@@ -31,7 +32,6 @@ const areaGroups = [
   { heading: "South & southeast", areas: ["Jayanagar", "JP Nagar", "Banashankari", "BTM Layout", "Electronic City", "Bommasandra", "Anekal", "Kanakapura Road"] },
   { heading: "West & beyond", areas: ["Vijayanagar", "Nagarbhavi", "Kengeri", "RR Nagar", "Mysore Road", "Ramanagara", "Chikkaballapur", "Hosur"] },
 ];
-const serviceAreas = ["Bengaluru", ...areaGroups.flatMap((group) => group.areas)];
 const indexableSeoPages = getIndexableSeoPages();
 
 const whyCards = [
@@ -63,10 +63,12 @@ function ContactLink({ children, className = "" }: { children: React.ReactNode; 
 
 export default function HomePage() {
   const collectionEnabled = Boolean(process.env.LEADS_WEBHOOK_URL);
-  const siteUrl = getProductionUrl();
-  const localBusiness = { "@context": "https://schema.org", "@type": "LocalBusiness", name: "Eshan Borewells", ...(siteUrl ? { url: siteUrl, image: `${siteUrl}/hero-drilling.webp` } : {}), description: "Borewell drilling, groundwater survey, casing and flushing in Bengaluru and nearby areas within about 100 km.", areaServed: serviceAreas.map((name) => ({ "@type": "Place", name })), hasOfferCatalog: { "@type": "OfferCatalog", name: "Borewell services", itemListElement: services.map((service) => ({ "@type": "OfferCatalog", name: service.title, itemListElement: [{ "@type": "Offer", itemOffered: { "@type": "Service", name: service.title } }] })) }, address: { "@type": "PostalAddress", streetAddress: "6th Block, Rajajinagar", addressLocality: "Bengaluru", addressRegion: "Karnataka", addressCountry: "IN" }, ...(phone ? { telephone: phone } : {}), ...(email ? { email } : {}) };
+  const siteUrl = getProductionUrl() || "https://www.eshanborewells.com";
+  const localBusiness = buildLocalBusinessSchema(siteUrl, publicBusinessFacts);
+  const homePage = buildHomePageSchema(siteUrl, "Eshan Borewells | Borewell Drilling in Bengaluru", publicBusinessFacts.description);
   return <main id="top">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusiness) }} />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homePage) }} />
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: questions.map((item) => ({ "@type": "Question", name: item.question, acceptedAnswer: { "@type": "Answer", text: item.answer } })) }) }} />
     <header id="site-header" className="site-header shell"><Brand /><nav className="desktop-nav" aria-label="Main navigation"><a href="#services">Services</a><a href="#approach">Our approach</a><a href="#why-us">Why us</a><a href="#areas">Where we work</a><a href="#questions">FAQs</a></nav><a className="header-contact" href={contactHref}>Call us<ArrowRight size={16} /></a><MobileMenu /></header>
     <ScrollNav />

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, MapPin, Phone } from "lucide-react";
-import { BUSINESS_ADDRESS, BUSINESS_PHONE } from "../business-config";
+import { BUSINESS_ADDRESS, BUSINESS_PHONE, publicBusinessFacts } from "../business-config";
 import { getSeoPage, seoPages } from "../seo-pages";
 import { getProductionUrl } from "../site-url";
 import { buildIndexablePageSchemas } from "../../lib/seo/page-schema";
@@ -35,7 +35,7 @@ export default async function SeoLandingPage({ params }: PageProps) {
   const page = getSeoPage((await params).slug);
   if (!page) notFound();
 
-  const phone = BUSINESS_PHONE.replace(/[^+\d]/g, "");
+  const phone = publicBusinessFacts.phone?.replace(/[^+\d]/g, "") || BUSINESS_PHONE.replace(/[^+\d]/g, "");
   const origin = getProductionUrl() || "https://www.eshanborewells.com";
   const { webPage, breadcrumb } = buildIndexablePageSchemas({ origin, slug: page.slug, title: page.title, description: page.description });
   const serviceSchema = {
@@ -45,8 +45,8 @@ export default async function SeoLandingPage({ params }: PageProps) {
     description: page.description,
     url: `${origin}/${page.slug}`,
     serviceType: page.keywords[0],
-    provider: { "@type": "LocalBusiness", name: "Eshan Borewells", telephone: BUSINESS_PHONE, address: BUSINESS_ADDRESS },
-    areaServed: { "@type": "Place", name: "Bengaluru and nearby areas within about 100 km" },
+    provider: { "@id": `${origin}/#localbusiness` },
+    areaServed: { "@type": "Place", name: publicBusinessFacts.serviceArea },
   };
 
   return <main className="seo-page">
