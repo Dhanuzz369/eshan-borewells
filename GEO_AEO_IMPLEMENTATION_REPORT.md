@@ -28,6 +28,7 @@ The public diagnostic audit captured on 2026-10-10 reported heuristic scores of 
 | Sitemap | Request-time `lastmod` and `priority`/`changefreq` did not reflect actual changes | Emits only homepage and approved SEO URLs; no freshness or priority claims | Sitemap shape/exclusion tests |
 | Security headers | Three baseline headers absent | Added `nosniff`, `SAMEORIGIN`, and `strict-origin-when-cross-origin`; no CSP | Config test |
 | Discovery | Public `robots.txt` and `llms.txt` were already consistent | Kept them open and aligned; did not add bot-specific directives | Route inspection |
+| FAQ markup | Visible FAQs answer practical customer questions; FAQ structured data is not a Google rich-result strategy for this commercial site | Retained visible FAQs and their existing FAQPage JSON-LD for semantic consistency, without claiming a rich result or ranking benefit | Rendered schema inspection |
 
 ## Search intent and answer map
 
@@ -45,7 +46,7 @@ The related-link model only targets existing indexable routes and filters self-l
 
 ## Remaining owner evidence and limitations
 
-Provide evidence before adding any of the following: substantiation for company-reported years/sites; completed project references and permission to publish them; independently verifiable review source and review permissions; operating hours; public email/social/directions links; precise service boundaries by locality; qualifications, registrations or awards; survey methodology/accuracy claims; or detailed historical outcomes. Do not convert service coverage or any site-specific result into a guarantee.
+The internal `requiresOwnerVerification` checklist in `app/public-business-facts.ts` records these items. Provide evidence before adding any of the following: substantiation for company-reported years/sites; completed project references and permission to publish them; independently verifiable review source and review permissions; operating hours; public email/social/directions links; precise service boundaries by locality; qualifications, registrations or awards; survey methodology/accuracy claims; or detailed historical outcomes. Do not convert service coverage or any site-specific result into a guarantee.
 
 The visible customer testimonials currently do not have individual star ratings or a verified aggregate rating because the source ratings were not supplied. Do not add a 4.5-star or 1,000+ review claim without a public verifiable source and evidence of permission.
 

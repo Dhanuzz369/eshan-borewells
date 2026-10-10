@@ -2,6 +2,13 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { buildIndexablePageSchemas, buildLocalBusinessSchema, buildHomePageSchema, buildWebsiteSchema } from "./page-schema";
 import { publicBusinessFacts } from "../../app/business-config";
+import { requiresOwnerVerification } from "../../app/public-business-facts";
+
+test("keeps owner-verification requirements out of public business facts until supported", () => {
+  assert.ok(requiresOwnerVerification.length > 0);
+  assert.ok(requiresOwnerVerification.some((item) => item.includes("25+ years")));
+  assert.ok(requiresOwnerVerification.some((item) => item.toLowerCase().includes("review")));
+});
 
 test("uses one stable LocalBusiness identifier", () => {
   const localBusiness = buildLocalBusinessSchema("https://www.eshanborewells.com", publicBusinessFacts);
