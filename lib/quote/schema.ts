@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { casingDiameters, casingMaterials, diameterOptions, machineOptions, propertyOptions, pumpCapacities, pumpTypes } from "./config";
+import { drillingAdjustmentError } from "./rate-adjustment";
 
 export function normalizeMobile(value: string): string | null {
   let digits = value.replace(/[\s()+-]/g, "");
@@ -18,12 +19,16 @@ export const quoteInputSchema = z.object({
   property: z.enum(propertyOptions),
   access: z.enum(["open", "narrow", "restricted", "unsure"]),
   machine: z.enum(machineOptions),
+  rateAdjustmentOperation: z.enum(["+", "-"]).default("+"),
+  rateAdjustmentAmount: z.number().finite().min(0).max(1_000_000).default(0),
   depth: z.number().int().min(50).max(2000).nullable(),
   diameter: z.enum(diameterOptions),
   casing: z.object({ required: decision, material: z.enum(casingMaterials), diameter: z.enum(casingDiameters), depth: z.number().int().min(1).max(2000) }),
   pump: z.object({ required: decision, type: z.enum(pumpTypes), hp: z.enum(pumpCapacities), installationDepth: z.number().int().min(1).max(2000).nullable(), panel: z.boolean(), electrical: z.boolean() }),
   additionalServices: z.array(z.enum(["cleaning", "deepening", "testing", "pump-installation", "pump-replacement", "electrical", "casing", "flushing", "inspection", "turnkey"])).max(10).transform((items) => [...new Set(items)]),
 }).superRefine((input, ctx) => {
+  const adjustmentError = drillingAdjustmentError(input.machine, input.diameter, input.rateAdjustmentOperation, input.rateAdjustmentAmount);
+  if (adjustmentError) ctx.addIssue({ code: "custom", path: ["rateAdjustmentAmount"], message: adjustmentError });
   if (input.machine === "Robo Rig" && input.depth && input.depth > 1200) ctx.addIssue({ code: "custom", path: ["depth"], message: "Robo Rig supports depths up to 1200 ft." });
   if ((input.service === "new" || input.service === "complete") && input.depth && input.casing.required === "yes" && input.casing.depth > input.depth) ctx.addIssue({ code: "custom", path: ["casing", "depth"], message: "Casing depth cannot exceed borewell depth." });
 });
@@ -42,7 +47,7 @@ export const submissionSchema = z.object({
 });
 export type Submission = z.infer<typeof submissionSchema>;
 export const initialInput: QuoteInput = {
-  service: "new", locality: "", city: "Bengaluru", pin: "", property: "Home / Villa", access: "open", machine: "Sensor Rig", depth: 500, diameter: "Standard",
+  service: "new", locality: "", city: "Bengaluru", pin: "", property: "Home / Villa", access: "open", machine: "Sensor Rig", rateAdjustmentOperation: "+", rateAdjustmentAmount: 0, depth: 500, diameter: "Standard",
   casing: { required: "no", material: "Steel", diameter: "6 inch", depth: 40 },
   pump: { required: "no", type: "Submersible Pump", hp: "Not Sure", installationDepth: null, panel: false, electrical: false },
   additionalServices: [],

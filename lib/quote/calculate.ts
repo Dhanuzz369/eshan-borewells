@@ -1,5 +1,6 @@
 import { accessOptions, extras, quotePricing, type Pricing, type Rate } from "./config";
 import type { QuoteInput } from "./schema";
+import { adjustedDrillingConfiguration } from "./rate-adjustment";
 
 export type CostLine = { key: string; label: string; min: Rate; max: Rate; detail: string };
 export type DrillingSlab = { from: number; to: number; feet: number; rate: Rate; amount: Rate };
@@ -17,7 +18,7 @@ export function quotePrice(quote: Quote) {
 }
 export function formatRange(min: Rate, max: Rate): string {
   if (min === null || max === null) return "To be confirmed";
-  const f = (n: number) => new Intl.NumberFormat("en-IN", { maximumFractionDigits: 0 }).format(n);
+  const f = (n: number) => new Intl.NumberFormat("en-IN", { maximumFractionDigits: 2 }).format(n);
   return min === max ? `₹${f(min)}` : `₹${f(min)} – ₹${f(max)}`;
 }
 export function drillingSlabs(depth: number, configuration: Pricing["drilling"][string][string]): DrillingSlab[] {
@@ -26,7 +27,7 @@ export function drillingSlabs(depth: number, configuration: Pricing["drilling"][
     const from = previous;
     const feet = Math.max(0, Math.min(depth, slab.to) - previous);
     previous = slab.to;
-    return feet ? [{ from, to: from + feet, feet, rate: slab.perFoot, amount: slab.perFoot === null ? null : feet * slab.perFoot }] : [];
+    return feet ? [{ from, to: from + feet, feet, rate: slab.perFoot, amount: slab.perFoot === null ? null : Math.round(feet * slab.perFoot * 100) / 100 }] : [];
   });
 }
 function slabCost(depth: number, configuration: Pricing["drilling"][string][string]): Rate {
@@ -40,7 +41,7 @@ function slabCost(depth: number, configuration: Pricing["drilling"][string][stri
     if (depth <= previous) break;
   }
   if (depth > previous) return null;
-  return Math.max(total, configuration.minimum ?? 0);
+  return Math.round(Math.max(total, configuration.minimum ?? 0) * 100) / 100;
 }
 export function calculateQuote(input: QuoteInput, pricing: Pricing = quotePricing): Quote {
   const breakdown: CostLine[] = [];
@@ -52,7 +53,14 @@ export function calculateQuote(input: QuoteInput, pricing: Pricing = quotePricin
   const multiply = (rate: Rate, quantity: number | null) => rate === null || quantity === null ? null : rate * quantity;
   if (drilling) {
     const depths = input.depth === null ? pricing.defaultDepth : { min: input.depth, max: input.depth };
-    const config = pricing.drilling[input.machine]?.[input.diameter] || pricing.drilling[input.machine]?.["*"];
+    let config: Pricing["drilling"][string][string] | undefined = pricing.drilling[input.machine]?.[input.diameter] || pricing.drilling[input.machine]?.["*"];
+    try {
+      config = adjustedDrillingConfiguration(config, input.rateAdjustmentOperation, input.rateAdjustmentAmount);
+    } catch (error) {
+      if (!(error instanceof RangeError)) throw error;
+      config = undefined;
+      assumptions.push(error.message);
+    }
     if (config && input.depth !== null) appliedSlabs = drillingSlabs(input.depth, config);
     add("drilling", "Borewell drilling", config ? slabCost(depths.min, config) : null, input.depth ? `${input.depth} ft · ${input.diameter} · depth slab rates` : `${depths.min}–${depths.max} ft planning range`, config ? slabCost(depths.max, config) : null);
     add("fixed-setting", "Setting Charge", pricing.settingCharge[input.machine] ?? null);

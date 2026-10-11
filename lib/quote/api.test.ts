@@ -30,3 +30,35 @@ test("reject invalid mobile, no consent, overlong body, foreign origin and unaut
   assert.equal((await POST(request(payload, "https://unrelated.invalid"))).status, 403);
   assert.equal((await GET(new Request("https://www.eshanborewells.com/api/quotes/retry"))).status, 401);
 });
+
+test("server applies adjustments to both rigs and sends the adjusted total to lead capture", async () => {
+  const originalFetch = globalThis.fetch;
+  const saved = process.env.QUOTE_REDIS_REST_URL;
+  delete process.env.QUOTE_REDIS_REST_URL;
+  try {
+    for (const fixture of [
+      { machine: "Sensor Rig", operation: "+", total: "₹1,38,750", drilling: 132750 },
+      { machine: "Robo Rig", operation: "-", total: "₹2,30,000", drilling: 226000 },
+    ]) {
+      let delivered = false;
+      globalThis.fetch = async (_url, options) => {
+        const lead = JSON.parse(String(options?.body));
+        assert.deepEqual(Object.keys(lead).sort(), ["name", "mobile", "location", "machineType", "estimatedDepth", "quote"].sort());
+        assert.equal(lead.quote, fixture.total);
+        assert.equal(lead.machineType, fixture.machine);
+        delivered = true;
+        return Response.json({ ok: true });
+      };
+      const response = await POST(request({ ...payload, requestId: crypto.randomUUID(), input: { ...payload.input, machine: fixture.machine, rateAdjustmentOperation: fixture.operation, rateAdjustmentAmount: 10 } }));
+      assert.equal(response.status, 200);
+      const data = await response.json();
+      assert.equal(data.quote.breakdown.find((item: { key: string }) => item.key === "drilling").min, fixture.drilling);
+      assert.equal(delivered, true);
+    }
+    globalThis.fetch = async () => { throw new Error("Invalid adjustments must not capture a lead"); };
+    assert.equal((await POST(request({ ...payload, input: { ...payload.input, rateAdjustmentOperation: "-", rateAdjustmentAmount: 101 } }))).status, 400);
+  } finally {
+    globalThis.fetch = originalFetch;
+    if (saved) process.env.QUOTE_REDIS_REST_URL = saved;
+  }
+});
