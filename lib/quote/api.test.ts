@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { POST } from "../../app/api/quotes/route";
 import { GET } from "../../app/api/quotes/retry/route";
 import { initialInput } from "./schema";
+import type { Quote } from "./calculate";
 
 const payload = { requestId: "36b85011-40cd-4d65-8d17-dd585c201001", input: { ...initialInput, locality: "Rajajinagar", access: "open", machine: "Sensor Rig", depth: 850 }, customer: { name: "Test Customer", mobile: "9844775905", email: "", consent: true } };
 const request = (data: unknown, origin = "https://www.eshanborewells.com") => new Request("https://www.eshanborewells.com/api/quotes", { method: "POST", headers: { origin, "content-type": "application/json" }, body: JSON.stringify(data) });
@@ -51,8 +52,8 @@ test("server applies adjustments to both rigs and sends the adjusted total to le
       };
       const response = await POST(request({ ...payload, requestId: crypto.randomUUID(), input: { ...payload.input, machine: fixture.machine, rateAdjustmentOperation: fixture.operation, rateAdjustmentAmount: 10 } }));
       assert.equal(response.status, 200);
-      const data = await response.json();
-      assert.equal(data.quote.breakdown.find((item: { key: string }) => item.key === "drilling").min, fixture.drilling);
+      const data = await response.json() as { quote: Quote };
+      assert.equal(data.quote.breakdown.find((item) => item.key === "drilling")?.min, fixture.drilling);
       assert.equal(delivered, true);
     }
     globalThis.fetch = async () => { throw new Error("Invalid adjustments must not capture a lead"); };
