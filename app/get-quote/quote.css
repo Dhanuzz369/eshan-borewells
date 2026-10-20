@@ -30,6 +30,7 @@
 @media(max-width:700px){.instant-quote-form>section{padding-block:22px}.quote-section-service{padding-block:18px!important}.quote-section-contact{padding-block:18px!important}.contact-grid{grid-template-columns:1fr;gap:12px}.quote-section-contact .full-field{grid-column:auto}.machine-cards button{min-height:142px}.quote-depth-presets{grid-template-columns:repeat(3,1fr);gap:0}.quote-depth-presets button:nth-child(3){border-radius:0 10px 10px 0}.quote-depth-presets button:nth-child(4){border-radius:10px 0 0 10px}.quote-depth-presets button:nth-child(4){margin-left:0}.quote-depth-presets button:nth-child(n+4){margin-top:-1px}}
 
 /* Customer-facing quotation document */
+.quotation-terms{padding-left:22px;margin:0;color:#425a70;font-size:13px;line-height:1.65}.quotation-terms li+li{margin-top:7px}
 .quote-rate-adjustment{margin-top:16px;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.rate-adjustment-note{margin:8px 0 0;color:#63758c;font-size:12px;line-height:1.5}.quote-rate-adjustment label{min-width:0}.quote-rate-adjustment select,.quote-rate-adjustment input{width:100%}
 .quote-result-page{--quotation-navy:#082f49;--quotation-teal:#075d6b;--quotation-orange:#f59e0b;--quotation-green:#078842;--quotation-ink:#102a43;--quotation-muted:#63758c;--quotation-border:#d9e4ec;background:#eef4f7;color:var(--quotation-ink);padding-bottom:0}
 .quotation-masthead{position:relative;height:238px;overflow:hidden;background:#075d6b;color:#fff}

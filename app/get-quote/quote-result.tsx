@@ -100,6 +100,8 @@ export function QuoteResult({ quotation, phone, whatsapp, address, delivery, onE
         <div className="quotation-material-grid">{quotation.variableMaterials.map((material) => <div key={material.label}><span>{material.label}</span><b>₹{material.rate}/{material.unit}</b></div>)}</div>
       </section>
 
+      {quotation.terms.length > 0 && <section className="quotation-panel quotation-materials"><SectionHeading icon={<AlertCircle size={22} />} title="Sensor Rig Notes & Terms" subtitle="Drilling rates apply to 6.5-inch diameter drilling." /><ol className="quotation-terms">{quotation.terms.map((term) => <li key={term}>{term}</li>)}</ol></section>}
+
       <section className="quotation-notes">
         <article><AlertCircle size={24} /><div><h2>Important Note</h2><p>{disclaimer}</p></div></article>
         <article><ShieldCheck size={24} /><div><h2>Experience and Quality</h2><p>25+ years in the industry, with site-aware drilling and experienced operators across Bengaluru.</p></div></article>

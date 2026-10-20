@@ -34,7 +34,7 @@ test("lead saved before calculation, Sheets outage retained, successful retry ac
     assert.deepEqual(Object.keys(payload).sort(), ["estimatedDepth", "location", "machineType", "mobile", "name", "quote"]);
     assert.equal(payload.name, "Test Customer"); assert.equal(payload.mobile, "+919844775905");
     assert.equal(payload.location, "Rajajinagar, Bengaluru"); assert.equal(payload.machineType, "Sensor Rig");
-    assert.equal(payload.estimatedDepth, "500 ft"); assert.equal(payload.quote, "₹60,000");
+    assert.equal(payload.estimatedDepth, "500 ft"); assert.equal(payload.quote, "₹62,000");
     rows.add(JSON.stringify(payload)); sheetsWrites++;
     return Response.json({ ok: true });
   };

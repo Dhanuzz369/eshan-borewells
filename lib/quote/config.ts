@@ -16,11 +16,12 @@ export const accessOptions = [
 export const diameterOptions = ["Standard", "Large", "Not Sure"] as const;
 export const machineOptions = ["Sensor Rig", "Compact Rig", "Robo Rig", "Not Sure"] as const;
 export const sensorSlabs = [
-  { to: 300, perFoot: 100 }, { to: 400, perFoot: 110 }, { to: 500, perFoot: 130 },
-  { to: 600, perFoot: 160 }, { to: 700, perFoot: 190 }, { to: 800, perFoot: 225 },
-  { to: 900, perFoot: 255 }, { to: 1000, perFoot: 305 }, { to: 1100, perFoot: 405 },
-  { to: 1200, perFoot: 505 }, { to: 1300, perFoot: 605 }, { to: 1400, perFoot: 705 },
-  { to: 1500, perFoot: 805 }, { to: 1600, perFoot: 905 }, { to: 1700, perFoot: 1005 },
+  { to: 250, perFoot: 95 }, { to: 350, perFoot: 105 }, { to: 450, perFoot: 125 },
+  { to: 500, perFoot: 155 }, { to: 600, perFoot: 185 }, { to: 700, perFoot: 215 },
+  { to: 800, perFoot: 245 }, { to: 900, perFoot: 285 }, { to: 1000, perFoot: 335 },
+  { to: 1100, perFoot: 435 }, { to: 1200, perFoot: 535 }, { to: 1300, perFoot: 635 },
+  { to: 1400, perFoot: 735 }, { to: 1500, perFoot: 935 },
+  { to: 1600, perFoot: 905 }, { to: 1700, perFoot: 1005 },
   { to: 1800, perFoot: 1155 }, { to: 1900, perFoot: 1305 }, { to: 2000, perFoot: 1455 },
 ];
 export const roboSlabs = [
@@ -30,7 +31,7 @@ export const roboSlabs = [
   { to: 1000, perFoot: 750 }, { to: 1100, perFoot: 900 }, { to: 1200, perFoot: 1100 },
 ];
 export const machinePricing = {
-  "Sensor Rig": { drillingSlabs: sensorSlabs, settingCharge: 2000 },
+  "Sensor Rig": { drillingSlabs: sensorSlabs, settingCharge: 2500 },
   "Robo Rig": { drillingSlabs: roboSlabs, settingCharge: 0 },
 } as const;
 export const casingMaterials = ["Steel", "PVC"] as const;
@@ -63,6 +64,28 @@ export const variableMaterials = [
 ] as const;
 
 export type Rate = number | null;
+export const sensorFixedOperationalCosts = [
+  { key: "labour", label: "Labour Charges", amount: 2500 },
+  { key: "transport", label: "Transport Charges", amount: 2500 },
+] as const;
+export const sensorVariableMaterials = [
+  { label: '6.5" M.S. Heavy Casing Pipe', rate: 545, unit: "ft" },
+  { label: '6.5" M.S. Heavy Duty Casing Pipe', rate: 595, unit: "ft" },
+  { label: '10" PVC Casing Pipe', rate: 450, unit: "ft" },
+  { label: '12" PVC Casing Pipe', rate: 850, unit: "ft" },
+  { label: 'M.S. Welding', rate: 250, unit: "joint" },
+  { label: 'M.S. Collar', rate: 250, unit: "each" },
+  { label: 'M.S. Cap', rate: 250, unit: "each" },
+  { label: 'Filter Pipe', rate: 135, unit: "ft" },
+  { label: 'Water Injection', rate: 15, unit: "ft" },
+] as const;
+export const sensorTerms = [
+  'If more than 2.5 inches of water, boulders, silt or a dry gap are found, further drilling is not possible.',
+  'This quotation is valid for 7 days.',
+  'GST at 18% is applicable on the bill if required. GST is not included in the displayed estimate.',
+  'Each drilling rod has a 15-minute drilling allowance. Beyond this, hourly charges apply; the overrun rate must be confirmed before work.',
+  'Drilling hours are 6 am to 9 pm. If the vehicle is kept idle, ₹4,500 per hour will be charged.',
+] as const;
 export type Pricing = {
   version: string;
   defaultDepth: { min: number; max: number };
@@ -79,11 +102,12 @@ export type Pricing = {
   extras: Record<string, Rate>;
   settingCharge: Record<string, Rate>;
   fixedOperational: readonly { key: string; label: string; amount: number }[];
+  fixedOperationalByMachine?: Record<string, readonly { key: string; label: string; amount: number }[]>;
   variableMaterials: readonly { label: string; rate: number; unit: string }[];
 };
 const drillingConfiguration = () => Object.fromEntries(diameterOptions.map((d) => [d, { slabs: [{ to: 2000, perFoot: null }], minimum: null }]));
 export const quotePricing: Pricing = {
-  version: "machine-rates-approved-2026-10-06",
+  version: "sensor-rates-approved-2026-10-20",
   defaultDepth: { min: 300, max: 800 },
   allowance: { low: 0.9, high: 1.1 }, // Estimate band, not a business rate.
   taxPercent: null,
@@ -109,5 +133,6 @@ export const quotePricing: Pricing = {
     "Not Sure": null,
   },
   fixedOperational: fixedOperationalCosts,
+  fixedOperationalByMachine: { "Sensor Rig": sensorFixedOperationalCosts },
   variableMaterials,
 };

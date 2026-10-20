@@ -14,13 +14,13 @@ test("quote submission sends the approved Apps Script lead fields without changi
   try {
     globalThis.fetch = async (url, options) => {
       assert.match(String(url), /^https:\/\/script\.google\.com\//);
-      assert.deepEqual(JSON.parse(String(options?.body)), { name: "Test Customer", mobile: "+919844775905", location: "Rajajinagar, Bengaluru", machineType: "Sensor Rig", estimatedDepth: "850 ft", quote: "₹1,30,250" });
+      assert.deepEqual(JSON.parse(String(options?.body)), { name: "Test Customer", mobile: "+919844775905", location: "Rajajinagar, Bengaluru", machineType: "Sensor Rig", estimatedDepth: "850 ft", quote: "₹1,40,750" });
       return Response.json({ ok: true });
     };
     const response = await POST(request(payload));
     const data = await response.json() as { delivery: string; quoteNumber: string; quote: { breakdown: { key: string; min: number }[] } };
     assert.equal(response.status, 200); assert.equal(data.delivery, "delivered"); assert.match(data.quoteNumber, /^EB-DRAFT-/);
-    assert.equal(data.quote.breakdown.find((x) => x.key === "drilling")!.min, 124250);
+    assert.equal(data.quote.breakdown.find((x) => x.key === "drilling")!.min, 133250);
     assert.equal(response.headers.get("cache-control"), "no-store");
   } finally { globalThis.fetch = originalFetch; if (saved) process.env.QUOTE_REDIS_REST_URL = saved; }
 });
@@ -38,7 +38,7 @@ test("server applies adjustments to both rigs and sends the adjusted total to le
   delete process.env.QUOTE_REDIS_REST_URL;
   try {
     for (const fixture of [
-      { machine: "Sensor Rig", operation: "+", total: "₹1,38,750", drilling: 132750 },
+      { machine: "Sensor Rig", operation: "+", total: "₹1,49,250", drilling: 141750 },
       { machine: "Robo Rig", operation: "-", total: "₹2,30,000", drilling: 226000 },
     ]) {
       let delivered = false;
@@ -57,7 +57,7 @@ test("server applies adjustments to both rigs and sends the adjusted total to le
       assert.equal(delivered, true);
     }
     globalThis.fetch = async () => { throw new Error("Invalid adjustments must not capture a lead"); };
-    assert.equal((await POST(request({ ...payload, input: { ...payload.input, rateAdjustmentOperation: "-", rateAdjustmentAmount: 101 } }))).status, 400);
+    assert.equal((await POST(request({ ...payload, input: { ...payload.input, rateAdjustmentOperation: "-", rateAdjustmentAmount: 96 } }))).status, 400);
   } finally {
     globalThis.fetch = originalFetch;
     if (saved) process.env.QUOTE_REDIS_REST_URL = saved;

@@ -39,7 +39,7 @@ test("validates adjustments, permits a zero rate, and defaults older submissions
   assert.equal((parsed as Record<string, unknown>).rateAdjustmentAmount, 0);
   assert.equal((parsed as Record<string, unknown>).rateAdjustmentOperation, "+");
   for (const machine of ["Sensor Rig", "Robo Rig"] as const) {
-    const limit = machine === "Sensor Rig" ? 100 : 120;
+    const limit = machine === "Sensor Rig" ? 95 : 120;
     assert.equal(quoteInputSchema.safeParse(inputFor(machine, 850, "-", limit)).success, true);
     assert.equal(quoteInputSchema.safeParse(inputFor(machine, 850, "-", limit + 0.01)).success, false);
   }
@@ -52,10 +52,10 @@ test("quotation and PDF data share adjusted rates and retain paise in displayed 
   const input = inputFor("Sensor Rig", 850, "+", 10.01);
   const quote = calculateQuote(input);
   const data = buildQuotationData({ quote, input, quoteNumber: "test", capturedAt: "2026-10-11T06:30:00Z", customer: { name: "Customer", mobile: "+919844775905" } });
-  assert.equal(data.drillingSubtotal, 132758.5);
-  assert.equal(data.estimatedTotal, 138758.5);
+  assert.equal(data.drillingSubtotal, 141758.5);
+  assert.equal(data.estimatedTotal, 149258.5);
   assert.equal(quotePrice(quote).min, data.estimatedTotal);
-  assert.equal(data.drillingBreakdown[0].rate, 110.01);
-  assert.equal(data.drillingBreakdown[0].amount, 33003);
-  assert.equal(formatRange(data.estimatedTotal, data.estimatedTotal), "₹1,38,758.5");
+  assert.equal(data.drillingBreakdown[0].rate, 105.01);
+  assert.equal(data.drillingBreakdown[0].amount, 26252.5);
+  assert.equal(formatRange(data.estimatedTotal, data.estimatedTotal), "₹1,49,258.5");
 });

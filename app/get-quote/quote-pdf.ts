@@ -22,7 +22,7 @@ async function imageData(path: string) {
 }
 
 export async function downloadQuote({ quotation, phone, address }: PdfInput) {
-  const font = await fetch("/fonts/NotoSans-Regular.ttf");
+  const font = await fetch("/fonts/NotoSans-Bold.ttf");
   if (!font.ok) throw new Error("PDF font unavailable");
   const bytes = new Uint8Array(await font.arrayBuffer());
   let binary = "";
@@ -34,12 +34,12 @@ export async function downloadQuote({ quotation, phone, address }: PdfInput) {
 
 export function renderQuotePdf({ quotation, phone, address, fontBase64, hero }: PdfInput & { fontBase64: string; hero: string }) {
   const pdf = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
-  pdf.addFileToVFS("NotoSans-Regular.ttf", fontBase64);
-  pdf.addFont("NotoSans-Regular.ttf", "NotoSans", "normal");
-  pdf.setFont("NotoSans");
+  pdf.addFileToVFS("NotoSans-Bold.ttf", fontBase64);
+  pdf.addFont("NotoSans-Bold.ttf", "NotoSans", "bold");
+  pdf.setFont("NotoSans", "bold");
 
   const money = (value: number | null) => formatRange(value, value);
-  const setText = (size: number, color: [number, number, number] = ink) => { pdf.setFontSize(size); pdf.setTextColor(...color); };
+  const setText = (size: number, color: [number, number, number] = ink) => { pdf.setFontSize(Math.max(8, size + 0.7)); pdf.setTextColor(...color); };
   const wrapped = (value: string, x: number, y: number, width: number, size = 8, color: [number, number, number] = muted, lineHeight = 4) => {
     setText(size, color);
     const rows = pdf.splitTextToSize(value, width) as string[];
@@ -55,7 +55,7 @@ export function renderQuotePdf({ quotation, phone, address, fontBase64, hero }: 
     if (!compact) { pdf.addImage(hero, "WEBP", 112, 0, 98, 46, undefined, "FAST"); pdf.setFillColor(...teal); pdf.rect(0, 0, 122, 46, "F"); }
     setText(compact ? 17 : 21, [255, 255, 255]); pdf.text("ESHAN", 14, compact ? 13 : 18);
     pdf.setCharSpace(2); setText(compact ? 7 : 8, [255, 255, 255]); pdf.text("BOREWELLS", 14, compact ? 20 : 27); pdf.setCharSpace(0);
-    if (!compact) { setText(7, [232, 247, 248]); pdf.text("25+ years  |  10,000+ borewell sites  |  Bengaluru", 14, 35); setText(6.5, [255, 255, 255]); pdf.text(`${phone}  |  ${address}`, 14, 42); }
+    if (!compact) { setText(7, [232, 247, 248]); pdf.text("25+ years  |  10,000+ borewell sites  |  Bengaluru", 14, 35); setText(6.5, [255, 255, 255]); pdf.text(phone, 14, 42); }
     else { setText(7, [255, 255, 255]); pdf.text(`${phone}  |  ${address}`, 196, 17, { align: "right", maxWidth: 105 }); }
     return height;
   };
@@ -117,12 +117,12 @@ export function renderQuotePdf({ quotation, phone, address, fontBase64, hero }: 
 
   y = sectionTitle("Variable Materials", "Not included unless selected or used. Final cost depends on actual site usage.", y);
   quotation.variableMaterials.forEach((material, index) => {
-    const column = index % 2, row = Math.floor(index / 2), x = 14 + column * 92, rowY = y + row * 10;
-    pdf.setDrawColor(...line); pdf.line(x, rowY + 8, x + 88, rowY + 8);
-    wrapped(material.label, x + 4, rowY + 5, 60, 6.8, ink, 3.2);
-    rect(x + 68, rowY + 1, 18, 6, [230, 246, 235], [230, 246, 235], 1); setText(6.4, [23, 104, 59]); pdf.text(`₹${material.rate}/${material.unit}`, x + 77, rowY + 5.2, { align: "center" });
+    const column = index % 2, row = Math.floor(index / 2), x = 14 + column * 92, rowY = y + row * 14;
+    pdf.setDrawColor(...line); pdf.line(x, rowY + 12, x + 88, rowY + 12);
+    wrapped(material.label, x + 3, rowY + 5, 57, 7.5, ink, 3.6);
+    setText(7.5, [23, 104, 59]); pdf.text(`₹${material.rate}/${material.unit}`, x + 86, rowY + 5.2, { align: "right" });
   });
-  y += Math.ceil(quotation.variableMaterials.length / 2) * 10 + 8;
+  y += Math.ceil(quotation.variableMaterials.length / 2) * 14 + 8;
 
   const callableNumber = phone.replace(/[^+\d]/g, "");
   pdf.setFillColor(5, 128, 76);
@@ -132,10 +132,20 @@ export function renderQuotePdf({ quotation, phone, address, fontBase64, hero }: 
   pdf.link(68, y, 74, 12, { url: `tel:${callableNumber}` });
   y += 20;
 
+  // Keep terms and notes legible instead of squeezing them below the material table.
+  pageFooter();
+  pdf.addPage(); y = brandHeader(true) + 10;
+  if (quotation.terms.length) {
+    y = sectionTitle("Sensor Rig Notes & Terms", "Rates apply to 6.5-inch diameter drilling.", y);
+    for (const [index, term] of quotation.terms.entries()) {
+      y = wrapped(`${index + 1}. ${term}`, 18, y + 2, 174, 9.5, ink, 5) + 6;
+    }
+    y += 4;
+  }
   y = sectionTitle("Important Note", `Quotation validity: ${quotation.validityDays} days. Valid until ${quotation.validUntil}.`, y);
   y = wrapped("This is an estimated quotation based on the information provided by the customer. Final pricing may vary depending on actual drilling conditions, ground formation, machine access, actual depth, casing requirements, materials used and site assessment. Water, depth and final price are not guaranteed.", 18, y, 174, 7, muted, 3.8) + 5;
   rect(14, y, 182, 22, [240, 247, 248], line, 2);
-  setText(8, teal); pdf.text("25+ YEARS EXPERIENCE", 20, y + 8); pdf.text("10,000+ BOREWELL SITES", 78, y + 8); pdf.text("BENGALURU & SURROUNDING AREAS", 142, y + 8);
+  setText(8, teal); pdf.text("25+ YEARS EXPERIENCE", 20, y + 8); pdf.text("10,000+ BOREWELL SITES", 110, y + 8);
   setText(6.5, muted); pdf.text("Call or WhatsApp to confirm site conditions and the final scope.", 20, y + 16); pdf.text(phone, 191, y + 16, { align: "right" });
   pageFooter();
 

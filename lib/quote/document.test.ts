@@ -16,10 +16,14 @@ test("quotation data uses one quote object, seven-day validity and migrated casi
   assert.equal(data.quoteNumber, "EB-2026-0056");
   assert.equal(data.quote, quote);
   assert.equal(data.machineType, "Sensor Rig");
-  assert.equal(data.fixedOperationalCosts.find((line) => line.key === "fixed-setting")?.min, 2000);
-  assert.equal(data.estimatedTotal, 264500);
-  assert.equal(data.variableMaterials.find((material) => material.label.includes("Slotted Casing"))?.label, '4½" or 5" 6 kg ISI Mark PVC Slotted Casing Pipe');
-  assert.equal(data.variableMaterials.find((material) => material.label.includes("M.S. Medium"))?.label, '7" M.S. Medium Casing Pipe');
+  assert.equal(data.fixedOperationalCosts.find((line) => line.key === "fixed-setting")?.min, 2500);
+  assert.equal(data.estimatedTotal, 285500);
+  assert.equal(data.variableMaterials.find((material) => material.label.includes("Heavy Duty"))?.rate, 595);
+  assert.equal(data.variableMaterials.find((material) => material.label === "Water Injection")?.rate, 15);
+  assert.equal(data.terms.length, 5);
+  assert.deepEqual(data.variableMaterials.map(({ rate, unit }) => [rate, unit]), [[545,"ft"],[595,"ft"],[450,"ft"],[850,"ft"],[250,"joint"],[250,"each"],[250,"each"],[135,"ft"],[15,"ft"]]);
+  assert.equal(data.variableMaterials.find((material) => material.label.includes("Slotted Casing"))?.label, undefined);
+  assert.equal(data.variableMaterials.find((material) => material.label.includes("M.S. Medium"))?.label, undefined);
   const retiredName = '6" PVC ' + "Slotted Casing";
   assert.equal(variableMaterials.some((material) => String(material.label) === retiredName), false);
 });
@@ -31,6 +35,8 @@ test("Robo Rig document keeps zero setting charge and progressive total", () => 
   assert.equal(data.fixedOperationalCosts.find((line) => line.key === "fixed-setting")?.min, 0);
   assert.equal(data.drillingSubtotal, 540000);
   assert.equal(data.estimatedTotal, 544000);
+  assert.equal(data.variableMaterials.find((material) => material.label === "Water Injection")?.rate, 8);
+  assert.deepEqual(data.terms, []);
 });
 
 test("Robo Rig input is capped at 1200 ft by validation", () => {

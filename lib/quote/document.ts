@@ -1,4 +1,4 @@
-import { accessOptions, serviceOptions, variableMaterials } from "./config";
+import { accessOptions, serviceOptions, variableMaterials, sensorVariableMaterials, sensorTerms } from "./config";
 import { formatRange, quotePrice, type CostLine, type DrillingSlab, type Quote } from "./calculate";
 import type { QuoteInput } from "./schema";
 
@@ -23,7 +23,8 @@ export type QuotationData = {
   fixedOperationalCosts: CostLine[];
   fixedSubtotal: number | null;
   materialsServices: CostLine[];
-  variableMaterials: typeof variableMaterials;
+  variableMaterials: readonly { label: string; rate: number; unit: string }[];
+  terms: readonly string[];
   estimatedTotal: number | null;
   estimatedTotalLabel: string;
   estimatedTotalFormatted: string;
@@ -75,7 +76,8 @@ export function buildQuotationData({ quote, quoteNumber, capturedAt, input, cust
     fixedOperationalCosts: fixed,
     fixedSubtotal: fixedKnown ? fixed.reduce((sum, line) => sum + line.min!, 0) : null,
     materialsServices: services,
-    variableMaterials,
+    variableMaterials: input.machine === "Sensor Rig" ? sensorVariableMaterials : variableMaterials,
+    terms: input.machine === "Sensor Rig" ? sensorTerms : [],
     estimatedTotal: price.min === price.max ? price.min : null,
     estimatedTotalLabel: price.label,
     estimatedTotalFormatted: formatRange(price.min, price.max),
