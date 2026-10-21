@@ -9,6 +9,7 @@ export const estimateTerms = [
   "GST at 18% is applicable on the bill if required. GST is not included in the displayed estimate.",
   "Drilling hours are 6 am to 9 pm. If the vehicle is kept idle, ₹4,000 per hour will be charged.",
   "If more than 2.5 inches of water, boulders, silt or a dry gap are found, further drilling is not possible.",
+  "This above quotation is valid for 7 days only.",
 ] as const;
 
 export function resolveMaterialRates(materials: QuotationData["variableMaterials"], overrides: Record<string, string> = {}) {
@@ -25,7 +26,7 @@ export const yieldReportFields = ["Rig Name", "Water Yield", "Water Layer at: 1)
 export function invoicePayments(total: number | null, advance: string) {
   const formattedAdvance = manualMoney(advance);
   const amount = advance.trim() ? Number(advance) : 0;
-  if (total !== null && Math.round(amount * 100) > Math.round(total * 100)) throw new Error("Advance received cannot exceed the invoice total.");
+  if (total !== null && Math.round(amount * 100) > Math.round(total * 100)) throw new Error("Advance received cannot exceed the Estimated Bill total.");
   const balance = total === null ? null : (Math.round(total * 100) - Math.round(amount * 100)) / 100;
   return [["Advance received", formattedAdvance], ["Balance due", formatRange(balance, balance)]];
 }
@@ -60,7 +61,7 @@ export function buildInternalDocument(quotation: QuotationData, mode: DocumentMo
   const total = quotation.estimatedTotal === null ? null : Math.round((quotation.estimatedTotal + (materials?.subtotal ?? 0)) * 100) / 100;
   return {
     mode,
-    title: invoice ? "Invoice" : "Estimate Quotation",
+    title: invoice ? "Estimated Bill" : "Estimate Quotation",
     date: date ? new Intl.DateTimeFormat("en-IN", { day: "2-digit", month: "short", year: "numeric", timeZone: "Asia/Kolkata" }).format(date) : "",
     drillingHeaders: invoice ? ["Depth range", "Rate", "Amount"] : ["Depth range", "Rate"],
     drillingRows: quotation.drillingBreakdown.map((slab) => [
@@ -75,7 +76,7 @@ export function buildInternalDocument(quotation: QuotationData, mode: DocumentMo
     materialSubtotal: materials ? formatRange(materials.subtotal, materials.subtotal) : null,
     total: invoice ? total === null ? quotation.estimatedTotalFormatted : formatRange(total, total) : null,
     payments: invoice ? invoicePayments(total, fields.advance) : [],
-    labels: { drilling: "Drilling subtotal (A)", fixedHeading: "Fixed operational costs (B)", fixed: "Fixed subtotal (B)", materials: "Materials subtotal (C)", total: "Invoice total (A+B+C)" },
+    labels: { drilling: "Drilling subtotal (A)", fixedHeading: "Fixed operational costs (B)", fixed: "Fixed subtotal (B)", materials: "Materials subtotal (C)", total: "Estimated Bill total (A+B+C)" },
     yieldReport: invoice ? yieldReportFields.map((label) => [label, fields.yieldReport?.[label] ?? ""]) : [],
     terms: invoice ? [] : estimateTerms,
   };

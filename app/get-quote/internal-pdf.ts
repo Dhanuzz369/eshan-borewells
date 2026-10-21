@@ -8,7 +8,7 @@ export async function downloadInternalPdf(props: Props) {
   if (!response.ok) throw new Error("PDF font unavailable");
   const bytes = new Uint8Array(await response.arrayBuffer());
   let binary = ""; for (const byte of bytes) binary += String.fromCharCode(byte);
-  renderInternalPdf({ ...props, fontBase64: btoa(binary) }).save(`Eshan-Borewells-${props.document.mode === "invoice" ? "Invoice" : "Estimate"}.pdf`);
+  renderInternalPdf({ ...props, fontBase64: btoa(binary) }).save(`Eshan-Borewells-${props.document.mode === "invoice" ? "Estimated-Bill" : "Estimate"}.pdf`);
 }
 
 export function renderInternalPdf({ quotation, document, phone, address, fontBase64 }: Props & { fontBase64: string }) {
@@ -58,7 +58,7 @@ export function renderInternalPdf({ quotation, document, phone, address, fontBas
   if(document.drillingSubtotal)summary(document.labels.drilling,document.drillingSubtotal);
   section(document.mode==="invoice"?document.labels.fixedHeading:"Fixed operational rates");row(["Description",document.mode==="invoice"?"Amount":"Rate"],true);for(const values of document.fixedRows)row(values);
   if(document.fixedSubtotal)summary(document.labels.fixed,document.fixedSubtotal);
-  section(document.mode === "invoice" ? "Variable materials used" : "Variable material rates");paragraph(document.mode === "invoice" ? "Entered quantities are included in the invoice total. Blank materials are not billed." : "Charged according to actual site usage; rates only.",8.5);y+=2;row(document.materialHeaders,true);for(const values of document.materialRows)row(values);
+  section(document.mode === "invoice" ? "Variable materials used" : "Variable material rates");paragraph(document.mode === "invoice" ? "Entered quantities are included in the Estimated Bill total. Blank materials are not billed." : "Charged according to actual site usage; rates only.",8.5);y+=2;row(document.materialHeaders,true);for(const values of document.materialRows)row(values);
   if(document.materialSubtotal)summary(document.labels.materials,document.materialSubtotal);
   if(document.total){ensure(55);summary(document.labels.total,document.total);for(const[label,value]of document.payments)summary(label,value);paragraph("Includes drilling, fixed operational costs and entered materials. Conditional charges and GST are not included.",8.5);}
   if(document.yieldReport.length){

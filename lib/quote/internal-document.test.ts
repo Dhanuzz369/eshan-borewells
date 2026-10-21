@@ -9,7 +9,7 @@ const input = { ...initialInput, locality: "Rajajinagar", depth: 850 };
 const quote = buildQuotationData({ input, quote: calculateQuote(input), quoteNumber: "unused", capturedAt: "2026-10-21T06:30:00Z", customer: { name: "Customer", mobile: "9844775905" } });
 test("invoice shows approved amounts and calculates the full balance when no advance is entered", () => {
   const document = buildInternalDocument(quote, "invoice", { date: "", advance: "", balance: "" });
-  assert.equal(document.title, "Invoice");
+  assert.equal(document.title, "Estimated Bill");
   assert.deepEqual(document.drillingRows[0], ["0 - 250 ft", "₹95/ft", "₹23,750"]);
   assert.equal(document.total, "₹1,40,750");
   assert.deepEqual(document.payments, [["Advance received", ""], ["Balance due", "₹1,40,750"]]);
@@ -94,9 +94,9 @@ test("edited material rates affect invoice amounts and balance and appear as rat
   assert.equal(buildInternalDocument(quote, "invoice", { ...fields, materialRates: { 'Water Injection': "" } }).materialRows.at(-1)?.[1], "₹15/ft");
 });
 
-test("estimate has five terms with the drilling-condition warning last", () => {
+test("estimate has six terms with the drilling-condition warning fifth and seven-day validity sixth", () => {
   const estimate = buildInternalDocument(quote, "estimate", { date: "", advance: "" });
-  assert.equal(estimate.terms.length, 5);
+  assert.equal(estimate.terms.length, 6);
   assert.match(estimate.terms[0], /Booking amount of Rs 10,000\/- on booking and 70,000\/- must be paid before drilling/);
   assert.equal(estimate.terms[1], "Balance amount has to be settled immediately after work completion on the spot.");
   assert.match(estimate.terms[2], /GST at 18%/);
@@ -104,6 +104,7 @@ test("estimate has five terms with the drilling-condition warning last", () => {
   assert.ok(!estimate.terms.some((term) => term.includes("15-minute")));
   assert.ok(!estimate.terms[0].includes("boulders"));
   assert.equal(estimate.terms[4], "If more than 2.5 inches of water, boulders, silt or a dry gap are found, further drilling is not possible.");
+  assert.equal(estimate.terms[5], "This above quotation is valid for 7 days only.");
 });
 
 test("both document types use renamed materials without changing the approved rates", () => {
