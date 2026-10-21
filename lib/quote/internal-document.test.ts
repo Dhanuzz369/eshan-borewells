@@ -7,19 +7,38 @@ import { buildInternalDocument } from "./internal-document";
 
 const input = { ...initialInput, locality: "Rajajinagar", depth: 850 };
 const quote = buildQuotationData({ input, quote: calculateQuote(input), quoteNumber: "unused", capturedAt: "2026-10-21T06:30:00Z", customer: { name: "Customer", mobile: "9844775905" } });
-test("invoice shows approved line amounts and preserves blank manual payment fields", () => {
+test("invoice shows approved amounts and calculates the full balance when no advance is entered", () => {
   const document = buildInternalDocument(quote, "invoice", { date: "", advance: "", balance: "" });
   assert.equal(document.title, "Invoice");
   assert.deepEqual(document.drillingRows[0], ["0 - 250 ft", "₹95/ft", "₹23,750"]);
   assert.equal(document.total, "₹1,40,750");
-  assert.deepEqual(document.payments, [["Advance received", ""], ["Balance due", ""]]);
+  assert.deepEqual(document.payments, [["Advance received", ""], ["Balance due", "₹1,40,750"]]);
   assert.equal(document.date, "");
 });
-test("manual invoice date and payment values are preserved without calculating or assuming payment", () => {
-  const document = buildInternalDocument(quote, "invoice", { date: "2026-10-21", advance: "50000", balance: "90750" });
+test("invoice balance is derived from advance and ignores any old manually entered balance", () => {
+  const document = buildInternalDocument(quote, "invoice", { date: "2026-10-21", advance: "50000", balance: "1" });
   assert.deepEqual(document.payments, [["Advance received", "₹50,000"], ["Balance due", "₹90,750"]]);
   assert.equal(document.date, "21 Oct 2026");
   assert.throws(() => buildInternalDocument(quote, "invoice", { date: "", advance: "-1", balance: "" }));
+});
+
+test("invoice has blank yield fields and no terms, while estimate retains terms", () => {
+  const document = buildInternalDocument(quote, "invoice", { date: "", advance: "", balance: "" });
+  assert.deepEqual(document.terms, []);
+  assert.deepEqual(document.yieldReport.map((field) => field[0]), ["Rig Name", "Water Yield", "Water Layer at: 1)", "Water Layer at: 2)", "Water Layer at: 3)", "Remarks", "Boulders / Silt", "Suitable Pumps: Compressor / Submersible"]);
+  assert.ok(document.yieldReport.every((field) => field[1] === ""));
+  const estimate = buildInternalDocument(quote, "estimate", { date: "", advance: "", balance: "" });
+  assert.ok(estimate.terms.length > 0);
+  assert.deepEqual(estimate.yieldReport, []);
+});
+
+test("balance includes materials, supports full payment and rejects advances above the total", () => {
+  const fields = { date: "", advance: "50000", materials: { 'Water Injection': "12.5" } };
+  const document = buildInternalDocument(quote, "invoice", fields);
+  assert.deepEqual(document.payments[1], ["Balance due", "₹90,937.5"]);
+  const paid = buildInternalDocument(quote, "invoice", { date: "", advance: "140750" });
+  assert.deepEqual(paid.payments[1], ["Balance due", "₹0"]);
+  assert.throws(() => buildInternalDocument(quote, "invoice", { date: "", advance: "140750.01" }));
 });
 test("estimate retains depth slabs and rates but has no amounts, subtotals, totals or payments", () => {
   const document = buildInternalDocument(quote, "estimate", { date: "", advance: "50000", balance: "90750" });

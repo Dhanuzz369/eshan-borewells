@@ -2,7 +2,16 @@ import { formatRange } from "./calculate";
 import type { QuotationData } from "./document";
 
 export type DocumentMode = "invoice" | "estimate";
-export type ManualFields = { date: string; advance: string; balance: string; materials?: Record<string, string> };
+export type ManualFields = { date: string; advance: string; balance?: string; materials?: Record<string, string>; yieldReport?: Record<string, string> };
+export const yieldReportFields = ["Rig Name", "Water Yield", "Water Layer at: 1)", "Water Layer at: 2)", "Water Layer at: 3)", "Remarks", "Boulders / Silt", "Suitable Pumps: Compressor / Submersible"] as const;
+
+export function invoicePayments(total: number | null, advance: string) {
+  const formattedAdvance = manualMoney(advance);
+  const amount = advance.trim() ? Number(advance) : 0;
+  if (total !== null && Math.round(amount * 100) > Math.round(total * 100)) throw new Error("Advance received cannot exceed the invoice total.");
+  const balance = total === null ? null : (Math.round(total * 100) - Math.round(amount * 100)) / 100;
+  return [["Advance received", formattedAdvance], ["Balance due", formatRange(balance, balance)]];
+}
 
 export function calculateMaterialUsage(materials: QuotationData["variableMaterials"], quantities: Record<string, string> = {}) {
   let subtotalPaise = 0;
@@ -47,8 +56,10 @@ export function buildInternalDocument(quotation: QuotationData, mode: DocumentMo
     materialRows: materials?.rows ?? quotation.variableMaterials.map((material) => [material.label, `₹${material.rate}/${material.unit}`]),
     materialSubtotal: materials ? formatRange(materials.subtotal, materials.subtotal) : null,
     total: invoice ? total === null ? quotation.estimatedTotalFormatted : formatRange(total, total) : null,
-    payments: invoice ? [["Advance received", manualMoney(fields.advance)], ["Balance due", manualMoney(fields.balance)]] : [],
-    terms: invoice ? quotation.terms.filter((term) => !term.includes("valid for")).map((term) => term.replace("displayed estimate", "invoice total")) : quotation.terms,
+    payments: invoice ? invoicePayments(total, fields.advance) : [],
+    labels: { drilling: "Drilling subtotal (A)", fixedHeading: "Fixed operational costs (B)", fixed: "Fixed subtotal (B)", materials: "Materials subtotal (C)", total: "Invoice total (A+B+C)" },
+    yieldReport: invoice ? yieldReportFields.map((label) => [label, fields.yieldReport?.[label] ?? ""]) : [],
+    terms: invoice ? [] : quotation.terms,
   };
 }
 export type InternalDocument = ReturnType<typeof buildInternalDocument>;

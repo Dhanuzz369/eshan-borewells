@@ -55,12 +55,23 @@ export function renderInternalPdf({ quotation, document, phone, address, fontBas
   paragraph(quotation.customerName,13);paragraph(`${quotation.mobile}\n${quotation.location}`,10);y+=3;
   paragraph(`${quotation.machineType} | ${quotation.depth} | ${quotation.propertyType}`,10);
   section("Drilling cost structure");row(document.drillingHeaders,true);for(const values of document.drillingRows)row(values);
-  if(document.drillingSubtotal)summary("Drilling subtotal",document.drillingSubtotal);
-  section(document.mode==="invoice"?"Fixed operational costs":"Fixed operational rates");row(["Description",document.mode==="invoice"?"Amount":"Rate"],true);for(const values of document.fixedRows)row(values);
-  if(document.fixedSubtotal)summary("Fixed subtotal",document.fixedSubtotal);
+  if(document.drillingSubtotal)summary(document.labels.drilling,document.drillingSubtotal);
+  section(document.mode==="invoice"?document.labels.fixedHeading:"Fixed operational rates");row(["Description",document.mode==="invoice"?"Amount":"Rate"],true);for(const values of document.fixedRows)row(values);
+  if(document.fixedSubtotal)summary(document.labels.fixed,document.fixedSubtotal);
   section(document.mode === "invoice" ? "Variable materials used" : "Variable material rates");paragraph(document.mode === "invoice" ? "Entered quantities are included in the invoice total. Blank materials are not billed." : "Charged according to actual site usage; rates only.",8.5);y+=2;row(document.materialHeaders,true);for(const values of document.materialRows)row(values);
-  if(document.materialSubtotal)summary("Materials subtotal",document.materialSubtotal);
-  if(document.total){ensure(55);summary("Invoice total",document.total);for(const[label,value]of document.payments)summary(label,value);paragraph("Includes drilling, fixed operational costs and entered materials. Conditional charges and GST are not included.",8.5);}
+  if(document.materialSubtotal)summary(document.labels.materials,document.materialSubtotal);
+  if(document.total){ensure(55);summary(document.labels.total,document.total);for(const[label,value]of document.payments)summary(label,value);paragraph("Includes drilling, fixed operational costs and entered materials. Conditional charges and GST are not included.",8.5);}
+  if(document.yieldReport.length){
+    ensure(112);section("Yield report");
+    for(const[label,value]of document.yieldReport){
+      pdf.setFontSize(9);const rows = value ? pdf.splitTextToSize(value,82) as string[] : [];
+      const height=Math.max(12,rows.length*4.5+5);ensure(height);
+      text(label,18,y+3,9);
+      if(value){rows.forEach((value,index)=>text(value,108,y+3+index*4.5,9));}
+      else{pdf.setDrawColor(130,145,155);pdf.setLineDashPattern([.6,1],0);pdf.line(108,y+5,192,y+5);pdf.setLineDashPattern([],0);}
+      y+=height;
+    }
+  }
   if(document.terms.length){section("Notes & terms");for(const[index,term]of document.terms.entries()){paragraph(`${index+1}. ${term}`,9);y+=3;}}
   const count=pdf.getNumberOfPages();for(let page=1;page<=count;page++){
     pdf.setPage(page);pdf.setFillColor(235,245,246);pdf.rect(0,276,210,21,"F");pdf.setDrawColor(17,137,139);pdf.line(16,276,194,276);
