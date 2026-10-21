@@ -1,17 +1,17 @@
 # Graph Report - eshan-borewells  (2026-10-21)
 
 ## Corpus Check
-- 156 files · ~498,874 words
+- 164 files · ~500,767 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 9 file(s) not represented in the graph (top: .css 3, (none) 2, .ttf 2)
 
 ## Summary
-- 1092 nodes · 2186 edges · 81 communities (65 shown, 16 thin omitted)
+- 1130 nodes · 2287 edges · 81 communities (64 shown, 17 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 6 edges (avg confidence: 0.92)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f4d12ab4`
+- Built from commit: `25ca4108`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -19,7 +19,7 @@
 - connector-preview-session.mjs
 - cn
 - sidebar.tsx
-- react
+- utils.ts
 - pnpm-install.mjs
 - Eshan Borewells GEO + AEO: Phase 2 design
 - config.ts
@@ -30,7 +30,7 @@
 - connector-context.ts
 - combobox.tsx
 - devDependencies
-- lucide-react
+- command.tsx
 - compilerOptions
 - quote-wizard.tsx
 - field.tsx
@@ -41,11 +41,11 @@
 - calculate.ts
 - context-menu.tsx
 - attachment.tsx
-- business-config.ts
+- internal-auth.ts
 - empty.tsx
 - carousel.tsx
 - [slug]/page.tsx
-- marker.tsx
+- lucide-react
 - route.ts
 - chart.tsx
 - sites-env.sh
@@ -53,7 +53,7 @@
 - alert-dialog.tsx
 - Eshan Borewells website
 - renderInternalPdf
-- Button
+- pagination.tsx
 - drawer.tsx
 - form.tsx
 - select.tsx
@@ -64,12 +64,11 @@
 - V2 quote setup
 - scripts
 - connector-preview.d.ts
-- alert.tsx
+- react
 - Eshan Borewells GEO/AEO implementation report
 - ConnectorBinding
 - install-pnpm.sh
 - bubble.tsx
-- radix-ui
 - ConnectorContent
 - Search and AI visibility measurement log
 - dropdown-menu.tsx
@@ -84,16 +83,16 @@
 - engines
 - postcss.config.mjs
 - build-verified.sh
-- internal-document.test.ts
+- message-scroller.tsx
 - ConnectorFailureStatus
 - ConnectorResult
 - Json
 - tabs.tsx
-- ref_node_assert
+- sitemap.xml/route.ts
 - LeadForm
-- button-group.tsx
-- internal-result.tsx
-- page-schema.ts
+- resizable.tsx
+- Internal generators login
+- business-config.ts
 
 ## God Nodes (most connected - your core abstractions)
 1. `cn()` - 329 edges
@@ -116,45 +115,45 @@
   docs/superpowers/specs/2026-10-10-geo-aeo-design.md → components/ui/breadcrumb.tsx
 - `Implemented changes` --references--> `BreadcrumbList()`  [INFERRED]
   SEO_IMPLEMENTATION_REPORT.md → components/ui/breadcrumb.tsx
-- `AccordionContent()` --calls--> `cn()`  [EXTRACTED]
-  components/ui/accordion.tsx → lib/utils.ts
+- `RadioGroup()` --calls--> `cn()`  [EXTRACTED]
+  components/ui/radio-group.tsx → lib/utils.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (81 total, 16 thin omitted)
+## Communities (81 total, 17 thin omitted)
 
 ### Community 0 - "connector-preview-session.mjs"
 Cohesion: 0.06
 Nodes (33): json-rpc-2.0, raw-body, zod, active, binding, close(), descriptor, directory (+25 more)
 
 ### Community 1 - "cn"
-Cohesion: 0.07
-Nodes (40): Avatar(), AvatarBadge(), AvatarFallback(), AvatarGroup(), AvatarGroupCount(), AvatarImage(), BreadcrumbEllipsis(), BreadcrumbItem() (+32 more)
+Cohesion: 0.08
+Nodes (39): Avatar(), AvatarBadge(), AvatarFallback(), AvatarGroup(), AvatarGroupCount(), AvatarImage(), BreadcrumbEllipsis(), BreadcrumbItem() (+31 more)
 
 ### Community 2 - "sidebar.tsx"
 Cohesion: 0.07
-Nodes (40): Sheet(), SheetContent(), SheetDescription(), SheetFooter(), SheetHeader(), SheetOverlay(), SheetPortal(), SheetTitle() (+32 more)
+Nodes (42): InputGroupInput(), Input(), Sheet(), SheetContent(), SheetDescription(), SheetFooter(), SheetHeader(), SheetOverlay() (+34 more)
 
-### Community 3 - "react"
-Cohesion: 0.07
-Nodes (24): AccordionContent(), AccordionItem(), AccordionTrigger(), Checkbox(), HoverCardContent(), InputGroupInput(), InputGroupText(), InputGroupTextarea() (+16 more)
+### Community 3 - "utils.ts"
+Cohesion: 0.08
+Nodes (20): AccordionContent(), AccordionItem(), AccordionTrigger(), Badge(), badgeVariants, ButtonGroup(), ButtonGroupText(), buttonGroupVariants (+12 more)
 
 ### Community 4 - "pnpm-install.mjs"
 Cohesion: 0.07
-Nodes (27): Evidence-First GEO + AEO Implementation Plan, File Structure, Global Constraints, Plan self-review, Review Focus, Task 1: Public business facts and stable entity schema, Task 2: Answer-first content and safe locality differentiation, Task 3: Accurate sitemap and discovery coverage (+19 more)
+Nodes (28): homePage, Evidence-First GEO + AEO Implementation Plan, File Structure, Global Constraints, Plan self-review, Review Focus, Task 1: Public business facts and stable entity schema, Task 2: Answer-first content and safe locality differentiation (+20 more)
 
 ### Community 5 - "Eshan Borewells GEO + AEO: Phase 2 design"
 Cohesion: 0.06
 Nodes (29): BreadcrumbList(), 1. Explicit public-facts model, 2. Content model that differentiates service from locality intent, 3. Entity and structured-data alignment, 4. Crawl and discovery accuracy, 5. Safe technical hardening, 6. Measurement and evidence operations, Acceptance criteria (+21 more)
 
 ### Community 6 - "config.ts"
-Cohesion: 0.14
-Nodes (20): accessOptions, casingDiameters, casingMaterials, diameterOptions, fixedOperationalCosts, localities, machineOptions, machinePricing (+12 more)
+Cohesion: 0.11
+Nodes (20): casingDiameters, casingMaterials, diameterOptions, extras, fixedOperationalCosts, localities, machineOptions, machinePricing (+12 more)
 
 ### Community 7 - "delivery.ts"
-Cohesion: 0.15
-Nodes (23): GET(), maxDuration, runtime, headers, maxDuration, POST(), runtime, payload (+15 more)
+Cohesion: 0.16
+Nodes (22): GET(), maxDuration, runtime, headers, maxDuration, POST(), runtime, payload (+14 more)
 
 ### Community 8 - "dependencies"
 Cohesion: 0.07
@@ -165,8 +164,8 @@ Cohesion: 0.11
 Nodes (21): CustomerReview, CustomerReviews(), CustomerReviewsProps, customerRating, customerRatingSource, customerReviews, links, MobileMenu() (+13 more)
 
 ### Community 10 - "package.json"
-Cohesion: 0.08
-Nodes (24): name, private, type, version, @cloudflare/vite-plugin, @cloudflare/workers-types, cmdk, date-fns (+16 more)
+Cohesion: 0.07
+Nodes (26): name, private, type, version, @cloudflare/vite-plugin, @cloudflare/workers-types, cmdk, date-fns (+18 more)
 
 ### Community 11 - "connector-context.ts"
 Cohesion: 0.36
@@ -174,31 +173,31 @@ Nodes (3): bindings, getConnectorBinding(), connectorsForRequest()
 
 ### Community 12 - "combobox.tsx"
 Cohesion: 0.11
-Nodes (19): ComboboxChip(), ComboboxChips(), ComboboxChipsInput(), ComboboxClear(), ComboboxContent(), ComboboxEmpty(), ComboboxGroup(), ComboboxInput() (+11 more)
+Nodes (21): ComboboxChips(), ComboboxChipsInput(), ComboboxClear(), ComboboxContent(), ComboboxEmpty(), ComboboxGroup(), ComboboxInput(), ComboboxItem() (+13 more)
 
 ### Community 13 - "devDependencies"
 Cohesion: 0.09
 Nodes (22): devDependencies, @cloudflare/vite-plugin, @cloudflare/workers-types, drizzle-kit, eslint, eslint-config-next, json-rpc-2.0, raw-body (+14 more)
 
-### Community 14 - "lucide-react"
-Cohesion: 0.10
-Nodes (20): ConnectorError(), Command(), CommandDialog(), CommandGroup(), CommandInput(), CommandItem(), CommandList(), CommandSeparator() (+12 more)
+### Community 14 - "command.tsx"
+Cohesion: 0.17
+Nodes (15): Command(), CommandDialog(), CommandGroup(), CommandInput(), CommandItem(), CommandList(), CommandSeparator(), CommandShortcut() (+7 more)
 
 ### Community 15 - "compilerOptions"
 Cohesion: 0.10
 Nodes (19): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+11 more)
 
 ### Community 16 - "quote-wizard.tsx"
-Cohesion: 0.19
-Nodes (21): MaterialQuantities(), Props, Props, QuoteWizard(), scrollTop(), submit(), SectionTitle(), formatRange() (+13 more)
+Cohesion: 0.14
+Nodes (25): Props, InternalResult(), download(), Props, Table(), MaterialQuantities(), Props, Props (+17 more)
 
 ### Community 17 - "field.tsx"
 Cohesion: 0.19
 Nodes (11): Field(), FieldContent(), FieldDescription(), FieldError(), FieldGroup(), FieldLabel(), FieldLegend(), FieldSet() (+3 more)
 
 ### Community 18 - "getProductionUrl"
-Cohesion: 0.23
-Nodes (9): GET(), revalidate, GET(), revalidate, getProductionUrl(), GET(), revalidate, buildSitemapXml() (+1 more)
+Cohesion: 0.20
+Nodes (8): metadata, siteUrl, websiteSchema, GET(), revalidate, GET(), revalidate, getProductionUrl()
 
 ### Community 19 - "components.json"
 Cohesion: 0.11
@@ -213,8 +212,8 @@ Cohesion: 0.12
 Nodes (12): Menubar(), MenubarCheckboxItem(), MenubarContent(), MenubarItem(), MenubarLabel(), MenubarPortal(), MenubarRadioItem(), MenubarSeparator() (+4 more)
 
 ### Community 22 - "calculate.ts"
-Cohesion: 0.13
-Nodes (20): calculateQuote(), CostLine, DrillingSlab, drillingSlabs(), Quote, slabCost(), drilling(), extras (+12 more)
+Cohesion: 0.12
+Nodes (26): calculateQuote(), CostLine, DrillingSlab, drillingSlabs(), Quote, quotePrice(), slabCost(), drilling() (+18 more)
 
 ### Community 23 - "context-menu.tsx"
 Cohesion: 0.12
@@ -224,9 +223,9 @@ Nodes (9): ContextMenuCheckboxItem(), ContextMenuContent(), ContextMenuItem(), C
 Cohesion: 0.20
 Nodes (11): Attachment(), AttachmentAction(), AttachmentActions(), AttachmentContent(), AttachmentDescription(), AttachmentGroup(), AttachmentMedia(), attachmentMediaVariants (+3 more)
 
-### Community 25 - "business-config.ts"
-Cohesion: 0.16
-Nodes (15): BUSINESS_ADDRESS, BUSINESS_EMAIL, BUSINESS_PHONE, publicBusinessFacts, WHATSAPP_NUMBER, EstimateQuoteGeneratorPage(), metadata, GetQuotePage() (+7 more)
+### Community 25 - "internal-auth.ts"
+Cohesion: 0.10
+Nodes (34): allowAttempt(), headers, POST(), runtime, POST(), runtime, BUSINESS_ADDRESS, BUSINESS_PHONE (+26 more)
 
 ### Community 26 - "empty.tsx"
 Cohesion: 0.29
@@ -237,12 +236,12 @@ Cohesion: 0.17
 Nodes (14): Carousel(), CarouselApi, CarouselContent(), CarouselContext, CarouselContextProps, CarouselItem(), CarouselNext(), CarouselOptions (+6 more)
 
 ### Community 28 - "[slug]/page.tsx"
-Cohesion: 0.29
-Nodes (10): getRelatedSeoPages(), getSeoContent(), SeoContent, seoContentBySlug, getSeoPage(), SeoPage, seoPages, generateMetadata() (+2 more)
+Cohesion: 0.25
+Nodes (11): getRelatedSeoPages(), getSeoContent(), SeoContent, seoContentBySlug, getIndexableSeoPages(), getSeoPage(), SeoPage, seoPages (+3 more)
 
-### Community 29 - "marker.tsx"
-Cohesion: 0.50
-Nodes (4): Marker(), MarkerContent(), MarkerIcon(), markerVariants
+### Community 29 - "lucide-react"
+Cohesion: 0.30
+Nodes (8): ConnectorError(), Button(), buttonVariants, Calendar(), CalendarDayButton(), ComboboxChip(), DialogFooter(), lucide-react
 
 ### Community 30 - "route.ts"
 Cohesion: 0.33
@@ -257,8 +256,8 @@ Cohesion: 0.14
 Nodes (13): HOME, MINIFLARE_REGISTRY_PATH, npm_config_audit, npm_config_cache, npm_config_fund, npm_config_update_notifier, sites-env.sh script, SITES_ENV_READY (+5 more)
 
 ### Community 33 - "item.tsx"
-Cohesion: 0.18
-Nodes (12): Item(), ItemActions(), ItemContent(), ItemDescription(), ItemFooter(), ItemGroup(), ItemHeader(), ItemMedia() (+4 more)
+Cohesion: 0.14
+Nodes (16): ButtonGroupSeparator(), FieldSeparator(), Item(), ItemActions(), ItemContent(), ItemDescription(), ItemFooter(), ItemGroup() (+8 more)
 
 ### Community 34 - "alert-dialog.tsx"
 Cohesion: 0.18
@@ -269,12 +268,12 @@ Cohesion: 0.15
 Nodes (13): Customer reviews, Deployment and enquiries, Diagnostic Commands, Eshan Borewells website, Evidence-first SEO / GEO / AEO, Included Shape, Learn More, Local D1 migrations (+5 more)
 
 ### Community 36 - "renderInternalPdf"
-Cohesion: 0.52
-Nodes (7): renderInternalPdf(), ensure(), header(), paragraph(), row(), section(), summary()
+Cohesion: 0.43
+Nodes (8): downloadInternalPdf(), renderInternalPdf(), ensure(), header(), paragraph(), row(), section(), summary()
 
-### Community 37 - "Button"
-Cohesion: 0.12
-Nodes (19): Button(), buttonVariants, Calendar(), CalendarDayButton(), DialogFooter(), MessageScroller(), MessageScrollerButton(), MessageScrollerContent() (+11 more)
+### Community 37 - "pagination.tsx"
+Cohesion: 0.28
+Nodes (7): Pagination(), PaginationContent(), PaginationEllipsis(), PaginationLink(), PaginationLinkProps, PaginationNext(), PaginationPrevious()
 
 ### Community 38 - "drawer.tsx"
 Cohesion: 0.20
@@ -297,8 +296,8 @@ Cohesion: 0.24
 Nodes (9): NavigationMenu(), NavigationMenuContent(), NavigationMenuIndicator(), NavigationMenuItem(), NavigationMenuLink(), NavigationMenuList(), NavigationMenuTrigger(), navigationMenuTriggerStyle (+1 more)
 
 ### Community 43 - "class-variance-authority"
-Cohesion: 0.39
-Nodes (6): ToggleGroup(), ToggleGroupContext, ToggleGroupItem(), Toggle(), toggleVariants, class-variance-authority
+Cohesion: 0.15
+Nodes (14): Alert(), AlertDescription(), AlertTitle(), alertVariants, Marker(), MarkerContent(), MarkerIcon(), markerVariants (+6 more)
 
 ### Community 44 - "popover.tsx"
 Cohesion: 0.25
@@ -316,9 +315,9 @@ Nodes (9): scripts, build, dev, graph:update, lint, start, test, test:quote (+1 
 Cohesion: 0.50
 Nodes (3): Cloudflare, Env, virtual:sites-connector-preview
 
-### Community 48 - "alert.tsx"
-Cohesion: 0.50
-Nodes (4): Alert(), AlertDescription(), AlertTitle(), alertVariants
+### Community 48 - "react"
+Cohesion: 0.22
+Nodes (5): InputOTP(), InputOTPGroup(), InputOTPSlot(), input-otp, react
 
 ### Community 49 - "Eshan Borewells GEO/AEO implementation report"
 Cohesion: 0.25
@@ -331,10 +330,6 @@ Nodes (7): acquire_shared_lock(), can_write_directory(), release_shared_lock(), 
 ### Community 52 - "bubble.tsx"
 Cohesion: 0.38
 Nodes (6): Bubble(), BubbleContent(), BubbleGroup(), BubbleReactions(), bubbleReactionsVariants, bubbleVariants
-
-### Community 53 - "radix-ui"
-Cohesion: 0.18
-Nodes (3): Badge(), badgeVariants, radix-ui
 
 ### Community 55 - "Search and AI visibility measurement log"
 Cohesion: 0.33
@@ -356,53 +351,53 @@ Nodes (3): eslintConfig, eslint, eslint-config-next
 Cohesion: 0.67
 Nodes (3): sharp, overrides, miniflare
 
-### Community 70 - "internal-document.test.ts"
-Cohesion: 0.33
-Nodes (3): input, quote, initialInput
+### Community 70 - "message-scroller.tsx"
+Cohesion: 0.25
+Nodes (6): MessageScroller(), MessageScrollerButton(), MessageScrollerContent(), MessageScrollerItem(), MessageScrollerViewport(), @shadcn/react
 
 ### Community 75 - "tabs.tsx"
 Cohesion: 0.40
 Nodes (5): Tabs(), TabsContent(), TabsList(), tabsListVariants, TabsTrigger()
 
-### Community 76 - "ref_node_assert"
-Cohesion: 0.27
-Nodes (4): homePage, getIndexableSeoPages(), nextConfig, next
+### Community 76 - "sitemap.xml/route.ts"
+Cohesion: 0.48
+Nodes (4): GET(), revalidate, buildSitemapXml(), escapeXml()
 
 ### Community 77 - "LeadForm"
 Cohesion: 0.25
 Nodes (8): EnquiryPopup(), EnquiryPopupProps, LeadDetails, LeadForm(), openWhatsappDraft(), readDetails(), submit(), LeadFormProps
 
-### Community 78 - "button-group.tsx"
-Cohesion: 0.36
-Nodes (6): ButtonGroup(), ButtonGroupSeparator(), ButtonGroupText(), buttonGroupVariants, FieldSeparator(), Separator()
+### Community 78 - "resizable.tsx"
+Cohesion: 0.40
+Nodes (3): ResizableHandle(), ResizablePanelGroup(), react-resizable-panels
 
-### Community 79 - "internal-result.tsx"
-Cohesion: 0.27
-Nodes (8): downloadInternalPdf(), Props, InternalResult(), download(), Props, Table(), InternalDocument, jspdf
+### Community 79 - "Internal generators login"
+Cohesion: 0.50
+Nodes (3): Internal generators login, Required hosting configuration, Session and password rotation
 
-### Community 80 - "page-schema.ts"
-Cohesion: 0.24
-Nodes (9): metadata, siteUrl, websiteSchema, buildHomePageSchema(), buildIndexablePageSchemas(), buildLocalBusinessSchema(), buildWebsiteSchema(), IndexablePage (+1 more)
+### Community 80 - "business-config.ts"
+Cohesion: 0.23
+Nodes (14): BUSINESS_EMAIL, publicBusinessFacts, PUBLIC_BUSINESS_DESCRIPTION, PUBLIC_BUSINESS_NAME, PUBLIC_SERVICE_AREA, PUBLIC_SERVICE_NAMES, PublicBusinessFacts, requiresOwnerVerification (+6 more)
 
 ## Knowledge Gaps
-- **308 isolated node(s):** `machinePricing`, `fixedOperationalCosts`, `sensorFixedOperationalCosts`, `input`, `quote` (+303 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 393 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **16 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **319 isolated node(s):** `runtime`, `headers`, `runtime`, `metadata`, `dynamic` (+314 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 407 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **17 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `cn()` connect `cn` to `sidebar.tsx`, `react`, `Eshan Borewells GEO + AEO: Phase 2 design`, `app/page.tsx`, `combobox.tsx`, `lucide-react`, `field.tsx`, `menubar.tsx`, `context-menu.tsx`, `attachment.tsx`, `empty.tsx`, `carousel.tsx`, `marker.tsx`, `chart.tsx`, `item.tsx`, `alert-dialog.tsx`, `Button`, `drawer.tsx`, `form.tsx`, `select.tsx`, `navigation-menu.tsx`, `class-variance-authority`, `popover.tsx`, `alert.tsx`, `bubble.tsx`, `radix-ui`, `dropdown-menu.tsx`, `tabs.tsx`, `button-group.tsx`?**
-  _High betweenness centrality (0.198) - this node is a cross-community bridge._
-- **Why does `react` connect `react` to `cn`, `sidebar.tsx`, `app/page.tsx`, `package.json`, `combobox.tsx`, `lucide-react`, `quote-wizard.tsx`, `field.tsx`, `quote-pdf.ts`, `menubar.tsx`, `context-menu.tsx`, `attachment.tsx`, `carousel.tsx`, `marker.tsx`, `chart.tsx`, `item.tsx`, `alert-dialog.tsx`, `Button`, `drawer.tsx`, `form.tsx`, `select.tsx`, `navigation-menu.tsx`, `class-variance-authority`, `popover.tsx`, `alert.tsx`, `bubble.tsx`, `radix-ui`, `dropdown-menu.tsx`, `tabs.tsx`, `LeadForm`, `button-group.tsx`, `internal-result.tsx`?**
-  _High betweenness centrality (0.190) - this node is a cross-community bridge._
-- **Why does `lucide-react` connect `lucide-react` to `cn`, `sidebar.tsx`, `react`, `app/page.tsx`, `package.json`, `combobox.tsx`, `quote-wizard.tsx`, `quote-pdf.ts`, `menubar.tsx`, `context-menu.tsx`, `business-config.ts`, `carousel.tsx`, `[slug]/page.tsx`, `Button`, `select.tsx`, `navigation-menu.tsx`, `dropdown-menu.tsx`, `sonner.tsx`, `LeadForm`, `internal-result.tsx`?**
-  _High betweenness centrality (0.188) - this node is a cross-community bridge._
-- **What connects `machinePricing`, `fixedOperationalCosts`, `sensorFixedOperationalCosts` to the rest of the system?**
-  _308 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `react` connect `react` to `cn`, `sidebar.tsx`, `utils.ts`, `app/page.tsx`, `package.json`, `combobox.tsx`, `command.tsx`, `quote-wizard.tsx`, `field.tsx`, `quote-pdf.ts`, `menubar.tsx`, `context-menu.tsx`, `attachment.tsx`, `carousel.tsx`, `lucide-react`, `chart.tsx`, `item.tsx`, `alert-dialog.tsx`, `pagination.tsx`, `drawer.tsx`, `form.tsx`, `select.tsx`, `navigation-menu.tsx`, `class-variance-authority`, `popover.tsx`, `bubble.tsx`, `dropdown-menu.tsx`, `message-scroller.tsx`, `tabs.tsx`, `LeadForm`?**
+  _High betweenness centrality (0.199) - this node is a cross-community bridge._
+- **Why does `cn()` connect `cn` to `sidebar.tsx`, `utils.ts`, `Eshan Borewells GEO + AEO: Phase 2 design`, `app/page.tsx`, `combobox.tsx`, `command.tsx`, `field.tsx`, `menubar.tsx`, `context-menu.tsx`, `attachment.tsx`, `empty.tsx`, `carousel.tsx`, `lucide-react`, `chart.tsx`, `item.tsx`, `alert-dialog.tsx`, `pagination.tsx`, `drawer.tsx`, `form.tsx`, `select.tsx`, `navigation-menu.tsx`, `class-variance-authority`, `popover.tsx`, `react`, `bubble.tsx`, `dropdown-menu.tsx`, `message-scroller.tsx`, `tabs.tsx`, `resizable.tsx`?**
+  _High betweenness centrality (0.193) - this node is a cross-community bridge._
+- **Why does `lucide-react` connect `lucide-react` to `cn`, `sidebar.tsx`, `utils.ts`, `app/page.tsx`, `package.json`, `combobox.tsx`, `command.tsx`, `quote-wizard.tsx`, `quote-pdf.ts`, `menubar.tsx`, `context-menu.tsx`, `internal-auth.ts`, `carousel.tsx`, `[slug]/page.tsx`, `pagination.tsx`, `select.tsx`, `navigation-menu.tsx`, `react`, `dropdown-menu.tsx`, `sonner.tsx`, `message-scroller.tsx`, `LeadForm`, `resizable.tsx`?**
+  _High betweenness centrality (0.181) - this node is a cross-community bridge._
+- **What connects `runtime`, `headers`, `runtime` to the rest of the system?**
+  _319 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `connector-preview-session.mjs` be split into smaller, more focused modules?**
   _Cohesion score 0.0613107822410148 - nodes in this community are weakly interconnected._
 - **Should `cn` be split into smaller, more focused modules?**
-  _Cohesion score 0.07397959183673469 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07535460992907801 - nodes in this community are weakly interconnected._
 - **Should `sidebar.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.06938020351526364 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.0653061224489796 - nodes in this community are weakly interconnected._
