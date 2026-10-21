@@ -78,3 +78,28 @@ test("Robo Rig material quantities use its own unchanged rate card", () => {
   assert.equal(document.materialSubtotal, "₹1,380");
   assert.equal(document.total, "₹2,39,880");
 });
+
+test("edited material rates affect invoice amounts and balance and appear as rates only in estimates", () => {
+  const original = structuredClone(quote.variableMaterials);
+  const fields = { date: "", advance: "50000", materials: { 'Water Injection': "12.5" }, materialRates: { 'Water Injection': "20.50" } };
+  const document = buildInternalDocument(quote, "invoice", fields);
+  assert.deepEqual(document.materialRows.at(-1), ["Water Injection", "₹20.5/ft", "12.5 ft", "₹256.25"]);
+  assert.equal(document.total, "₹1,41,006.25");
+  assert.deepEqual(document.payments[1], ["Balance due", "₹91,006.25"]);
+  const estimate = buildInternalDocument(quote, "estimate", fields);
+  assert.deepEqual(estimate.materialRows.at(-1), ["Water Injection", "₹20.5/ft"]);
+  assert.equal(estimate.total, null);
+  assert.deepEqual(quote.variableMaterials, original);
+  for (const rate of ["-1", "NaN", "0.001", "1000001"]) assert.throws(() => buildInternalDocument(quote, "estimate", { ...fields, materialRates: { 'Water Injection': rate } }));
+  assert.equal(buildInternalDocument(quote, "invoice", { ...fields, materialRates: { 'Water Injection': "" } }).materialRows.at(-1)?.[1], "₹15/ft");
+});
+
+test("estimate has the revised booking, settlement and idle-charge terms without the rod-time point", () => {
+  const estimate = buildInternalDocument(quote, "estimate", { date: "", advance: "" });
+  assert.equal(estimate.terms.length, 4);
+  assert.match(estimate.terms[0], /Booking amount of Rs 10,000\/- on booking and 70,000\/- must be paid before drilling/);
+  assert.equal(estimate.terms[1], "Balance amount has to be settled immediately after work completion on the spot.");
+  assert.match(estimate.terms[2], /GST at 18%/);
+  assert.equal(estimate.terms[3], "Drilling hours are 6 am to 9 pm. If the vehicle is kept idle, ₹4,000 per hour will be charged.");
+  assert.ok(!estimate.terms.some((term) => term.includes("15-minute")));
+});

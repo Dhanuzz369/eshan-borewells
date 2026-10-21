@@ -2,7 +2,23 @@ import { formatRange } from "./calculate";
 import type { QuotationData } from "./document";
 
 export type DocumentMode = "invoice" | "estimate";
-export type ManualFields = { date: string; advance: string; balance?: string; materials?: Record<string, string>; yieldReport?: Record<string, string> };
+export type ManualFields = { date: string; advance: string; balance?: string; materials?: Record<string, string>; materialRates?: Record<string, string>; yieldReport?: Record<string, string> };
+export const estimateTerms = [
+  "Booking amount of Rs 10,000/- on booking and 70,000/- must be paid before drilling. If more than 2.5 inches of water, boulders, silt or a dry gap are found, further drilling is not possible.",
+  "Balance amount has to be settled immediately after work completion on the spot.",
+  "GST at 18% is applicable on the bill if required. GST is not included in the displayed estimate.",
+  "Drilling hours are 6 am to 9 pm. If the vehicle is kept idle, ₹4,000 per hour will be charged.",
+] as const;
+
+export function resolveMaterialRates(materials: QuotationData["variableMaterials"], overrides: Record<string, string> = {}) {
+  return materials.map((material) => {
+    const raw = (overrides[material.label] ?? "").trim();
+    if (!raw) return { ...material };
+    const rate = Number(raw);
+    if (!/^\d+(\.\d{1,2})?$/.test(raw) || !Number.isFinite(rate) || rate < 0 || rate > 1000000) throw new Error(`Enter a rate from ₹0 to ₹10,00,000 with at most two decimal places for ${material.label}.`);
+    return { ...material, rate };
+  });
+}
 export const yieldReportFields = ["Rig Name", "Water Yield", "Water Layer at: 1)", "Water Layer at: 2)", "Water Layer at: 3)", "Remarks", "Boulders / Silt", "Suitable Pumps: Compressor / Submersible"] as const;
 
 export function invoicePayments(total: number | null, advance: string) {
@@ -21,7 +37,7 @@ export function calculateMaterialUsage(materials: QuotationData["variableMateria
     if (raw && (!/^\d+(\.\d{1,2})?$/.test(raw) || !Number.isFinite(quantity) || quantity < 0 || quantity > 1000000 || (material.unit !== "ft" && !Number.isInteger(quantity)))) {
       throw new Error(`Enter a valid ${material.unit === "ft" ? "quantity (up to two decimals)" : "whole-number quantity"} for ${material.label}.`);
     }
-    const amountPaise = Math.round(quantity * material.rate * 100);
+    const amountPaise = Math.round(Math.round(quantity * 100) * Math.round(material.rate * 100) / 100);
     subtotalPaise += amountPaise;
     return [material.label, `₹${material.rate}/${material.unit}`, quantity > 0 ? `${quantity} ${material.unit}` : "", quantity > 0 ? formatRange(amountPaise / 100, amountPaise / 100) : ""];
   });
@@ -38,7 +54,8 @@ export function buildInternalDocument(quotation: QuotationData, mode: DocumentMo
   const invoice = mode === "invoice";
   const date = fields.date ? new Date(`${fields.date}T12:00:00+05:30`) : null;
   if (date && Number.isNaN(date.getTime())) throw new Error("Enter a valid document date.");
-  const materials = invoice ? calculateMaterialUsage(quotation.variableMaterials, fields.materials) : null;
+  const materialRates = resolveMaterialRates(quotation.variableMaterials, fields.materialRates);
+  const materials = invoice ? calculateMaterialUsage(materialRates, fields.materials) : null;
   const total = quotation.estimatedTotal === null ? null : Math.round((quotation.estimatedTotal + (materials?.subtotal ?? 0)) * 100) / 100;
   return {
     mode,
@@ -53,13 +70,13 @@ export function buildInternalDocument(quotation: QuotationData, mode: DocumentMo
     fixedRows: quotation.fixedOperationalCosts.map((cost) => [cost.label, formatRange(cost.min, cost.max)]),
     fixedSubtotal: invoice ? formatRange(quotation.fixedSubtotal, quotation.fixedSubtotal) : null,
     materialHeaders: invoice ? ["Material", "Rate", "Quantity", "Amount"] : ["Material", "Rate"],
-    materialRows: materials?.rows ?? quotation.variableMaterials.map((material) => [material.label, `₹${material.rate}/${material.unit}`]),
+    materialRows: materials?.rows ?? materialRates.map((material) => [material.label, `₹${material.rate}/${material.unit}`]),
     materialSubtotal: materials ? formatRange(materials.subtotal, materials.subtotal) : null,
     total: invoice ? total === null ? quotation.estimatedTotalFormatted : formatRange(total, total) : null,
     payments: invoice ? invoicePayments(total, fields.advance) : [],
     labels: { drilling: "Drilling subtotal (A)", fixedHeading: "Fixed operational costs (B)", fixed: "Fixed subtotal (B)", materials: "Materials subtotal (C)", total: "Invoice total (A+B+C)" },
     yieldReport: invoice ? yieldReportFields.map((label) => [label, fields.yieldReport?.[label] ?? ""]) : [],
-    terms: invoice ? [] : quotation.terms,
+    terms: invoice ? [] : estimateTerms,
   };
 }
 export type InternalDocument = ReturnType<typeof buildInternalDocument>;
