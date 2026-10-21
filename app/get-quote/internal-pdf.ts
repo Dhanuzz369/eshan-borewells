@@ -21,18 +21,28 @@ export function renderInternalPdf({ quotation, document, phone, address, fontBas
   let tableHeaders: string[] = [];
   const text = (value: string, x: number, at: number, size = 10, align: "left" | "right" = "left") => { pdf.setFontSize(size); pdf.setTextColor(19, 44, 59); pdf.text(value, x, at, { align }); };
   function header() {
-    pdf.setFillColor(19,44,59); pdf.rect(0,0,210,30,"F"); pdf.setTextColor(255,255,255); pdf.setFontSize(19); pdf.text("ESHAN BOREWELLS",16,14); pdf.setFontSize(9); pdf.text(document.title,16,23); y=39;
+    pdf.setFillColor(12,48,65); pdf.rect(0,0,210,45,"F");
+    pdf.setFillColor(17,137,139); pdf.rect(0,45,210,2,"F");
+    pdf.setTextColor(255,255,255); pdf.setFontSize(19); pdf.text("ESHAN BOREWELLS",16,14);
+    pdf.setFontSize(10); pdf.text(document.title.toUpperCase(),16,23);
+    pdf.setTextColor(195,228,232); pdf.setFontSize(8); pdf.text("Borewell drilling & water solutions",16,31);
+    pdf.setTextColor(255,255,255); pdf.setFontSize(11); pdf.text(phone,194,13,{align:"right"});
+    pdf.setFontSize(9); pdf.text("www.eshanborewells.com",194,21,{align:"right"});
+    pdf.setTextColor(210,233,236); pdf.setFontSize(8); pdf.text(`Office: ${address}`,16,40);
+    pdf.link(142,7,52,9,{url:`tel:${phone.replace(/[^+\d]/g,"")}`});
+    pdf.link(143,17,51,7,{url:"https://www.eshanborewells.com/"});
+    y=56;
   }
-  function ensure(height: number) { if (y+height > 272) { pdf.addPage(); header(); } }
+  function ensure(height: number) { if (y+height > 266) { pdf.addPage(); header(); } }
   function paragraph(value: string, size=9, width=178) { pdf.setFontSize(size); const lines=pdf.splitTextToSize(value,width) as string[]; for(const row of lines){ensure(5);text(row,16,y,size);y+=5;} }
   function section(title: string) { tableHeaders=[];ensure(22); y+=5;text(title,16,y,12);y+=7; }
   function row(values: string[], heading=false) {
     const last=values.length-1;
-    const widths=values.length===3?[87,43,48]:[130,48];
+    const widths=values.length===4?[78,35,28,37]:values.length===3?[87,43,48]:[130,48];
     pdf.setFontSize(heading?8.5:9);
     const lines=values.map((value,index)=>pdf.splitTextToSize(value,widths[index]-8) as string[]);
     const height=Math.max(8.5,...lines.map((part)=>part.length*4.7+3.5));
-    if (y + height > 272) { ensure(height); if (!heading && tableHeaders.length) row(tableHeaders,true); }
+    if (y + height > 266) { ensure(height); if (!heading && tableHeaders.length) row(tableHeaders,true); }
     if (heading) tableHeaders=values;
     if(heading){pdf.setFillColor(237,243,245);pdf.rect(16,y-4,178,height,"F");}
     let x=20;
@@ -48,10 +58,16 @@ export function renderInternalPdf({ quotation, document, phone, address, fontBas
   if(document.drillingSubtotal)summary("Drilling subtotal",document.drillingSubtotal);
   section(document.mode==="invoice"?"Fixed operational costs":"Fixed operational rates");row(["Description",document.mode==="invoice"?"Amount":"Rate"],true);for(const values of document.fixedRows)row(values);
   if(document.fixedSubtotal)summary("Fixed subtotal",document.fixedSubtotal);
-  if(document.total){summary("Invoice total",document.total);for(const[label,value]of document.payments)summary(label,value);paragraph("Drilling plus fixed operational costs. Materials and conditional charges are separate. GST is not included.",8.5);}
-  section("Variable material rates");paragraph("Charged according to actual site usage, separately from drilling and operational charges.",8.5);y+=2;row(["Material","Rate"],true);for(const values of document.materialRows)row(values);
+  section(document.mode === "invoice" ? "Variable materials used" : "Variable material rates");paragraph(document.mode === "invoice" ? "Entered quantities are included in the invoice total. Blank materials are not billed." : "Charged according to actual site usage; rates only.",8.5);y+=2;row(document.materialHeaders,true);for(const values of document.materialRows)row(values);
+  if(document.materialSubtotal)summary("Materials subtotal",document.materialSubtotal);
+  if(document.total){ensure(55);summary("Invoice total",document.total);for(const[label,value]of document.payments)summary(label,value);paragraph("Includes drilling, fixed operational costs and entered materials. Conditional charges and GST are not included.",8.5);}
   if(document.terms.length){section("Notes & terms");for(const[index,term]of document.terms.entries()){paragraph(`${index+1}. ${term}`,9);y+=3;}}
-  section("Eshan Borewells");paragraph(address,9);paragraph(`${phone} | www.eshanborewells.com`,9);
-  const count=pdf.getNumberOfPages();for(let page=1;page<=count;page++){pdf.setPage(page);pdf.setDrawColor(221,230,234);pdf.line(16,282,194,282);text(phone,16,288,8);pdf.link(16,284,65,7,{url:`tel:${phone.replace(/[^+\d]/g,"")}`});text(`${page} / ${count}`,194,288,8,"right");}
+  const count=pdf.getNumberOfPages();for(let page=1;page<=count;page++){
+    pdf.setPage(page);pdf.setFillColor(235,245,246);pdf.rect(0,276,210,21,"F");pdf.setDrawColor(17,137,139);pdf.line(16,276,194,276);
+    text("ESHAN BOREWELLS",16,282,8);text(phone,96,282,8);text(`${page} / ${count}`,194,282,8,"right");
+    text("www.eshanborewells.com",16,287,8);text(address,16,292,7.5);
+    pdf.link(92,278,60,6,{url:`tel:${phone.replace(/[^+\d]/g,"")}`});
+    pdf.link(16,283,75,6,{url:"https://www.eshanborewells.com/"});
+  }
   return pdf;
 }

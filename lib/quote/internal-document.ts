@@ -2,7 +2,22 @@ import { formatRange } from "./calculate";
 import type { QuotationData } from "./document";
 
 export type DocumentMode = "invoice" | "estimate";
-export type ManualFields = { date: string; advance: string; balance: string };
+export type ManualFields = { date: string; advance: string; balance: string; materials?: Record<string, string> };
+
+export function calculateMaterialUsage(materials: QuotationData["variableMaterials"], quantities: Record<string, string> = {}) {
+  let subtotalPaise = 0;
+  const rows = materials.map((material) => {
+    const raw = (quantities[material.label] ?? "").trim();
+    const quantity = raw === "" ? 0 : Number(raw);
+    if (raw && (!/^\d+(\.\d{1,2})?$/.test(raw) || !Number.isFinite(quantity) || quantity < 0 || quantity > 1000000 || (material.unit !== "ft" && !Number.isInteger(quantity)))) {
+      throw new Error(`Enter a valid ${material.unit === "ft" ? "quantity (up to two decimals)" : "whole-number quantity"} for ${material.label}.`);
+    }
+    const amountPaise = Math.round(quantity * material.rate * 100);
+    subtotalPaise += amountPaise;
+    return [material.label, `₹${material.rate}/${material.unit}`, quantity > 0 ? `${quantity} ${material.unit}` : "", quantity > 0 ? formatRange(amountPaise / 100, amountPaise / 100) : ""];
+  });
+  return { rows, subtotal: subtotalPaise / 100 };
+}
 
 function manualMoney(value: string) {
   if (!value.trim()) return "";
@@ -14,6 +29,8 @@ export function buildInternalDocument(quotation: QuotationData, mode: DocumentMo
   const invoice = mode === "invoice";
   const date = fields.date ? new Date(`${fields.date}T12:00:00+05:30`) : null;
   if (date && Number.isNaN(date.getTime())) throw new Error("Enter a valid document date.");
+  const materials = invoice ? calculateMaterialUsage(quotation.variableMaterials, fields.materials) : null;
+  const total = quotation.estimatedTotal === null ? null : Math.round((quotation.estimatedTotal + (materials?.subtotal ?? 0)) * 100) / 100;
   return {
     mode,
     title: invoice ? "Invoice" : "Estimate Quotation",
@@ -26,8 +43,10 @@ export function buildInternalDocument(quotation: QuotationData, mode: DocumentMo
     drillingSubtotal: invoice ? formatRange(quotation.drillingSubtotal, quotation.drillingSubtotal) : null,
     fixedRows: quotation.fixedOperationalCosts.map((cost) => [cost.label, formatRange(cost.min, cost.max)]),
     fixedSubtotal: invoice ? formatRange(quotation.fixedSubtotal, quotation.fixedSubtotal) : null,
-    materialRows: quotation.variableMaterials.map((material) => [material.label, `₹${material.rate}/${material.unit}`]),
-    total: invoice ? quotation.estimatedTotalFormatted : null,
+    materialHeaders: invoice ? ["Material", "Rate", "Quantity", "Amount"] : ["Material", "Rate"],
+    materialRows: materials?.rows ?? quotation.variableMaterials.map((material) => [material.label, `₹${material.rate}/${material.unit}`]),
+    materialSubtotal: materials ? formatRange(materials.subtotal, materials.subtotal) : null,
+    total: invoice ? total === null ? quotation.estimatedTotalFormatted : formatRange(total, total) : null,
     payments: invoice ? [["Advance received", manualMoney(fields.advance)], ["Balance due", manualMoney(fields.balance)]] : [],
     terms: invoice ? quotation.terms.filter((term) => !term.includes("valid for")).map((term) => term.replace("displayed estimate", "invoice total")) : quotation.terms,
   };
