@@ -4,10 +4,11 @@ import type { QuotationData } from "./document";
 export type DocumentMode = "invoice" | "estimate";
 export type ManualFields = { date: string; advance: string; balance?: string; materials?: Record<string, string>; materialRates?: Record<string, string>; yieldReport?: Record<string, string> };
 export const estimateTerms = [
-  "Booking amount of Rs 10,000/- on booking and 70,000/- must be paid before drilling. If more than 2.5 inches of water, boulders, silt or a dry gap are found, further drilling is not possible.",
+  "Booking amount of Rs 10,000/- on booking and 70,000/- must be paid before drilling.",
   "Balance amount has to be settled immediately after work completion on the spot.",
   "GST at 18% is applicable on the bill if required. GST is not included in the displayed estimate.",
   "Drilling hours are 6 am to 9 pm. If the vehicle is kept idle, ₹4,000 per hour will be charged.",
+  "If more than 2.5 inches of water, boulders, silt or a dry gap are found, further drilling is not possible.",
 ] as const;
 
 export function resolveMaterialRates(materials: QuotationData["variableMaterials"], overrides: Record<string, string> = {}) {

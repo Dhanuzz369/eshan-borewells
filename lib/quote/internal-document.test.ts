@@ -51,9 +51,9 @@ test("estimate retains depth slabs and rates but has no amounts, subtotals, tota
 });
 
 test("invoice multiplies selected material quantities and adds them once to the grand total", () => {
-  const document = buildInternalDocument(quote, "invoice", { date: "", advance: "", balance: "", materials: { '6.5" M.S. Heavy Casing Pipe': "12.5", 'M.S. Welding': "2", 'Water Injection': "25" } });
+  const document = buildInternalDocument(quote, "invoice", { date: "", advance: "", balance: "", materials: { 'M.S Casing Pipe Regular': "12.5", 'M.S. Welding': "2", 'Water Injection': "25" } });
   assert.deepEqual(document.materialHeaders, ["Material", "Rate", "Quantity", "Amount"]);
-  assert.deepEqual(document.materialRows[0], ['6.5" M.S. Heavy Casing Pipe', '₹545/ft', '12.5 ft', '₹6,812.5']);
+  assert.deepEqual(document.materialRows[0], ['M.S Casing Pipe Regular', '₹545/ft', '12.5 ft', '₹6,812.5']);
   assert.equal(document.materialSubtotal, "₹7,687.5");
   assert.equal(document.total, "₹1,48,437.5");
   assert.equal(document.materialRows[1][2], "");
@@ -94,12 +94,23 @@ test("edited material rates affect invoice amounts and balance and appear as rat
   assert.equal(buildInternalDocument(quote, "invoice", { ...fields, materialRates: { 'Water Injection': "" } }).materialRows.at(-1)?.[1], "₹15/ft");
 });
 
-test("estimate has the revised booking, settlement and idle-charge terms without the rod-time point", () => {
+test("estimate has five terms with the drilling-condition warning last", () => {
   const estimate = buildInternalDocument(quote, "estimate", { date: "", advance: "" });
-  assert.equal(estimate.terms.length, 4);
+  assert.equal(estimate.terms.length, 5);
   assert.match(estimate.terms[0], /Booking amount of Rs 10,000\/- on booking and 70,000\/- must be paid before drilling/);
   assert.equal(estimate.terms[1], "Balance amount has to be settled immediately after work completion on the spot.");
   assert.match(estimate.terms[2], /GST at 18%/);
   assert.equal(estimate.terms[3], "Drilling hours are 6 am to 9 pm. If the vehicle is kept idle, ₹4,000 per hour will be charged.");
   assert.ok(!estimate.terms.some((term) => term.includes("15-minute")));
+  assert.ok(!estimate.terms[0].includes("boulders"));
+  assert.equal(estimate.terms[4], "If more than 2.5 inches of water, boulders, silt or a dry gap are found, further drilling is not possible.");
+});
+
+test("both document types use renamed materials without changing the approved rates", () => {
+  for (const mode of ["invoice", "estimate"] as const) {
+    const document = buildInternalDocument(quote, mode, { date: "", advance: "" });
+    assert.deepEqual(document.materialRows[0].slice(0,2), ["M.S Casing Pipe Regular", "₹545/ft"]);
+    assert.deepEqual(document.materialRows[1].slice(0,2), ["M.S Casing Pipe Heavy", "₹595/ft"]);
+    assert.deepEqual(document.materialRows[7].slice(0,2), ['PVC Filter Pipe (4 ½" or 5") 6KG Pressure ISI Brand', "₹135/ft"]);
+  }
 });

@@ -59,7 +59,7 @@ export const variableMaterials = [
   { label: '7" M.S. Welding', rate: 300, unit: "each" },
   { label: '7" M.S. Collar', rate: 300, unit: "each" },
   { label: '7" M.S. Cap', rate: 300, unit: "each" },
-  { label: '4½" or 5" 6 kg ISI Mark PVC Slotted Casing Pipe', rate: 130, unit: "ft", certification: "ISI Mark" },
+  { label: 'PVC Filter Pipe (4 ½" or 5") 6KG Pressure ISI Brand', rate: 130, unit: "ft", certification: "ISI Mark" },
   { label: "Water Injection", rate: 8, unit: "ft" },
 ] as const;
 
@@ -69,14 +69,14 @@ export const sensorFixedOperationalCosts = [
   { key: "transport", label: "Transport Charges", amount: 2500 },
 ] as const;
 export const sensorVariableMaterials = [
-  { label: '6.5" M.S. Heavy Casing Pipe', rate: 545, unit: "ft" },
-  { label: '6.5" M.S. Heavy Duty Casing Pipe', rate: 595, unit: "ft" },
+  { label: 'M.S Casing Pipe Regular', rate: 545, unit: "ft" },
+  { label: 'M.S Casing Pipe Heavy', rate: 595, unit: "ft" },
   { label: '10" PVC Casing Pipe', rate: 450, unit: "ft" },
   { label: '12" PVC Casing Pipe', rate: 850, unit: "ft" },
   { label: 'M.S. Welding', rate: 250, unit: "joint" },
   { label: 'M.S. Collar', rate: 250, unit: "each" },
   { label: 'M.S. Cap', rate: 250, unit: "each" },
-  { label: 'Filter Pipe', rate: 135, unit: "ft" },
+  { label: 'PVC Filter Pipe (4 ½" or 5") 6KG Pressure ISI Brand', rate: 135, unit: "ft" },
   { label: 'Water Injection', rate: 15, unit: "ft" },
 ] as const;
 export const sensorTerms = [
