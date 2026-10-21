@@ -1,7 +1,7 @@
 # Graph Report - eshan-borewells  (2026-10-21)
 
 ## Corpus Check
-- 156 files · ~498,787 words
+- 156 files · ~498,874 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 9 file(s) not represented in the graph (top: .css 3, (none) 2, .ttf 2)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `7b2327b9`
+- Built from commit: `f4d12ab4`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -116,8 +116,8 @@
   docs/superpowers/specs/2026-10-10-geo-aeo-design.md → components/ui/breadcrumb.tsx
 - `Implemented changes` --references--> `BreadcrumbList()`  [INFERRED]
   SEO_IMPLEMENTATION_REPORT.md → components/ui/breadcrumb.tsx
-- `Empty()` --calls--> `cn()`  [EXTRACTED]
-  components/ui/empty.tsx → lib/utils.ts
+- `AccordionContent()` --calls--> `cn()`  [EXTRACTED]
+  components/ui/accordion.tsx → lib/utils.ts
 
 ## Import Cycles
 - None detected.
@@ -385,7 +385,7 @@ Cohesion: 0.24
 Nodes (9): metadata, siteUrl, websiteSchema, buildHomePageSchema(), buildIndexablePageSchemas(), buildLocalBusinessSchema(), buildWebsiteSchema(), IndexablePage (+1 more)
 
 ## Knowledge Gaps
-- **308 isolated node(s):** `Props`, `Props`, `input`, `quote`, `estimateTerms` (+303 more)
+- **308 isolated node(s):** `machinePricing`, `fixedOperationalCosts`, `sensorFixedOperationalCosts`, `input`, `quote` (+303 more)
   These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 393 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **16 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -393,12 +393,12 @@ Nodes (9): metadata, siteUrl, websiteSchema, buildHomePageSchema(), buildIndexab
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `cn()` connect `cn` to `sidebar.tsx`, `react`, `Eshan Borewells GEO + AEO: Phase 2 design`, `app/page.tsx`, `combobox.tsx`, `lucide-react`, `field.tsx`, `menubar.tsx`, `context-menu.tsx`, `attachment.tsx`, `empty.tsx`, `carousel.tsx`, `marker.tsx`, `chart.tsx`, `item.tsx`, `alert-dialog.tsx`, `Button`, `drawer.tsx`, `form.tsx`, `select.tsx`, `navigation-menu.tsx`, `class-variance-authority`, `popover.tsx`, `alert.tsx`, `bubble.tsx`, `radix-ui`, `dropdown-menu.tsx`, `tabs.tsx`, `button-group.tsx`?**
-  _High betweenness centrality (0.215) - this node is a cross-community bridge._
+  _High betweenness centrality (0.198) - this node is a cross-community bridge._
 - **Why does `react` connect `react` to `cn`, `sidebar.tsx`, `app/page.tsx`, `package.json`, `combobox.tsx`, `lucide-react`, `quote-wizard.tsx`, `field.tsx`, `quote-pdf.ts`, `menubar.tsx`, `context-menu.tsx`, `attachment.tsx`, `carousel.tsx`, `marker.tsx`, `chart.tsx`, `item.tsx`, `alert-dialog.tsx`, `Button`, `drawer.tsx`, `form.tsx`, `select.tsx`, `navigation-menu.tsx`, `class-variance-authority`, `popover.tsx`, `alert.tsx`, `bubble.tsx`, `radix-ui`, `dropdown-menu.tsx`, `tabs.tsx`, `LeadForm`, `button-group.tsx`, `internal-result.tsx`?**
-  _High betweenness centrality (0.186) - this node is a cross-community bridge._
+  _High betweenness centrality (0.190) - this node is a cross-community bridge._
 - **Why does `lucide-react` connect `lucide-react` to `cn`, `sidebar.tsx`, `react`, `app/page.tsx`, `package.json`, `combobox.tsx`, `quote-wizard.tsx`, `quote-pdf.ts`, `menubar.tsx`, `context-menu.tsx`, `business-config.ts`, `carousel.tsx`, `[slug]/page.tsx`, `Button`, `select.tsx`, `navigation-menu.tsx`, `dropdown-menu.tsx`, `sonner.tsx`, `LeadForm`, `internal-result.tsx`?**
-  _High betweenness centrality (0.151) - this node is a cross-community bridge._
-- **What connects `Props`, `Props`, `input` to the rest of the system?**
+  _High betweenness centrality (0.188) - this node is a cross-community bridge._
+- **What connects `machinePricing`, `fixedOperationalCosts`, `sensorFixedOperationalCosts` to the rest of the system?**
   _308 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `connector-preview-session.mjs` be split into smaller, more focused modules?**
   _Cohesion score 0.0613107822410148 - nodes in this community are weakly interconnected._

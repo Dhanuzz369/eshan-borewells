@@ -882,9 +882,9 @@
     "semantic_hash": ""
   },
   "lib/quote/config.ts": {
-    "mtime": 1792513565.5496335,
-    "seen": 1792513820.115378,
-    "ast_hash": "123539138c8de85192cdcc9e393ac56d",
+    "mtime": 1792582964.5270064,
+    "seen": 1792583042.481514,
+    "ast_hash": "863c36571609c2469f8a2e180ea57d4b",
     "semantic_hash": ""
   },
   "lib/quote/delivery.test.ts": {
@@ -936,9 +936,9 @@
     "semantic_hash": ""
   },
   "lib/quote/document.test.ts": {
-    "mtime": 1792513769.554898,
-    "seen": 1792513820.11538,
-    "ast_hash": "2524f04ebbae1ad418cd051ad9e3b27b",
+    "mtime": 1792582964.6007485,
+    "seen": 1792583042.481515,
+    "ast_hash": "6899628dca36c299ce55b68912514e2f",
     "semantic_hash": ""
   },
   "lib/quote/document.ts": {
@@ -1068,15 +1068,15 @@
     "semantic_hash": ""
   },
   "lib/quote/internal-document.test.ts": {
-    "mtime": 1792581374.5376582,
-    "seen": 1792581997.3110569,
-    "ast_hash": "043f18d8520111667b747418a10ef9e4",
+    "mtime": 1792582964.5778067,
+    "seen": 1792583042.481517,
+    "ast_hash": "6b8ff123e65f4933041a50a9cd18d221",
     "semantic_hash": ""
   },
   "lib/quote/internal-document.ts": {
-    "mtime": 1792581411.0464315,
-    "seen": 1792581997.3110569,
-    "ast_hash": "92eca68acfa1e37169c5042b0f09db62",
+    "mtime": 1792582964.5544305,
+    "seen": 1792583042.481517,
+    "ast_hash": "a57ac248f9a5646bfbcc1f7e0cbe376f",
     "semantic_hash": ""
   },
   "app/get-quote/material-quantities.tsx": {

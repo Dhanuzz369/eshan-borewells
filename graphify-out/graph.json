@@ -677,7 +677,7 @@
       "file_type": "code",
       "norm_label": "internaldocument",
       "source_file": "lib/quote/internal-document.ts",
-      "source_location": "L82"
+      "source_location": "L83"
     },
     {
       "id": "lib_seo_page_schema_indexablepage",
@@ -2025,7 +2025,7 @@
       "file_type": "code",
       "norm_label": "buildinternaldocument()",
       "source_file": "lib/quote/internal-document.ts",
-      "source_location": "L53"
+      "source_location": "L54"
     },
     {
       "id": "lib_quote_internal_document_calculatematerialusage",
@@ -2037,7 +2037,7 @@
       "file_type": "code",
       "norm_label": "calculatematerialusage()",
       "source_file": "lib/quote/internal-document.ts",
-      "source_location": "L32"
+      "source_location": "L33"
     },
     {
       "id": "lib_quote_internal_document_invoicepayments",
@@ -2049,7 +2049,7 @@
       "file_type": "code",
       "norm_label": "invoicepayments()",
       "source_file": "lib/quote/internal-document.ts",
-      "source_location": "L24"
+      "source_location": "L25"
     },
     {
       "id": "lib_quote_internal_document_manualmoney",
@@ -2061,7 +2061,7 @@
       "file_type": "code",
       "norm_label": "manualmoney()",
       "source_file": "lib/quote/internal-document.ts",
-      "source_location": "L47"
+      "source_location": "L48"
     },
     {
       "id": "lib_quote_internal_document_resolvematerialrates",
@@ -2073,7 +2073,7 @@
       "file_type": "code",
       "norm_label": "resolvematerialrates()",
       "source_file": "lib/quote/internal-document.ts",
-      "source_location": "L13"
+      "source_location": "L14"
     },
     {
       "id": "components_ui_field_field",
@@ -7734,7 +7734,7 @@
       "file_type": "code",
       "norm_label": "yieldreportfields",
       "source_file": "lib/quote/internal-document.ts",
-      "source_location": "L22"
+      "source_location": "L23"
     },
     {
       "id": "ref_motion",
@@ -18420,7 +18420,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/quote/internal-document.ts",
-      "source_location": "L57",
+      "source_location": "L58",
       "weight": 1.0
     },
     {
@@ -18432,7 +18432,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/quote/internal-document.ts",
-      "source_location": "L58",
+      "source_location": "L59",
       "weight": 1.0
     },
     {
@@ -18444,7 +18444,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/quote/internal-document.ts",
-      "source_location": "L67",
+      "source_location": "L68",
       "weight": 1.0
     },
     {
@@ -18456,7 +18456,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/quote/internal-document.ts",
-      "source_location": "L76",
+      "source_location": "L77",
       "weight": 1.0
     },
     {
@@ -18468,7 +18468,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/quote/internal-document.ts",
-      "source_location": "L42",
+      "source_location": "L43",
       "weight": 1.0
     },
     {
@@ -18480,7 +18480,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/quote/internal-document.ts",
-      "source_location": "L25",
+      "source_location": "L26",
       "weight": 1.0
     },
     {
@@ -18492,7 +18492,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/quote/internal-document.ts",
-      "source_location": "L29",
+      "source_location": "L30",
       "weight": 1.0
     },
     {
@@ -18504,7 +18504,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/quote/internal-document.ts",
-      "source_location": "L50",
+      "source_location": "L51",
       "weight": 1.0
     },
     {
@@ -35654,7 +35654,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/quote/internal-document.ts",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0
     },
     {
@@ -35665,7 +35665,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/quote/internal-document.ts",
-      "source_location": "L22",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -35676,7 +35676,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/quote/internal-document.ts",
-      "source_location": "L24",
+      "source_location": "L25",
       "weight": 1.0
     },
     {
@@ -35687,7 +35687,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/quote/internal-document.ts",
-      "source_location": "L32",
+      "source_location": "L33",
       "weight": 1.0
     },
     {
@@ -35709,7 +35709,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/quote/internal-document.ts",
-      "source_location": "L47",
+      "source_location": "L48",
       "weight": 1.0
     },
     {
@@ -35731,7 +35731,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/quote/internal-document.ts",
-      "source_location": "L53",
+      "source_location": "L54",
       "weight": 1.0
     },
     {
@@ -35753,7 +35753,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/quote/internal-document.ts",
-      "source_location": "L82",
+      "source_location": "L83",
       "weight": 1.0
     },
     {
@@ -38224,5 +38224,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "7b2327b929bbdbc3aba84caf744ca7ae307a92c9"
+  "built_at_commit": "f4d12ab4dc1c35b80d1d42e8fba8b104ad0b7879"
 }
