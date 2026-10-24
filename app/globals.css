@@ -274,5 +274,7 @@
 .seo-related-pages a{display:inline-flex;align-items:center;gap:8px;color:#145ca5;font-weight:700}
 .seo-related-pages a:hover,.seo-text-link:hover{text-decoration:underline;text-underline-offset:3px}
 .company-claim-note{display:block;margin-top:12px;color:#526477;font-size:11px;line-height:1.5}
+.header-brand{display:flex;flex-direction:column;align-items:flex-start;flex-shrink:0;gap:3px}.header-brand-phone{margin-left:52px;font-size:12px;font-weight:700;line-height:1.3;letter-spacing:.035em;color:var(--blue);white-space:nowrap}.header-brand-phone:hover{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:540px){.header-brand-phone{margin-left:48px;font-size:11px}}
 .hero .company-claim-note{color:#e0e9ee}
 @media(max-width:700px){.seo-header{min-height:70px}.seo-hero{padding-block:67px 74px}.seo-hero p{font-size:16px}.seo-content{grid-template-columns:1fr;gap:34px;padding-block:66px}.seo-header-call{font-size:12px}.seo-breadcrumb{font-size:12px;margin-bottom:17px}}
