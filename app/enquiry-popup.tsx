@@ -6,49 +6,49 @@ import { LeadForm } from "./lead-form";
 
 type EnquiryPopupProps = { whatsapp: string | null; phone: string | null; collectionEnabled: boolean };
 
+// Shown once per browser, after the visitor has spent this long on the site.
+export const ENQUIRY_POPUP_DELAY_MS = 60_000;
+const SHOWN_KEY = "eshan-enquiry-popup-shown";
+
+function alreadyShown() {
+  try { return window.localStorage.getItem(SHOWN_KEY) === "1"; } catch { return false; }
+}
+
+function markShown() {
+  try { window.localStorage.setItem(SHOWN_KEY, "1"); } catch { /* storage unavailable: the popup still shows only once per page view */ }
+}
+
 export function EnquiryPopup({ whatsapp, phone, collectionEnabled }: EnquiryPopupProps) {
   const [open, setOpen] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
-  const dismissedRef = useRef(false);
-  const completedRef = useRef(false);
-  const bottomReadyRef = useRef(true);
 
   function dismiss() {
-    dismissedRef.current = true;
     setOpen(false);
   }
 
   useEffect(() => {
     if (!whatsapp && !collectionEnabled) return;
-    if (sessionStorage.getItem("eshan-enquiry-seen")) return;
-    if (window.location.hash && window.location.hash !== "#top") return;
-    const target = document.getElementById("services");
-    if (!target) return;
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0]?.isIntersecting) {
-        setOpen(true);
-        sessionStorage.setItem("eshan-enquiry-seen", "1");
-        observer.disconnect();
-      }
-    }, { threshold: 0.2 });
-    observer.observe(target);
-    return () => observer.disconnect();
-  }, [whatsapp, collectionEnabled]);
+    if (alreadyShown()) return;
 
-  useEffect(() => {
-    if (!whatsapp && !collectionEnabled) return;
-    const target = document.getElementById("contact");
-    if (!target) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) {
-        bottomReadyRef.current = true;
-      } else if (bottomReadyRef.current && dismissedRef.current && !completedRef.current) {
-        bottomReadyRef.current = false;
-        setOpen(true);
-      }
-    }, { threshold: 0.2 });
-    observer.observe(target);
-    return () => observer.disconnect();
+    // Count only time the page is actually visible, so a background tab doesn't trigger it.
+    let remaining = ENQUIRY_POPUP_DELAY_MS;
+    let startedAt = 0;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const show = () => {
+      if (alreadyShown()) return;
+      markShown();
+      setOpen(true);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+    };
+    const start = () => { startedAt = Date.now(); timer = setTimeout(show, remaining); };
+    const pause = () => { clearTimeout(timer); timer = undefined; remaining = Math.max(0, remaining - (Date.now() - startedAt)); };
+    function onVisibilityChange() {
+      if (document.visibilityState === "hidden") { if (timer) pause(); } else if (!timer) start();
+    }
+
+    if (document.visibilityState === "visible") start();
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () => { clearTimeout(timer); document.removeEventListener("visibilitychange", onVisibilityChange); };
   }, [whatsapp, collectionEnabled]);
 
   useEffect(() => {
@@ -75,6 +75,6 @@ export function EnquiryPopup({ whatsapp, phone, collectionEnabled }: EnquiryPopu
 
   return <>
     {whatsapp && <a className="floating-whatsapp" href={`https://wa.me/${whatsapp}?text=${encodeURIComponent("Hello Eshan Borewells, I would like to discuss a borewell site visit.")}`} target="_blank" rel="noopener noreferrer" aria-label="Chat with Eshan Borewells on WhatsApp"><MessageCircle size={24} /></a>}
-    {open && <div className="enquiry-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) dismiss(); }}><section className="enquiry-dialog" role="dialog" aria-modal="true" aria-labelledby="enquiry-title"><button ref={closeRef} className="enquiry-close" type="button" aria-label="Close enquiry form" onClick={dismiss}><X size={21} /></button><div className="enquiry-copy"><span>PLANNING A BOREWELL?</span><h2 id="enquiry-title">Let&apos;s talk about your site.</h2><p>Share three details to start a useful conversation.</p></div><LeadForm source="popup" whatsapp={whatsapp} phone={phone} collectionEnabled={collectionEnabled} onDraftOpened={() => { completedRef.current = true; setOpen(false); }} onSubmitted={() => { completedRef.current = true; setOpen(false); }} /></section></div>}
+    {open && <div className="enquiry-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) dismiss(); }}><section className="enquiry-dialog" role="dialog" aria-modal="true" aria-labelledby="enquiry-title"><button ref={closeRef} className="enquiry-close" type="button" aria-label="Close enquiry form" onClick={dismiss}><X size={21} /></button><div className="enquiry-copy"><span>PLANNING A BOREWELL?</span><h2 id="enquiry-title">Let&apos;s talk about your site.</h2><p>Share three details to start a useful conversation.</p></div><LeadForm source="popup" whatsapp={whatsapp} phone={phone} collectionEnabled={collectionEnabled} onDraftOpened={() => setOpen(false)} onSubmitted={() => setOpen(false)} /></section></div>}
   </>;
 }
