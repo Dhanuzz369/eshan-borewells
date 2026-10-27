@@ -175,7 +175,7 @@ Status of each recommendation. The repo's evidence-first rules (README) still ap
 | Keyword in homepage H1 | Done ("Borewell drilling in Bengaluru" is part of the H1) |
 | Direct, citable FAQ answers | Done for areas, narrow sites and casing. Cost/price content is out of scope by owner instruction |
 | Expand thin pages | Partly: process steps, FAQs, image and area cross-links added (about 190 → 450 words). Local facts need owner input |
-| Authority claims machine-readable | Partly: developer names now visible text. Founder, founding year, registrations need owner input |
+| Authority claims machine-readable | Developer names stay as logo labels only (owner removed the visible text line). Founder, founding year, registrations need owner input |
 | Freshness | Done: visible "Last updated" and `dateModified` on homepage and all 15 pages |
 | Schema: specific type, E.164 phone, City areaServed, per-locality areaServed, inline provider, `knowsAbout`, `mainEntity` | Done |
 | llms.txt carries the new facts | Done (no Google effect; may help other AI systems) |

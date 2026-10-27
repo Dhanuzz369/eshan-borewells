@@ -297,7 +297,6 @@
 /* Tap targets of at least 44px on small homepage links */
 .header-brand-phone,.service-footnote a{padding-block:15px;margin-block:-15px}
 .seo-updated{margin:0;color:#5b7080;font-size:13px}
-.developer-names{max-width:900px;margin:26px auto 0;padding:0 20px;text-align:center;color:#5b7080;font-size:13px;line-height:1.7}
 .business-profile-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;color:inherit;font-size:14px;font-weight:700;text-decoration:underline;text-underline-offset:4px}
 .footer-hours{display:flex;align-items:center;gap:10px;margin:0}
 .reviews-rating a{display:block;margin-top:6px;font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
