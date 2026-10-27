@@ -18,10 +18,10 @@ test("quotation data uses one quote object, seven-day validity and migrated casi
   assert.equal(data.machineType, "Sensor Rig");
   assert.equal(data.fixedOperationalCosts.find((line) => line.key === "fixed-setting")?.min, 2500);
   assert.equal(data.estimatedTotal, 285500);
-  assert.equal(data.variableMaterials.find((material) => material.label === "M.S Casing Pipe Heavy")?.rate, 595);
-  assert.equal(data.variableMaterials.find((material) => material.label === "Water Injection")?.rate, 15);
+  assert.equal(data.variableMaterials.find((material) => material.label === "M.S Casing Pipe Heavy")?.rate, 560);
+  assert.equal(data.variableMaterials.find((material) => material.label === "Water Injection")?.rate, 10);
   assert.equal(data.terms.length, 5);
-  assert.deepEqual(data.variableMaterials.map(({ rate, unit }) => [rate, unit]), [[545,"ft"],[595,"ft"],[450,"ft"],[850,"ft"],[250,"joint"],[250,"each"],[250,"each"],[135,"ft"],[15,"ft"]]);
+  assert.deepEqual(data.variableMaterials.map(({ rate, unit }) => [rate, unit]), [[480,"ft"],[560,"ft"],[450,"ft"],[850,"ft"],[250,"joint"],[250,"each"],[250,"each"],[130,"ft"],[10,"ft"]]);
   assert.equal(data.variableMaterials.find((material) => material.label.includes("Slotted Casing"))?.label, undefined);
   assert.equal(data.variableMaterials.find((material) => material.label.includes("M.S. Medium"))?.label, undefined);
   const retiredName = '6" PVC ' + "Slotted Casing";

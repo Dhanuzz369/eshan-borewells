@@ -69,15 +69,15 @@ export const sensorFixedOperationalCosts = [
   { key: "transport", label: "Transport Charges", amount: 2500 },
 ] as const;
 export const sensorVariableMaterials = [
-  { label: 'M.S Casing Pipe Regular', rate: 545, unit: "ft" },
-  { label: 'M.S Casing Pipe Heavy', rate: 595, unit: "ft" },
+  { label: 'M.S Casing Pipe Regular', rate: 480, unit: "ft" },
+  { label: 'M.S Casing Pipe Heavy', rate: 560, unit: "ft" },
   { label: '10" PVC Casing Pipe', rate: 450, unit: "ft" },
   { label: '12" PVC Casing Pipe', rate: 850, unit: "ft" },
   { label: 'M.S. Welding', rate: 250, unit: "joint" },
   { label: 'M.S. Collar', rate: 250, unit: "each" },
   { label: 'M.S. Cap', rate: 250, unit: "each" },
-  { label: 'PVC Filter Pipe (4 ½" or 5") 6KG Pressure ISI Brand', rate: 135, unit: "ft" },
-  { label: 'Water Injection', rate: 15, unit: "ft" },
+  { label: 'PVC Filter Pipe (4 ½" or 5") 6KG Pressure ISI Brand', rate: 130, unit: "ft" },
+  { label: 'Water Injection', rate: 10, unit: "ft" },
 ] as const;
 export const sensorTerms = [
   'If more than 2.5 inches of water, boulders, silt or a dry gap are found, further drilling is not possible.',

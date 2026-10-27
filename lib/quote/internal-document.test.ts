@@ -35,7 +35,7 @@ test("invoice has blank yield fields and no terms, while estimate retains terms"
 test("balance includes materials, supports full payment and rejects advances above the total", () => {
   const fields = { date: "", advance: "50000", materials: { 'Water Injection': "12.5" } };
   const document = buildInternalDocument(quote, "invoice", fields);
-  assert.deepEqual(document.payments[1], ["Balance due", "₹90,937.5"]);
+  assert.deepEqual(document.payments[1], ["Balance due", "₹90,875"]);
   const paid = buildInternalDocument(quote, "invoice", { date: "", advance: "140750" });
   assert.deepEqual(paid.payments[1], ["Balance due", "₹0"]);
   assert.throws(() => buildInternalDocument(quote, "invoice", { date: "", advance: "140750.01" }));
@@ -53,9 +53,9 @@ test("estimate retains depth slabs and rates but has no amounts, subtotals, tota
 test("invoice multiplies selected material quantities and adds them once to the grand total", () => {
   const document = buildInternalDocument(quote, "invoice", { date: "", advance: "", balance: "", materials: { 'M.S Casing Pipe Regular': "12.5", 'M.S. Welding': "2", 'Water Injection': "25" } });
   assert.deepEqual(document.materialHeaders, ["Material", "Rate", "Quantity", "Amount"]);
-  assert.deepEqual(document.materialRows[0], ['M.S Casing Pipe Regular', '₹545/ft', '12.5 ft', '₹6,812.5']);
-  assert.equal(document.materialSubtotal, "₹7,687.5");
-  assert.equal(document.total, "₹1,48,437.5");
+  assert.deepEqual(document.materialRows[0], ['M.S Casing Pipe Regular', '₹480/ft', '12.5 ft', '₹6,000']);
+  assert.equal(document.materialSubtotal, "₹6,750");
+  assert.equal(document.total, "₹1,47,500");
   assert.equal(document.materialRows[1][2], "");
   assert.equal(document.materialRows[1][3], "");
   const estimate = buildInternalDocument(quote, "estimate", { date: "", advance: "", balance: "", materials: { 'M.S. Welding': "2" } });
@@ -91,7 +91,7 @@ test("edited material rates affect invoice amounts and balance and appear as rat
   assert.equal(estimate.total, null);
   assert.deepEqual(quote.variableMaterials, original);
   for (const rate of ["-1", "NaN", "0.001", "1000001"]) assert.throws(() => buildInternalDocument(quote, "estimate", { ...fields, materialRates: { 'Water Injection': rate } }));
-  assert.equal(buildInternalDocument(quote, "invoice", { ...fields, materialRates: { 'Water Injection': "" } }).materialRows.at(-1)?.[1], "₹15/ft");
+  assert.equal(buildInternalDocument(quote, "invoice", { ...fields, materialRates: { 'Water Injection': "" } }).materialRows.at(-1)?.[1], "₹10/ft");
 });
 
 test("estimate has six terms with the drilling-condition warning fifth and seven-day validity sixth", () => {
@@ -110,8 +110,9 @@ test("estimate has six terms with the drilling-condition warning fifth and seven
 test("both document types use renamed materials without changing the approved rates", () => {
   for (const mode of ["invoice", "estimate"] as const) {
     const document = buildInternalDocument(quote, mode, { date: "", advance: "" });
-    assert.deepEqual(document.materialRows[0].slice(0,2), ["M.S Casing Pipe Regular", "₹545/ft"]);
-    assert.deepEqual(document.materialRows[1].slice(0,2), ["M.S Casing Pipe Heavy", "₹595/ft"]);
-    assert.deepEqual(document.materialRows[7].slice(0,2), ['PVC Filter Pipe (4 ½" or 5") 6KG Pressure ISI Brand', "₹135/ft"]);
+    assert.deepEqual(document.materialRows[0].slice(0,2), ["M.S Casing Pipe Regular", "₹480/ft"]);
+    assert.deepEqual(document.materialRows[1].slice(0,2), ["M.S Casing Pipe Heavy", "₹560/ft"]);
+    assert.deepEqual(document.materialRows[7].slice(0,2), ['PVC Filter Pipe (4 ½" or 5") 6KG Pressure ISI Brand', "₹130/ft"]);
+    assert.deepEqual(document.materialRows[8].slice(0,2), ["Water Injection", "₹10/ft"]);
   }
 });
