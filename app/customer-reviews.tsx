@@ -10,10 +10,13 @@ type CustomerReviewsProps = {
   reviews: CustomerReview[];
   aggregateRating?: number | null;
   ratingSource?: string | null;
+  reviewCount?: number | null;
+  ratingChecked?: string | null;
+  ratingHref?: string | null;
   feedbackHref: string;
 };
 
-export function CustomerReviews({ reviews, aggregateRating, ratingSource, feedbackHref }: CustomerReviewsProps) {
+export function CustomerReviews({ reviews, aggregateRating, ratingSource, reviewCount, ratingChecked, ratingHref, feedbackHref }: CustomerReviewsProps) {
   if (reviews.length === 0) return <section className="reviews-section reviews-empty" aria-labelledby="reviews-heading">
     <div className="shell reviews-empty-inner">
       <div><span className="section-label">CUSTOMER FEEDBACK</span><h2 id="reviews-heading">Your experience matters.</h2></div>
@@ -26,7 +29,7 @@ export function CustomerReviews({ reviews, aggregateRating, ratingSource, feedba
   return <section className="reviews-section" aria-labelledby="reviews-heading">
     <div className="shell reviews-heading">
       <div><span className="section-label">CUSTOMER FEEDBACK</span><h2 id="reviews-heading">Words from our customers.</h2></div>
-      {displayRating && <p className="reviews-rating"><strong>{aggregateRating.toFixed(1)} <span aria-hidden="true">★</span></strong><span>Verified rating on {ratingSource}</span></p>}
+      {displayRating && <p className="reviews-rating"><strong>{aggregateRating.toFixed(1)} <span aria-hidden="true">★</span></strong><span>{reviewCount ? `${reviewCount} reviews on ${ratingSource}` : `Verified rating on ${ratingSource}`}{ratingChecked ? ` (${ratingChecked})` : ""}</span>{ratingHref && <a href={ratingHref} target="_blank" rel="noopener noreferrer">Read the reviews on {ratingSource} <span aria-hidden="true">↗</span></a>}</p>}
     </div>
     <Marquee className="reviews-track" repeat={2} aria-label="Customer reviews">
       {reviews.map((review, index) => <blockquote className="review-card" key={`${review.reviewer}-${index}`}>

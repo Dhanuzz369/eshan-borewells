@@ -173,15 +173,16 @@ Status of each recommendation. The repo's evidence-first rules (README) still ap
 |---|---|
 | Question-shaped H2s; fix "in bengaluru" / "in WHITEFIELD" casing | Done (all 15 pages) |
 | Keyword in homepage H1 | Done ("Borewell drilling in Bengaluru" is part of the H1) |
-| Direct, citable FAQ answers | Done for cost structure (per-foot, rising with depth), areas, narrow sites, casing. No prices |
+| Direct, citable FAQ answers | Done for areas, narrow sites and casing. Cost/price content is out of scope by owner instruction |
 | Expand thin pages | Partly: process steps, FAQs, image and area cross-links added (about 190 → 450 words). Local facts need owner input |
 | Authority claims machine-readable | Partly: developer names now visible text. Founder, founding year, registrations need owner input |
 | Freshness | Done: visible "Last updated" and `dateModified` on homepage and all 15 pages |
 | Schema: specific type, E.164 phone, City areaServed, per-locality areaServed, inline provider, `knowsAbout`, `mainEntity` | Done |
 | llms.txt carries the new facts | Done (no Google effect; may help other AI systems) |
 | Vercel preview `noindex` | Done |
-| Quantified cost page (₹/ft table) | **Blocked**: owner-approved rates exist in the internal quote tool, but publishing them needs the owner's OK |
-| GBP, Bing Places, Justdial, Sulekha, IndiaMART, `sameAs` | **Owner action** |
+| Quantified cost page | **Out of scope**: owner instruction, prices are not to be touched |
+| Google Business Profile linked (`sameAs`, `hasMap`, daily hours, visible 4.9★ / 55 reviews with source and date) | Done. The public profile shows **no phone number**; add it there |
+| Bing Places, Justdial, Sulekha, IndiaMART | **Owner action** |
 | YouTube and real job photos with captions | **Owner action** |
 | Permit (KGWA/BWSSB) guide | **Needs current rules verified** before publishing |
 | Measured AI citations | Not measured; connect Search Console and an AI-visibility tool |

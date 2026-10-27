@@ -1,3 +1,4 @@
+import { PUBLIC_GOOGLE_PROFILE_URL, PUBLIC_GOOGLE_RATING } from "./public-business-facts";
 import type { CustomerReview } from "./customer-reviews";
 
 // Reviews supplied by the business owner. No individual star ratings were provided.
@@ -45,5 +46,9 @@ export const customerReviews: CustomerReview[] = [
 ];
 
 // Display an aggregate only when it can be checked against the named source.
-export const customerRating: number | null = null;
-export const customerRatingSource: string | null = null;
+// Source: the owner's Google Business Profile, checked 2026-10-27. Update with the profile.
+export const customerRating: number | null = PUBLIC_GOOGLE_RATING.rating;
+export const customerRatingSource: string | null = "Google";
+export const customerReviewCount: number | null = PUBLIC_GOOGLE_RATING.reviewCount;
+export const customerRatingChecked: string | null = PUBLIC_GOOGLE_RATING.checked;
+export const customerRatingHref: string | null = PUBLIC_GOOGLE_PROFILE_URL;

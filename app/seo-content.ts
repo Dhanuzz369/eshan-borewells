@@ -138,7 +138,7 @@ export type ProcessStep = { title: string; detail: string };
 const drillingProcess: ProcessStep[] = [
   { title: "Share the site details", detail: "Send the location, property type, entry width, overhead clearance and a few photos, along with the water requirement." },
   { title: "Match the rig to the access", detail: "Large, compact and robotic rigs are considered against the entry route, clearance and working space at the property." },
-  { title: "Agree the scope and estimate", detail: "Drilling, casing, pump installation coordination and related work are confirmed before work starts, with an itemised estimate." },
+  { title: "Agree the scope and estimate", detail: "Drilling, casing, pump installation coordination and related work are confirmed before work starts." },
   { title: "Drill and complete the borewell", detail: "Drilling proceeds at the agreed point. Casing and completion follow, based on what the drilling encounters; water, depth and yield cannot be promised in advance." },
 ];
 

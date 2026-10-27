@@ -29,13 +29,18 @@ export const PUBLIC_SERVICE_PAGES: Partial<Record<(typeof PUBLIC_SERVICE_NAMES)[
   "Borewell flushing and redevelopment": "/borewell-flushing-redevelopment-bengaluru",
 };
 
+// Google Business Profile supplied by the owner (checked 2026-10-27).
+export const PUBLIC_GOOGLE_PROFILE_URL = "https://maps.google.com/?cid=2493916436492727064";
+export const PUBLIC_OPENING_HOURS = { opens: "09:00", closes: "22:00", label: "Open daily, 9 am to 10 pm" } as const;
+export const PUBLIC_GOOGLE_RATING = { rating: 4.9, reviewCount: 55, checked: "October 2026" } as const;
+
 // Internal safeguards: these items are not published as facts until evidence is supplied.
 export const requiresOwnerVerification = [
   "Evidence supporting the company-reported 25+ years in the industry.",
   "Records or methodology supporting the company-reported 10,000+ borewell sites.",
   "Current service availability for each locality and the approximate 100 km coverage statement.",
-  "Public review source, exact individual ratings, aggregate rating, and permission to publish testimonials.",
+  "Permission to publish the individual testimonials shown on the site, and their exact individual review ratings.",
   "Project names, client references, photographs, outcomes, and permission to publish them.",
-  "Public operating hours, email address, directions URL, and social profile URLs.",
+  "Public email address and social profile URLs other than the Google Business Profile.",
   "Credentials, registrations, awards, survey methodology, and any accuracy or success-rate claims.",
 ] as const;

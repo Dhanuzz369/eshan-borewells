@@ -70,3 +70,12 @@ test("publishes dateModified only when a revision date is supplied", () => {
   assert.equal(buildIndexablePageSchemas({ ...base, dateModified: "2026-10-27" }).webPage.dateModified, "2026-10-27");
   assert.equal(buildHomePageSchema(base.origin, "T", "D", "2026-10-27").dateModified, "2026-10-27");
 });
+
+test("links the business to its Google Business Profile and daily hours", () => {
+  const schema = buildLocalBusinessSchema("https://www.eshanborewells.com", publicBusinessFacts);
+
+  assert.deepEqual(schema.sameAs, ["https://maps.google.com/?cid=2493916436492727064"]);
+  assert.equal(schema.hasMap, "https://maps.google.com/?cid=2493916436492727064");
+  assert.equal(schema.openingHoursSpecification.dayOfWeek.length, 7);
+  assert.equal("aggregateRating" in schema, false, "self-serving review markup is not eligible");
+});

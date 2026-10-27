@@ -7,7 +7,7 @@ type IndexablePage = {
   dateModified?: string;
 };
 
-import { PUBLIC_SERVICE_PAGES, type PublicBusinessFacts } from "../../app/public-business-facts";
+import { PUBLIC_GOOGLE_PROFILE_URL, PUBLIC_OPENING_HOURS, PUBLIC_SERVICE_PAGES, type PublicBusinessFacts } from "../../app/public-business-facts";
 
 // Closest schema.org subtype for a borewell contractor; no borewell-specific type exists.
 const BUSINESS_TYPE = "HomeAndConstructionBusiness";
@@ -62,6 +62,14 @@ export function buildLocalBusinessSchema(origin: string, facts: PublicBusinessFa
       addressCountry: "IN",
     },
     areaServed: bengaluru,
+    hasMap: PUBLIC_GOOGLE_PROFILE_URL,
+    sameAs: [PUBLIC_GOOGLE_PROFILE_URL],
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: PUBLIC_OPENING_HOURS.opens,
+      closes: PUBLIC_OPENING_HOURS.closes,
+    },
     knowsAbout: ["Borewell drilling", "Groundwater survey", "Borewell casing", "Borewell flushing"],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
@@ -83,6 +91,7 @@ export function buildProviderSchema(origin: string, facts: PublicBusinessFacts) 
     "@id": `${baseUrl}/#localbusiness`,
     name: facts.name,
     url: `${baseUrl}/`,
+    sameAs: [PUBLIC_GOOGLE_PROFILE_URL],
     ...(facts.phone ? { telephone: e164(facts.phone) } : {}),
     address: { "@type": "PostalAddress", streetAddress: facts.address, addressLocality: "Bengaluru", addressRegion: "Karnataka", addressCountry: "IN" },
   };
