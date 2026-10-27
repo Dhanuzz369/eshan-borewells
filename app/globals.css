@@ -286,8 +286,7 @@
 .seo-hero .seo-breadcrumb{color:#c7d9e5}
 .seo-breadcrumb a{display:inline-flex;align-items:center;min-height:44px}
 .seo-header-call{min-height:44px;padding-bottom:0;border-bottom:0;text-decoration:underline;text-underline-offset:6px}
-.seo-figure{position:relative;aspect-ratio:4/3;margin:34px 0 0;overflow:hidden;background:#d4e2e9}
-.seo-figure img{object-fit:cover}
+.seo-figure{max-width:440px;margin:34px 0 0}
 .seo-steps{display:grid;gap:14px;margin:0;padding-left:22px;color:#3f586b;font-size:15px;line-height:1.65}
 .seo-steps strong{display:block;color:#092348}
 .seo-faq{display:grid;border-top:1px solid #c3d0d6}
@@ -303,3 +302,8 @@
 .footer-hours{display:flex;align-items:center;gap:10px;margin:0}
 .reviews-rating a{display:block;margin-top:6px;font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
 .seo-location a{color:#145ca5;font-weight:700}
+.hero-proof{flex-wrap:wrap;row-gap:12px}
+.hero-proof>a{display:flex;align-items:baseline;gap:9px;padding-left:27px;border-left:1px solid rgba(232,246,255,.3)}
+.hero-proof>a:hover span{text-decoration:underline;text-underline-offset:3px}
+.hero-proof .hero-proof-star{display:inline;max-width:none;margin:0 0 0 2px;color:#f2b84b;font-size:.8em;letter-spacing:0;text-transform:none}
+@media(max-width:540px){.hero-proof>a{display:block;padding-left:0;border-left:0}}

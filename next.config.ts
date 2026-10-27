@@ -1,6 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  experimental: {
+    // Next 16.3 caches Turbopack build output on disk by default and Vercel restores
+    // that cache between deploys. A stale cache shipped old globals.css with new markup
+    // (wrong developer logos, unsized images), so production builds compile fresh.
+    turbopackFileSystemCacheForBuild: false,
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 31536000,

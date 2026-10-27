@@ -29,3 +29,7 @@ test("redirects /contact to the homepage contact section", async () => {
 
   assert.deepEqual(redirects?.find((redirect) => redirect.source === "/contact"), { source: "/contact", destination: "/#contact", permanent: true });
 });
+
+test("compiles production builds without the persistent Turbopack cache", () => {
+  assert.equal(nextConfig.experimental?.turbopackFileSystemCacheForBuild, false);
+});

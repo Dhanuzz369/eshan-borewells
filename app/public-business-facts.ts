@@ -32,7 +32,7 @@ export const PUBLIC_SERVICE_PAGES: Partial<Record<(typeof PUBLIC_SERVICE_NAMES)[
 // Google Business Profile supplied by the owner (checked 2026-10-27).
 export const PUBLIC_GOOGLE_PROFILE_URL = "https://maps.google.com/?cid=2493916436492727064";
 export const PUBLIC_OPENING_HOURS = { opens: "09:00", closes: "22:00", label: "Open daily, 9 am to 10 pm" } as const;
-export const PUBLIC_GOOGLE_RATING = { rating: 4.9, reviewCount: 55, checked: "October 2026" } as const;
+export const PUBLIC_GOOGLE_RATING = { rating: 4.9, checked: "October 2026" } as const;
 
 // Internal safeguards: these items are not published as facts until evidence is supplied.
 export const requiresOwnerVerification = [

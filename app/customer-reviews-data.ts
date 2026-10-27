@@ -49,6 +49,5 @@ export const customerReviews: CustomerReview[] = [
 // Source: the owner's Google Business Profile, checked 2026-10-27. Update with the profile.
 export const customerRating: number | null = PUBLIC_GOOGLE_RATING.rating;
 export const customerRatingSource: string | null = "Google";
-export const customerReviewCount: number | null = PUBLIC_GOOGLE_RATING.reviewCount;
 export const customerRatingChecked: string | null = PUBLIC_GOOGLE_RATING.checked;
 export const customerRatingHref: string | null = PUBLIC_GOOGLE_PROFILE_URL;

@@ -181,7 +181,7 @@ Status of each recommendation. The repo's evidence-first rules (README) still ap
 | llms.txt carries the new facts | Done (no Google effect; may help other AI systems) |
 | Vercel preview `noindex` | Done |
 | Quantified cost page | **Out of scope**: owner instruction, prices are not to be touched |
-| Google Business Profile linked (`sameAs`, `hasMap`, daily hours, visible 4.9★ / 55 reviews with source and date) | Done. The public profile shows **no phone number**; add it there |
+| Google Business Profile linked (`sameAs`, `hasMap`, daily hours, visible 4.9★ Google rating with source and date) | Done. The public profile shows **no phone number**; add it there |
 | Bing Places, Justdial, Sulekha, IndiaMART | **Owner action** |
 | YouTube and real job photos with captions | **Owner action** |
 | Permit (KGWA/BWSSB) guide | **Needs current rules verified** before publishing |
