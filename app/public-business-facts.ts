@@ -21,6 +21,14 @@ export const PUBLIC_SERVICE_NAMES = [
   "Pump installation coordination",
 ] as const;
 
+// Public pages that describe each listed service, used in the schema offer catalog.
+export const PUBLIC_SERVICE_PAGES: Partial<Record<(typeof PUBLIC_SERVICE_NAMES)[number], string>> = {
+  "Borewell drilling": "/borewell-drilling-bengaluru",
+  "Groundwater survey and water detection": "/groundwater-survey-water-detection-bengaluru",
+  "Borewell casing and completion": "/borewell-casing-installation-bengaluru",
+  "Borewell flushing and redevelopment": "/borewell-flushing-redevelopment-bengaluru",
+};
+
 // Internal safeguards: these items are not published as facts until evidence is supplied.
 export const requiresOwnerVerification = [
   "Evidence supporting the company-reported 25+ years in the industry.",

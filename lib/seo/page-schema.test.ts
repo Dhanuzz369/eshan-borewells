@@ -47,3 +47,26 @@ test("builds self-referencing WebPage and breadcrumb schemas for an indexable pa
     { "@type": "ListItem", position: 2, name: "Borewell Drilling in Yelahanka, Bengaluru", item: "https://www.eshanborewells.com/borewell-drilling-yelahanka" },
   ]);
 });
+
+test("describes the business with a specific type, E.164 phone and a real service area", () => {
+  const schema = buildLocalBusinessSchema("https://www.eshanborewells.com", publicBusinessFacts);
+
+  assert.equal(schema["@type"], "HomeAndConstructionBusiness");
+  assert.equal(schema.telephone, "+919844775905");
+  assert.equal(schema.areaServed["@type"], "City");
+  assert.ok(schema.hasOfferCatalog.itemListElement.every((offer) => offer["@type"] === "Offer"));
+});
+
+test("links an indexable page to its main entity when given", () => {
+  const { webPage } = buildIndexablePageSchemas({ origin: "https://www.eshanborewells.com", slug: "a", title: "A", description: "D", mainEntityId: "https://www.eshanborewells.com/a#service" });
+
+  assert.deepEqual(webPage.mainEntity, { "@id": "https://www.eshanborewells.com/a#service" });
+});
+
+test("publishes dateModified only when a revision date is supplied", () => {
+  const base = { origin: "https://www.eshanborewells.com", slug: "a", title: "A", description: "D" };
+
+  assert.equal("dateModified" in buildIndexablePageSchemas(base).webPage, false);
+  assert.equal(buildIndexablePageSchemas({ ...base, dateModified: "2026-10-27" }).webPage.dateModified, "2026-10-27");
+  assert.equal(buildHomePageSchema(base.origin, "T", "D", "2026-10-27").dateModified, "2026-10-27");
+});

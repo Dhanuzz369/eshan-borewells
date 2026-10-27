@@ -1,0 +1,320 @@
+{
+  "summary": {
+    "health_score": 67,
+    "business_type": "Local Service (borewell drilling, Bengaluru; service-area business)",
+    "top_findings": [
+      "15 inner pages are thin templates (148-219 words, no images)",
+      "No cost/depth/timeline figures anywhere; no cost page",
+      "No Google Business Profile linked; citations unverified; no sameAs",
+      "No About/Contact page; unverifiable trust claims and testimonials",
+      "No permit/regulation content despite it dominating head-term SERPs"
+    ],
+    "quick_wins": [
+      "Keyworded homepage H1 + fix template H2 casing",
+      "Upgrade LocalBusiness JSON-LD (HomeAndConstructionBusiness, geo, hours, sameAs, areaServed)",
+      "Call/WhatsApp CTAs on service pages, 44px tap targets",
+      "Compress/remove 200KB developer-logos-source.webp; hero fetchPriority=high",
+      "noindex on eshan-borewells.vercel.app; 301 /contact"
+    ]
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 88,
+      "what_works": [
+        "Prerendered HTML",
+        "Self-canonical, indexable pages",
+        "Real 404",
+        "HSTS + security headers",
+        "robots.txt allows all with sitemap"
+      ],
+      "findings": [
+        {
+          "title": "No CSP / Permissions-Policy",
+          "severity": "Medium",
+          "description": "Headers absent on homepage",
+          "recommendation": "Add via next.config headers()"
+        },
+        {
+          "title": "Two-hop apex redirect",
+          "severity": "Low",
+          "description": "http apex -> https apex -> www",
+          "recommendation": "Redirect directly to https://www"
+        },
+        {
+          "title": "Vercel preview indexable",
+          "severity": "Low",
+          "description": "eshan-borewells.vercel.app returns index,follow (canonical points to prod)",
+          "recommendation": "X-Robots-Tag: noindex on preview domain"
+        },
+        {
+          "title": "404 reuses homepage title",
+          "severity": "Low",
+          "description": "Same title as home",
+          "recommendation": "Unique 404 title"
+        }
+      ]
+    },
+    {
+      "name": "Content Quality",
+      "score": 38,
+      "what_works": [
+        "Honest no-guarantee disclaimers",
+        "Clean structure"
+      ],
+      "findings": [
+        {
+          "title": "Thin templated inner pages",
+          "severity": "Critical",
+          "description": "15 pages at 148-174 extracted words, same skeleton",
+          "recommendation": "Expand to 800+ (service) / 500+ unique (area) words"
+        },
+        {
+          "title": "No About/Contact, no named people or credentials",
+          "severity": "Critical",
+          "description": "/about, /contact 404; claims unsupported",
+          "recommendation": "Publish About/Contact with founder, registration, full NAP"
+        },
+        {
+          "title": "Unverifiable testimonials and client logos",
+          "severity": "High",
+          "description": "40 first-name-only quotes; 16 developer logos without case studies",
+          "recommendation": "Detailed dated reviews; document or remove logos"
+        },
+        {
+          "title": "No first-hand experience evidence",
+          "severity": "High",
+          "description": "No projects, generic reused photos",
+          "recommendation": "Projects section with original photos"
+        },
+        {
+          "title": "Low readability",
+          "severity": "Medium",
+          "description": "Flesch 16-21 on inner pages",
+          "recommendation": "Shorter sentences, tables, bullets"
+        }
+      ]
+    },
+    {
+      "name": "On-Page SEO",
+      "score": 76,
+      "what_works": [
+        "Unique titles",
+        "One H1 per page",
+        "Meta descriptions present",
+        "No broken links"
+      ],
+      "findings": [
+        {
+          "title": "Area pages have 1 internal inbound link",
+          "severity": "High",
+          "description": "Linked only from homepage",
+          "recommendation": "Link from service pages, footer areas block, neighbour cross-links"
+        },
+        {
+          "title": "Slogan H1 on homepage",
+          "severity": "Medium",
+          "description": "'Water starts with the right groundwork.'",
+          "recommendation": "Include 'Borewell Drilling in Bengaluru'"
+        },
+        {
+          "title": "Short meta descriptions / long titles",
+          "severity": "Medium",
+          "description": "Peenya 96 chars; Commercial title 76 chars",
+          "recommendation": "140-160 char descriptions; titles <= 65 chars"
+        }
+      ]
+    },
+    {
+      "name": "Schema / Structured Data",
+      "score": 62,
+      "what_works": [
+        "Valid JSON-LD",
+        "@id linking",
+        "BreadcrumbList on inner pages"
+      ],
+      "findings": [
+        {
+          "title": "LocalBusiness missing core properties",
+          "severity": "High",
+          "description": "No geo, hours, logo, sameAs, postalCode, priceRange",
+          "recommendation": "Use JSON-LD A in findings/schema.md"
+        },
+        {
+          "title": "Generic type and prose areaServed",
+          "severity": "High",
+          "description": "@type LocalBusiness; areaServed is a sentence",
+          "recommendation": "HomeAndConstructionBusiness; City + GeoCircle"
+        },
+        {
+          "title": "Area pages lack locality areaServed",
+          "severity": "Medium",
+          "description": "Generic text reused",
+          "recommendation": "Per-locality areaServed (JSON-LD C)"
+        },
+        {
+          "title": "FAQPage present",
+          "severity": "Info",
+          "description": "8 Q&As; FAQ rich results retired 2026-05-07",
+          "recommendation": "No action"
+        }
+      ]
+    },
+    {
+      "name": "Performance (CWV)",
+      "score": 88,
+      "what_works": [
+        "CLS 0 everywhere",
+        "No third-party scripts",
+        "Inner pages LCP 0.3-1.3s"
+      ],
+      "findings": [
+        {
+          "title": "Home mobile LCP 2.4s (lab)",
+          "severity": "Medium",
+          "description": "2,009ms render delay",
+          "recommendation": "fetchPriority=high on hero; reduce hydration gating"
+        },
+        {
+          "title": "200KB raw logo asset",
+          "severity": "Medium",
+          "description": "developer-logos-source.webp bypasses next/image",
+          "recommendation": "Optimize or remove"
+        },
+        {
+          "title": "/public assets uncacheable",
+          "severity": "Medium",
+          "description": "Cache-Control max-age=0",
+          "recommendation": "Long-lived cache headers"
+        }
+      ]
+    },
+    {
+      "name": "AI Search Readiness",
+      "score": 53,
+      "what_works": [
+        "All AI crawlers allowed",
+        "llms.txt present",
+        "Clean accessibility tree"
+      ],
+      "findings": [
+        {
+          "title": "No quotable facts",
+          "severity": "Critical",
+          "description": "No price/depth/timeline numbers on any page",
+          "recommendation": "Cost page and quantified answers"
+        },
+        {
+          "title": "Near-zero off-site brand footprint",
+          "severity": "Critical",
+          "description": "Brand search shows only GitHub repo",
+          "recommendation": "GBP, directories, sameAs, YouTube"
+        }
+      ]
+    },
+    {
+      "name": "Images",
+      "score": 78,
+      "what_works": [
+        "All homepage images have alt text",
+        "AVIF via next/image"
+      ],
+      "findings": [
+        {
+          "title": "Service pages have no images",
+          "severity": "Medium",
+          "description": "0 <img> on service pages",
+          "recommendation": "Add real job photos"
+        },
+        {
+          "title": "Reused illustrative photos",
+          "severity": "Low",
+          "description": "~7 distinct files",
+          "recommendation": "Original project photography"
+        }
+      ]
+    },
+    {
+      "name": "Local SEO (supplementary)",
+      "score": 31,
+      "what_works": [
+        "Click-to-call and WhatsApp throughout",
+        "Internal NAP consistent"
+      ],
+      "findings": [
+        {
+          "title": "No GBP linked",
+          "severity": "Critical",
+          "description": "No map, place ID, review link",
+          "recommendation": "Claim/verify GBP and link it"
+        },
+        {
+          "title": "Citations unverified",
+          "severity": "High",
+          "description": "Searches blocked",
+          "recommendation": "Claim Justdial, Sulekha, IndiaMART with identical NAP"
+        },
+        {
+          "title": "Incomplete address",
+          "severity": "Medium",
+          "description": "No street/PIN",
+          "recommendation": "Full address with PIN 560010"
+        }
+      ]
+    }
+  ],
+  "action_plan": {
+    "phases": [
+      {
+        "name": "Phase 1: Critical Fixes",
+        "timeframe": "Week 1",
+        "items": [
+          "Verify GSC + Bing Webmaster",
+          "Claim GBP",
+          "Publish About + Contact",
+          "Upgrade LocalBusiness schema",
+          "On-page quick fixes (H1, H2 casing, metas, titles)",
+          "Technical quick fixes (vercel noindex, logo asset, hero priority, cache headers, CTAs)"
+        ]
+      },
+      {
+        "name": "Phase 2: High-Impact Improvements",
+        "timeframe": "Weeks 2-3",
+        "items": [
+          "Cost page with rate tables",
+          "Expand 8 service pages to 800-1,200 words",
+          "Verifiable testimonials and client proof",
+          "Review-request routine",
+          "Directory citations + sameAs",
+          "Internal linking to area pages"
+        ]
+      },
+      {
+        "name": "Phase 3: Content & Authority",
+        "timeframe": "Month 2",
+        "items": [
+          "Rewrite 7 area pages with unique local content",
+          "Permits guide",
+          "Recharge page (if offered)",
+          "Projects section + video",
+          "Blog: 8-12 dated guides",
+          "Supplier/association/press links"
+        ]
+      },
+      {
+        "name": "Phase 4: Monitoring & Iteration",
+        "timeframe": "Ongoing",
+        "items": [
+          "Sitemap lastmod",
+          "CSP + Permissions-Policy",
+          "Drift baseline + monthly compare",
+          "Re-audit after Phase 2"
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "findings_dir": "findings/",
+    "screenshots_dir": "screenshots/"
+  }
+}

@@ -23,6 +23,13 @@ ${pageLinks}
 - Phone and WhatsApp: +91 98447 75905.
 - Coverage: Bengaluru and nearby areas, generally within about 100 km; confirm access and availability for the exact site.
 - Important: groundwater surveys guide planning and do not guarantee water.
+
+## How projects work
+- Drilling is charged per foot, and the per-foot rate rises as the borewell goes deeper. Casing pipe, the rig needed for site access, labour, transport and related work make up the rest of an itemised estimate. Water, depth and yield cannot be promised in advance.
+- Rigs: large rigs for open plots and farms; compact and robotic rigs may suit narrow or restricted sites after access is assessed.
+- Casing: PVC or M.S. steel pipe, chosen for the ground conditions and the well. Pump installation can be coordinated.
+- Existing borewells: flushing or redevelopment is suggested only after the borewell's condition is assessed.
+- Areas with dedicated pages: Rajajinagar, Whitefield, Electronic City, Yelahanka, Peenya, KR Puram and Sarjapur Road. Other nearby areas are served subject to site confirmation.
 `;
   return new Response(text, { headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "public, s-maxage=86400, stale-while-revalidate=604800" } });
 }

@@ -41,7 +41,7 @@
 @media(prefers-reduced-motion:reduce){.hero-background,.hero-cinematic .hero-copy,.developer-track{animation:none!important}.approach-steps>div,.floating-whatsapp{transition:none!important}}
 
 .developer-logo{height:90px;flex:none;display:block;border:0;background:transparent}
-.developer-logo-image{display:block;height:90px;background-image:url('/developer-logos-source.webp');background-repeat:no-repeat;background-size:1536px 1024px}
+.developer-logo-image{display:block;height:90px;background-image:url('/developer-logos.webp');background-repeat:no-repeat;background-size:1536px 196px}
 .business-address{display:flex;align-items:center;gap:9px;margin-top:26px!important;color:#d9ebf5!important;font-size:14px!important}
 .business-address svg{flex:none;color:#9ed4f3}
 
@@ -278,3 +278,24 @@
 @media(max-width:540px){.header-brand-phone{margin-left:48px;font-size:11px}}
 .hero .company-claim-note{color:#e0e9ee}
 @media(max-width:700px){.seo-header{min-height:70px}.seo-hero{padding-block:67px 74px}.seo-hero p{font-size:16px}.seo-content{grid-template-columns:1fr;gap:34px;padding-block:66px}.seo-header-call{font-size:12px}.seo-breadcrumb{font-size:12px;margin-bottom:17px}}
+
+/* Service/locality page additions */
+.seo-hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.seo-hero-whatsapp{gap:10px;border:1px solid #9dc5df;color:#fff}
+.seo-hero-whatsapp:hover{background:#ffffff14}
+.seo-hero .seo-breadcrumb{color:#c7d9e5}
+.seo-breadcrumb a{display:inline-flex;align-items:center;min-height:44px}
+.seo-header-call{min-height:44px;padding-bottom:0;border-bottom:0;text-decoration:underline;text-underline-offset:6px}
+.seo-figure{position:relative;aspect-ratio:4/3;margin:34px 0 0;overflow:hidden;background:#d4e2e9}
+.seo-figure img{object-fit:cover}
+.seo-steps{display:grid;gap:14px;margin:0;padding-left:22px;color:#3f586b;font-size:15px;line-height:1.65}
+.seo-steps strong{display:block;color:#092348}
+.seo-faq{display:grid;border-top:1px solid #c3d0d6}
+.seo-faq details{border-bottom:1px solid #c3d0d6}
+.seo-faq summary{display:flex;align-items:center;min-height:48px;padding-block:10px;cursor:pointer;color:#092348;font-size:15px;font-weight:700}
+.seo-faq p{margin:0 0 16px}
+.seo-area-links{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+/* Tap targets of at least 44px on small homepage links */
+.header-brand-phone,.service-footnote a{padding-block:15px;margin-block:-15px}
+.seo-updated{margin:0;color:#5b7080;font-size:13px}
+.developer-names{max-width:900px;margin:26px auto 0;padding:0 20px;text-align:center;color:#5b7080;font-size:13px;line-height:1.7}
