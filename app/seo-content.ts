@@ -1,4 +1,4 @@
-import type { FaqKey } from "./faq-data";
+import { faqQuestions, type FaqKey } from "./faq-data";
 import { seoPages, type SeoPage } from "./seo-pages";
 
 // Date the service/locality page copy was last substantively revised. Update when the copy changes.
@@ -170,13 +170,61 @@ const kindBySlug: Record<string, string> = {
   "borewell-flushing-redevelopment-bengaluru": "flushing",
 };
 
+export type PageFaq = { question: string; answer: string };
+
+// Area-specific questions, written only from facts already published on the site
+// (office location, hours, property mix, rig options, ~100 km coverage).
+const localityFaqsBySlug: Record<string, PageFaq[]> = {
+  "borewell-drilling-rajajinagar": [
+    { question: "Is Eshan Borewells based in Rajajinagar?", answer: "Yes. Our office is in 6th Block, Rajajinagar, Bengaluru, and we are open daily from 9 am to 10 pm. Share your exact block or site location to confirm availability for your property." },
+    { question: "Can a drilling rig reach a built-up Rajajinagar plot?", answer: "It depends on the entry width, overhead clearance and space around the drilling point. Compact and robotic rigs may suit narrow or restricted sites once access is assessed, so send a few site photos first." },
+  ],
+  "borewell-drilling-whitefield": [
+    { question: "Do you drill for apartments and gated communities in Whitefield?", answer: "Yes. We discuss borewell projects for apartments and layouts as well as independent homes and commercial properties in Whitefield. Apartment sites need early coordination on the entry route, working area and a project contact." },
+    { question: "What should a Whitefield apartment association share first?", answer: "The exact locality, the site entrance, the available working area, the intended water use and any site plan. These details help plan equipment access before a visit is arranged." },
+  ],
+  "borewell-drilling-electronic-city": [
+    { question: "Do you work on industrial and commercial sites in Electronic City?", answer: "Yes. We discuss borewell requirements for homes, layouts, offices and industrial properties in Electronic City. Commercial and industrial work is planned around site operations, access and safety." },
+    { question: "What helps plan a borewell at an Electronic City workplace?", answer: "Share the phase or a nearby landmark, the site contact, any operating-hour or access restrictions and the area available for the rig." },
+  ],
+  "borewell-drilling-yelahanka": [
+    { question: "Can you drill on open land or farm plots around Yelahanka?", answer: "Yes. Open plots and farms may suit larger drilling machinery where access allows. We work around Bengaluru, generally within about 100 km, subject to confirming the site." },
+    { question: "Which details matter most for a Yelahanka site?", answer: "The exact locality or a map point, vehicle access, overhead clearance, working space, the property type and the intended water requirement." },
+  ],
+  "borewell-drilling-peenya": [
+    { question: "Do you drill borewells for factories in Peenya?", answer: "Yes. We discuss borewell projects for industrial and commercial sites in Peenya, as well as nearby homes, planned around site operations, access and safety." },
+    { question: "How is drilling planned around factory operations?", answer: "Identify the site contact, the area available for the rig, any operating-hour restrictions and the intended water use, so the work can be coordinated with the site before a visit." },
+  ],
+  "borewell-drilling-kr-puram": [
+    { question: "Can you work on an existing borewell in KR Puram?", answer: "We discuss selected existing-borewell work, such as flushing or redevelopment, after the borewell's condition is assessed. Share its age, depth and any change in water flow; more water cannot be promised." },
+    { question: "What should I share for a KR Puram borewell?", answer: "The exact locality and site address, access width, turning space, overhead clearance and any details of an existing borewell on the property." },
+  ],
+  "borewell-drilling-sarjapur-road": [
+    { question: "Do you work with apartments and layouts on Sarjapur Road?", answer: "Yes. Sarjapur Road has individual homes, apartment projects and commercial properties, and we discuss drilling, groundwater survey, casing and selected existing-borewell work for each." },
+    { question: "Do you travel beyond Sarjapur Road?", answer: "Yes. We work in every direction around Bengaluru, generally within about 100 km. Share the exact locality or a nearby landmark so we can confirm machinery access." },
+  ],
+};
+
+// One shared question per area page, varied so the same answer doesn't repeat across areas.
+const localitySharedFaqBySlug: Record<string, FaqKey> = {
+  "borewell-drilling-rajajinagar": "survey-guarantee",
+  "borewell-drilling-whitefield": "survey-guarantee",
+  "borewell-drilling-electronic-city": "casing-pump",
+  "borewell-drilling-yelahanka": "survey-guarantee",
+  "borewell-drilling-peenya": "casing-pump",
+  "borewell-drilling-kr-puram": "narrow-roads",
+  "borewell-drilling-sarjapur-road": "casing-pump",
+};
+
 const faqKeysBySlug: Record<string, FaqKey[]> = {
   "groundwater-survey-water-detection-bengaluru": ["survey-guarantee", "prepare", "cost"],
-  "borewell-casing-installation-bengaluru": ["casing-pump", "cost", "prepare"],
+  "borewell-casing-installation-bengaluru": ["casing-pump", "flushing", "prepare"],
   "borewell-flushing-redevelopment-bengaluru": ["flushing", "prepare", "cost"],
   "farm-agricultural-borewell-drilling-bengaluru": ["outside", "prepare", "cost"],
   "residential-borewell-drilling-bengaluru": ["narrow-roads", "prepare", "cost"],
-  "apartment-borewell-drilling-bengaluru": ["narrow-roads", "prepare", "cost"],
+  "apartment-borewell-drilling-bengaluru": ["narrow-roads", "survey-guarantee", "cost"],
+  "borewell-drilling-bengaluru": ["where", "narrow-roads", "cost"],
+  "commercial-industrial-borewell-drilling-bengaluru": ["casing-pump", "where", "survey-guarantee"],
 };
 
 const imageBySlug: Record<string, { src: string; alt: string }> = {
@@ -195,7 +243,14 @@ export function getProcessSteps(slug: string): ProcessStep[] {
 }
 
 export function getFaqKeys(slug: string): FaqKey[] {
-  return faqKeysBySlug[slug] ?? (getSeoContent(slug)?.pageType === "locality" ? ["where", "narrow-roads", "prepare"] : ["prepare", "narrow-roads", "cost"]);
+  return faqKeysBySlug[slug] ?? ["prepare", "narrow-roads", "cost"];
+}
+
+/** Visible FAQs for a page: area pages get their own questions plus one shared answer. */
+export function getPageFaqs(slug: string): PageFaq[] {
+  const local = localityFaqsBySlug[slug];
+  if (local) return [...local, faqQuestions[localitySharedFaqBySlug[slug] ?? "prepare"]];
+  return getFaqKeys(slug).map((key) => faqQuestions[key]);
 }
 
 export function getSeoImage(slug: string) {

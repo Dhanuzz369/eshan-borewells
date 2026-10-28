@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { getFaqKeys, getLocalityPages, getProcessSteps, getRelatedSeoPages, getSeoContent } from "./seo-content";
+import { getFaqKeys, getLocalityPages, getPageFaqs, getProcessSteps, getRelatedSeoPages, getSeoContent } from "./seo-content";
 import { faqQuestions } from "./faq-data";
 import { seoPages } from "./seo-pages";
 
@@ -43,4 +43,18 @@ test("cross-links every locality page from the other localities", () => {
 
   assert.equal(localities.length, 7);
   for (const locality of localities) assert.equal(getLocalityPages(locality.slug).length, 6);
+});
+
+test("gives each area page its own FAQs and keeps any one question off most pages", () => {
+  const localities = getLocalityPages();
+  const sets = localities.map((page) => getPageFaqs(page.slug).map((faq) => faq.question));
+
+  for (const [index, questions] of sets.entries()) {
+    assert.equal(questions.length, 3, `${localities[index].slug} should show three FAQs`);
+    assert.equal(new Set(sets.map((other) => other.join("|"))).size, sets.length, "two area pages share the same FAQ set");
+  }
+
+  const counts = new Map<string, number>();
+  for (const page of seoPages) for (const faq of getPageFaqs(page.slug)) counts.set(faq.question, (counts.get(faq.question) ?? 0) + 1);
+  for (const [question, count] of counts) assert.ok(count <= seoPages.length / 2, `"${question}" appears on ${count} of ${seoPages.length} pages`);
 });

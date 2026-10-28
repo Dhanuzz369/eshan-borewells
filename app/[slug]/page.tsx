@@ -5,9 +5,8 @@ import { notFound } from "next/navigation";
 import { ArrowRight, MapPin, MessageCircle, Phone } from "lucide-react";
 import { BUSINESS_ADDRESS, BUSINESS_PHONE, publicBusinessFacts, WHATSAPP_NUMBER } from "../business-config";
 import { PUBLIC_GOOGLE_PROFILE_URL, PUBLIC_OPENING_HOURS } from "../public-business-facts";
-import { faqQuestions } from "../faq-data";
 import { getSeoPage, seoPages } from "../seo-pages";
-import { getFaqKeys, getLocalityPages, getProcessSteps, getRelatedSeoPages, getSeoContent, getSeoImage, SEO_CONTENT_UPDATED } from "../seo-content";
+import { getLocalityPages, getProcessSteps, getRelatedSeoPages, getPageFaqs, getSeoContent, getSeoImage, SEO_CONTENT_UPDATED } from "../seo-content";
 import { getProductionUrl } from "../site-url";
 import { bengaluru, buildIndexablePageSchemas, buildProviderSchema } from "../../lib/seo/page-schema";
 
@@ -45,7 +44,7 @@ export default async function SeoLandingPage({ params }: PageProps) {
   if (!seoContent) notFound();
   const relatedPages = getRelatedSeoPages(page.slug);
   const steps = getProcessSteps(page.slug);
-  const faqs = getFaqKeys(page.slug).map((key) => faqQuestions[key]);
+  const faqs = getPageFaqs(page.slug);
   const image = getSeoImage(page.slug);
   const isLocality = seoContent.pageType === "locality";
   const areaPages = isLocality || page.slug === "borewell-drilling-bengaluru" ? getLocalityPages(page.slug) : [];
