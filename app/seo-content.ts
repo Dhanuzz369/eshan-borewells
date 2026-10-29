@@ -19,7 +19,7 @@ const seoContentBySlug: Record<string, SeoContent> = {
     answerHeading: "How should you plan borewell drilling in Bengaluru?",
     directAnswer: "Borewell drilling in Bengaluru should be planned around the exact property, equipment access, overhead clearance, working space and intended water use. Eshan Borewells discusses those site conditions before outlining a practical drilling approach; water availability and the final scope depend on the site.",
     considerations: ["Share the site location, entry width and overhead clearance.", "Explain the property type and intended water requirement.", "A site assessment helps determine which equipment and scope may suit the property."],
-    relatedSlugs: ["groundwater-survey-water-detection-bengaluru", "residential-borewell-drilling-bengaluru", "apartment-borewell-drilling-bengaluru", "farm-agricultural-borewell-drilling-bengaluru"],
+    relatedSlugs: ["groundwater-survey-water-detection-bengaluru", "residential-borewell-drilling-bengaluru", "apartment-borewell-drilling-bengaluru", "farm-agricultural-borewell-drilling-bengaluru", "commercial-industrial-borewell-drilling-bengaluru"],
   },
   "groundwater-survey-water-detection-bengaluru": {
     pageType: "service",

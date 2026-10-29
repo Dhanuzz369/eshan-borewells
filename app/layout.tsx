@@ -7,8 +7,8 @@ const siteUrl = getProductionUrl();
 
 export const metadata: Metadata = {
   ...(siteUrl ? { metadataBase: new URL(siteUrl), alternates: { canonical: "/" } } : {}),
-  title: "Borewell Drilling & Water Survey in Bengaluru | Eshan Borewells",
-  description: "Borewell drilling, groundwater survey, casing, flushing and water solutions for homes, apartments, farms and commercial sites across Bengaluru and nearby areas.",
+  title: "Borewell Drilling in Bangalore | Eshan Borewells",
+  description: "Borewell drilling, water survey, casing and flushing in Bangalore (Bengaluru) and nearby areas. Based in Rajajinagar. Call 98447 75905 to discuss your site.",
   keywords: ["borewell drilling Bengaluru", "borewell drilling Bangalore", "groundwater survey Bengaluru", "water detection Bangalore", "borewell casing", "borewell flushing", "residential borewell", "apartment borewell", "farm borewell", "borewell services near me"],
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
   openGraph: {
