@@ -22,7 +22,7 @@ export function InternalResult({ quotation, document, brand, onEdit }: Props) {
     finally { setBusy(false); }
   }
   const message = [`${brand.name} ${document.title}`, `Customer: ${quotation.customerName}`, `Location: ${quotation.location}`, `Machine: ${quotation.machineType}`, `Depth: ${quotation.depth}`, ...(document.total ? [`Total: ${document.total}`] : [])].join("\n");
-  return <article className="internal-document shell">
+  return <article className={`internal-document shell brand-${brand.theme}`}>
     <div className="internal-document-tools"><button type="button" onClick={onEdit}><ArrowLeft size={16} />Edit details</button><button type="button" onClick={download} disabled={busy}><Download size={16} />{busy ? "Preparing PDF…" : "Download PDF"}</button></div>
     <header className="internal-document-heading"><div><span>{brand.name.toUpperCase()}</span><h1>{document.title}</h1><p>{address}<br />{phone} · {brand.website}{brand.email && <> · {brand.email}</>}</p></div><div className="internal-date">Date<span>{document.date || <i className="manual-blank" />}</span></div></header>
     <section className="internal-customer"><div><small>Customer & site</small><h2>{quotation.customerName}</h2><p>{quotation.mobile}<br />{quotation.location}</p></div><div><small>Job details</small><p>{quotation.machineType} · {quotation.depth}<br />{quotation.propertyType}</p></div></section>

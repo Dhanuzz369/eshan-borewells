@@ -15,6 +15,12 @@ export async function downloadInternalPdf(props: Props) {
 export function renderInternalPdf({ quotation, document, brand, fontBase64 }: Props & { fontBase64: string }) {
   const { phone, address, website, email } = brand;
   const url = `https://${website}/`;
+  const daivik = brand.theme === "daivik";
+  type RGB = [number, number, number];
+  // Daivik colours follow daivikborewells.com: forest ink, mint, sand and earth on white.
+  const c: Record<"ink" | "accent" | "muted" | "tableHead" | "line", RGB> = daivik
+    ? { ink: [36, 61, 53], accent: [43, 81, 67], muted: [83, 102, 94], tableHead: [226, 238, 228], line: [206, 217, 209] }
+    : { ink: [19, 44, 59], accent: [19, 44, 59], muted: [19, 44, 59], tableHead: [237, 243, 245], line: [221, 230, 234] };
   const pdf = new jsPDF({ unit: "mm", format: "a4" });
   pdf.addFileToVFS("NotoSans-Bold.ttf", fontBase64);
   pdf.addFont("NotoSans-Bold.ttf", "Noto", "bold");
@@ -22,8 +28,9 @@ export function renderInternalPdf({ quotation, document, brand, fontBase64 }: Pr
   pdf.setProperties({ title: `${brand.name} ${document.title}`, author: brand.name });
   let y = 0;
   let tableHeaders: string[] = [];
-  const text = (value: string, x: number, at: number, size = 10, align: "left" | "right" = "left") => { pdf.setFontSize(size); pdf.setTextColor(19, 44, 59); pdf.text(value, x, at, { align }); };
+  const text = (value: string, x: number, at: number, size = 10, align: "left" | "right" = "left") => { pdf.setFontSize(size); pdf.setTextColor(...c.ink); pdf.text(value, x, at, { align }); };
   function header() {
+    if (daivik) { daivikHeader(); return; }
     pdf.setFillColor(12,48,65); pdf.rect(0,0,210,45,"F");
     pdf.setFillColor(17,137,139); pdf.rect(0,45,210,2,"F");
     pdf.setTextColor(255,255,255); pdf.setFontSize(19); pdf.text(brand.name.toUpperCase(),16,14);
@@ -37,9 +44,30 @@ export function renderInternalPdf({ quotation, document, brand, fontBase64 }: Pr
     pdf.link(143,17,51,7,{url});
     y=56;
   }
+  function daivikHeader() {
+    pdf.setFillColor(250,251,248); pdf.rect(0,0,210,47,"F");
+    pdf.setFillColor(...c.ink); pdf.roundedRect(16,11,17,17,2.5,2.5,"F");
+    pdf.setFont("times","bold"); pdf.setTextColor(255,255,255); pdf.setFontSize(17); pdf.text("D",24.5,23.2,{align:"center"});
+    pdf.setTextColor(...c.ink); pdf.setFontSize(24); pdf.text("Daivik",38,21);
+    pdf.setFont("Noto","bold"); pdf.setFontSize(7); pdf.setTextColor(157,104,72); pdf.text("B O R E W E L L S",38.5,27);
+    pdf.setTextColor(...c.muted); pdf.setFontSize(8); pdf.text(brand.tagline,16,38);
+    pdf.setTextColor(...c.ink); pdf.setFontSize(11); pdf.text(phone,194,15,{align:"right"});
+    pdf.setTextColor(...c.accent); pdf.setFontSize(8.5); pdf.text(website,194,22,{align:"right"});
+    if (email) pdf.text(email,194,28,{align:"right"});
+    pdf.setTextColor(...c.muted); pdf.setFontSize(8); pdf.text(address,194,38,{align:"right"});
+    pdf.link(150,9,44,8,{url:`tel:${phone.replace(/[^+\d]/g,"")}`}); pdf.link(150,18,44,6,{url});
+    if (email) pdf.link(140,24,54,6,{url:`mailto:${email}`});
+    pdf.setDrawColor(223,207,173); pdf.setLineWidth(0.8); pdf.line(0,47,210,47); pdf.setLineWidth(0.2);
+    pdf.setTextColor(157,104,72); pdf.setFontSize(9); pdf.text(document.title.toUpperCase(),16,56,{charSpace:0.6});
+    y=64;
+  }
   function ensure(height: number) { if (y+height > 266) { pdf.addPage(); header(); } }
   function paragraph(value: string, size=9, width=178) { pdf.setFontSize(size); const lines=pdf.splitTextToSize(value,width) as string[]; for(const row of lines){ensure(5);text(row,16,y,size);y+=5;} }
-  function section(title: string) { tableHeaders=[];ensure(22); y+=5;text(title,16,y,12);y+=7; }
+  function section(title: string) {
+    tableHeaders=[];ensure(22); y+=5;
+    if (daivik) { pdf.setFont("times","bold"); pdf.setFontSize(14); pdf.setTextColor(...c.ink); pdf.text(title,16,y); pdf.setFont("Noto","bold"); pdf.setDrawColor(223,207,173); pdf.line(16,y+2,30,y+2); y+=8; return; }
+    text(title,16,y,12);y+=7;
+  }
   function row(values: string[], heading=false) {
     const last=values.length-1;
     const widths=values.length===4?[78,35,28,37]:values.length===3?[87,43,48]:[130,48];
@@ -48,10 +76,10 @@ export function renderInternalPdf({ quotation, document, brand, fontBase64 }: Pr
     const height=Math.max(8.5,...lines.map((part)=>part.length*4.7+3.5));
     if (y + height > 266) { ensure(height); if (!heading && tableHeaders.length) row(tableHeaders,true); }
     if (heading) tableHeaders=values;
-    if(heading){pdf.setFillColor(237,243,245);pdf.rect(16,y-4,178,height,"F");}
+    if(heading){pdf.setFillColor(...c.tableHead);pdf.rect(16,y-4,178,height,"F");}
     let x=20;
     lines.forEach((part,index)=>{part.forEach((value,line)=>text(value,index===last?190:x,y+line*4.7,heading?8.5:9,index===last?"right":"left"));x+=widths[index];});
-    y+=height;pdf.setDrawColor(221,230,234);pdf.line(16,y-4,194,y-4);
+    y+=height;pdf.setDrawColor(...c.line);pdf.line(16,y-4,194,y-4);
   }
   function summary(label:string,value:string) { ensure(13);text(label,20,y+2,10);if(value)text(value,190,y+2,11,"right");else{pdf.setDrawColor(130,145,155);pdf.line(146,y+3,190,y+3);}y+=12; }
   header();
@@ -78,7 +106,9 @@ export function renderInternalPdf({ quotation, document, brand, fontBase64 }: Pr
   }
   if(document.terms.length){section("Notes & terms");for(const[index,term]of document.terms.entries()){paragraph(`${index+1}. ${term}`,9);y+=3;}}
   const count=pdf.getNumberOfPages();for(let page=1;page<=count;page++){
-    pdf.setPage(page);pdf.setFillColor(235,245,246);pdf.rect(0,276,210,21,"F");pdf.setDrawColor(17,137,139);pdf.line(16,276,194,276);
+    pdf.setPage(page);
+    if (daivik) { pdf.setDrawColor(...c.ink); pdf.setLineWidth(0.4); pdf.line(16,276,194,276); pdf.setLineWidth(0.2); }
+    else { pdf.setFillColor(235,245,246);pdf.rect(0,276,210,21,"F");pdf.setDrawColor(17,137,139);pdf.line(16,276,194,276); }
     text(brand.name.toUpperCase(),16,282,8);text(phone,96,282,8);text(`${page} / ${count}`,194,282,8,"right");
     text(email ? `${website} · ${email}` : website,16,287,8);text(address,16,292,7.5);
     pdf.link(92,278,60,6,{url:`tel:${phone.replace(/[^+\d]/g,"")}`});

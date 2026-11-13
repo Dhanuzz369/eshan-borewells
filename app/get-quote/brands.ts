@@ -1,10 +1,10 @@
-export type Brand = { name: string; phone: string; whatsapp: string; address: string; website: string; email: string | null; tagline: string };
+export type Brand = { theme: "eshan" | "daivik"; name: string; phone: string; whatsapp: string; address: string; website: string; email: string | null; tagline: string };
 
-// Details as published on https://www.daivikborewells.com/ (no street address is listed there).
+// Contact details and palette from https://www.daivikborewells.com/; address supplied by the owner.
 export const daivikBrand: Brand = {
-  name: "Daivik Borewells", phone: "+91 94484 17318", whatsapp: "919448417318", address: "Bengaluru, Karnataka",
+  theme: "daivik", name: "Daivik Borewells", phone: "+91 94484 17318", whatsapp: "919448417318", address: "BK Nagar, Yeshwanthpur, Bangalore",
   website: "www.daivikborewells.com", email: "daivikborewells@gmail.com", tagline: "Borewell drilling & complete water solutions",
 };
 export const eshanBrand = (phone: string, whatsapp: string, address: string): Brand => ({
-  name: "Eshan Borewells", phone, whatsapp, address, website: "www.eshanborewells.com", email: null, tagline: "Borewell drilling & water solutions",
+  theme: "eshan", name: "Eshan Borewells", phone, whatsapp, address, website: "www.eshanborewells.com", email: null, tagline: "Borewell drilling & water solutions",
 });
