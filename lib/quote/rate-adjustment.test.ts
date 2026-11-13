@@ -59,3 +59,14 @@ test("quotation and PDF data share adjusted rates and retain paise in displayed 
   assert.equal(data.drillingBreakdown[0].amount, 26252.5);
   assert.equal(formatRange(data.estimatedTotal, data.estimatedTotal), "₹1,49,258.5");
 });
+
+test("per-slab rate edits replace only that slab, flow into totals and are validated", () => {
+  const input = { ...inputFor("Sensor Rig", 850, "+", 10), slabRates: { "0": "100.5", "800": "" } };
+  const base = calculateQuote(inputFor("Sensor Rig", 850, "+", 10));
+  const edited = calculateQuote(quoteInputSchema.parse(input));
+  assert.equal(edited.drillingSlabs[0].rate, 100.5);
+  assert.deepEqual(edited.drillingSlabs.slice(1), base.drillingSlabs.slice(1));
+  assert.equal(edited.breakdown[0].min, base.breakdown[0].min! - base.drillingSlabs[0].amount! + edited.drillingSlabs[0].amount!);
+  assert.equal(calculateQuote({ ...inputFor("Robo Rig", 850, "+", 0), slabRates: { "0": "0" } }).drillingSlabs[0].rate, 0);
+  for (const rate of ["-1", "abc", "0.001", "1000001"]) assert.equal(quoteInputSchema.safeParse({ ...input, slabRates: { "0": rate } }).success, false);
+});

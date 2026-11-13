@@ -55,7 +55,7 @@ export function calculateQuote(input: QuoteInput, pricing: Pricing = quotePricin
     const depths = input.depth === null ? pricing.defaultDepth : { min: input.depth, max: input.depth };
     let config: Pricing["drilling"][string][string] | undefined = pricing.drilling[input.machine]?.[input.diameter] || pricing.drilling[input.machine]?.["*"];
     try {
-      config = adjustedDrillingConfiguration(config, input.rateAdjustmentOperation, input.rateAdjustmentAmount);
+      config = adjustedDrillingConfiguration(config, input.rateAdjustmentOperation, input.rateAdjustmentAmount, input.slabRates);
     } catch (error) {
       if (!(error instanceof RangeError)) throw error;
       config = undefined;
