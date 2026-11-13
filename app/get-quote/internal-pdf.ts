@@ -1,36 +1,40 @@
 import { jsPDF } from "jspdf";
 import type { QuotationData } from "@/lib/quote/document";
 import type { InternalDocument } from "@/lib/quote/internal-document";
+import type { Brand } from "./brands";
 
-type Props = { quotation: QuotationData; document: InternalDocument; phone: string; address: string };
+type Props = { quotation: QuotationData; document: InternalDocument; brand: Brand };
 export async function downloadInternalPdf(props: Props) {
   const response = await fetch("/fonts/NotoSans-Bold.ttf");
   if (!response.ok) throw new Error("PDF font unavailable");
   const bytes = new Uint8Array(await response.arrayBuffer());
   let binary = ""; for (const byte of bytes) binary += String.fromCharCode(byte);
-  renderInternalPdf({ ...props, fontBase64: btoa(binary) }).save(`Eshan-Borewells-${props.document.mode === "invoice" ? "Estimated-Bill" : "Estimate"}.pdf`);
+  renderInternalPdf({ ...props, fontBase64: btoa(binary) }).save(`${props.brand.name.replace(/ /g, "-")}-${props.document.mode === "invoice" ? "Estimated-Bill" : "Estimate"}.pdf`);
 }
 
-export function renderInternalPdf({ quotation, document, phone, address, fontBase64 }: Props & { fontBase64: string }) {
+export function renderInternalPdf({ quotation, document, brand, fontBase64 }: Props & { fontBase64: string }) {
+  const { phone, address, website, email } = brand;
+  const url = `https://${website}/`;
   const pdf = new jsPDF({ unit: "mm", format: "a4" });
   pdf.addFileToVFS("NotoSans-Bold.ttf", fontBase64);
   pdf.addFont("NotoSans-Bold.ttf", "Noto", "bold");
   pdf.setFont("Noto", "bold");
-  pdf.setProperties({ title: `Eshan Borewells ${document.title}`, author: "Eshan Borewells" });
+  pdf.setProperties({ title: `${brand.name} ${document.title}`, author: brand.name });
   let y = 0;
   let tableHeaders: string[] = [];
   const text = (value: string, x: number, at: number, size = 10, align: "left" | "right" = "left") => { pdf.setFontSize(size); pdf.setTextColor(19, 44, 59); pdf.text(value, x, at, { align }); };
   function header() {
     pdf.setFillColor(12,48,65); pdf.rect(0,0,210,45,"F");
     pdf.setFillColor(17,137,139); pdf.rect(0,45,210,2,"F");
-    pdf.setTextColor(255,255,255); pdf.setFontSize(19); pdf.text("ESHAN BOREWELLS",16,14);
+    pdf.setTextColor(255,255,255); pdf.setFontSize(19); pdf.text(brand.name.toUpperCase(),16,14);
     pdf.setFontSize(10); pdf.text(document.title.toUpperCase(),16,23);
-    pdf.setTextColor(195,228,232); pdf.setFontSize(8); pdf.text("Borewell drilling & water solutions",16,31);
+    pdf.setTextColor(195,228,232); pdf.setFontSize(8); pdf.text(brand.tagline,16,31);
     pdf.setTextColor(255,255,255); pdf.setFontSize(11); pdf.text(phone,194,13,{align:"right"});
-    pdf.setFontSize(9); pdf.text("www.eshanborewells.com",194,21,{align:"right"});
+    pdf.setFontSize(9); pdf.text(website,194,21,{align:"right"});
+    if (email) { pdf.setFontSize(8.5); pdf.text(email,194,28,{align:"right"}); pdf.link(140,24,54,6,{url:`mailto:${email}`}); }
     pdf.setTextColor(210,233,236); pdf.setFontSize(8); pdf.text(`Office: ${address}`,16,40);
     pdf.link(142,7,52,9,{url:`tel:${phone.replace(/[^+\d]/g,"")}`});
-    pdf.link(143,17,51,7,{url:"https://www.eshanborewells.com/"});
+    pdf.link(143,17,51,7,{url});
     y=56;
   }
   function ensure(height: number) { if (y+height > 266) { pdf.addPage(); header(); } }
@@ -75,10 +79,10 @@ export function renderInternalPdf({ quotation, document, phone, address, fontBas
   if(document.terms.length){section("Notes & terms");for(const[index,term]of document.terms.entries()){paragraph(`${index+1}. ${term}`,9);y+=3;}}
   const count=pdf.getNumberOfPages();for(let page=1;page<=count;page++){
     pdf.setPage(page);pdf.setFillColor(235,245,246);pdf.rect(0,276,210,21,"F");pdf.setDrawColor(17,137,139);pdf.line(16,276,194,276);
-    text("ESHAN BOREWELLS",16,282,8);text(phone,96,282,8);text(`${page} / ${count}`,194,282,8,"right");
-    text("www.eshanborewells.com",16,287,8);text(address,16,292,7.5);
+    text(brand.name.toUpperCase(),16,282,8);text(phone,96,282,8);text(`${page} / ${count}`,194,282,8,"right");
+    text(email ? `${website} · ${email}` : website,16,287,8);text(address,16,292,7.5);
     pdf.link(92,278,60,6,{url:`tel:${phone.replace(/[^+\d]/g,"")}`});
-    pdf.link(16,283,75,6,{url:"https://www.eshanborewells.com/"});
+    pdf.link(16,283,40,6,{url});
   }
   return pdf;
 }

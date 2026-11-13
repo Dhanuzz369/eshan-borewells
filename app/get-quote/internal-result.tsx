@@ -4,25 +4,27 @@ import { useState } from "react";
 import { ArrowLeft, Download, Phone, MessageCircle } from "lucide-react";
 import type { QuotationData } from "@/lib/quote/document";
 import type { InternalDocument } from "@/lib/quote/internal-document";
+import type { Brand } from "./brands";
 
-type Props = { quotation: QuotationData; document: InternalDocument; phone: string; whatsapp: string; address: string; onEdit: () => void };
+type Props = { quotation: QuotationData; document: InternalDocument; brand: Brand; onEdit: () => void };
 function Table({ headers, rows }: { headers: string[]; rows: string[][] }) {
   return <div className="internal-table-scroll"><table className="internal-table"><thead><tr>{headers.map((header) => <th key={header}>{header}</th>)}</tr></thead><tbody>{rows.map((row, index) => <tr key={index}>{row.map((value, column) => <td key={column}>{value}</td>)}</tr>)}</tbody></table></div>;
 }
 
-export function InternalResult({ quotation, document, phone, whatsapp, address, onEdit }: Props) {
+export function InternalResult({ quotation, document, brand, onEdit }: Props) {
+  const { phone, whatsapp, address } = brand;
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   async function download() {
     setBusy(true); setError("");
-    try { const { downloadInternalPdf } = await import("./internal-pdf"); await downloadInternalPdf({ quotation, document, phone, address }); }
+    try { const { downloadInternalPdf } = await import("./internal-pdf"); await downloadInternalPdf({ quotation, document, brand }); }
     catch { setError("Could not prepare the PDF. Please try again."); }
     finally { setBusy(false); }
   }
-  const message = [`Eshan Borewells ${document.title}`, `Customer: ${quotation.customerName}`, `Location: ${quotation.location}`, `Machine: ${quotation.machineType}`, `Depth: ${quotation.depth}`, ...(document.total ? [`Total: ${document.total}`] : [])].join("\n");
+  const message = [`${brand.name} ${document.title}`, `Customer: ${quotation.customerName}`, `Location: ${quotation.location}`, `Machine: ${quotation.machineType}`, `Depth: ${quotation.depth}`, ...(document.total ? [`Total: ${document.total}`] : [])].join("\n");
   return <article className="internal-document shell">
     <div className="internal-document-tools"><button type="button" onClick={onEdit}><ArrowLeft size={16} />Edit details</button><button type="button" onClick={download} disabled={busy}><Download size={16} />{busy ? "Preparing PDF…" : "Download PDF"}</button></div>
-    <header className="internal-document-heading"><div><span>ESHAN BOREWELLS</span><h1>{document.title}</h1><p>{address}<br />{phone} · www.eshanborewells.com</p></div><div className="internal-date">Date<span>{document.date || <i className="manual-blank" />}</span></div></header>
+    <header className="internal-document-heading"><div><span>{brand.name.toUpperCase()}</span><h1>{document.title}</h1><p>{address}<br />{phone} · {brand.website}{brand.email && <> · {brand.email}</>}</p></div><div className="internal-date">Date<span>{document.date || <i className="manual-blank" />}</span></div></header>
     <section className="internal-customer"><div><small>Customer & site</small><h2>{quotation.customerName}</h2><p>{quotation.mobile}<br />{quotation.location}</p></div><div><small>Job details</small><p>{quotation.machineType} · {quotation.depth}<br />{quotation.propertyType}</p></div></section>
     <section><h2>Drilling cost structure</h2><Table headers={document.drillingHeaders} rows={document.drillingRows} />{document.drillingSubtotal && <p className="internal-subtotal"><span>{document.labels.drilling}</span><strong>{document.drillingSubtotal}</strong></p>}</section>
     <section><h2>{document.mode === "invoice" ? document.labels.fixedHeading : "Fixed operational rates"}</h2><Table headers={["Description", document.mode === "invoice" ? "Amount" : "Rate"]} rows={document.fixedRows} />{document.fixedSubtotal && <p className="internal-subtotal"><span>{document.labels.fixed}</span><strong>{document.fixedSubtotal}</strong></p>}</section>
